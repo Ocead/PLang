@@ -1,0 +1,148 @@
+// Path
+.;
+unqualified;
+unqualified.path;
+.qualified;
+.qualified.path;
+
+. (0, "Test");
+unqualified (1);
+unqualified.path(-1);
+.qualified (.1);
+.qualified.path(-1.);
+
+// Symbol class
+.[];
+(.character[]) unqualified_symbol_class[];
+unqualified_symbol.class[];
+.qualified_symbol_class[];
+.qualified_symbol.class[];
+
+.,list[];
+unqualified_symbol_class,list[];
+unqualified.symbol.class,list[];
+.qualified_symbol_class,list[];
+.qualified.symbol.class,list[];
+
+.[] (0);
+unqualified_symbol_class[] (1);
+unqualified_symbol.class[] (-1);
+.qualified_symbol_class[](.5);
+.qualified_symbol.class[](-.9);
+
+.,list[];
+unqualified_symbol_class,list[];
+unqualified.symbol.class,list[];
+.qualified_symbol_class,list[];
+.qualified.symbol.class,list[];
+
+// Symbol
+(.character[]) [local_symbol];
+.[root_symbol];
+unqualified[symbol];
+unqualified.symbol[name];
+.qualified[symbol];
+.qualified.symbol[name];
+
+[local_symbol,list];
+.[root_symbol,list];
+unqualified[symbol,list];
+unqualified.symbol[name,list];
+.qualified[symbol,list];
+.qualified.symbol[name,list];
+
+[local_symbol(0)];
+.[root_symbol(1)];
+unqualified[symbol(-1)];
+unqualified.symbol[name(1.)];
+.qualified[symbol(-1.)];
+.qualified.symbol[name(-.9)];
+
+[local_symbol(0),list(0)];
+.[root_symbol(1),list(1)];
+unqualified[symbol(-1),list(0.)];
+unqualified.symbol[name(1.),list(0.0)];
+.qualified[symbol(-1.),list(.1)];
+.qualified.symbol[name(-.9),list(.9)];
+
+// Object class
+?object_class: ();
+.?object_class: ();
+unqualified_object_class?object_class: ();
+unqualified_object.class?object_class: ();
+.qualified_object_class?object_class: ();
+.qualified_object.class?object_class: ("abc", l"Test", g"Test", r"Test", m"Test", .symbol.class[], point.class?:);
+
+// Point class
+.point.class _;
+.point.class ?_;
+! .point.class _;
+! .point.class ?_;
+.point.class !_;
+.point.class !?_;
+! .point.class !_;
+! .point.class !?_;
+
+() .point.class _;
+() .point.class ?_;
+() ! .point.class _;
+() ! .point.class ?_;
+() .point.class !_;
+() .point.class !?_;
+() ! .point.class !_;
+() ! .point.class !?_;
+
+.point.class (0) _;
+.point.class (1) ?_;
+! .point.class (-1) _;
+! .point.class (1.) ?_;
+.point.class (0.1) !_;
+.point.class (1.0) !?_;
+! .point.class (-.1) !_;
+! .point.class (-1.) !?_;
+
+() .point.class (0) _;
+() .point.class (1) ?_;
+() ! .point.class (-1) _;
+() ! .point.class (1.) ?_;
+() .point.class (0.1) !_;
+() .point.class (1.0) !?_;
+() ! .point.class (-.1) !_;
+() ! .point.class (-1.) !?_;
+
+(.symbol.class.hint[], .recursive.symbol.class.hint[]...) ! .point.class (5.4)
+  default_object_class : (l"like_literal_hint", g"glob_literal_hint")
+  ! ?singleton_object_class : (.recursive.symbol.class.hint[]..., r"regex_literal_hint")
+  ?object_class : (.point.class.hint?:, m"match_literal_hint")
+  <- <* requirement_name [] .indirecting.point.class >>
+    [] ~ .recursive.implied.point.class...
+      : [],
+        ?source_object_class,
+        "explicit_literal",
+        .explicit[symbol],
+        {*explicit_point_id}
+      ?implied_object_class : [],
+        ?source_object_class,
+        "explicit_literal",
+        .explicit[symbol],
+        {*explicit_point_id}>;
+
+// Point
+.symbol.class[symbol] .point.class;
+.symbol.class[symbol] .point.class:"literal";
+.symbol.class[symbol] .point.class?object_class:"literal";
+.symbol.class[symbol] .point.class:"literal" ?object_class:"literal";
+.symbol.class[symbol] ~ .point.class
+  : "literal",
+    .symbol.class[symbol_name],
+    {.symbol.class[symbol_name] .point.class:"object_literal"}
+  ?object_class : .symbol.class[symbol_name],
+    {*0},
+    "literal"
+  ?object_class : {*Test},
+    "literal",
+    .symbol.class[symbol_name]
+  <- {*req_prv}
+  -< {*reg_now}
+  >- {*ipl_now}
+  -> {*ipl_def};

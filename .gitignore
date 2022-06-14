@@ -1,0 +1,28 @@
+# Python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# File manager
+desktop.ini
+.DS_Store
+.directory
+
+# Virtualenv
+venv/
+ENV/
+
+# Generated source
+.antlr/
+
+# Generated databases
+out/
+*.db
+*.sqlite
+*.sqlite3
+
+# PyCharm specific
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
