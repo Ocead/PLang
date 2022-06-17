@@ -1,4 +1,4 @@
-grammar plang;
+grammar Plang;
 
 // Lexer
 
@@ -91,10 +91,13 @@ declCore
     | STRING
     | INTEGER);
 
-declSVO
+declSVOCore
     : (declCore
     | pointClassSVODecl
-    | pointSVODecl)? WS* OP_DECL;
+    | pointSVODecl);
+
+declSVO
+    : declSVOCore? WS* OP_DECL;
 
 ref
     : (pathRef
@@ -154,9 +157,9 @@ pathUnqualifiedNode
 pathQualifiedNode
     : OP_PATH (IDENTIFIER)*;
 pathFollowingNode
-    : OP_PATH (IDENTIFIER)*;
+    : OP_PATH IDENTIFIER;
 pathUnqualifiedPath
-    : (pathUnqualifiedNode (pathFollowingNode)*)?;
+    : pathUnqualifiedNode (pathFollowingNode)*;
 pathQualifiedPath
     : OP_PATH
     | (pathFollowingNode)+;
@@ -172,7 +175,7 @@ pathRef
 // Symbol class
 
 symbolUnqualifiedClass
-    : pathUnqualifiedPath OP_SYM;
+    : pathUnqualifiedPath? OP_SYM;
 symbolQualifiedClass
     : pathQualifiedPath OP_SYM;
 symbolClass
@@ -188,9 +191,9 @@ symbolClassListElement
 symbolClassListElements
     : WS* OP_LIST WS* symbolClassListElement;
 symbolUnqualifiedClassList
-    : pathUnqualifiedPath symbolClassListElements* OP_SYM;
+    : pathUnqualifiedPath symbolClassListElements+ OP_SYM;
 symbolQualifiedClassList
-    : pathQualifiedPath symbolClassListElements* OP_SYM;
+    : pathQualifiedPath symbolClassListElements+ OP_SYM;
 symbolClassList
     : symbolUnqualifiedClassList
     | symbolQualifiedClassList;
@@ -212,13 +215,13 @@ symbolOrderedName
     : symbolName
       (WS* decoration)?;
 symbol
-    : pathRef OP_SYM_L symbolName OP_SYM_R;
+    : pathRef? OP_SYM_L symbolName OP_SYM_R;
 symbolList
-    : pathRef OP_SYM_L symbolName WS* (OP_LIST WS* symbolName WS*)+ OP_SYM_R;
+    : pathRef? OP_SYM_L symbolName WS* (OP_LIST WS* symbolName WS*)+ OP_SYM_R;
 symbolDef
-    : pathRef OP_SYM_L symbolOrderedName OP_SYM_R;
+    : pathRef? OP_SYM_L symbolOrderedName OP_SYM_R;
 symbolListDef
-    : pathRef OP_SYM_L WS*
+    : pathRef? OP_SYM_L WS*
       symbolOrderedName WS*
       (OP_LIST WS* symbolOrderedName WS*)*
       OP_SYM_R;
@@ -240,7 +243,7 @@ objectClassName
 objectClassInlineRef
     : OP_OBJ_NAME objectClassName;
 objectUnqualifiedClass
-    : pathUnqualifiedPath objectClassInlineRef;
+    : pathUnqualifiedPath? objectClassInlineRef;
 objectQualifiedClass
     : pathQualifiedPath objectClassInlineRef;
 objectDefaultClass
@@ -252,7 +255,7 @@ objectClassDef
     : OP_OBJ (WS* hintList)?;
 
 objectClassDecl
-    : objectClass WS* objectClassDef;
+    : objectClass objectClassDef;
 objectDefaultClassDecl
     : (OP_SINGLE WS*)? objectDefaultClass WS* objectClassDef?;
 objectInlineClassDecl
@@ -301,7 +304,7 @@ pointRecursiveClassName
 pointClassSVODecl
     : (hintSymbolClassList WS*)?
       (OP_SINGLE WS*)?
-      pointClassName WS*
+      pointClassName WS+
       (decoration WS*)?
       (objectDefaultClassDecl | objectInlineClassDecl) WS*
       (objectInlineClassDecl WS*)*
@@ -351,7 +354,7 @@ causalDef
       (objectCausalDefaultDecl WS*)?
       (objectCausalInlineDecl WS*)*;
 causalIndirectDef
-    : (causalDef WS* OP_INDIR WS*)?
+    : (causalDef OP_INDIR WS*)?
       causalSymbolRef WS*
       (OP_NEGATE WS*)?
       (pointClassName | pointRecursiveClassName) WS*
