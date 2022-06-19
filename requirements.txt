@@ -1,2 +1,4 @@
 antlr4-python3-runtime~=4.10
 SQLAlchemy~=1.4.37
+rich~=12.4.4
+pyreadline3~=3.4.1; sys_platform == 'win32'
