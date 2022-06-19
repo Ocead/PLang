@@ -4,20 +4,17 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy import UniqueConstraint, CheckConstraint, PrimaryKeyConstraint
 from sqlalchemy.orm import relationship
 
-from plang.db.base import Base
+from plang.db.base import Base, Decoratable
 
 
 class Config(Base):
     __tablename__ = 'config'
-    __table_args__ = (
-        UniqueConstraint('option', name=__tablename__ + '_option_uindex'),
-    )
 
-    option = Column(String, primary_key=True, nullable=False)
+    option = Column(String, nullable=False, unique=True)
     value = Column(String, nullable=False)
 
 
-class Source(Base):
+class Source(Decoratable, Base):
     __tablename__ = 'source'
 
     id = Column(Integer, primary_key=True, nullable=False)
@@ -25,28 +22,20 @@ class Source(Base):
     author = Column(String, nullable=False)
     origin = Column(String, nullable=False)
 
-class Path(Base):
+
+class Path(Decoratable, Base):
     __tablename__ = 'path'
     __table_args__ = (
-        PrimaryKeyConstraint('id', name=__tablename__ + '_pk'),
-        UniqueConstraint('name', 'path_id', name=__tablename__ + '_name_parent_id_uindex'),
-        UniqueConstraint('id', name=__tablename__ + '_id_uindex'),
+        UniqueConstraint('name', 'parent_id'),
     )
 
-    id = Column(Integer().with_variant(Integer, "sqlite"),
-                primary_key=True,
-                nullable=False)
     name = Column(String,
                   CheckConstraint("name regexp '^[^.?!()\\[\\]{\\}]*$'",
-                                  name=__tablename__ + '_name_check'),
+                                  name='path_name_check'),
                   nullable=False)
-    path_id = Column(Integer,
-                     ForeignKey(__tablename__ + '.id'),
+    parent_id = Column(Integer,
+                     ForeignKey('path.id'),
                      nullable=False)
-    ordinal = Column(Integer,
-                     nullable=True)
-    description = Column(String,
-                         nullable=True)
 
     parent = relationship('Path', remote_side=[id])
     children = relationship('Path', back_populates='parent')

@@ -9,7 +9,6 @@ from plang.db.base import Base
 class CausalSymbolClass(Base):
     __tablename__ = 'plot_causal_symbol_class'
 
-    id = Column(Integer, primary_key=True)
     causal_id = Column(Integer, ForeignKey('plot_causal.id'), nullable=False)
     symbol_class_id = Column(Integer, ForeignKey('plot_symbol_class.id'), nullable=False)
 
@@ -24,7 +23,6 @@ class CausalPointClass(Base):
 
     __tablename__ = 'plot_causal_point_class'
 
-    id = Column(Integer, primary_key=True)
     causal_id = Column(Integer, ForeignKey('plot_causal.id'), nullable=False)
     point_class_id = Column(Integer, ForeignKey('plot_point_class.id'), nullable=False)
     direction = Column(Enum(Direction), nullable=True)
@@ -42,7 +40,6 @@ class Causal(Base):
 
     __tablename__ = 'plot_causal'
 
-    id = Column(Integer, primary_key=True)
     op = Column(Enum(Operations), nullable=True)
 
     symbol_classes = relationship('SymbolClass', secondary=CausalSymbolClass)
@@ -56,7 +53,6 @@ class Causal(Base):
 class CausalElementObj(Base):
     __tablename__ = 'plot_causal_element_obj'
 
-    id = Column(Integer, primary_key=True)
     causal_id = Column(Integer, ForeignKey('plot_causal.id'), nullable=False)
     slot = Column(Integer, nullable=False)
     point_class_id = Column(Integer, ForeignKey('plot_point_class.id'), nullable=False)
@@ -74,7 +70,6 @@ class CausalElementLit(Base):
 
     __tablename__ = 'plot_causal_element_lit'
 
-    id = Column(Integer, primary_key=True)
     causal_id = Column(Integer, ForeignKey('plot_causal.id'), nullable=False)
     slot = Column(Integer, nullable=False)
     type = Column(Enum(Types), nullable=True)
@@ -86,7 +81,6 @@ class CausalElementLit(Base):
 class CausalElementSym(Base):
     __tablename__ = 'plot_causal_element_sym'
 
-    id = Column(Integer, primary_key=True)
     causal_id = Column(Integer, ForeignKey('plot_causal.id'), nullable=False)
     slot = Column(Integer, nullable=False)
     symbol_id = Column(Integer, ForeignKey('plot_symbol.id'), nullable=False)
@@ -98,7 +92,6 @@ class CausalElementSym(Base):
 class CausalElementPnt(Base):
     __tablename__ = 'plot_causal_element_pnt'
 
-    id = Column(Integer, primary_key=True)
     causal_id = Column(Integer, ForeignKey('plot_causal.id'), nullable=False)
     slot = Column(Integer, nullable=False)
     point_id = Column(Integer, ForeignKey('plot_point.id'), nullable=False)
@@ -110,7 +103,6 @@ class CausalElementPnt(Base):
 class Causality(Base):
     __tablename__ = 'plot_causal_ity'
 
-    id = Column(Integer, primary_key=True)
     cause_point_id = Column(Integer, ForeignKey('plot_point.id'), nullable=False)
     effect_point_id = Column(Integer, ForeignKey('plot_point.id'), nullable=False)
     overlap = Column(Boolean, nullable=False)

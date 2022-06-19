@@ -3,16 +3,15 @@ import enum
 from sqlalchemy import Column, Integer, String, Boolean, Enum, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
 
-from plang.db.base import Base
+from plang.db.base import Base, Decoratable
 
 
-class ObjectClass(Base):
+class ObjectClass(Decoratable, Base):
     __tablename__ = 'plot_object_class'
     __table_args__ = (
         UniqueConstraint('point_class_id', 'name'),
     )
 
-    id = Column(Integer, primary_key=True)
     point_class_id = Column(Integer, ForeignKey('plot_point_class.id'), nullable=False)
     name = Column(String(), nullable=False)
     default = Column(Boolean, default=False, nullable=False)
@@ -41,7 +40,6 @@ class ObjectClassHintLit(ObjectClassHint):
 
     __tablename__ = 'plot_object_class_hint_lit'
 
-    id = Column(Integer, primary_key=True)
     class_id = Column(Integer, ForeignKey('plot_object_class.id'), nullable=False)
     hint = Column(String, nullable=False)
     type = Column(Enum(Types), nullable=True)
@@ -52,7 +50,6 @@ class ObjectClassHintLit(ObjectClassHint):
 class ObjectClassHintSym(ObjectClassHint):
     __tablename__ = 'plot_object_class_hint_sym'
 
-    id = Column(Integer, primary_key=True)
     class_id = Column(Integer, ForeignKey('plot_object_class.id'), nullable=False)
     hint_id = Column(Integer, ForeignKey('plot_symbol_class.id'), nullable=False)
     recursive = Column(Boolean, default=False, nullable=False)
@@ -64,7 +61,6 @@ class ObjectClassHintSym(ObjectClassHint):
 class ObjectClassHintPnt(ObjectClassHint):
     __tablename__ = 'plot_object_class_hint_pnt'
 
-    id = Column(Integer, primary_key=True)
     class_id = Column(Integer, ForeignKey('plot_object_class.id'), nullable=False)
     hint_id = Column(Integer, ForeignKey('plot_point_class.id'), nullable=False)
     recursive = Column(Boolean, default=False, nullable=False)
@@ -77,7 +73,6 @@ class ObjectClassHintPnt(ObjectClassHint):
 class ObjectLit(Base):
     __tablename__ = 'plot_object_lit'
 
-    id = Column(Integer, primary_key=True)
     class_id = Column(Integer, ForeignKey('plot_object_class.id'), nullable=False)
     point_id = Column(Integer, ForeignKey('plot_point.id'), nullable=False)
     object = Column(String, nullable=False)
@@ -88,7 +83,6 @@ class ObjectLit(Base):
 class ObjectSym(Base):
     __tablename__ = 'plot_object_sym'
 
-    id = Column(Integer, primary_key=True)
     class_id = Column(Integer, ForeignKey('plot_object_class.id'), nullable=False)
     point_id = Column(Integer, ForeignKey('plot_point.id'), nullable=False)
     object_id = Column(Integer, ForeignKey('plot_symbol.id'), nullable=False)
@@ -101,7 +95,6 @@ class ObjectSym(Base):
 class ObjectPnt(Base):
     __tablename__ = 'plot_object_pnt'
 
-    id = Column(Integer, primary_key=True)
     class_id = Column(Integer, ForeignKey('plot_object_class.id'), nullable=False)
     point_id = Column(Integer, ForeignKey('plot_point.id'), nullable=False)
     object_id = Column(Integer, ForeignKey('plot_point.id'), nullable=False)

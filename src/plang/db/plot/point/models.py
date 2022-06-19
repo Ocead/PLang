@@ -10,7 +10,6 @@ class PointClass(Base):
         UniqueConstraint('id', 'path_id'),
     )
 
-    id = Column(Integer, primary_key=True)
     path_id = Column(Integer, ForeignKey('path.id'), nullable=False)
     singleton = Column(Boolean, default=False, nullable=False)
 
@@ -25,7 +24,6 @@ class PointClassHint(Base):
         UniqueConstraint('class_id', 'symbol_id'),
     )
 
-    id = Column(Integer, primary_key=True)
     class_id = Column(Integer, ForeignKey('plot_point_class.id'), nullable=False)
     symbol_id = Column(Integer, ForeignKey('plot_symbol_class.id'), nullable=False)
     recursive = Column(Boolean, default=False, nullable=False)
@@ -36,7 +34,6 @@ class PointClassHint(Base):
 class Point(Base):
     __tablename__ = 'plot_point'
 
-    id = Column(Integer, primary_key=True)
     class_id = Column(Integer, ForeignKey('plot_point_class.id'), nullable=False)
     truth = Column(Boolean, default=True, nullable=True)
 
@@ -51,7 +48,6 @@ class Point(Base):
 class PointSubjectSym(Base):
     __tablename__ = 'plot_point_subject_sym'
 
-    id = Column(Integer, primary_key=True)
     point_id = Column(Integer, ForeignKey('plot_point.id'), nullable=False)
     symbol_id = Column(Integer, ForeignKey('plot_symbol.id'), nullable=False)
 
@@ -62,7 +58,6 @@ class PointSubjectSym(Base):
 class PointSubjectCls(Base):
     __tablename__ = 'plot_point_subject_cls'
 
-    id = Column(Integer, primary_key=True)
     point_id = Column(Integer, ForeignKey('plot_point.id'), nullable=False)
     symbol_class_id = Column(Integer, ForeignKey('plot_symbol_class.id'), nullable=False)
 
