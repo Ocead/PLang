@@ -22,7 +22,8 @@ class CLI:
         self.handlers: Set[Handler] = set()
         readline.parse_and_bind('tab: complete')
         readline.set_completer(self.__complete)
-        readline.set_auto_history(True)
+        if readline in sys.modules:
+            readline.set_auto_history(True)
 
         self.incomplete: Union[str, None] = None
         self.completions: List[str] = []
