@@ -1,5 +1,6 @@
 import re
-from typing import List, Set
+import sys
+from typing import List, Set, Union
 
 from sqlalchemy.orm import Session
 
@@ -23,10 +24,10 @@ class CLI:
         readline.set_completer(self.__complete)
         readline.set_auto_history(True)
 
-        self.incomplete: str | None = None
+        self.incomplete: Union[str, None] = None
         self.completions: List[str] = []
 
-    def __complete(self, text, state) -> str | None:
+    def __complete(self, text, state) -> Union[str, None]:
         # cursor = self.__readLine.mode.l_buffer.point  # TODO: Implement
         if state == 0:
             self.incomplete = text
@@ -47,7 +48,6 @@ class CLI:
     def input(self) -> int:
         line = input(f'{self.scope}> ')
         for h in self.handlers:
-            result: object | Scope = None
             if re.compile(h.pattern(), re.UNICODE | re.MULTILINE).match(line) is not None:
                 result = h.execute(self.scope, line)
             if result is Scope:

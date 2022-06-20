@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, List, Set
+from typing import Dict, List, Set, Union
 
 from antlr4 import Parser, Token, ParserRuleContext
 from antlr4.IntervalSet import IntervalSet
@@ -45,14 +45,14 @@ class CodeCompletionCore:
         def __str__(self):
             return f"CandidatesCollection{{tokens={self.tokens}, rules={self.rules}, ruleStrings={self.rulePositions}}}"
 
-    def __init__(self, parser: Parser, preferredRules: Set[int] | None, ignoredTokens: Set[int] | None):
+    def __init__(self, parser: Parser, preferred_rules: Union[Set[int], None], ignored_tokens: Union[Set[int], None]):
         self.__showResult = True
         self.__showDebugOutput = True
         self.__debugOutputWithTransistions = True
         self.__showRuleState = True
 
-        self.__ignoredTokens: Set[int] = ignoredTokens or set()
-        self.__preferredRules: Set[int] = preferredRules or set()
+        self.__ignoredTokens: Set[int] = ignored_tokens or set()
+        self.__preferredRules: Set[int] = preferred_rules or set()
 
         self.__parser: Parser = parser
         self.__atn: ATN = parser.getATNWithBypassAlts()

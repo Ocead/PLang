@@ -17,8 +17,8 @@ in narrative works, regardless of form or topic.
 
 ### Requirements
 
-* Python [3.10](https://www.python.org/downloads/release/python-3100/)
-* SQLAlchemy ([SQLAlchemy](https://pypi.org/project/SQLAlchemy/))
+* **Python [3.9](https://www.python.org/downloads/release/python-390/)** or higher
+* SQLAlchemy ([SQLAlchemy~=1.4.37](https://pypi.org/project/SQLAlchemy/))
 * ANTLR 4 runtime for Python 3 ([antlr4-python3-runtime](https://pypi.org/project/antlr4-python3-runtime/))
 
 ### Usage
@@ -102,19 +102,19 @@ The interpreter mainly works with two types of files:
 
 * **PLang Source File**<br/>
   MIME type: `application/x-plang`<br/>
-  File extension:`.plang`<br/>
-  Derived from:`plain/text`<br/>
+  File extension: `.plang`<br/>
+  Derived from: `plain/text`<br/>
 * **PLang Database File**<br/>
   MIME Type: `application/x-plangdb`<br/>
-  File extension:`.plangdb`<br/>
-  Derived from:`application/vnd.sqlite3`<br/>
+  File extension: `.plangdb`<br/>
+  Derived from: `application/vnd.sqlite3`<br/>
 
 Executables may also write:
 
 * **Log file**:<br/>
   MIME type: `application/x-log`<br/>
-  File extension:`.log`<br/>
-  Derived from:`plain/text`<br/>
+  File extension: `.log`<br/>
+  Derived from: `plain/text`<br/>
 
 Referencing content in external file will be supported for the following types:
 
