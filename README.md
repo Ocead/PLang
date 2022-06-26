@@ -147,7 +147,7 @@ Referencing content in external file will be supported for the following types:
 
 `G`: Grammar, `D`: Data model, `I`: Interpreter, `S`: Serialization, `A`: Analysis
 
-* [ ] Path `GD---`
+* [ ] Path `GDI--`
 * [ ] Plot `GD---`
     * [ ] Symbol classes `GD---`
     * [ ] Symbols `GD---`

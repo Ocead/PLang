@@ -155,9 +155,9 @@ decoration
 pathUnqualifiedNode
     : IDENTIFIER;
 pathQualifiedNode
-    : OP_PATH (IDENTIFIER)*;
+    : OP_PATH pathUnqualifiedNode?;
 pathFollowingNode
-    : OP_PATH IDENTIFIER;
+    : OP_PATH pathUnqualifiedNode;
 pathUnqualifiedPath
     : pathUnqualifiedNode (pathFollowingNode)*;
 pathQualifiedPath
