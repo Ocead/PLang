@@ -2,6 +2,7 @@ from sqlalchemy import event
 from sqlalchemy.engine import Engine
 
 try:
+    from plang.db.base import *
     from plang.db.models import *
     from plang.db.plot import *
     from plang.db.story import *

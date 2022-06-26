@@ -1,10 +1,17 @@
+from typing import List
+
 from sqlalchemy import Column, Integer, String, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
 
+from plang.db.models import Path
 from plang.db.base import Base, Decoratable
 
 
 class SymbolClass(Base):
+    class Form:
+        def __init__(self, path: Path.Form):
+            self.path = path
+
     __tablename__ = 'plot_symbol_class'
     __table_args__ = (
         UniqueConstraint('id', 'path_id'),
@@ -17,6 +24,11 @@ class SymbolClass(Base):
 
 
 class Symbol(Decoratable, Base):
+    class Form:
+        def __init__(self, clazz: SymbolClass.Form, name: str):
+            self.clazz = clazz
+            self.name = name
+
     __tablename__ = 'plot_symbol'
     __table_args__ = (
         UniqueConstraint('class_id', 'name'),
@@ -33,6 +45,10 @@ class Symbol(Decoratable, Base):
 
 
 class SymbolCompound(Base):
+    class Form:
+        def __init__(self, symbols: List[Symbol.Form]):
+            self.symbols = symbols
+
     __tablename__ = 'plot_symbol_compound'
     __table_args__ = (
         UniqueConstraint('symbol_id', 'distance'),

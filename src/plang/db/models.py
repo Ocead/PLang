@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy import UniqueConstraint, CheckConstraint
@@ -24,6 +24,12 @@ class Source(Decoratable, Base):
 
 
 class Path(Decoratable, Base):
+    class Form:
+        def __init__(self, qualified: bool, nodes: List[str], decoration: Optional[Decoratable.Form] = None):
+            self.qualified = qualified
+            self.nodes = [str(x) for x in nodes]
+            self.decoration = decoration
+
     __tablename__ = 'path'
     __table_args__ = (
         UniqueConstraint('name', 'parent_id'),
@@ -76,20 +82,31 @@ class Path(Decoratable, Base):
 
         return paths
 
+    def __form__(self) -> Form:
+        node = self
+        nodes = []
+        while node.id != node.parent_id:
+            nodes = [node.name] + nodes
+            node = node.parent
+
+        return Path.Form(True, nodes)
+
     def __str__(self) -> str:
         path = self.name
         node = self
 
-        while node.id != node.super:
+        while node != node.parent:
             node = node.parent
             if node is None:
                 break
             path = node.name + '.' + path
 
         if len(path) != 0:
-            return path
+            str = path
         else:
-            return '.'
+            str =  '.'
+
+        return f'{str} {Decoratable.__str__(self)}'
 
     def __repr__(self) -> str:
         return f'{type(self).__name__}({str(self)})'
