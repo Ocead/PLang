@@ -1,40 +1,58 @@
-from argparse import *
 import sys
+from argparse import *
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-from plang import Base
 from plang.cli.cli import CLI
-from plang.cli.handler import CommandHandler, PlangHandler
 from plang.cli.scope import PlangScope
+from plang.error import PlangException
 
 
 def parseArgs(args: list[str]) -> Namespace:
-    parser = ArgumentParser()
-    parser.add_argument('-f', '--file', help='File to open', required=False)
-    parser.add_argument('-v', '--version', help='Print the software version', required=False)
+    """
+    Parses the command line arguments
 
-    namespace = parser.parse_args()
+    :param args: List of command line arguments without the path of the executable
+    :return: a namespace of all parsed arguments
+    """
+    parser = ArgumentParser()
+    parser.add_argument('-f', '--file',
+                        help='open the specified file',
+                        required=False)
+    parser.add_argument('-r', '--raw',
+                        help='print python errors to console',
+                        action='store_true',
+                        required=False)
+    parser.add_argument('-s', '--silent',
+                        help='keep console output to a minimum',
+                        action='store_true',
+                        required=False)
+    parser.add_argument('-v', '--version',
+                        help='print the software version',
+                        action='store_true',
+                        required=False)
+
+    namespace = parser.parse_args(args)
     return namespace
 
 
-def main() -> int:
-    ns = parseArgs(sys.argv)
+def main(args: list[str]) -> int:
+    """
+    Entry point for the PLang command line interface
 
-    engine = create_engine(f'sqlite:///{ns.file}')
-    Base.metadata.create_all(engine)
+    :return: Process exit code
+    """
+    ns = parseArgs(args)
 
-    Session = sessionmaker()
-    Session.configure(bind=engine)
-    session = Session()
-    session.commit()
+    if ns.file is not None:
+        session = CLI.session(ns.file)
+    else:
+        session = None
 
     cli = CLI(session, PlangScope())
-    cli.addHandler(CommandHandler())
-    cli.addHandler(PlangHandler())
 
     while True:
-        ret = cli.input()
-        if ret != 0:
-            return ret
+        try:
+            result = cli.input()
+            if isinstance(result, int):
+                return result
+        except PlangException as e:
+            print(e, file=sys.stderr)

@@ -1,11 +1,14 @@
-import shlex
 from abc import ABC, abstractmethod
-from typing import List
+from typing import Any
 
+from antlr4 import BailErrorStrategy, Parser, RecognitionException, InputStream, CommonTokenStream
 from antlr4.error.ErrorListener import ErrorListener
+from sqlalchemy.orm import Session
 
 from plang.cli.scope import Scope
-from plang.lang.generated import *
+from plang.lang.generated import PlangLexer, PlangParser, PlangListener
+from plang.lang.parser import PlangVisitor, MarkupMode
+from plang.db import *
 
 
 class Handler(ABC):
@@ -14,28 +17,12 @@ class Handler(ABC):
         pass
 
     @abstractmethod
-    def execute(self, scope: Scope, line: str) -> object:
+    def execute(self, session: Session, scope: Scope, line: str) -> Any:
         pass
 
     @abstractmethod
     def pattern(self) -> str:
         pass
-
-
-class CommandHandler(Handler):
-    def __init__(self) -> None:
-        super().__init__()
-
-    def complete(self, scope: Scope, line: str) -> List:
-        pass
-
-    def execute(self, scope: Scope, line: str) -> object:
-        args = shlex.split(line)
-
-        return None
-
-    def pattern(self) -> str:
-        return r'^[\s\t]*:[\w]+'
 
 
 class TestErrorListener(ErrorListener):
@@ -68,7 +55,7 @@ class PlangHandler(Handler):
     def complete(self, scope: Scope, line: str) -> List:
         pass
 
-    def execute(self, scope: Scope, line: str) -> object:
+    def execute(self, session: Session, scope: Scope, line: str) -> object:
         input_stream = InputStream(data=line)
         lexer = PlangLexer(input_stream)
         stream = CommonTokenStream(lexer)
@@ -79,10 +66,10 @@ class PlangHandler(Handler):
 
         try:
             tree = parser.start()
-            visitor = PlangVisitor()
+            visitor = PlangVisitor(session, scope, MarkupMode.IMPLICIT)
             result = visitor.visit(tree)
             return result
-        finally:
+        except:
             return None
 
     def pattern(self) -> str:
