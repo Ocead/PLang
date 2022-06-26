@@ -13,7 +13,7 @@ class PointClass(Base):
     path_id = Column(Integer, ForeignKey('path.id'), nullable=False)
     singleton = Column(Boolean, default=False, nullable=False)
 
-    path = relationship('Path')
+    path = relationship('Path', back_populates='point_class')
     hints = relationship('PointClassHint', back_populates='clazz')
     instances = relationship('Point', back_populates='clazz')
 

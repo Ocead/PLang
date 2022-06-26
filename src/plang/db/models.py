@@ -1,8 +1,8 @@
 from typing import List
 
 from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy import UniqueConstraint, CheckConstraint, PrimaryKeyConstraint
-from sqlalchemy.orm import relationship
+from sqlalchemy import UniqueConstraint, CheckConstraint
+from sqlalchemy.orm import relationship, declared_attr
 
 from plang.db.base import Base, Decoratable
 
@@ -34,11 +34,16 @@ class Path(Decoratable, Base):
                                   name='path_name_check'),
                   nullable=False)
     parent_id = Column(Integer,
-                     ForeignKey('path.id'),
-                     nullable=False)
+                       ForeignKey('path.id'),
+                       nullable=False)
 
-    parent = relationship('Path', remote_side=[id])
+    @declared_attr
+    def parent(cls):
+        return relationship('Path', remote_side=f'{format(cls.__name__)}.id')
     children = relationship('Path', back_populates='parent')
+
+    symbol_class = relationship('SymbolClass')
+    point_class = relationship('PointClass')
 
     def get_ordinal(self, max: int) -> int:
         return self.ordinal or max

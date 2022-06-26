@@ -12,7 +12,7 @@ class SymbolClass(Base):
 
     path_id = Column(Integer, ForeignKey('path.id'), nullable=False)
 
-    path = relationship('Path')
+    path = relationship('Path', back_populates='symbol_class')
     instances = relationship('Symbol', back_populates='clazz')
 
 
@@ -26,6 +26,7 @@ class Symbol(Decoratable, Base):
     class_id = Column(Integer, ForeignKey('plot_symbol_class.id'), nullable=False)
 
     clazz = relationship('SymbolClass', back_populates='instances')
+    compounds = relationship('SymbolCompound', foreign_keys='SymbolCompound.symbol_id')
 
     def __str__(self):
         return f'{str(self.clazz.path)}[{self.name}]'
@@ -41,5 +42,5 @@ class SymbolCompound(Base):
     compound_id = Column(Integer, ForeignKey('plot_symbol.id'), nullable=False)
     distance = Column(Integer, nullable=False)
 
-    symbol = relationship('Symbol', foreign_keys='SymbolCompound.symbol_id')
-    compound = relationship('Symbol', foreign_keys='SymbolCompound.compound_id')
+    symbol = relationship('Symbol', foreign_keys=[symbol_id], back_populates='compounds')
+    compound = relationship('Symbol', foreign_keys=[compound_id])

@@ -13,7 +13,7 @@ class CausalSymbolClass(Base):
     symbol_class_id = Column(Integer, ForeignKey('plot_symbol_class.id'), nullable=False)
 
     causal = relationship('Causal')
-    symbol_class = relationship('SymbolClass')
+    symbol_class = relationship('SymbolClass', foreign_keys=[symbol_class_id])
 
 
 class CausalPointClass(Base):
@@ -42,8 +42,8 @@ class Causal(Base):
 
     op = Column(Enum(Operations), nullable=True)
 
-    symbol_classes = relationship('SymbolClass', secondary=CausalSymbolClass)
-    point_classes = relationship('PointClass', secondary=CausalPointClass)
+    symbol_classes = relationship('CausalSymbolClass', back_populates='causal')
+    point_classes = relationship('CausalPointClass', back_populates='causal')
     elements_obj = relationship('CausalElementObj', back_populates='causal')
     elements_lit = relationship('CausalElementLit', back_populates='causal')
     elements_sym = relationship('CausalElementPnt', back_populates='causal')
@@ -108,4 +108,4 @@ class Causality(Base):
     overlap = Column(Boolean, nullable=False)
 
     cause = relationship('Point', foreign_keys=[cause_point_id])
-    effect = relationship('Effect', foreign_keys=[effect_point_id])
+    effect = relationship('Point', foreign_keys=[effect_point_id])
