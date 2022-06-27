@@ -22,6 +22,9 @@ class SymbolClass(Base):
     path = relationship('Path', back_populates='symbol_class')
     instances = relationship('Symbol', back_populates='clazz')
 
+    def __str__(self) -> str:
+        return f'{self.path}[]'
+
 
 class Symbol(Decoratable, Base):
     class Form:

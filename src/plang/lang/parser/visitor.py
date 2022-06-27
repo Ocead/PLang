@@ -133,8 +133,12 @@ class PlangVisitor(BasePlangVisitor):
         return path
 
     def visitPathRef(self, ctx: PlangParser.PathRefContext):
-        result = super().visitPathRef(ctx)[0]
-        return result
+        result = super().visitPathRef(ctx)
+        pathForm = next(filter(lambda x: isinstance(x, Path.Form), result), None)
+        if pathForm is None:
+            return None
+        path = Manager(self.session, self.scope).selectPath(pathForm)
+        return path
 
     def visitSymbolUnqualifiedClass(self, ctx: PlangParser.SymbolUnqualifiedClassContext):
         return super().visitSymbolUnqualifiedClass(ctx)

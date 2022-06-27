@@ -1,6 +1,7 @@
 import re
 import sys
 import shlex
+from sqlite3 import IntegrityError
 from typing import List, Optional
 
 from sqlalchemy import create_engine
@@ -23,6 +24,12 @@ except ImportError:
 class CLI:
     @classmethod
     def session(cls, path: str) -> Optional[Session]:
+        """
+        Creates a new database session
+
+        :param path: Path to the database file
+        :return: The new session, if it could be created
+        """
         try:
             engine = create_engine(f'sqlite:///{path}')
             Base.metadata.create_all(engine)
@@ -49,6 +56,19 @@ class CLI:
     def isCommand(cls, line: str) -> bool:
         return re.compile(r'^[\s\t]*:[\w]*', re.UNICODE | re.MULTILINE).match(line) is not None
 
+    def printReport(self):
+        report = Manager(self.session, self.scope).report()
+        if len(report) > 0:
+            print(report)
+
+    def commit(self):
+        try:
+            self.session.commit()
+        except IntegrityError as e:
+            pass
+        finally:
+            self.session.rollback()
+
     def __init__(self, session: Session, scope: Scope):
         self.session = session
         self.scope = scope
@@ -66,6 +86,9 @@ class CLI:
 
     def __pragma(self, *args) -> None:
         raise NotImplementedError()  # TODO: implement
+
+    def __info(self, *args) -> None:
+        print(f'Current database file: {self.session.bind.url[-2]}')
 
     def __quit(self, *args) -> Optional[int]:
         if len(args) != 0:
@@ -92,7 +115,7 @@ class CLI:
             raise NotImplementedError()  # TODO: implement error
 
         if len(self.session.dirty) != 0:
-            self.session.commit()
+            self.commit()
         else:
             raise NotImplementedError()  # TODO: implement error
 
@@ -112,7 +135,15 @@ class CLI:
         raise NotImplementedError()  # TODO: implement
 
     def __delete(self, *args) -> None:
-        raise NotImplementedError()  # TODO: implement
+        for a in args:
+            result = self.handler.ref(self.session, self.scope, a)
+            if result is not None:
+                for r in result:
+                    self.session.delete(r)
+            else:
+                pass  # TODO: implement error
+        self.printReport()
+        self.commit()
 
     def __copy(self, *args) -> None:
         raise NotImplementedError()  # TODO: implement
@@ -126,6 +157,9 @@ class CLI:
 
         ':p': __pragma,
         ':option': __pragma,
+
+        ':i': __info,
+        ':info': __info,
 
         ':q': __quit,
         ':quit': __quit,
@@ -196,10 +230,8 @@ class CLI:
             else:
                 if self.session is not None:
                     result = self.handler.execute(self.session, self.scope, line)
-                    report = Manager(self.session, self.scope).report()
-                    if len(report) > 0:
-                        print(report)
-                    self.session.commit()
+                    self.printReport()
+                    self.commit()
                 else:
                     raise NoSessionException()
         except KeyboardInterrupt as e:

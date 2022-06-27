@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any
 
-from antlr4 import BailErrorStrategy, Parser, RecognitionException, InputStream, CommonTokenStream
+from antlr4 import BailErrorStrategy, Parser, RecognitionException, InputStream, CommonTokenStream, ParserRuleContext
 from antlr4.error.ErrorListener import ErrorListener
 from sqlalchemy.orm import Session
 
@@ -18,6 +18,14 @@ class Handler(ABC):
 
     @abstractmethod
     def execute(self, session: Session, scope: Scope, line: str) -> Any:
+        pass
+
+    @abstractmethod
+    def decl(self, session: Session, scope: Scope, line: str) -> Any:
+        pass
+
+    @abstractmethod
+    def ref(self, session: Session, scope: Scope, line: str) -> Any:
         pass
 
     @abstractmethod
@@ -52,10 +60,7 @@ class PlangHandler(Handler):
     def __init__(self) -> None:
         super().__init__()
 
-    def complete(self, scope: Scope, line: str) -> List:
-        pass
-
-    def execute(self, session: Session, scope: Scope, line: str) -> object:
+    def __prepare(self, line: str) -> PlangParser:
         input_stream = InputStream(data=line)
         lexer = PlangLexer(input_stream)
         stream = CommonTokenStream(lexer)
@@ -64,13 +69,37 @@ class PlangHandler(Handler):
         parser.addErrorListener(TestErrorListener())
         parser.addParseListener(PlangListener())
 
+        return parser
+
+    def __visit(self, session: Session, scope: Scope, tree: ParserRuleContext) -> Any:
         try:
-            tree = parser.start()
             visitor = PlangVisitor(session, scope, MarkupMode.IMPLICIT)
             result = visitor.visit(tree)
             return result
         except:
             return None
+
+
+    def complete(self, scope: Scope, line: str) -> List:
+        pass
+
+    def execute(self, session: Session, scope: Scope, line: str) -> object:
+        parser = self.__prepare(line)
+
+        tree = parser.start()
+        return self.__visit(session, scope, tree)
+
+    def decl(self, session: Session, scope: Scope, line: str) -> object:
+        parser = self.__prepare(line)
+
+        tree = parser.declSVO()
+        return self.__visit(session, scope, tree)
+
+    def ref(self, session: Session, scope: Scope, line: str) -> object:
+        parser = self.__prepare(line)
+
+        tree = parser.ref()
+        return self.__visit(session, scope, tree)
 
     def pattern(self) -> str:
         return r'^(?![\s\t]*:[\w]+).+'

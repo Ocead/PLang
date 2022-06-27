@@ -45,7 +45,7 @@ class Manager():
         leaf = len(form.nodes) - 1
         for i in range(0, len(form.nodes)):
             nodes = [n for n in node.children if n.name == form.nodes[i]]
-            if len(nodes) != 1:
+            if len(nodes) != 1 and insert:
                 new_path = Path()
                 new_path.name = form.nodes[i]
                 new_path.parent = node
@@ -54,7 +54,7 @@ class Manager():
                     new_path.description = form.decoration.description
                 self.session.add(new_path)
                 node = new_path
-            elif insert:
+            elif len(nodes) == 1:
                 node = nodes[0]
             else:
                 return None
@@ -68,8 +68,8 @@ class Manager():
         result = self.selectOrInsertPath(form)
         return result if result.id is not None else None
 
-    def removePath(self, path: Path):
-        pass
+    def removePath(self, path: Path, recursive: bool = False):
+        self.session.delete(path)
 
     def insertSymbolClass(self, form: SymbolClass.Form) -> Optional[SymbolClass]:
         pass

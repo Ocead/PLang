@@ -31,7 +31,8 @@ class Decoratable:
     def __str__(self) -> str:
         list = []
         if self.ordinal is not None:
-            list += [str(self.ordinal).rstrip("0").rstrip(".")]
+            num = str(self.ordinal).rstrip("0").rstrip(".")
+            list += [num if len(num) > 0 else '0']
         if self.description is not None:
             list += [self.description]
         if len(list) > 0:
