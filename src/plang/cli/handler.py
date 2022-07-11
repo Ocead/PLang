@@ -1,13 +1,15 @@
 from abc import ABC, abstractmethod
-from typing import Any
+from typing import Any, List
 
 from antlr4 import BailErrorStrategy, Parser, RecognitionException, InputStream, CommonTokenStream, ParserRuleContext
 from antlr4.error.ErrorListener import ErrorListener
 from sqlalchemy.orm import Session
 
 from plang.cli.scope import Scope
-from plang.lang.generated import PlangLexer, PlangParser, PlangListener
-from plang.lang.parser import PlangVisitor, MarkupMode
+from plang.lang.generated.PlangLexer import PlangLexer
+from plang.lang.generated.PlangListener import PlangListener
+from plang.lang.generated.PlangParser import PlangParser
+from plang.lang.parser.visitor import PlangVisitor, MarkupMode
 from plang.db import *
 
 

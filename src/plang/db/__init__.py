@@ -1,15 +1,7 @@
 from sqlalchemy import event
 from sqlalchemy.engine import Engine
 
-try:
-    from plang.db.base import *
-    from plang.db.models import *
-    from plang.db.plot import *
-    from plang.db.story import *
-    from plang.db.outline import *
-    from plang.db.text import *
-except ImportError as e:
-    print(e)
+
 
 
 @event.listens_for(Engine, "connect")

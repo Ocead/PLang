@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Any, Union, Optional
 
-from plang.db import Path
+from plang.db.models import Path
 
 
 class Scope(ABC):

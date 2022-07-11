@@ -9,9 +9,14 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from plang.cli.handler import Handler, PlangHandler
 from plang.cli.scope import Scope
-from plang.db import Base, Path
+from plang.db.base import Base
+from plang.db.models import Path
+from plang.db.plot.symbol.models import *
+from plang.db.plot.point.models import *
+from plang.db.plot.object.models import *
+from plang.db.plot.causal.models import *
 from plang.error import NoSessionException
-from plang.lang.parser import Manager
+from plang.lang.logic.manager import Manager
 
 try:
     import readline
