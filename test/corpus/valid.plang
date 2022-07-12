@@ -12,8 +12,9 @@ unqualified.path(-1);
 .qualified.path(-1.);
 
 // Symbol class
+[];
 .[];
-(.character[]) unqualified_symbol_class[];
+(unqualified_symbol_class[]) unqualified_symbol_class[];
 unqualified_symbol.class[];
 .qualified_symbol_class[];
 .qualified_symbol.class[];

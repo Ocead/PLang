@@ -44,12 +44,13 @@ class Path(Decoratable, Base):
                        nullable=False)
 
     @declared_attr
-    def parent(cls):
-        return relationship('Path', remote_side=f'{format(cls.__name__)}.id')
+    def parent(self):
+        return relationship('Path', remote_side=f'{self.__name__}.id')
+
     children = relationship('Path', back_populates='parent')
 
-    symbol_class = relationship('SymbolClass')
-    point_class = relationship('PointClass')
+    symbol_class = relationship('SymbolClass', uselist=False)
+    point_class = relationship('PointClass', uselist=False)
 
     def get_ordinal(self, max: int) -> int:
         return self.ordinal or max
@@ -82,6 +83,18 @@ class Path(Decoratable, Base):
 
         return paths
 
+    def is_child_of(self, parent: 'Path') -> bool:
+        node = self
+        while True:
+            if node.parent == parent:
+                return True
+            if node.parent == node:
+                return False
+            node = node.parent
+
+    def is_parent_of(self, child: 'Path') -> bool:
+        return child.is_child_of(self)
+
     def __form__(self) -> Form:
         node = self
         nodes = []
@@ -104,9 +117,9 @@ class Path(Decoratable, Base):
         if len(path) != 0:
             str = path
         else:
-            str =  '.'
+            str = '.'
 
-        return f'{str} {Decoratable.__str__(self)}'
+        return str
 
     def __repr__(self) -> str:
         return f'{type(self).__name__}({str(self)})'

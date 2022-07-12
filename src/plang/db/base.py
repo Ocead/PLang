@@ -18,6 +18,9 @@ class Sourced:
     def source(cls):
         return Column(Integer, ForeignKey('source.id'), nullable=True)
 
+    def __repr__(self) -> str:
+        return f'{type(self).__name__}({str(self)})'
+
 
 class Decoratable:
     class Form(FormBase):
