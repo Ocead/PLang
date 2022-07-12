@@ -10,7 +10,6 @@ from plang.lang.generated.PlangLexer import PlangLexer
 from plang.lang.generated.PlangListener import PlangListener
 from plang.lang.generated.PlangParser import PlangParser
 from plang.lang.parser.visitor import PlangVisitor, MarkupMode
-from plang.db import *
 
 
 class Handler(ABC):
@@ -77,7 +76,10 @@ class PlangHandler(Handler):
         try:
             visitor = PlangVisitor(session, scope, MarkupMode.IMPLICIT)
             result = visitor.visit(tree)
-            return result
+            if len(result) == 1:
+                return result[0]
+            else:
+                return result
         except:
             return None
 

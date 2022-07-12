@@ -234,7 +234,13 @@ class CLI:
                 return command(self, *args[1:])
             else:
                 if self.session is not None:
-                    result = self.handler.execute(self.session, self.scope, line)
+                    try:
+                        result = self.handler.execute(self.session, self.scope, line)
+                    except Exception as e:
+                        print(e)
+                        result = None
+                    if isinstance(result, Scope):
+                        self.scope = result
                     self.printReport()
                     self.commit()
                 else:

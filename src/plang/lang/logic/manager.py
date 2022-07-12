@@ -1,9 +1,11 @@
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 from sqlalchemy.orm import Session
 
-from plang.db import Path, SymbolClass, Symbol, Base, FormBase
 from plang.cli.scope import Scope
+from plang.db.base import Base, FormBase
+from plang.db.models import Path
+from plang.db.plot.symbol.models import SymbolClass, SymbolClassHint, Symbol
 
 
 class Report:
@@ -24,7 +26,7 @@ class Report:
         return '\n'.join(s for s in [sa, sm, sd, sf] if len(s) > 0)
 
 
-class Manager():
+class Manager:
     def __init__(self, session: Session, scope: Scope):
         self.session = session
         self.scope = scope
@@ -41,6 +43,7 @@ class Manager():
             node: Path = root[0]
         else:
             node = self.scope.getPath()
+        self.session.refresh(node)
 
         leaf = len(form.nodes) - 1
         for i in range(0, len(form.nodes)):
@@ -49,9 +52,6 @@ class Manager():
                 new_path = Path()
                 new_path.name = form.nodes[i]
                 new_path.parent = node
-                if i == leaf and form.decoration is not None:
-                    new_path.ordinal = form.decoration.ordinal
-                    new_path.description = form.decoration.description
                 self.session.add(new_path)
                 node = new_path
             elif len(nodes) == 1:
@@ -59,10 +59,45 @@ class Manager():
             else:
                 return None
 
+        if insert and form.decoration is not None:
+            node.ordinal = form.decoration.ordinal
+            node.description = form.decoration.description
         return node
 
     def selectPath(self, form: Path.Form) -> Optional[Path]:
-        return self.selectOrInsertPath(form, False)
+        if form.qualified:
+            return self.selectOrInsertPath(form, False)
+        else:
+            scope_node = self.scope.getPath()
+            if len(form.nodes) == 0:
+                return scope_node
+            candidates: Dict[Path, Path] = {x: x for x in
+                                            self.session.query(Path).where(Path.name == form.nodes[-1]).all()}
+
+            match_candidates = candidates
+
+            for n in form.nodes[::-1][1:]:
+                match_candidates = {x: y.parent for (x, y) in match_candidates.items() if y.parent.name == n}
+
+            if len(match_candidates) == 1:
+                return next(iter(match_candidates.values()))
+
+            self_candidates = {x: y for (x, y) in match_candidates.items() if x == self.scope.getPath()}
+
+            if len(self_candidates) == 1:
+                return next(iter(self_candidates.values()))
+
+            child_candidates = {x: y for (x, y) in match_candidates.items() if x.is_child_of(scope_node)}
+
+            if len(child_candidates) == 1:
+                return next(iter(child_candidates.values()))
+
+            parent_candidates = {x: y for (x, y) in match_candidates.items() if x.is_parent_of(scope_node)}
+
+            if len(parent_candidates) == 1:
+                return next(iter(parent_candidates.values()))
+
+            return None
 
     def insertPath(self, form: Path.Form) -> Optional[Path]:
         result = self.selectOrInsertPath(form)
@@ -71,11 +106,53 @@ class Manager():
     def removePath(self, path: Path, recursive: bool = False):
         self.session.delete(path)
 
+    def selectOrInsertSymbolClass(self, form: SymbolClass.Form, insert: bool = True) -> Optional[SymbolClass]:
+        if insert:
+            path = self.selectOrInsertPath(form.path, insert)
+        else:
+            path = self.selectPath(form.path) or self.selectOrInsertPath(form.path, insert)
+        if path.symbol_class is None:
+            new_symbol_class = SymbolClass()
+            new_symbol_class.path = path
+            self.session.add(new_symbol_class)
+            symbol_class = new_symbol_class
+        else:
+            symbol_class = path.symbol_class
+
+        if form.hints is not None:
+            for h in symbol_class.hints:
+                self.session.delete(h)
+
+            for h in form.hints:
+                hint = SymbolClassHint()
+                hint.hint = self.selectOrInsertSymbolClass(h, insert)
+                hint.recursive = h.recursive
+                hint.clazz = symbol_class
+                self.session.add(hint)
+
+        return symbol_class
+
+    def selectSymbolClass(self, form: SymbolClass.Form) -> Optional[SymbolClass]:
+        path = self.selectPath(form.path)
+        if path is None:
+            return None
+        else:
+            return path.symbol_class
+
     def insertSymbolClass(self, form: SymbolClass.Form) -> Optional[SymbolClass]:
-        pass
+        path = self.selectPath(form.path)
+        if path is None:
+            return None
+        elif path.symbol_class is None:
+            new_symbol_class = SymbolClass()
+            new_symbol_class.path = path
+            self.session.add(new_symbol_class)
+            return new_symbol_class
+        else:
+            return None
 
     def removeSymbolClass(self, symbol_class: SymbolClass):
-        pass
+        self.session.delete(symbol_class)
 
     def insertSymbol(self, form: Symbol.Form) -> Optional[Symbol]:
         pass

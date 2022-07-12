@@ -108,3 +108,6 @@ class PathScope(Scope):
 
     def up(self) -> "PathScope":
         return PathScope(self.path.parent)
+
+    def __str__(self) -> str:
+        return self.path.__str__()

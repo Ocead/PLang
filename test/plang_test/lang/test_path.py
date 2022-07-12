@@ -45,7 +45,8 @@ class TestPathBase(TestCase):
 
     def setUp(self) -> None:
         self.handler = PlangHandler()
-        self.session = TestPath.session
+        self.session = TestPathBase.session
+        self.session.rollback()
         path = self.handler.ref(self.session, PlangScope(), '.;')
         if isinstance(path, Path):
             self.scope = PathScope(path)
@@ -62,7 +63,7 @@ class TestPath(TestPathBase):
         self.isDecorated(result, None, None)
         self.isStringEquals(result, line)
 
-    def testUnqualifiedToPath(self):
+    def testUnqualifiedTopPath(self):
         line = 'unqualified'
 
         result: Path = self.execute(line)
@@ -80,7 +81,7 @@ class TestPath(TestPathBase):
         self.isDecorated(result, None, None)
         self.isStringEquals(result, '.' + line)
 
-    def testQualifiedToPath(self):
+    def testQualifiedTopPath(self):
         line = '.qualified'
 
         result: Path = self.execute(line)

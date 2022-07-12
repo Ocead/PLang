@@ -41,7 +41,7 @@ fragment OP_COMMENT : '//';
 fragment OP_COMMENT_L : '/*';
 fragment OP_COMMENT_R : '*/';
 OP_ESCAPE : '\\';
-fragment OP_CONTEXT : '@';
+OP_CONTEXT : '@';
 
 fragment XID_START : [\p{XID_START}];
 fragment XID_CONTINUE : [\p{XID_CONTINUE}];
@@ -88,6 +88,7 @@ declCore
     | symbolDecl
     | hintDecl
     | objectClassDecl
+    | contextDecl
     | STRING
     | INTEGER);
 
@@ -104,7 +105,8 @@ ref
     | symbolClassRef
     | symbolCompoundRef
     | objectClassRef
-    | pointClassRef);
+    | pointClassRef
+    | pointSVORef);
 
 // Hint
 
@@ -181,13 +183,10 @@ symbolQualifiedClass
 symbolClass
     : symbolUnqualifiedClass
     | symbolQualifiedClass;
-symbolOrderedClass
-    : symbolClass
-      (WS* decoration)?;
 symbolRecursiveClass
     : symbolClass OP_RECUR;
 symbolClassListElement
-    : pathUnqualifiedPath;
+    : pathUnqualifiedNode;
 symbolClassListElements
     : WS* OP_LIST WS* symbolClassListElement;
 symbolUnqualifiedClassList
@@ -200,8 +199,9 @@ symbolClassList
 
 symbolClassDecl
     : (hintSymbolClassList WS*)?
-      (symbolOrderedClass
-    | symbolClassList);
+      (symbolClass
+    | symbolClassList)
+      (WS* decoration)?;
 symbolClassRef
     : symbolClass
     | symbolClassList
@@ -380,3 +380,11 @@ causalImplicationDef
       causalName WS*
       causalConcreteDef WS*
       OP_CAU_R;
+
+// Context
+context
+    : OP_CONTEXT WS*
+    (pathRef);
+
+contextDecl
+    : context;

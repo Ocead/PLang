@@ -149,7 +149,7 @@ Referencing content in external file will be supported for the following types:
 
 * [ ] Path `GDI--`
 * [ ] Plot `GD---`
-    * [ ] Symbol classes `GD---`
+    * [ ] Symbol classes `GDI--`
     * [ ] Symbols `GD---`
     * [ ] Point classes `GD---`
     * [ ] Points `GD---`
