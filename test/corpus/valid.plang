@@ -5,7 +5,7 @@ unqualified.path;
 .qualified;
 .qualified.path;
 
-. (0, "Test");
+//. (0, "Test");
 unqualified (1);
 unqualified.path(-1);
 .qualified (.1);
@@ -25,7 +25,7 @@ unqualified.symbol.class,list[];
 .qualified_symbol_class,list[];
 .qualified.symbol.class,list[];
 
-.[] (0);
+//.[] (0);
 unqualified_symbol_class[] (1);
 unqualified_symbol.class[] (-1);
 .qualified_symbol_class[](.5);

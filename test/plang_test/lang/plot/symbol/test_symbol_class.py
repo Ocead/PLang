@@ -50,7 +50,7 @@ class TestSymbolClassBase(TestCase):
         self.session.rollback()
         path = self.handler.ref(self.session, PlangScope(), '.;')
         if isinstance(path, Path):
-            self.scope = PathScope(path)
+            self.scope = PathScope('test', path)
         else:
             raise TypeError()
 
@@ -163,7 +163,7 @@ class TestSymbolClassDecorated(TestSymbolClassBase):
     def testDecoratedLocalSymbolClass(self):
         line = '[]'
         ordinal = random.randint(-50, 50)
-        description = 'Root path'
+        description = 'Local Symbol class'
 
         result: SymbolClass = self.execute(line + f'({ordinal}, "{description}")')
 
@@ -174,7 +174,7 @@ class TestSymbolClassDecorated(TestSymbolClassBase):
     def testDecoratedRootSymbolClass(self):
         line = '.[]'
         ordinal = random.randint(-50, 50)
-        description = 'Root path'
+        description = 'Root symbol class'
 
         result: SymbolClass = self.execute(line + f'({ordinal}, "{description}")')
 
@@ -185,7 +185,7 @@ class TestSymbolClassDecorated(TestSymbolClassBase):
     def testDecoratedUnqualifiedSymbolClass(self):
         line = 'unqualified_symbol_class[]'
         ordinal = random.randint(-50, 50)
-        description = 'Root path'
+        description = 'Unqualified symbol class'
 
         result: SymbolClass = self.execute(line + f'({ordinal}, "{description}")')
 
@@ -196,7 +196,7 @@ class TestSymbolClassDecorated(TestSymbolClassBase):
     def testDecoratedUnqualifiedChildSymbolClass(self):
         line = 'unqualified_symbol.class[]'
         ordinal = random.randint(-50, 50)
-        description = 'Root path'
+        description = 'Unqualified symbol child class'
 
         result: SymbolClass = self.execute(line + f'({ordinal}, "{description}")')
 
@@ -207,7 +207,7 @@ class TestSymbolClassDecorated(TestSymbolClassBase):
     def testDecoratedQualifiedSymbolClass(self):
         line = '.qualified_symbol_class[]'
         ordinal = random.randint(-50, 50)
-        description = 'Root path'
+        description = 'Qualified symbol class'
 
         result: SymbolClass = self.execute(line + f'({ordinal}, "{description}")')
 
@@ -218,7 +218,7 @@ class TestSymbolClassDecorated(TestSymbolClassBase):
     def testDecoratedQualifiedChildSymbolClass(self):
         line = '.qualified_symbol.class[]'
         ordinal = random.randint(-50, 50)
-        description = 'Root path'
+        description = 'Qualified symbol child class'
 
         result: SymbolClass = self.execute(line + f'({ordinal}, "{description}")')
 
@@ -229,7 +229,7 @@ class TestSymbolClassDecorated(TestSymbolClassBase):
     def testDecoratedUnqualifiedSymbolClassList(self):
         line = 'unqualified_symbol_class,list[]'
         ordinal = random.randint(-50, 50)
-        description = 'Root path'
+        description = 'Unqualified symbol class list'
 
         result: List[SymbolClass] = self.execute(line + f'({ordinal}, "{description}")')
 
@@ -242,7 +242,7 @@ class TestSymbolClassDecorated(TestSymbolClassBase):
     def testDecoratedUnqualifiedChildSymbolClassList(self):
         line = 'unqualified.symbol.class,list[]'
         ordinal = random.randint(-50, 50)
-        description = 'Root path'
+        description = 'Unqualified symbol child class list'
 
         result: List[SymbolClass] = self.execute(line + f'({ordinal}, "{description}")')
 
@@ -255,7 +255,7 @@ class TestSymbolClassDecorated(TestSymbolClassBase):
     def testDecoratedQualifiedSymbolClassList(self):
         line = '.qualified_symbol_class,list[]'
         ordinal = random.randint(-50, 50)
-        description = 'Root path'
+        description = 'Qualified symbol class list'
 
         result: List[SymbolClass] = self.execute(line + f'({ordinal}, "{description}")')
 
@@ -268,7 +268,7 @@ class TestSymbolClassDecorated(TestSymbolClassBase):
     def testDecoratedQualifiedChildSymbolClassList(self):
         line = '.qualified.symbol.class,list[]'
         ordinal = random.randint(-50, 50)
-        description = 'Root path'
+        description = 'Qualified symbol child class list'
 
         result: List[SymbolClass] = self.execute(line + f'({ordinal}, "{description}")')
 

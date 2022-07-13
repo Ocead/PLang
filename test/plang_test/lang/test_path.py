@@ -49,7 +49,7 @@ class TestPathBase(TestCase):
         self.session.rollback()
         path = self.handler.ref(self.session, PlangScope(), '.;')
         if isinstance(path, Path):
-            self.scope = PathScope(path)
+            self.scope = PathScope('test', path)
         else:
             raise TypeError()
 
@@ -60,16 +60,14 @@ class TestPath(TestPathBase):
         result: Path = self.execute(line)
 
         self.isPersisted(result)
-        self.isDecorated(result, None, None)
         self.isStringEquals(result, line)
 
-    def testUnqualifiedTopPath(self):
+    def testUnqualifiedPath(self):
         line = 'unqualified'
 
         result: Path = self.execute(line)
 
         self.isPersisted(result)
-        self.isDecorated(result, None, None)
         self.isStringEquals(result, '.' + line)
 
     def testUnqualifiedChildPath(self):
@@ -78,16 +76,14 @@ class TestPath(TestPathBase):
         result: Path = self.execute(line)
 
         self.isPersisted(result)
-        self.isDecorated(result, None, None)
         self.isStringEquals(result, '.' + line)
 
-    def testQualifiedTopPath(self):
+    def testQualifiedPath(self):
         line = '.qualified'
 
         result: Path = self.execute(line)
 
         self.isPersisted(result)
-        self.isDecorated(result, None, None)
         self.isStringEquals(result, line)
 
     def testQualifiedChildPath(self):
@@ -96,23 +92,11 @@ class TestPath(TestPathBase):
         result: Path = self.execute(line)
 
         self.isPersisted(result)
-        self.isDecorated(result, None, None)
         self.isStringEquals(result, line)
 
 
 class TestPathDecorated(TestPathBase):
-    def testDecoratedQualifiedRootPath(self):
-        line = '.'
-        ordinal = random.randint(-50, 50)
-        description = 'Root path'
-
-        result: Path = self.execute(line + f'({ordinal}, "{description}")')
-
-        self.isPersisted(result)
-        self.isDecorated(result, ordinal, description)
-        self.isStringEquals(result, line)
-
-    def testDecoratedUnqualifiedTopPath(self):
+    def testDecoratedUnqualifiedPath(self):
         line = 'unqualified'
         ordinal = random.randint(-50, 50)
         description = 'Unqualified path'
@@ -134,7 +118,7 @@ class TestPathDecorated(TestPathBase):
         self.isDecorated(result, ordinal, description)
         self.isStringEquals(result, '.' + line)
 
-    def testDecoratedQualifiedTopPath(self):
+    def testDecoratedQualifiedPath(self):
         line = '.qualified'
         ordinal = random.randint(-50, 50)
         description = 'Qualified path'

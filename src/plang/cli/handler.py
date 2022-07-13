@@ -83,7 +83,6 @@ class PlangHandler(Handler):
         except:
             return None
 
-
     def complete(self, scope: Scope, line: str) -> List:
         pass
 

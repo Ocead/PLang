@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
 from plang.cli.handler import Handler, PlangHandler
-from plang.cli.scope import Scope
+from plang.cli.scope import Scope, PathScope
 from plang.db.base import Base
 from plang.db.models import Path
 from plang.db.plot.symbol.models import *
@@ -107,6 +107,7 @@ class CLI:
     def __open(self, *args) -> None:
         if len(args) == 1:
             self.session = CLI.session(args[0])
+            self.scope = PathScope(args[0], self.handler.ref(self.session, self.scope, '.;'))
         else:
             raise NotImplementedError()  # TODO: implement error
 

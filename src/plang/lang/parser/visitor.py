@@ -4,7 +4,7 @@ from typing import List, Optional
 from sqlalchemy.orm import Session
 
 from plang.db.base import Decoratable
-from plang.db.plot.symbol.models import SymbolClass
+from plang.db.plot.symbol.models import SymbolClass, Symbol
 from plang.cli.scope import Scope, PathScope
 from plang.db.base import Sourced
 from plang.db.models import Path
@@ -225,7 +225,11 @@ class PlangVisitor(BasePlangVisitor):
         return ctx.IDENTIFIER()
 
     def visitSymbolOrderedName(self, ctx: PlangParser.SymbolOrderedNameContext):
-        return super().visitSymbolOrderedName(ctx)
+        result = super().visitSymbolOrderedName(ctx)
+        symbolName = next(filter(lambda x: not isinstance(x, Decoratable.Form), result), None)
+        decorationForm = next(filter(lambda x: isinstance(x, Decoratable.Form), result), None)
+        symbolForm = Symbol.Form(name=str(symbolName), decoration=decorationForm)
+        return symbolForm
 
     def visitSymbol(self, ctx: PlangParser.SymbolContext):
         return super().visitSymbol(ctx)
@@ -237,10 +241,30 @@ class PlangVisitor(BasePlangVisitor):
         return super().visitSymbolDef(ctx)
 
     def visitSymbolListDef(self, ctx: PlangParser.SymbolListDefContext):
-        return super().visitSymbolListDef(ctx)
+        result = super().visitSymbolListDef(ctx)
+        pathForm = next(filter(lambda x: isinstance(x, Path.Form), result), None)
+        symbolForms = list(filter(lambda x: isinstance(x, Symbol.Form), result))
+        decorationForm = next(filter(lambda x: isinstance(x, Decoratable.Form), result), None)
+
+        if pathForm is None:
+            pathForm = Path.Form(False, [])
+
+        if decorationForm is not None:
+            pathForm.decoration = decorationForm
+
+        for f in symbolForms:
+            f.clazz = SymbolClass.Form(pathForm)
+        return symbolForms
 
     def visitSymbolDecl(self, ctx: PlangParser.SymbolDeclContext):
-        return super().visitSymbolDecl(ctx)
+        result = super().visitSymbolDecl(ctx)
+        symbolForms = list(filter(lambda x: isinstance(x, Symbol.Form), result))
+        symbols = []
+        manager = Manager(self.session, self.scope)
+        for f in symbolForms:
+            symbol = manager.selectOrInsertSymbol(f, True)
+            symbols.append(symbol)
+        return symbols
 
     def visitSymbolRef(self, ctx: PlangParser.SymbolRefContext):
         return super().visitSymbolRef(ctx)
@@ -367,5 +391,5 @@ class PlangVisitor(BasePlangVisitor):
         path = next(filter(lambda x: isinstance(x, Path), result), None)
         if path is None:
             return None
-        scope = PathScope(path)
+        scope = self.scope.getScope(path)
         return scope

@@ -44,6 +44,10 @@ class Scope(ABC):
         pass
 
     @abstractmethod
+    def getScope(self, path) -> "Scope":
+        pass
+
+    @abstractmethod
     def up(self) -> "Scope":
         """
         Gives the scope of the current scope paths parent
@@ -72,6 +76,9 @@ class PlangScope(Scope):
     def getPath(self) -> Any:
         pass
 
+    def getScope(self, path) -> "Scope":
+        pass
+
     def up(self) -> "Scope":
         return self
 
@@ -80,8 +87,9 @@ class PlangScope(Scope):
 
 
 class PathScope(Scope):
-    def __init__(self, path: Path) -> None:
+    def __init__(self, file: str, path: Path) -> None:
         super().__init__()
+        self.file = file
         self.path = path
 
     def lookup(self, identifier: str) -> List[Path]:
@@ -106,8 +114,11 @@ class PathScope(Scope):
     def getPath(self) -> Path:
         return self.path
 
+    def getScope(self, path) -> "Scope":
+        return PathScope(self.file, path)
+
     def up(self) -> "PathScope":
-        return PathScope(self.path.parent)
+        return PathScope(self.file, self.path.parent)
 
     def __str__(self) -> str:
-        return self.path.__str__()
+        return f'{self.file}:{self.path}'

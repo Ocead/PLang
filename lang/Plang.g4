@@ -215,13 +215,13 @@ symbolOrderedName
     : symbolName
       (WS* decoration)?;
 symbol
-    : pathRef? OP_SYM_L symbolName OP_SYM_R;
+    : path? OP_SYM_L symbolName OP_SYM_R;
 symbolList
-    : pathRef? OP_SYM_L symbolName WS* (OP_LIST WS* symbolName WS*)+ OP_SYM_R;
+    : path? OP_SYM_L symbolName WS* (OP_LIST WS* symbolName WS*)+ OP_SYM_R;
 symbolDef
-    : pathRef? OP_SYM_L symbolOrderedName OP_SYM_R;
+    : path? OP_SYM_L symbolOrderedName OP_SYM_R;
 symbolListDef
-    : pathRef? OP_SYM_L WS*
+    : path? OP_SYM_L WS*
       symbolOrderedName WS*
       (OP_LIST WS* symbolOrderedName WS*)*
       OP_SYM_R;

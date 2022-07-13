@@ -51,9 +51,10 @@ class SymbolClassHint(Base):
 
 class Symbol(Decoratable, Base):
     class Form:
-        def __init__(self, clazz: SymbolClass.Form, name: str):
-            self.clazz = clazz
+        def __init__(self, name: str, clazz: SymbolClass.Form = None, decoration: Decoratable.Form = None):
             self.name = name
+            self.clazz = clazz
+            self.decoration = decoration
 
     __tablename__ = 'plot_symbol'
     __table_args__ = (

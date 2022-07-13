@@ -1,5 +1,6 @@
 from typing import List, Optional, Dict
 
+from sqlalchemy import inspect
 from sqlalchemy.orm import Session
 
 from plang.cli.scope import Scope
@@ -31,6 +32,10 @@ class Manager:
         self.session = session
         self.scope = scope
 
+    def __refresh(self, instance):
+        if inspect(instance).persistent:
+            self.session.refresh(instance)
+
     def report(self):
         return Report(self.session.new, self.session.dirty, self.session.deleted, [])
 
@@ -43,7 +48,6 @@ class Manager:
             node: Path = root[0]
         else:
             node = self.scope.getPath()
-        self.session.refresh(node)
 
         leaf = len(form.nodes) - 1
         for i in range(0, len(form.nodes)):
@@ -53,6 +57,7 @@ class Manager:
                 new_path.name = form.nodes[i]
                 new_path.parent = node
                 self.session.add(new_path)
+                self.__refresh(node)  # Flush new child to parent
                 node = new_path
             elif len(nodes) == 1:
                 node = nodes[0]
@@ -80,22 +85,22 @@ class Manager:
                 match_candidates = {x: y.parent for (x, y) in match_candidates.items() if y.parent.name == n}
 
             if len(match_candidates) == 1:
-                return next(iter(match_candidates.values()))
+                return next(iter(match_candidates.keys()))
 
             self_candidates = {x: y for (x, y) in match_candidates.items() if x == self.scope.getPath()}
 
             if len(self_candidates) == 1:
-                return next(iter(self_candidates.values()))
+                return next(iter(self_candidates.keys()))
 
             child_candidates = {x: y for (x, y) in match_candidates.items() if x.is_child_of(scope_node)}
 
             if len(child_candidates) == 1:
-                return next(iter(child_candidates.values()))
+                return next(iter(child_candidates.keys()))
 
             parent_candidates = {x: y for (x, y) in match_candidates.items() if x.is_parent_of(scope_node)}
 
             if len(parent_candidates) == 1:
-                return next(iter(parent_candidates.values()))
+                return next(iter(parent_candidates.keys()))
 
             return None
 
@@ -107,15 +112,13 @@ class Manager:
         self.session.delete(path)
 
     def selectOrInsertSymbolClass(self, form: SymbolClass.Form, insert: bool = True) -> Optional[SymbolClass]:
-        if insert:
-            path = self.selectOrInsertPath(form.path, insert)
-        else:
-            path = self.selectPath(form.path) or self.selectOrInsertPath(form.path, insert)
+        path = self.selectPath(form.path) or self.selectOrInsertPath(form.path, insert)
         if path.symbol_class is None:
             new_symbol_class = SymbolClass()
             new_symbol_class.path = path
             self.session.add(new_symbol_class)
             symbol_class = new_symbol_class
+            self.__refresh(path)
         else:
             symbol_class = path.symbol_class
 
@@ -129,6 +132,12 @@ class Manager:
                 hint.recursive = h.recursive
                 hint.clazz = symbol_class
                 self.session.add(hint)
+
+        # self.__refresh(path)
+
+        if form.path.decoration is not None:
+            path.ordinal = form.path.decoration.ordinal
+            path.description = form.path.decoration.description
 
         return symbol_class
 
@@ -153,6 +162,27 @@ class Manager:
 
     def removeSymbolClass(self, symbol_class: SymbolClass):
         self.session.delete(symbol_class)
+
+    def selectOrInsertSymbol(self, form: Symbol.Form, insert: bool = True) -> Optional[Symbol]:
+        symbolClass = self.selectOrInsertSymbolClass(form.clazz, insert)
+        if symbolClass is None:
+            return None
+        else:
+            symbol = next(filter(lambda x: x.name == form.name, symbolClass.instances), None)
+            if symbol is None:
+                symbol = Symbol()
+                symbol.name = form.name
+                symbol.clazz = symbolClass
+                self.session.add(symbol)
+
+            if form.decoration is not None:
+                symbol.ordinal = form.decoration.ordinal
+                symbol.description = form.decoration.description
+
+            return symbol
+
+    def selectSymbol(self, form: Symbol.Form) -> Optional[Symbol]:
+        pass
 
     def insertSymbol(self, form: Symbol.Form) -> Optional[Symbol]:
         pass
