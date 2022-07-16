@@ -5,6 +5,7 @@ from sqlalchemy import UniqueConstraint, CheckConstraint
 from sqlalchemy.orm import relationship, declared_attr
 
 from plang.db.base import Base, Decoratable
+from plang.db.visual import OP
 
 
 class Config(Base):
@@ -104,7 +105,7 @@ class Path(Decoratable, Base):
 
         return Path.Form(True, nodes)
 
-    def __str__(self) -> str:
+    def __str__(self, rich: bool = False) -> str:
         path = self.name
         node = self
 
@@ -112,12 +113,12 @@ class Path(Decoratable, Base):
             node = node.parent
             if node is None:
                 break
-            path = node.name + '.' + path
+            path = node.name + OP.path(rich) + path
 
         if len(path) != 0:
             str = path
         else:
-            str = '.'
+            str = OP.path(rich)
 
         return str
 

@@ -29,6 +29,26 @@ You can invoke the command line tool via
 python3 -m plang
 ```
 
+## Building
+
+### Requirements
+
+* ANTLR v4 [Command Line Tool](https://www.antlr.org/download.html)
+
+### Preparation
+
+Generate the parser source code like this:
+
+```shell
+antlr4 \
+  -o ./src \
+  -lib ./lang \
+  -Dlanguage=Python3 \
+  -package "plang.lang.generated" \
+  -visitor \
+  ./lang/Plang.g4
+```
+
 ## Design
 
 ### Syntax

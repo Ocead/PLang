@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, List
 
 from antlr4 import BailErrorStrategy, Parser, RecognitionException, InputStream, CommonTokenStream, ParserRuleContext
-from antlr4.error.ErrorListener import ErrorListener
+from antlr4.error.ErrorListener import ErrorListener, ConsoleErrorListener
 from sqlalchemy.orm import Session
 
 from plang.cli.scope import Scope
@@ -53,7 +53,6 @@ class TestErrorListener(ErrorListener):
 
 class MyErrorStrategy(BailErrorStrategy):
     def recover(self, recognizer: Parser, e: RecognitionException):
-        recognizer._errHandler.reportError(recognizer, e)
         super().recover(recognizer, e)
 
 
@@ -64,6 +63,7 @@ class PlangHandler(Handler):
     def __prepare(self, line: str) -> PlangParser:
         input_stream = InputStream(data=line)
         lexer = PlangLexer(input_stream)
+        lexer.removeErrorListeners()
         stream = CommonTokenStream(lexer)
         parser = PlangParser(stream)
         parser._errHandler = MyErrorStrategy()
@@ -80,7 +80,7 @@ class PlangHandler(Handler):
                 return result[0]
             else:
                 return result
-        except:
+        except Exception as e:
             return None
 
     def complete(self, scope: Scope, line: str) -> List:

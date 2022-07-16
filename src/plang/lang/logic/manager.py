@@ -1,8 +1,9 @@
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Union
 
 from sqlalchemy import inspect
 from sqlalchemy.orm import Session
 
+from plang.error import LangExceptions
 from plang.cli.scope import Scope
 from plang.db.base import Base, FormBase
 from plang.db.models import Path
@@ -19,10 +20,14 @@ class Report:
     def __len__(self):
         return len(self.added) + len(self.modified) + len(self.deleted) + len(self.failed)
 
-    def __str__(self):
-        sa = 'Added entries:\n\t' + '\n\t'.join([str(a) for a in self.added]) if len(self.added) > 0 else ''
-        sm = 'Modified entries:\n\t' + '\n\t'.join([str(a) for a in self.modified]) if len(self.modified) > 0 else ''
-        sd = 'Deleted entries:\n\t' + '\n\t'.join([str(a) for a in self.deleted]) if len(self.deleted) > 0 else ''
+    def str(self, rich: bool):
+        return self.__str__(rich)
+
+    def __str__(self, rich: bool = False) -> str:
+        sa = 'Added entries:\n\t' + '\n\t'.join([a.str(rich) for a in self.added]) if len(self.added) > 0 else ''
+        sm = 'Modified entries:\n\t' + '\n\t'.join([a.str(rich) for a in self.modified]) if len(
+            self.modified) > 0 else ''
+        sd = 'Deleted entries:\n\t' + '\n\t'.join([a.str(rich) for a in self.deleted]) if len(self.deleted) > 0 else ''
         sf = 'Failed entries:\n\t' + '\n\t'.join([str(a) for a in self.failed]) if len(self.failed) > 0 else ''
         return '\n'.join(s for s in [sa, sm, sd, sf] if len(s) > 0)
 
@@ -36,7 +41,7 @@ class Manager:
         if inspect(instance).persistent:
             self.session.refresh(instance)
 
-    def report(self):
+    def report(self) -> Report:
         return Report(self.session.new, self.session.dirty, self.session.deleted, [])
 
     def selectOrInsertPath(self, form: Path.Form, insert: bool = True) -> Optional[Path]:
@@ -181,8 +186,19 @@ class Manager:
 
             return symbol
 
-    def selectSymbol(self, form: Symbol.Form) -> Optional[Symbol]:
-        pass
+    def selectSymbol(self, form: Symbol.Form) -> Union[None, Symbol, List[Symbol]]:
+        candidates: Dict[Symbol, Path] = {x: x.clazz.path for x in
+                                          self.session.query(Symbol).where(Symbol.name == form.name).all()}
+
+        match_candidates = candidates
+
+        for n in form.clazz.path.nodes[::-1]:
+            match_candidates = {x: y.parent for (x, y) in match_candidates.items() if y.name == n}
+
+        if len(match_candidates) == 1:
+            return next(iter(match_candidates.keys()))
+        else:
+            return list(iter(match_candidates.keys()))
 
     def insertSymbol(self, form: Symbol.Form) -> Optional[Symbol]:
         pass

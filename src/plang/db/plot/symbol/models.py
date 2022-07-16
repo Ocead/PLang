@@ -5,6 +5,7 @@ from sqlalchemy.orm import relationship
 
 from plang.db.models import Path
 from plang.db.base import Base, Decoratable
+from plang.db.visual import OP
 
 
 class SymbolClass(Base):
@@ -31,8 +32,8 @@ class SymbolClass(Base):
     instances = relationship('Symbol', back_populates='clazz')
     hints = relationship('SymbolClassHint', back_populates='clazz', foreign_keys='SymbolClassHint.class_id')
 
-    def __str__(self) -> str:
-        return f'{self.path}[]'
+    def __str__(self, rich: bool = False) -> str:
+        return f'{self.path.__str__(rich)}{OP.sym(rich)}'
 
 
 class SymbolClassHint(Base):
@@ -45,14 +46,14 @@ class SymbolClassHint(Base):
     clazz = relationship('SymbolClass', back_populates='hints', foreign_keys=[class_id])
     hint = relationship('SymbolClass', foreign_keys=[hint_id])
 
-    def __str__(self):
-        return f'{str(self.hint)}{"..." if self.recursive else ""}'
+    def __str__(self, rich: bool = False) -> str:
+        return f'{self.hint.__str__(rich)}{OP.recur(rich) if self.recursive else ""}'
 
 
 class Symbol(Decoratable, Base):
     class Form:
         def __init__(self, name: str, clazz: SymbolClass.Form = None, decoration: Decoratable.Form = None):
-            self.name = name
+            self.name = str(name)
             self.clazz = clazz
             self.decoration = decoration
 
@@ -67,8 +68,8 @@ class Symbol(Decoratable, Base):
     clazz = relationship('SymbolClass', back_populates='instances')
     compounds = relationship('SymbolCompound', foreign_keys='SymbolCompound.symbol_id')
 
-    def __str__(self):
-        return f'{str(self.clazz.path)}[{self.name}]'
+    def __str__(self, rich: bool = False) -> str:
+        return f'{self.clazz.path.__str__(rich)}{OP.sym_l(rich)}{self.name}{OP.sym_r(rich)}'
 
 
 class SymbolCompound(Base):

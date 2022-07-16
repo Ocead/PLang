@@ -2,8 +2,10 @@ import re
 import sys
 import shlex
 from sqlite3 import IntegrityError
-from typing import List, Optional
+from typing import List, Optional, Iterable
 
+from rich.console import Console
+from rich.markup import escape
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
@@ -15,7 +17,7 @@ from plang.db.plot.symbol.models import *
 from plang.db.plot.point.models import *
 from plang.db.plot.object.models import *
 from plang.db.plot.causal.models import *
-from plang.error import NoSessionException
+from plang.error import CLIExceptions, LangExceptions
 from plang.lang.logic.manager import Manager
 
 try:
@@ -64,7 +66,7 @@ class CLI:
     def printReport(self):
         report = Manager(self.session, self.scope).report()
         if len(report) > 0:
-            print(report)
+            self.console.print(report.str(True))
 
     def commit(self):
         try:
@@ -78,6 +80,7 @@ class CLI:
         self.session = session
         self.scope = scope
         self.handler: Handler = PlangHandler()
+        self.console = Console()
         readline.parse_and_bind('tab: complete')
         readline.set_completer(self.__complete)
         if readline in sys.modules:
@@ -131,7 +134,28 @@ class CLI:
     def __export(self, *args) -> None:
         raise NotImplementedError()  # TODO: implement
 
+    def __inspect(self, *args) -> None:
+        if len(args) == 0:
+            self.console.print(self.scope.getPath().str(True))
+        else:
+            entry = self.handler.ref(self.session, self.scope, args[0])
+
+            if entry is None:
+                raise LangExceptions.InvalidReferenceException()
+            elif not isinstance(entry, Iterable):
+                entry = [entry]
+
+            for e in entry:
+                if isinstance(e, Base):
+                    self.console.print(e.str(True))
+                else:
+                    self.console.print(escape(repr(entry)))
+
     def __scope(self, *args) -> None:
+        if len(args) == 0:
+            args = ['.']
+        elif len(args) > 1:
+            raise NotImplementedError()  # TODO: implement
         raise NotImplementedError()  # TODO: implement
 
     def __list(self, *args) -> None:
@@ -186,6 +210,9 @@ class CLI:
         ':e': __export,
         ':export': __export,
 
+        ':': __inspect,
+        ':inspect': __inspect,
+
         ':cd': __scope,
 
         ':l': __list,
@@ -224,27 +251,26 @@ class CLI:
     def input(self) -> Optional[int]:
         result = None
         try:
-            line = input(f'{self.scope}> ')
+            line = self.console.input(f'{self.scope.str(True)}[magenta]>[/magenta] ')
             if CLI.isCommand(line):
                 args = shlex.split(line)
                 try:
                     command = CLI.__commands[args[0]]
-                except KeyError:
-                    print(f'ERROR: Unknown command "{args[0]}"!', file=sys.stderr)
-                    return None
+                except KeyError as e:
+                    raise CLIExceptions.UnknownCommandException() from e
                 return command(self, *args[1:])
             else:
                 if self.session is not None:
                     try:
                         result = self.handler.execute(self.session, self.scope, line)
                     except Exception as e:
-                        print(e)
-                        result = None
+                        self.session.rollback()
+                        raise LangExceptions.MalformedExpressionException from e
                     if isinstance(result, Scope):
                         self.scope = result
                     self.printReport()
                     self.commit()
                 else:
-                    raise NoSessionException()
+                    raise CLIExceptions.NoSessionException()
         except KeyboardInterrupt as e:
             return 2

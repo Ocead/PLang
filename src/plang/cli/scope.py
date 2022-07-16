@@ -56,6 +56,13 @@ class Scope(ABC):
         """
         pass
 
+    def str(self, rich: bool):
+        return self.__str__(rich)
+
+    @abstractmethod
+    def __str__(self, rich: bool = False):
+        pass
+
 
 class PlangScope(Scope):
     def __init__(self) -> None:
@@ -82,8 +89,8 @@ class PlangScope(Scope):
     def up(self) -> "Scope":
         return self
 
-    def __str__(self):
-        return "PLang"
+    def __str__(self, rich: bool = False):
+        return f'{"[magenta]" if rich else ""}PLang{"[/magenta]" if rich else ""}'
 
 
 class PathScope(Scope):
@@ -120,5 +127,5 @@ class PathScope(Scope):
     def up(self) -> "PathScope":
         return PathScope(self.file, self.path.parent)
 
-    def __str__(self) -> str:
-        return f'{self.file}:{self.path}'
+    def __str__(self, rich: bool = False) -> str:
+        return f'{"[magenta]" if rich else ""}{self.file}{"[/magenta]" if rich else ""} {self.path.__str__(rich)}'

@@ -1,3 +1,4 @@
+from copy import deepcopy
 from enum import Enum
 from typing import List, Optional
 
@@ -5,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from plang.db.base import Decoratable
 from plang.db.plot.symbol.models import SymbolClass, Symbol
-from plang.cli.scope import Scope, PathScope
+from plang.cli.scope import Scope
 from plang.db.base import Sourced
 from plang.db.models import Path
 from plang.lang.generated.PlangVisitor import PlangVisitor as BasePlangVisitor
@@ -34,22 +35,22 @@ class PlangVisitor(BasePlangVisitor):
 
         self.implied: List[Sourced] = []
 
-    def aggregateResult(self, aggregate, nextResult):
+    def aggregateResult(self, aggregate, next_result):
         if aggregate is None:
-            list = []
+            result_list = []
         elif not isinstance(aggregate, List):
-            list = [aggregate]
+            result_list = [aggregate]
         else:
-            list = aggregate
+            result_list = aggregate
 
-        if nextResult is None:
+        if next_result is None:
             last = []
-        elif not isinstance(nextResult, List):
-            last = [nextResult]
+        elif not isinstance(next_result, List):
+            last = [next_result]
         else:
-            last = nextResult
+            last = next_result
 
-        result = list + last
+        result = result_list + last
         return result
 
     def visitStart(self, ctx: PlangParser.StartContext):
@@ -107,7 +108,15 @@ class PlangVisitor(BasePlangVisitor):
 
     def visitHintSymbolClassList(self, ctx: PlangParser.HintSymbolClassListContext):
         result = super().visitHintSymbolClassList(ctx)
-        return HintList(result)
+        flat = []
+        for r in result:
+            flat.append(r)
+            if r.elements is not None:
+                for e in r.elements:
+                    form = deepcopy(r)
+                    form.path.nodes[-1] = e
+                    flat.append(form)
+        return HintList(flat)
 
     def visitHintDecl(self, ctx: PlangParser.HintDeclContext):
         return super().visitHintDecl(ctx)
@@ -136,19 +145,19 @@ class PlangVisitor(BasePlangVisitor):
 
     def visitPathDecl(self, ctx: PlangParser.PathDeclContext) -> Optional[Path]:
         result = super().visitPathDecl(ctx)
-        pathForm = next(filter(lambda x: isinstance(x, Path.Form), result), None)
-        decorationForm = next(filter(lambda x: isinstance(x, Decoratable.Form), result), None)
-        if pathForm is not None and decorationForm is not None:
-            pathForm.decoration = decorationForm
-        path = Manager(self.session, self.scope).selectOrInsertPath(pathForm)
+        path_form = next(filter(lambda x: isinstance(x, Path.Form), result), None)
+        decoration_form = next(filter(lambda x: isinstance(x, Decoratable.Form), result), None)
+        if path_form is not None and decoration_form is not None:
+            path_form.decoration = decoration_form
+        path = Manager(self.session, self.scope).selectOrInsertPath(path_form)
         return path
 
     def visitPathRef(self, ctx: PlangParser.PathRefContext):
         result = super().visitPathRef(ctx)
-        pathForm = next(filter(lambda x: isinstance(x, Path.Form), result), None)
-        if pathForm is None:
+        path_form = next(filter(lambda x: isinstance(x, Path.Form), result), None)
+        if path_form is None:
             return None
-        path = Manager(self.session, self.scope).selectPath(pathForm)
+        path = Manager(self.session, self.scope).selectPath(path_form)
         return path
 
     def visitSymbolUnqualifiedClass(self, ctx: PlangParser.SymbolUnqualifiedClassContext):
@@ -160,20 +169,20 @@ class PlangVisitor(BasePlangVisitor):
     def visitSymbolQualifiedClass(self, ctx: PlangParser.SymbolQualifiedClassContext):
         return super().visitSymbolQualifiedClass(ctx)
 
-    def visitSymbolClass(self, ctx: PlangParser.SymbolClassContext):
-        result = super().visitSymbolClass(ctx)
-        pathForm = next(filter(lambda x: isinstance(x, Path.Form), result), None)
-        if pathForm is None:
+    def visitSymbolSimpleClass(self, ctx: PlangParser.SymbolSimpleClassContext):
+        result = super().visitSymbolSimpleClass(ctx)
+        path_form = next(filter(lambda x: isinstance(x, Path.Form), result), None)
+        if path_form is None:
             return None
-        symbolClassForm = SymbolClass.Form(path=pathForm)
-        return symbolClassForm
+        symbol_class_form = SymbolClass.Form(path=path_form)
+        return symbol_class_form
 
     def visitSymbolRecursiveClass(self, ctx: PlangParser.SymbolRecursiveClassContext):
         result = super().visitSymbolRecursiveClass(ctx)
-        symbolClassForm = next(filter(lambda x: isinstance(x, SymbolClass.Form), result), None)
-        symbolClassForm.recursive = True
+        symbol_class_form = next(filter(lambda x: isinstance(x, SymbolClass.Form), result), None)
+        symbol_class_form.recursive = True
 
-        return symbolClassForm
+        return symbol_class_form
 
     def visitSymbolClassListElement(self, ctx: PlangParser.SymbolClassListElementContext):
         result = super().visitSymbolClassListElement(ctx)
@@ -193,46 +202,57 @@ class PlangVisitor(BasePlangVisitor):
 
     def visitSymbolClassList(self, ctx: PlangParser.SymbolClassListContext):
         result = super().visitSymbolClassList(ctx)
-        pathForm = next(filter(lambda x: isinstance(x, Path.Form), result), None)
-        symbolClassForm = SymbolClass.Form(path=pathForm)
-        elementsList = ElementsList([str(x) for x in filter(lambda x: not isinstance(x, Path.Form), result)])
-        if elementsList is not None:
-            symbolClassForm.elements = elementsList
-        return symbolClassForm
+        path_form = next(filter(lambda x: isinstance(x, Path.Form), result), None)
+        symbol_class_form = SymbolClass.Form(path=path_form)
+        elements_list = ElementsList([str(x) for x in filter(lambda x: not isinstance(x, Path.Form), result)])
+        if elements_list is not None:
+            symbol_class_form.elements = elements_list
+        return symbol_class_form
 
     def visitSymbolClassDecl(self, ctx: PlangParser.SymbolClassDeclContext):
         result = super().visitSymbolClassDecl(ctx)
-        symbolClassForm = next(filter(lambda x: isinstance(x, SymbolClass.Form), result), None)
-        decorationForm = next(filter(lambda x: isinstance(x, Decoratable.Form), result), None)
-        if symbolClassForm is not None and decorationForm is not None:
-            symbolClassForm.path.decoration = decorationForm
-        hintList = next(filter(lambda x: isinstance(x, HintList), result), None)
-        if hintList is not None:
-            symbolClassForm.hints = hintList
-        symbolClass = Manager(self.session, self.scope).selectOrInsertSymbolClass(symbolClassForm)
-        listedSymbolClasses = []
-        for e in symbolClassForm.elements or []:
-            symbolClassForm.path.nodes[-1] = str(e)
-            listedSymbolClasses.append(Manager(self.session, self.scope).selectOrInsertSymbolClass(symbolClassForm))
+        symbol_class_form = next(filter(lambda x: isinstance(x, SymbolClass.Form), result), None)
+        decoration_form = next(filter(lambda x: isinstance(x, Decoratable.Form), result), None)
+        if symbol_class_form is not None and decoration_form is not None:
+            symbol_class_form.path.decoration = decoration_form
+        hint_list = next(filter(lambda x: isinstance(x, HintList), result), None)
+        if hint_list is not None:
+            symbol_class_form.hints = hint_list
+        symbol_class = Manager(self.session, self.scope).selectOrInsertSymbolClass(symbol_class_form)
+        listed_symbol_classes = []
+        for e in symbol_class_form.elements or []:
+            symbol_class_form.path.nodes[-1] = str(e)
+            listed_symbol_classes.append(Manager(self.session, self.scope).selectOrInsertSymbolClass(symbol_class_form))
 
-        return [symbolClass] + listedSymbolClasses
+        return [symbol_class] + listed_symbol_classes
 
     def visitSymbolClassRef(self, ctx: PlangParser.SymbolClassRefContext):
         result = super().visitSymbolClassRef(ctx)
-        return result
+        symbol_class_form = next(filter(lambda x: isinstance(x, SymbolClass.Form), result), None)
+        symbol_class = Manager(self.session, self.scope).selectSymbolClass(symbol_class_form)
+        return symbol_class
 
     def visitSymbolName(self, ctx: PlangParser.SymbolNameContext):
         return ctx.IDENTIFIER()
 
-    def visitSymbolOrderedName(self, ctx: PlangParser.SymbolOrderedNameContext):
-        result = super().visitSymbolOrderedName(ctx)
-        symbolName = next(filter(lambda x: not isinstance(x, Decoratable.Form), result), None)
-        decorationForm = next(filter(lambda x: isinstance(x, Decoratable.Form), result), None)
-        symbolForm = Symbol.Form(name=str(symbolName), decoration=decorationForm)
-        return symbolForm
+    def visitSymbolDecoratedName(self, ctx: PlangParser.SymbolDecoratedNameContext):
+        result = super().visitSymbolDecoratedName(ctx)
+        symbol_name = next(filter(lambda x: not isinstance(x, Decoratable.Form), result), None)
+        decoration_form = next(filter(lambda x: isinstance(x, Decoratable.Form), result), None)
+        symbol_form = Symbol.Form(name=str(symbol_name), decoration=decoration_form)
+        return symbol_form
 
     def visitSymbol(self, ctx: PlangParser.SymbolContext):
-        return super().visitSymbol(ctx)
+        result = super().visitSymbol(ctx)
+        path_form = next(filter(lambda x: isinstance(x, Path.Form), result), None)
+        symbol_name = next(filter(lambda x: not isinstance(x, Path.Form), result), None)
+
+        symbol_class_form = SymbolClass.Form(path_form or Path.Form(False, []))
+        symbol_form = Symbol.Form(symbol_name, symbol_class_form)
+        return symbol_form
+
+    def visitSymbolCompound(self, ctx: PlangParser.SymbolCompoundContext):
+        return super().visitSymbolCompound(ctx)
 
     def visitSymbolList(self, ctx: PlangParser.SymbolListContext):
         return super().visitSymbolList(ctx)
@@ -242,35 +262,35 @@ class PlangVisitor(BasePlangVisitor):
 
     def visitSymbolListDef(self, ctx: PlangParser.SymbolListDefContext):
         result = super().visitSymbolListDef(ctx)
-        pathForm = next(filter(lambda x: isinstance(x, Path.Form), result), None)
-        symbolForms = list(filter(lambda x: isinstance(x, Symbol.Form), result))
-        decorationForm = next(filter(lambda x: isinstance(x, Decoratable.Form), result), None)
+        path_form = next(filter(lambda x: isinstance(x, Path.Form), result), None)
+        symbol_forms = list(filter(lambda x: isinstance(x, Symbol.Form), result))
+        decoration_form = next(filter(lambda x: isinstance(x, Decoratable.Form), result), None)
 
-        if pathForm is None:
-            pathForm = Path.Form(False, [])
+        if path_form is None:
+            path_form = Path.Form(False, [])
 
-        if decorationForm is not None:
-            pathForm.decoration = decorationForm
+        if decoration_form is not None:
+            path_form.decoration = decoration_form
 
-        for f in symbolForms:
-            f.clazz = SymbolClass.Form(pathForm)
-        return symbolForms
+        for f in symbol_forms:
+            f.clazz = SymbolClass.Form(path_form)
+        return symbol_forms
 
     def visitSymbolDecl(self, ctx: PlangParser.SymbolDeclContext):
         result = super().visitSymbolDecl(ctx)
-        symbolForms = list(filter(lambda x: isinstance(x, Symbol.Form), result))
+        symbol_forms = list(filter(lambda x: isinstance(x, Symbol.Form), result))
         symbols = []
         manager = Manager(self.session, self.scope)
-        for f in symbolForms:
+        for f in symbol_forms:
             symbol = manager.selectOrInsertSymbol(f, True)
             symbols.append(symbol)
         return symbols
 
     def visitSymbolRef(self, ctx: PlangParser.SymbolRefContext):
-        return super().visitSymbolRef(ctx)
-
-    def visitSymbolCompoundRef(self, ctx: PlangParser.SymbolCompoundRefContext):
-        return super().visitSymbolCompoundRef(ctx)
+        result = super().visitSymbolRef(ctx)
+        symbol_form = next(filter(lambda x: isinstance(x, Symbol.Form), result))
+        symbol = Manager(self.session, self.scope).selectSymbol(symbol_form)
+        return symbol
 
     def visitObjectClassName(self, ctx: PlangParser.ObjectClassNameContext):
         return ctx.IDENTIFIER()

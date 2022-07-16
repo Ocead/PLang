@@ -10,7 +10,8 @@ OP_DECL : ';';
 OP_OBJ_NAME : '?';
 OP_SINGLE : '!';
 OP_NEGATE : '~';
-fragment OP_STR_DELIM : '"';
+fragment OP_STR_DELIM_SINGLE : '"';
+fragment OP_STR_DELIM_DOUBLE : '\'';
 fragment OP_STR_L : 'l';
 fragment OP_STR_G : 'g';
 fragment OP_STR_R : 'r';
@@ -49,8 +50,10 @@ IDENTIFIER : (XID_START | '_') XID_CONTINUE*;
 
 LINE_COMMENT : (OP_COMMENT (~[/!] | OP_COMMENT)~[\n]* | OP_COMMENT) -> skip;
 
-fragment ESC : '\\"' | '\\\\';
-fragment STRING_LITERAL : (ESC|.)*?;
+fragment ESC_SINGLE : '\\"' | '\\\\';
+fragment STRING_LITERAL_SINGLE : (ESC_SINGLE|.)*?;
+fragment ESC_DOUBLE : '\\"' | '\\\\';
+fragment STRING_LITERAL_DOUBLE : (ESC_SINGLE|.)*?;
 
 WS : [ \n\t\r\p{White_Space}]+;
 
@@ -60,7 +63,8 @@ INTEGER : [0-9]+;
 DECIMAL : ('+' | '-')? (INTEGER? '.' INTEGER | INTEGER '.' INTEGER? | INTEGER);
 
 STRING
-    : OP_STR_DELIM STRING_LITERAL OP_STR_DELIM;
+    : (OP_STR_DELIM_SINGLE STRING_LITERAL_SINGLE OP_STR_DELIM_SINGLE)
+    | (OP_STR_DELIM_DOUBLE STRING_LITERAL_DOUBLE OP_STR_DELIM_DOUBLE);
 LSTRING
     : OP_STR_L STRING;
 GSTRING
@@ -103,7 +107,7 @@ declSVO
 ref
     : (pathRef
     | symbolClassRef
-    | symbolCompoundRef
+    | symbolRef
     | objectClassRef
     | pointClassRef
     | pointSVORef);
@@ -127,7 +131,7 @@ hintLiteral
     | hintGlobLiteral
     | hintRegexpLiteral
     | hintMatchLiteral;
-hintSymbolClass : symbolClassRef;
+hintSymbolClass : symbolClass;
 hintPointClass : pointClassRef;
 
 hint
@@ -180,11 +184,11 @@ symbolUnqualifiedClass
     : pathUnqualifiedPath? OP_SYM;
 symbolQualifiedClass
     : pathQualifiedPath OP_SYM;
-symbolClass
+symbolSimpleClass
     : symbolUnqualifiedClass
     | symbolQualifiedClass;
 symbolRecursiveClass
-    : symbolClass OP_RECUR;
+    : symbolSimpleClass OP_RECUR;
 symbolClassListElement
     : pathUnqualifiedNode;
 symbolClassListElements
@@ -196,34 +200,38 @@ symbolQualifiedClassList
 symbolClassList
     : symbolUnqualifiedClassList
     | symbolQualifiedClassList;
+symbolClass
+    : symbolSimpleClass
+    | symbolClassList
+    | symbolRecursiveClass;
 
 symbolClassDecl
     : (hintSymbolClassList WS*)?
-      (symbolClass
+      (symbolSimpleClass
     | symbolClassList)
       (WS* decoration)?;
 symbolClassRef
-    : symbolClass
-    | symbolClassList
-    | symbolRecursiveClass;
+    : symbolSimpleClass;
 
 // Symbol
 
 symbolName
     : IDENTIFIER;
-symbolOrderedName
+symbolDecoratedName
     : symbolName
       (WS* decoration)?;
 symbol
     : path? OP_SYM_L symbolName OP_SYM_R;
+symbolCompound
+    : symbol (WS* symbol)* (WS* symbolClass)?;
 symbolList
     : path? OP_SYM_L symbolName WS* (OP_LIST WS* symbolName WS*)+ OP_SYM_R;
 symbolDef
-    : path? OP_SYM_L symbolOrderedName OP_SYM_R;
+    : path? OP_SYM_L symbolDecoratedName OP_SYM_R;
 symbolListDef
     : path? OP_SYM_L WS*
-      symbolOrderedName WS*
-      (OP_LIST WS* symbolOrderedName WS*)*
+      symbolDecoratedName WS*
+      (OP_LIST WS* symbolDecoratedName WS*)*
       OP_SYM_R;
 
 symbolDecl
@@ -231,9 +239,8 @@ symbolDecl
       symbolListDef
       (WS* decoration)?;
 symbolRef
-    : symbol;
-symbolCompoundRef
-    : symbolRef (WS* symbolRef)* (WS* symbolClassRef)?;
+    : symbol
+    | symbolCompound;
 // TODO: Symbol alias ?
 
 // Point object class
@@ -267,7 +274,7 @@ objectClassRef
 
 objectSVOElement
     : STRING
-    | symbolCompoundRef
+    | symbolCompound
     | pointSVORef;
 objectList
     : objectSVOElement
@@ -276,9 +283,9 @@ objectDef
     : OP_OBJ (WS* objectList)?;
 objectSVOCausalElement
     : STRING
-    | symbolCompoundRef
+    | symbolCompound
     | pointSVORef
-    | symbolClassRef
+    | symbolClass
     | objectClassRef;
 objectCausalList
     : objectSVOCausalElement
@@ -318,7 +325,7 @@ pointClassSymbolRef
 
 // TODO: Allow symbol classes subject or object as subject
 pointCoreSVODef
-    : (symbolCompoundRef | symbolClassRef) WS*
+    : (symbolCompound | symbolClass) WS*
       (OP_NEGATE WS*)?
       pointClassName WS*
       (objectDefaultDecl WS*)?
@@ -343,8 +350,8 @@ pointSVORef
 causalName
     : IDENTIFIER;
 causalSymbolRef
-    : symbolCompoundRef
-    | symbolClassRef
+    : symbolCompound
+    | symbolClass
     | objectClassRef;
 
 causalDef
