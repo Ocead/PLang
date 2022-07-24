@@ -1,8 +1,9 @@
+import time
 from abc import ABC, abstractmethod
 from typing import Any, List
 
 from antlr4 import BailErrorStrategy, Parser, RecognitionException, InputStream, CommonTokenStream, ParserRuleContext
-from antlr4.error.ErrorListener import ErrorListener, ConsoleErrorListener
+from antlr4.error.ErrorListener import ErrorListener
 from sqlalchemy.orm import Session
 
 from plang.cli.scope import Scope
@@ -18,7 +19,7 @@ class Handler(ABC):
         pass
 
     @abstractmethod
-    def execute(self, session: Session, scope: Scope, line: str) -> Any:
+    def execute(self, session: Session, scope: Scope, line) -> Any:
         pass
 
     @abstractmethod
@@ -60,10 +61,13 @@ class PlangHandler(Handler):
     def __init__(self) -> None:
         super().__init__()
 
-    def __prepare(self, line: str) -> PlangParser:
-        input_stream = InputStream(data=line)
+    def __prepare(self, line) -> PlangParser:
+        if isinstance(line, str):
+            input_stream = InputStream(line)
+        else:
+            input_stream = line
         lexer = PlangLexer(input_stream)
-        lexer.removeErrorListeners()
+        # lexer.removeErrorListeners()
         stream = CommonTokenStream(lexer)
         parser = PlangParser(stream)
         parser._errHandler = MyErrorStrategy()
@@ -86,11 +90,21 @@ class PlangHandler(Handler):
     def complete(self, scope: Scope, line: str) -> List:
         pass
 
-    def execute(self, session: Session, scope: Scope, line: str) -> object:
+    def execute(self, session: Session, scope: Scope, line) -> object:
+        start_time = time.process_time()
         parser = self.__prepare(line)
-
+        after_parser_time = time.process_time()
+        parser_dur = after_parser_time - start_time
         tree = parser.start()
-        return self.__visit(session, scope, tree)
+        after_tree_time = time.process_time()
+        tree_dur = after_tree_time - after_parser_time
+        result = self.__visit(session, scope, tree)
+        after_visit_time = time.process_time()
+        visit_dur = after_visit_time - after_tree_time
+        print(f'Parser time: {parser_dur}')
+        print(f'Tree time: {tree_dur}')
+        print(f'Visitor time: {visit_dur}')
+        return result
 
     def decl(self, session: Session, scope: Scope, line: str) -> object:
         parser = self.__prepare(line)

@@ -80,3 +80,24 @@ class LangExceptions:
 
         def __str__(self) -> str:
             return "ERROR: Entry does not match any hint."
+
+    class DuplicatePathException(PlangException):
+        def __init__(self):
+            super().__init__(LangExceptions.key, None)
+
+        def __str__(self) -> str:
+            return "ERROR: Path was already defined in the same statement."
+
+    class DuplicateSymbolClassException(PlangException):
+        def __init__(self):
+            super().__init__(LangExceptions.key, None)
+
+        def __str__(self) -> str:
+            return "ERROR: Symbol class was already defined in the same statement."
+
+    class DuplicateObjectClassException(PlangException):
+        def __init__(self):
+            super().__init__(LangExceptions.key, None)
+
+        def __str__(self) -> str:
+            return "ERROR: Object class was already defined in the same statement."

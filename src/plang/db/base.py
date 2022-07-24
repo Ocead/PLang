@@ -13,7 +13,7 @@ class FormBase(ABC):
 
 class Sourced:
     @declared_attr
-    def id(cls):
+    def id(self):
         return Column(Integer, primary_key=True, index=True, unique=True)
 
     @declared_attr

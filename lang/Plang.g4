@@ -12,10 +12,10 @@ OP_SINGLE : '!';
 OP_NEGATE : '~';
 fragment OP_STR_DELIM_SINGLE : '"';
 fragment OP_STR_DELIM_DOUBLE : '\'';
-fragment OP_STR_L : 'l';
-fragment OP_STR_G : 'g';
-fragment OP_STR_R : 'r';
-fragment OP_STR_M : 'm';
+OP_STR_L : 'l';
+OP_STR_G : 'g';
+OP_STR_R : 'r';
+OP_STR_M : 'm';
 OP_HINT_L : '(';
 OP_HINT_R : ')';
 OP_SYM_L : '[';
@@ -65,14 +65,6 @@ DECIMAL : ('+' | '-')? (INTEGER? '.' INTEGER | INTEGER '.' INTEGER? | INTEGER);
 STRING
     : (OP_STR_DELIM_SINGLE STRING_LITERAL_SINGLE OP_STR_DELIM_SINGLE)
     | (OP_STR_DELIM_DOUBLE STRING_LITERAL_DOUBLE OP_STR_DELIM_DOUBLE);
-LSTRING
-    : OP_STR_L STRING;
-GSTRING
-    : OP_STR_G STRING;
-RSTRING
-    : OP_STR_R STRING;
-MSTRING
-    : OP_STR_M STRING;
 
 // Parser
 
@@ -117,13 +109,13 @@ ref
 hintCommentLiteral
     : STRING;
 hintLikeLiteral
-    : LSTRING;
+    : OP_STR_L hintCommentLiteral;
 hintGlobLiteral
-    : GSTRING;
+    : OP_STR_G hintCommentLiteral;
 hintRegexpLiteral
-    : RSTRING;
+    : OP_STR_R hintCommentLiteral;
 hintMatchLiteral
-    : MSTRING;
+    : OP_STR_M hintCommentLiteral;
 
 hintLiteral
     : hintCommentLiteral
@@ -132,7 +124,7 @@ hintLiteral
     | hintRegexpLiteral
     | hintMatchLiteral;
 hintSymbolClass : symbolClass;
-hintPointClass : pointClassRef;
+hintPointClass : pointClass;
 
 hint
     : hintLiteral
@@ -255,18 +247,22 @@ objectQualifiedClass
     : pathQualifiedPath objectClassInlineRef;
 objectDefaultClass
     : objectClassName;
+objectInlineClass
+    : objectClassInlineRef;
 objectClass
     : objectUnqualifiedClass
     | objectQualifiedClass;
 objectClassDef
     : OP_OBJ (WS* hintList)?;
+objectSingleton
+    : OP_SINGLE WS*;
 
 objectClassDecl
     : objectClass objectClassDef;
 objectDefaultClassDecl
-    : (OP_SINGLE WS*)? objectDefaultClass WS* objectClassDef?;
+    : (objectSingleton)? objectDefaultClass WS* objectClassDef?;
 objectInlineClassDecl
-    : (OP_SINGLE WS*)? objectClassInlineRef WS* objectClassDef?;
+    : (objectSingleton)? objectInlineClass WS* objectClassDef?;
 objectClassRef
     : objectClass;
 
@@ -286,7 +282,7 @@ objectSVOCausalElement
     | symbolCompound
     | pointSVORef
     | symbolClass
-    | objectClassRef;
+    | objectClass;
 objectCausalList
     : objectSVOCausalElement
       (WS* OP_LIST WS* objectSVOCausalElement)*;
@@ -304,20 +300,22 @@ objectCausalInlineDecl
 // Point class
 
 pointClassName
-    : pathRef;
-pointRecursiveClassName
-    : pathRef OP_RECUR;
+    : path;
+pointSingleton
+    : OP_SINGLE WS*;
+pointClass
+    : pointClassName OP_OBJ_NAME OP_OBJ (OP_RECUR)?;
 
 pointClassSVODecl
     : (hintSymbolClassList WS*)?
-      (OP_SINGLE WS*)?
+      (pointSingleton)?
       pointClassName WS+
       (decoration WS*)?
       (objectDefaultClassDecl | objectInlineClassDecl) WS*
       (objectInlineClassDecl WS*)*
       ((causalRequirementDef | causalImplicationDef) WS*)*;
 pointClassRef
-    : pointClassName OP_OBJ_NAME OP_OBJ;
+    : pointClass;
 pointClassSymbolRef
     : pointClassRef OP_SYM;
 
@@ -357,14 +355,14 @@ causalSymbolRef
 causalDef
     : causalSymbolRef WS*
       (OP_NEGATE WS*)?
-      (pointClassName | pointRecursiveClassName) WS*
+      (pointClass) WS*
       (objectCausalDefaultDecl WS*)?
       (objectCausalInlineDecl WS*)*;
 causalIndirectDef
     : (causalDef OP_INDIR WS*)?
       causalSymbolRef WS*
       (OP_NEGATE WS*)?
-      (pointClassName | pointRecursiveClassName) WS*
+      (pointClass) WS*
       (objectCausalDefaultDecl WS*)?
       (objectCausalInlineDecl WS*)*;
 causalConcreteDef

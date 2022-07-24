@@ -19,7 +19,9 @@ in narrative works, regardless of form or topic.
 
 * **Python [3.9](https://www.python.org/downloads/release/python-390/)** or higher
 * SQLAlchemy ([SQLAlchemy~=1.4.37](https://pypi.org/project/SQLAlchemy/))
-* ANTLR 4 runtime for Python 3 ([antlr4-python3-runtime](https://pypi.org/project/antlr4-python3-runtime/))
+* ANTLR v4 Runtime for Python 3 ([antlr4-python3-runtime~=4.10](https://pypi.org/project/antlr4-python3-runtime/))
+* pyreadline3 ([pyreadline3~=3.4.1](https://pypi.org/project/pyreadline3/)) (only for Windows)
+* rich ([rich~=12.4.4](https://pypi.org/project/rich/))
 
 ### Usage
 
@@ -75,7 +77,7 @@ any statement with at least a subject and a verb.
 
 Its fully-qualified form looks like this:
 ```
-.character[andy] .character.behaviour.action.eat ?what:.world.culture.artifact.food[salad];
+.character[andy] .character.behaviour.action.eat ?what: .world.culture.artifact.food[salad];
 ```
 The namespaces before the subject, verb and object sort them into the hierarchy of the _corpus_.
 These additional namespaces mark the _symbols_ and _points_ as being instances of a _class_:<br/>
@@ -171,7 +173,7 @@ Referencing content in external file will be supported for the following types:
 * [ ] Plot `GD---`
     * [ ] Symbol classes `GDI--`
     * [ ] Symbols `GD---`
-    * [ ] Point classes `GD---`
+    * [ ] Point classes `GDI--`
     * [ ] Points `GD---`
     * [ ] Object classes `GD---`
     * [ ] Objects `GD---`

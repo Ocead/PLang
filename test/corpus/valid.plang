@@ -75,41 +75,45 @@ unqualified_object.class?object_class: ();
 .qualified_object.class?object_class: ("abc", l"Test", g"Test", r"Test", m"Test", .symbol.class[], point.class?:);
 
 // Point class
-.point.class _;
-.point.class ?_;
-! .point.class _;
-! .point.class ?_;
-.point.class !_;
-.point.class !?_;
-! .point.class !_;
-! .point.class !?_;
+.default.point.class default_object_class;
+.point.class ?object_class;
+.dual.point.class default_object_class ?object_class;
+! .singleton.default.point.class default_object_class;
+! .singleton.point.class ?object_class;
+! .singleton.dual.point.class default_object_class ?object_class;
+.default.point.class !singleton_default_object_class;
+.point.class !?singleton_object_class;
+.dual.point.class !singleton_default_object_class !?singleton_object_class;
+! .singleton.default.point.class !singleton_default_object_class;
+! .singleton.point.class !?singleton_object_class;
+! .dual.singleton.point.class !singleton_default_object_class !?singleton_object_class;
 
-() .point.class _;
-() .point.class ?_;
-() ! .point.class _;
-() ! .point.class ?_;
-() .point.class !_;
-() .point.class !?_;
-() ! .point.class !_;
-() ! .point.class !?_;
+(.symbol.class[]) .hinted.default.point.class default_object_class;
+(.symbol.class[]) .hinted.point.class ?object_class;
+(.symbol.class[]) ! .hinted.singleton.default.point.class default_object_class;
+(.symbol.class[]) ! .hinted.singleton.point.class ?object_class;
+(.recursive.symbol.class[]...) .hinted.default.point.class !singleton_default_object_class;
+(.recursive.symbol.class[]...) .hinted.point.class !?singleton_object_class;
+(.recursive.symbol.class[]...) ! .hinted.singleton.default.point.class !singleton_default_object_class;
+(.recursive.symbol.class[]...) ! .hinted.singleton.point.class !?singleton_object_class;
 
-.point.class (0) _;
-.point.class (1) ?_;
-! .point.class (-1) _;
-! .point.class (1.) ?_;
-.point.class (0.1) !_;
-.point.class (1.0) !?_;
-! .point.class (-.1) !_;
-! .point.class (-1.) !?_;
+.decorated.default.point.class (0) default_object_class;
+.decorated.point.class (1) ?object_class;
+! .decorated.singleton.default.point.class (-1) default_object_class;
+! .decorated.singleton.point.class (1.) ?object_class;
+.decorated.default.point.class (0.1) !singleton_default_object_class;
+.decorated.point.class (1.0) !?singleton_object_class;
+! .decorated.singleton.default.point.class (-.1) !singleton_default_object_class;
+! .decorated.singleton.point.class (-1.) !?singleton_object_class;
 
-() .point.class (0) _;
-() .point.class (1) ?_;
-() ! .point.class (-1) _;
-() ! .point.class (1.) ?_;
-() .point.class (0.1) !_;
-() .point.class (1.0) !?_;
-() ! .point.class (-.1) !_;
-() ! .point.class (-1.) !?_;
+(.symbol.class[], .recursive.symbol.class[]...) .hinted.decorated.default.point.class (0) default_object_class;
+(.symbol.class[], .recursive.symbol.class[]...) .hinted.decorated.point.class (1) ?object_class;
+(.symbol.class[], .recursive.symbol.class[]...) ! .hinted.decorated.singleton.default.point.class (-1) default_object_class;
+(.symbol.class[], .recursive.symbol.class[]...) ! .hinted.decorated.singleton.point.class (1.) ?object_class;
+(.symbol.class[], .recursive.symbol.class[]...) .hinted.decorated.default.point.class (0.1) !singleton_default_object_class;
+(.symbol.class[], .recursive.symbol.class[]...) .hinted.decorated.point.class (1.0) !?singleton_object_class;
+(.symbol.class[], .recursive.symbol.class[]...) ! .hinted.decorated.singleton.default.point.class (-.1) !singleton_default_object_class;
+(.symbol.class[], .recursive.symbol.class[]...) ! .hinted.decorated.singleton.point.class (-1.) !?singleton_object_class;
 
 (.symbol.class.hint[], .recursive.symbol.class.hint[]...) ! .point.class (5.4)
   default_object_class : (l"like_literal_hint", g"glob_literal_hint")
@@ -147,3 +151,55 @@ unqualified_object.class?object_class: ();
   -< {*reg_now}
   >- {*ipl_now}
   -> {*ipl_def};
+
+
+(.symbol.class.hint[],
+ .recursive.symbol.class.hint[]...) ! .point.class (5.4)
+               default_object_class : (l"like_literal_hint"
+                                       g"glob_literal_hint")
+          ! ?singleton_object_class : (.recursive.symbol.class.hint[]...,
+                                       r"regex_literal_hint")
+                      ?object_class : (.point.class.hint?:,
+                                       m"match_literal_hint")
+  <- <* requirement_name [] .indirecting.point.class >> [] ~ .recursive.implied.point.class...
+                                                           : [],
+                                                             ?source_object_class,
+                                                             "explicit_literal",
+                                                             .explicit[symbol],
+                                                             {*explicit_point_id}
+                                     ?implied_object_class : [],
+                                                             ?source_object_class,
+                                                             "explicit_literal",
+                                                             .explicit[symbol],
+                                                             {*explicit_point_id}>;
+
+
+(.symbol.class[],
+ .recursive.symbol.class[]...) ! .point.class (0, "Description")
+          default_object_class : ("Comment",
+                                  l"Like filter",
+                                  g"Glob filter",
+                                  r"Regex filter",
+                                  m"Match filter",
+                                  .symbol.class[],
+                                  .recursive.symbol.class[]...,
+                                  .point.class?:,
+                                  .recursive.point.class?:...)
+                 ?object_class : ("Comment",
+                                  l"Like filter",
+                                  g"Glob filter",
+                                  r"Regex filter",
+                                  m"Match filter",
+                                  .symbol.class[],
+                                  .recursive.symbol.class[]...,
+                                  .point.class?:,
+                                  .recursive.point.class?:...)
+       ! singleton_object_class : ("Comment",
+                                  l"Like filter",
+                                  g"Glob filter",
+                                  r"Regex filter",
+                                  m"Match filter",
+                                  .symbol.class[],
+                                  .recursive.symbol.class[]...,
+                                  .point.class?:,
+                                  .recursive.point.class?:...);

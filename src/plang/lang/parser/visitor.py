@@ -5,6 +5,8 @@ from typing import List, Optional
 from sqlalchemy.orm import Session
 
 from plang.db.base import Decoratable
+from plang.db.plot.object.models import ObjectClass, ObjectClassHintLit
+from plang.db.plot.point.models import PointClass
 from plang.db.plot.symbol.models import SymbolClass, Symbol
 from plang.cli.scope import Scope
 from plang.db.base import Sourced
@@ -76,29 +78,43 @@ class PlangVisitor(BasePlangVisitor):
         return super().visitRef(ctx)
 
     def visitHintCommentLiteral(self, ctx: PlangParser.HintCommentLiteralContext):
-        return super().visitHintCommentLiteral(ctx)
+        result = ctx.STRING()
+        return ObjectClassHintLit.Form(ObjectClassHintLit.Type.COMMENT, str(result)[1:-1])
 
     def visitHintLikeLiteral(self, ctx: PlangParser.HintLikeLiteralContext):
-        return super().visitHintLikeLiteral(ctx)
+        result = super().visitHintLikeLiteral(ctx)
+        hint = result[0]
+        hint.type = ObjectClassHintLit.Type.LIKE
+        return hint
 
     def visitHintGlobLiteral(self, ctx: PlangParser.HintGlobLiteralContext):
-        return super().visitHintGlobLiteral(ctx)
+        result = super().visitHintGlobLiteral(ctx)
+        hint = result[0]
+        hint.type = ObjectClassHintLit.Type.GLOB
+        return hint
 
     def visitHintRegexpLiteral(self, ctx: PlangParser.HintRegexpLiteralContext):
-        return super().visitHintRegexpLiteral(ctx)
+        result = super().visitHintRegexpLiteral(ctx)
+        hint = result[0]
+        hint.type = ObjectClassHintLit.Type.REGEX
+        return hint
 
     def visitHintMatchLiteral(self, ctx: PlangParser.HintMatchLiteralContext):
-        return super().visitHintMatchLiteral(ctx)
+        result = super().visitHintMatchLiteral(ctx)
+        hint = result[0]
+        hint.type = ObjectClassHintLit.Type.MATCH
+        return hint
 
     def visitHintLiteral(self, ctx: PlangParser.HintLiteralContext):
         return super().visitHintLiteral(ctx)
 
     def visitHintSymbolClass(self, ctx: PlangParser.HintSymbolClassContext):
         result = super().visitHintSymbolClass(ctx)
-        return result
+        return result[0]
 
     def visitHintPointClass(self, ctx: PlangParser.HintPointClassContext):
-        return super().visitHintPointClass(ctx)
+        result = super().visitHintPointClass(ctx)
+        return result[0]
 
     def visitHint(self, ctx: PlangParser.HintContext):
         return super().visitHint(ctx)
@@ -209,6 +225,9 @@ class PlangVisitor(BasePlangVisitor):
             symbol_class_form.elements = elements_list
         return symbol_class_form
 
+    def visitSymbolClass(self, ctx: PlangParser.SymbolClassContext):
+        return super().visitSymbolClass(ctx)
+
     def visitSymbolClassDecl(self, ctx: PlangParser.SymbolClassDeclContext):
         result = super().visitSymbolClassDecl(ctx)
         symbol_class_form = next(filter(lambda x: isinstance(x, SymbolClass.Form), result), None)
@@ -305,22 +324,54 @@ class PlangVisitor(BasePlangVisitor):
         return super().visitObjectQualifiedClass(ctx)
 
     def visitObjectDefaultClass(self, ctx: PlangParser.ObjectDefaultClassContext):
-        return super().visitObjectDefaultClass(ctx)
+        result = super().visitObjectDefaultClass(ctx)
+        object_class_form = ObjectClass.Form(result[0], Path.Form(False, list()), False, True)
+        return object_class_form
+
+    def visitObjectInlineClass(self, ctx: PlangParser.ObjectInlineClassContext):
+        result = super().visitObjectInlineClass(ctx)
+        object_class_form = ObjectClass.Form(result[0], Path.Form(False, list()), False, False)
+        return object_class_form
 
     def visitObjectClass(self, ctx: PlangParser.ObjectClassContext):
-        return super().visitObjectClass(ctx)
+        result = super().visitObjectClass(ctx)
+        object_class_form = ObjectClass.Form(result[0], Path.Form(False, list()), False, False)
+        return object_class_form
 
     def visitObjectClassDef(self, ctx: PlangParser.ObjectClassDefContext):
-        return super().visitObjectClassDef(ctx)
+        result = super().visitObjectClassDef(ctx)
+        return HintList(result)
+
+    def visitObjectSingleton(self, ctx: PlangParser.ObjectSingletonContext):
+        result = super().visitObjectSingleton(ctx)
+        return True
 
     def visitObjectClassDecl(self, ctx: PlangParser.ObjectClassDeclContext):
         return super().visitObjectClassDecl(ctx)
 
     def visitObjectDefaultClassDecl(self, ctx: PlangParser.ObjectDefaultClassDeclContext):
-        return super().visitObjectDefaultClassDecl(ctx)
+        result = super().visitObjectDefaultClassDecl(ctx)
+        singleton = next(filter(lambda x: isinstance(x, bool), result), None)
+        object_class_form = next(filter(lambda x: isinstance(x, ObjectClass.Form), result), None)
+        hint_list = next(filter(lambda x: isinstance(x, HintList), result), None)
+
+        if singleton is not None:
+            object_class_form.singleton = singleton
+        if hint_list is not None:
+            object_class_form.hint_list = hint_list
+        return object_class_form
 
     def visitObjectInlineClassDecl(self, ctx: PlangParser.ObjectInlineClassDeclContext):
-        return super().visitObjectInlineClassDecl(ctx)
+        result = super().visitObjectInlineClassDecl(ctx)
+        singleton = next(filter(lambda x: isinstance(x, bool), result), None)
+        object_class_form = next(filter(lambda x: isinstance(x, ObjectClass.Form), result), None)
+        hint_list = next(filter(lambda x: isinstance(x, HintList), result), None)
+
+        if singleton is not None:
+            object_class_form.singleton = singleton
+        if hint_list is not None:
+            object_class_form.hint_list = hint_list
+        return object_class_form
 
     def visitObjectClassRef(self, ctx: PlangParser.ObjectClassRefContext):
         return super().visitObjectClassRef(ctx)
@@ -356,16 +407,42 @@ class PlangVisitor(BasePlangVisitor):
         return super().visitObjectCausalInlineDecl(ctx)
 
     def visitPointClassName(self, ctx: PlangParser.PointClassNameContext):
-        return super().visitPointClassName(ctx)
+        result = super().visitPointClassName(ctx)
+        return result
 
-    def visitPointRecursiveClassName(self, ctx: PlangParser.PointRecursiveClassNameContext):
-        return super().visitPointRecursiveClassName(ctx)
+    def visitPointSingleton(self, ctx: PlangParser.PointSingletonContext):
+        result = super().visitPointSingleton(ctx)
+        return True
+
+    def visitPointClass(self, ctx: PlangParser.PointClassContext):
+        result = super().visitPointClass(ctx)
+        path_form = next(filter(lambda x: isinstance(x, Path.Form), result), None)
+        recursive = ctx.OP_RECUR() is not None
+
+        point_class_form = PointClass.Form(path_form, False, list(), list(), recursive)
+        return point_class_form
 
     def visitPointClassSVODecl(self, ctx: PlangParser.PointClassSVODeclContext):
-        return super().visitPointClassSVODecl(ctx)
+        result = super().visitPointClassSVODecl(ctx)
+        hint_list = next(filter(lambda x: isinstance(x, HintList), result), None)
+        singleton = next(filter(lambda x: isinstance(x, bool), result), None)
+        path_form = next(filter(lambda x: isinstance(x, Path.Form), result), None)
+        decoration_form = next(filter(lambda x: isinstance(x, Decoratable.Form), result), None)
+        if decoration_form is not None:
+            path_form.decoration = decoration_form
+        object_class_forms = list(filter(lambda x: isinstance(x, ObjectClass.Form), result))
+        # TODO: causal
+
+        point_class_form = PointClass.Form(path_form, singleton or False, object_class_forms, hint_list or list())
+        point_class = Manager(self.session, self.scope).insertPointClass(point_class_form)
+
+        return point_class
 
     def visitPointClassRef(self, ctx: PlangParser.PointClassRefContext):
-        return super().visitPointClassRef(ctx)
+        result = super().visitPointClassRef(ctx)
+        point_class_form = next(filter(lambda x: isinstance(x, PointClass.Form), result), None)
+        point_class = Manager(self.session, self.scope).selectPointClass(point_class_form)
+        return point_class
 
     def visitPointClassSymbolRef(self, ctx: PlangParser.PointClassSymbolRefContext):
         return super().visitPointClassSymbolRef(ctx)
@@ -413,3 +490,6 @@ class PlangVisitor(BasePlangVisitor):
             return None
         scope = self.scope.getScope(path)
         return scope
+
+    def visitContextDecl(self, ctx: PlangParser.ContextDeclContext):
+        return super().visitContextDecl(ctx)

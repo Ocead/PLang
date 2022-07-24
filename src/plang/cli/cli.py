@@ -1,9 +1,11 @@
+import os
 import re
 import sys
 import shlex
 from sqlite3 import IntegrityError
 from typing import List, Optional, Iterable
 
+from antlr4 import FileStream
 from rich.console import Console
 from rich.markup import escape
 from sqlalchemy import create_engine
@@ -68,6 +70,25 @@ class CLI:
         if len(report) > 0:
             self.console.print(report.str(True))
 
+    def checkSession(self):
+        if self.session is None or not self.session.is_active:
+            raise CLIExceptions.NoSessionException()
+
+    def __execute(self, data):
+        self.checkSession()
+
+        try:
+            result = self.handler.execute(self.session, self.scope, data)
+        except Exception as e:
+            self.session.rollback()
+            raise LangExceptions.MalformedExpressionException from e
+        if isinstance(result, Scope):
+            self.scope = result
+        self.printReport()
+        self.commit()
+
+        return result
+
     def commit(self):
         try:
             self.session.commit()
@@ -115,7 +136,8 @@ class CLI:
             raise NotImplementedError()  # TODO: implement error
 
     def __save(self, *args) -> None:
-        if len(args) != 0 or self.session is None:
+        self.checkSession()
+        if len(args) != 0:
             raise NotImplementedError()  # TODO: implement error
         self.session.flush()
 
@@ -129,7 +151,12 @@ class CLI:
             raise NotImplementedError()  # TODO: implement error
 
     def __run(self, *args) -> None:
-        raise NotImplementedError()  # TODO: implement
+        self.checkSession()
+        for f in args:
+            if not os.path.isfile(f):
+                raise CLIExceptions.ReadFileException()
+            fs = FileStream(f)
+            self.__execute(fs)
 
     def __export(self, *args) -> None:
         raise NotImplementedError()  # TODO: implement
@@ -144,6 +171,9 @@ class CLI:
                 raise LangExceptions.InvalidReferenceException()
             elif not isinstance(entry, Iterable):
                 entry = [entry]
+
+            if len(entry) == 0:
+                raise LangExceptions.InvalidReferenceException()
 
             for e in entry:
                 if isinstance(e, Base):
@@ -168,6 +198,8 @@ class CLI:
         for a in args:
             result = self.handler.ref(self.session, self.scope, a)
             if result is not None:
+                if not isinstance(result, Iterable):
+                    result = [result]
                 for r in result:
                     self.session.delete(r)
             else:
@@ -260,17 +292,8 @@ class CLI:
                     raise CLIExceptions.UnknownCommandException() from e
                 return command(self, *args[1:])
             else:
-                if self.session is not None:
-                    try:
-                        result = self.handler.execute(self.session, self.scope, line)
-                    except Exception as e:
-                        self.session.rollback()
-                        raise LangExceptions.MalformedExpressionException from e
-                    if isinstance(result, Scope):
-                        self.scope = result
-                    self.printReport()
-                    self.commit()
-                else:
-                    raise CLIExceptions.NoSessionException()
+                result = self.__execute(line)
+                if isinstance(result, Scope):
+                    self.scope = result
         except KeyboardInterrupt as e:
             return 2

@@ -1,10 +1,27 @@
+from typing import List
+
 from sqlalchemy import Column, Integer, Boolean, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
 
-from plang.db.base import Base
+from plang.db.base import Base, FormBase
+from plang.db.models import Path
+from plang.db.plot.object.models import ObjectClass
+from plang.db.visual import OP
 
 
 class PointClass(Base):
+    class Form(FormBase):
+        def __init__(self, path_form: Path.Form,
+                     singleton: bool = False,
+                     object_class_forms: List[ObjectClass.Form] = (),
+                     hint_list: List = (),
+                     recursive: bool = False):
+            self.path_form = path_form
+            self.singleton = singleton
+            self.object_class_forms = object_class_forms
+            self.hint_list = hint_list
+            self.recursive = recursive
+
     __tablename__ = 'plot_point_class'
     __table_args__ = (
         UniqueConstraint('id', 'path_id'),
@@ -14,21 +31,32 @@ class PointClass(Base):
     singleton = Column(Boolean, default=False, nullable=False)
 
     path = relationship('Path', back_populates='point_class')
-    hints = relationship('PointClassHint', back_populates='clazz')
+    hints = relationship('PointClassHint', cascade='all, delete', back_populates='clazz')
+    objects = relationship('ObjectClass', cascade='all, delete', back_populates='point_class')
     instances = relationship('Point', back_populates='clazz')
+
+    def str(self, rich: bool = False) -> str:
+        return self.__str__(rich)
+
+    def __str__(self, rich: bool = False) -> str:
+        return f'{self.path.str(rich)}?:'
 
 
 class PointClassHint(Base):
     __tablename__ = 'plot_point_class_hint'
     __table_args__ = (
-        UniqueConstraint('class_id', 'symbol_id'),
+        UniqueConstraint('class_id', 'hint_id'),
     )
 
-    class_id = Column(Integer, ForeignKey('plot_point_class.id'), nullable=False)
-    symbol_id = Column(Integer, ForeignKey('plot_symbol_class.id'), nullable=False)
+    class_id = Column(Integer, ForeignKey('plot_point_class.id', ondelete='CASCADE'), nullable=False)
+    hint_id = Column(Integer, ForeignKey('plot_symbol_class.id'), nullable=False)
     recursive = Column(Boolean, default=False, nullable=False)
 
     clazz = relationship('PointClass', back_populates='hints')
+    hint = relationship('SymbolClass')
+
+    def __str__(self, rich: bool = False) -> str:
+        return f'{self.hint.__str__(rich)}{OP.recur(rich) if self.recursive else ""}'
 
 
 class Point(Base):
