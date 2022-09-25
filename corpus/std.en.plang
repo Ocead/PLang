@@ -1,0 +1,954 @@
+// PLang English Standard Corpus
+.meta (0, "Meta information");
+.meta.work[] ("Meta information about the work");                                      //symbol_class
+(.meta.work[]) ! .meta.work.title is;                                                  //point_class
+(.meta.work[]) .meta.work.author is;                                                   //point_class
+(.meta.work[]) .meta.work.form is;                                                     //point_class
+(.meta.work[]) ! .meta.work.genre is;                                                  //point_class
+(.meta.work[]) ! .meta.work.theme is;                                                  //point_class
+.meta.character ("Meta information about acting characters");
+.meta.character.side[protagonist (1),
+                     deuteragonist (2),
+                     tritagonist (3),
+                     antagonist (99)];                                                 //symbol
+! .meta.character.side is;                                                             //mixed_class
+.meta.character.importance[main (0),
+                           side (1),
+                           extra (2)];                                                 //symbol
+! .meta.character.importance is : (importance[]);                                      //mixed_class
+.meta.character.narrator[];                                                            //symbol_class
+.meta.character.narrator.perspective.person[first (1),
+                                            second (2),
+                                            third (3)];                                //symbol
+.meta.character.narrator.perspective is : (person[]);                                  //mixed_class
+! .meta.character.narrator.perspective.person is;                                      //mixed_class
+.meta.character.narrator.perspective.insight[omniscient,
+                                             limited];                                 //symbol TODO: formalize limitations
+! .meta.character.narrator.perspective.insight is : (insight[]);                       //mixed_class
+.meta.character.narrator.perspective.bias[subjective,
+                                          objective];                                  //symbol
+.meta.character.narrator.perspective.bias is : (bias[]);                               //mixed_class
+.meta.character.narrator.tense[present,
+                               past];                                                  //symbol
+! .meta.character.narrator.tense is : (tense[]);                                       //mixed_class
+.meta.character.narrator.technique[];                                                  //symbol_class TODO: expand
+.meta.character.narrator.technique is : (technique[]);                                 //mixed_class
+.meta.character.audience[];                                                            //symbol_class
+.meta.plot;                                                                            // TODO: ?
+.meta.style;                                                                           // TODO: expand
+.meta.allegorize what;                                                                 //point_class
+
+.character[] ("Characters");                                                           //symbol_class
+.character.identity;
+(.character[]) .character.identity.name is;                                            //point_class
+(.character[]) .character.identity.name.title (0) is;                                  //point_class
+(.character[]) .character.identity.name.first (1) is;                                  //point_class
+(.character[]) .character.identity.name.last (2) is;                                   //point_class
+(.character[]) .character.identity.name.epithet (3) is;                                //point_class
+(.character[]) .character.identity.name.nickname (4) is;                               //point_class
+(.character[]) .character.identity.name.alias (5) is;                                  //point_class
+(.character[]) ! .character.identity.age is;                                           //point_class
+(.character[]) ! .character.identity.birthday is;                                      //point_class
+.character.personality;
+.character.relationship;
+.character.relationship.family;
+.character.relationship.family.nuclear (0);
+(.character[]) .character.relationship.family.nuclear.parent is;                       //point_class
+(.character[]) .character.relationship.family.nuclear.parent.father is;                //point_class
+(.character[]) .character.relationship.family.nuclear.parent.mother is;                //point_class
+(.character[]) .character.relationship.family.nuclear.child is;                        //point_class
+(.character[]) .character.relationship.family.nuclear.child.daughter is;               //point_class
+(.character[]) .character.relationship.family.nuclear.child.son is;                    //point_class
+(.character[]) .character.relationship.family.nuclear.sibling is;                      //point_class
+(.character[]) .character.relationship.family.nuclear.sibling.brother is;              //point_class
+(.character[]) .character.relationship.family.nuclear.sibling.sister is;               //point_class
+(.character[]) .character.relationship.family.nuclear.sibling.twin is;                 //point_class
+(.character[]) .character.relationship.family.nuclear.spouse is;                       //point_class
+(.character[]) .character.relationship.family.nuclear.spouse.husband is;               //point_class
+(.character[]) .character.relationship.family.nuclear.spouse.wife is;                  //point_class
+.character.relationship.family.extended (1);
+(.character[]) .character.relationship.family.extended.grandparent is;                 //point_class
+(.character[]) .character.relationship.family.extended.grandparent.grandfather is;     //point_class
+(.character[]) .character.relationship.family.extended.grandparent.grandmother is;     //point_class
+(.character[]) .character.relationship.family.extended.grandchild is;                  //point_class
+(.character[]) .character.relationship.family.extended.grandchild.granddaughter is;    //point_class
+(.character[]) .character.relationship.family.extended.grandchild.grandson is;         //point_class
+(.character[]) .character.relationship.family.extended.cousin is;                      //point_class
+(.character[]) .character.relationship.family.extended.uncle is;                       //point_class
+(.character[]) .character.relationship.family.extended.aunt is;                        //point_class
+(.character[]) .character.relationship.family.extended.nephew is;                      //point_class
+(.character[]) .character.relationship.family.extended.niece is;                       //point_class
+.character.relationship.intimate;                                                      //point_class
+(.character[]) .character.relationship.intimate.companion is;                          //point_class
+(.character[]) .character.relationship.intimate.friend is;                             //point_class
+(.character[]) .character.relationship.intimate.mate is;                               //point_class
+.character.relationship.professional;                                                  //point_class
+.character.relationship.professional.work;                                             //point_class
+(.character[]) .character.relationship.professional.work.employer is;                  //point_class
+(.character[]) .character.relationship.professional.work.employee is;                  //point_class
+(.character[]) .character.relationship.professional.work.superior is;                  //point_class
+(.character[]) .character.relationship.professional.work.coworker is;                  //point_class
+(.character[]) .character.relationship.professional.work.subordinate is;               //point_class
+.character.relationship.professional.education;                                        //point_class
+(.character[]) .character.relationship.professional.education.teacher is;              //point_class
+(.character[]) .character.relationship.professional.education.professor is;            //point_class
+(.character[]) .character.relationship.professional.education.student is;              //point_class
+.character.relationship.professional.training;                                         //point_class TODO: expand
+(.character[]) .character.relationship.professional.customer is;                       //point_class
+(.character[]) .character.relationship.acquaintance is;                                //point_class
+(.character[]) .character.relationship.enemy is;                                       //point_class
+.character.behaviour;                                                                  // TODO: expand
+.character.behaviour.action[];                                                         //symbol_class TODO: expand
+.character.behaviour.action.facial;                                                    //symbol_class TODO: expand
+.character.behaviour.action.gesture[];                                                 //symbol_class TODO: expand (https://en.wikipedia.org/wiki/Template:Gestures)
+.character.behaviour.action.locomotion[];                                              //symbol_class
+.character.behaviour.action.position[];                                                //symbol_class TODO: expand (https://en.wikipedia.org/wiki/List_of_human_positions)
+.character.behaviour.action.position.lying[supine,
+                                           prone,
+                                           left_side,
+                                           right_side,
+                                           fetal];                                     //symbol
+.character.behaviour.action.position.kneeling[vertical,
+                                              sitting];                                //symbol
+.character.behaviour.action.position.sitting[upright,
+                                             cross_legged,
+                                             lotus];                                   //symbol
+.character.behaviour.action.position.crouching[full,
+                                               partial];                               //symbol
+.character.behaviour.action.position.standing[upright,
+                                              leaning,
+                                              stooped];                                //symbol
+(.character[]) ! .character.behaviour.action.position ! take : (position[]...) ?on;    //symbol_class
+(.character[]) .character.behaviour.action what;                                       //point_class TODO: expand
+(.character[]) .character.behaviour.speech what ?to : (.character[]);                  //point_class TODO: expand
+(.character[]) .character.behaviour.thought what;                                      //point_class TODO: expand
+(.character[]) .character.behaviour.thought.entertain what;                            //point_class
+(.character[]) .character.behaviour.thought.judge what;                                //point_class
+(.character[]) .character.behaviour.thought.reason what;                               //point_class
+(.character[]) .character.behaviour.thought.concept what;                              //point_class
+(.character[]) .character.behaviour.thought.solve what;                                //point_class
+(.character[]) .character.behaviour.thought.deliberate what;                           //point_class
+(.character[]) .character.behaviour.thought.decide what;                               //point_class
+(.character[]) .character.behaviour.thought.remember what;                             //point_class
+(.character[]) .character.behaviour.thought.imagine what;                              //point_class
+(.character[]) .character.behaviour.thought.unconscious what;                          //point_class
+.character.knowledge;                                                                  // TODO: expand
+(.character[]) .character.knowledge.memory what;                                       //mixed_class
+(.character[]) .character.knowledge.memory.learn what;                                 //point_class
+(.character[]) .character.knowledge.memory.forget what;                                //point_class
+(.character[]) .character.knowledge.skill what;                                        //mixed_class
+(.character[]) .character.knowledge.skill.learn what;                                  //point_class
+(.character[]) .character.knowledge.skill.forget what;                                 //point_class
+.character.emotion ("Adapted from Shaver et al.");                                     // TODO: expand
+.character.emotion.love;
+.character.emotion.love.affection[adoration,
+                                  fondness,
+                                  liking,
+                                  caring,
+                                  tenderness,
+                                  compassion,
+                                  sentimentality];                                     //symbol_class
+.character.emotion.love.lust[desire,
+                             passion,
+                             infatuation];                                             //symbol_class
+.character.emotion.love.longing[longing];                                              //symbol_class
+.character.emotion.joy;
+.character.emotion.joy.cheerfulness[amusement,
+                                    bliss,
+                                    gaiety,
+                                    glee,
+                                    jolliness,
+                                    joviality,
+                                    joy,
+                                    delight,
+                                    enjoyment,
+                                    gladness,
+                                    happiness,
+                                    jubilation,
+                                    elation,
+                                    satisfaction,
+                                    ecstasy,
+                                    euphoria];                                         //symbol_class
+.character.emotion.joy.zest[enthusiasm,
+                            zeal,
+                            excitement,
+                            thrill,
+                            exhilaration];                                             //symbol_class
+.character.emotion.joy.contentment[pleasure];                                          //symbol_class
+.character.emotion.joy.pride[triumph];                                                 //symbol_class
+.character.emotion.joy.optimism[eagerness,
+                                hope];                                                 //symbol_class
+.character.emotion.joy.enthrallment[enthrallment,
+                                    rapture];                                          //symbol_class
+.character.emotion.joy.relief[relief];                                                 //symbol_class
+.character.emotion.surprise;
+.character.emotion.surprise.surprise[amazement,
+                                     astonishment];                                    //symbol_class
+.character.emotion.anger;
+.character.emotion.anger.irritability[aggravation,
+                                      agitation,
+                                      annoyance,
+                                      grouchy,
+                                      grumpy,
+                                      crosspatch];                                     //symbol_class
+.character.emotion.anger.exasperation[frustration];                                    //symbol_class
+.character.emotion.anger.rage[anger,
+                              outrage,
+                              fury,
+                              wrath,
+                              hostility,
+                              ferocity,
+                              bitterness,
+                              hatred,
+                              scorn,
+                              spite,
+                              vengefulness,
+                              dislike,
+                              resentment];                                             //symbol_class
+.character.emotion.anger.disgust[revulsion,
+                                 contempt,
+                                 loathing];                                            //symbol_class
+.character.emotion.anger.envy[jealousy];                                               //symbol_class
+.character.emotion.anger.torment[torment];                                             //symbol_class
+.character.emotion.sadness;
+.character.emotion.sadness.suffering[agony,
+                                     anguish,
+                                     hurt];                                            //symbol_class
+.character.emotion.sadness.sadness[depression,
+                                   despair,
+                                   gloom,
+                                   glumness,
+                                   unhappiness,
+                                   grief,
+                                   sorrow,
+                                   woe,
+                                   misery,
+                                   melancholy];                                        //symbol_class
+.character.emotion.sadness.disappointment[dismay,
+                                          displeasure];                                //symbol_class
+.character.emotion.sadness.shame[guilt,
+                                 regret,
+                                 remorse];                                             //symbol_class
+.character.emotion.sadness.neglect[alienation,
+                                   defeatism,
+                                   dejection,
+                                   embarrassment,
+                                   homesickness,
+                                   humiliation,
+                                   insecurity,
+                                   insult,
+                                   isolation,
+                                   loneliness,
+                                   rejection];                                          //symbol_class
+.character.emotion.sadness.sympathy[pity,
+                                    impermanence,
+                                    sympathy];                                          //symbol_class
+.character.emotion.fear;
+.character.emotion.fear.horror[alarm,
+                               shock,
+                               fear,
+                               fright,
+                               horror,
+                               terror,
+                               panic,
+                               hysteria,
+                               mortification];                                         //symbol_class
+.character.emotion.fear.nervousness[anxiety,
+                                    suspense,
+                                    uneasiness,
+                                    apprehension,
+                                    worry,
+                                    distress,
+                                    dread];                                            //symbol_class
+(.character[]) .character.emotion.feel what : (.character.emotion[]...)
+                                        ?to;                                           //point_class
+.character.trait[];                                                                    //symbol_class
+.character.trait.scalar[];                                                             //symbol_class TODO: expand (Big Five)
+.character.trait.virtue[];                                                             //symbol_class TODO: expand
+.character.trait.virtue.control[];                                                     //symbol_class TODO: expand
+.character.trait.virtue.efficacy[];                                                    //symbol_class TODO: expand
+.character.trait.virtue.regard[];                                                      //symbol_class TODO: expand
+.character.trait.virtue.respect[];                                                     //symbol_class TODO: expand
+.character.trait.virtue.kindness[];                                                    //symbol_class TODO: expand
+.character.trait.vice[];                                                               //symbol_class TODO: expands
+(.character[]) .character.trait.has _ : (trait[]...);                                  //point_class
+
+.world ("World");
+.world.culture[];                                                                      //symbol_class
+(.world.culture[]) .world.culture.consist of : (.world.culture[]...);                  //point_class
+(.world.culture[]...) .world.culture.part of : (.world.culture[]);                     //point_class
+.world.culture.symbol;
+.world.culture.symbol.verbal[];                                                        //symbol_class
+.world.culture.symbol.nonverbal[];                                                     //symbol_class
+.world.culture.symbol.material[];                                                      //symbol_class
+.world.culture.symbol.meaning is;                                                      //point-class
+.world.culture.language[];                                                             //symbol_class
+.world.culture.language.word[];                                                        //symbol_class
+(word[]...) .world.culture.language.word.meaning is;                                   //point_class
+(word[]...) .world.culture.language.word.pronunciation is;                             //point_class
+.world.culture.language.phrase[];                                                      //symbol_class
+(phrase[]...) .world.culture.language.phrase.meaning is;                               //point_class
+.world.culture.norm;
+.world.culture.norm.formal;
+.world.culture.norm.formal.mos[] ("Social norms");                                     //symbol_class
+.world.culture.norm.formal.law[];                                                      //symbol_class
+.world.culture.norm.informal[];                                                        //symbol_class
+.world.culture.value[];                                                                //symbol_class
+.world.culture.artifact[] ("Material objects");                                        //symbol_class
+.world.culture.artifact.art[];                                                         //symbol_class
+.world.culture.artifact.art.visual[];                                                  //symbol_class
+.world.culture.artifact.art.visual.architecture[];                                     //symbol_class
+.world.culture.artifact.art.visual.computer[];                                         //symbol_class
+.world.culture.artifact.art.visual.drawing[];                                          //symbol_class
+.world.culture.artifact.art.visual.film[];                                             //symbol_class
+.world.culture.artifact.art.visual.painting[];                                         //symbol_class
+.world.culture.artifact.art.visual.photography[];                                      //symbol_class
+.world.culture.artifact.art.visual.print[];                                            //symbol_class
+.world.culture.artifact.art.visual.plastic[];                                          //symbol_class
+.world.culture.artifact.art.literary[];                                                //symbol_class
+.world.culture.artifact.art.performing[];                                              //symbol_class
+.world.culture.artifact.art.performing.dance[];                                        //symbol_class
+.world.culture.artifact.art.performing.music[];                                        //symbol_class
+.world.culture.artifact.art.performing.music.instrument.idiophone,
+                                                        membranophone,
+                                                        aerophone,
+                                                        chordophone,
+                                                        electrophone[];                //symbol_class
+.world.culture.artifact.art.performing.music.work[];                                   //symbol_class
+.world.culture.artifact.art.performing.theatre[];                                      //symbol_class
+(art[]...) .world.culture.artifact.art.apply to : (artifact[]...);                     //point_class
+.world.culture.artifact.clothing[];                                                    //symbol_class
+.world.culture.artifact.clothing.head[];                                               //symbol_class
+.world.culture.artifact.clothing.head.beret,
+                                      cap,
+                                      hat,
+                                      helmet,
+                                      hood,
+                                      bandana,
+                                      turban,
+                                      veil[];                                          //symbol_class
+.world.culture.artifact.clothing.neck[];                                               //symbol_class
+.world.culture.artifact.clothing.neck.band,
+                                      choker,
+                                      tie,
+                                      scarf[];                                         //symbol_class
+.world.culture.artifact.clothing.top[];                                                //symbol_class
+.world.culture.artifact.clothing.top.blouse,
+                                     shirt,
+                                     sweater,
+                                     vest[];                                           //symbol_class
+.world.culture.artifact.clothing.trousers[];                                           //symbol_class
+.world.culture.artifact.clothing.trousers.jeans,
+                                          overall,
+                                          shorts[];                                    //symbol_class
+.world.culture.artifact.clothing.suit[];                                               //symbol_class
+.world.culture.artifact.clothing.suit.boiler,
+                                      cleanroom,
+                                      hazmat,
+                                      space,
+                                      scrubs[];                                        //symbol_class
+.world.culture.artifact.clothing.formal[];                                             //symbol_class TODO: expand
+.world.culture.artifact.clothing.uniform[];                                            //symbol_class
+.world.culture.artifact.clothing.uniform.school,
+                                         military,
+                                         diplomatic[];                                 //symbol_class
+.world.culture.artifact.clothing.dress[];                                              //symbol_class TODO: expand
+.world.culture.artifact.clothing.gown[];                                               //symbol_class TODO: expand
+.world.culture.artifact.clothing.skirt[];                                              //symbol_class TODO: expand
+.world.culture.artifact.clothing.under[];                                              //symbol_class TODO: expand
+.world.culture.artifact.clothing.outer[];                                              //symbol_class TODO: expand
+.world.culture.artifact.clothing.night[];                                              //symbol_class TODO: expand
+.world.culture.artifact.clothing.swim[];                                               //symbol_class TODO: expand
+.world.culture.artifact.clothing.foot[];                                               //symbol_class
+.world.culture.artifact.clothing.foot.boot,
+                                      dress,
+                                      sandal,
+                                      shoe[];                                          //symbol_class
+.world.culture.artifact.clothing.leg[];                                                //symbol_class
+.world.culture.artifact.clothing.leg.sock,
+                                     stocking,
+                                     tights[];                                         //symbol_class
+.world.culture.artifact.clothing.accessories[];                                        //symbol_class
+.world.culture.artifact.clothing.accessories.belt,
+                                             glasses,
+                                             gloves,
+                                             headband[];                               //symbol_class
+(.character[]) .world.culture.artifact.clothing.wear what : (clothing[]);              //point_class
+.world.culture.artifact.food[];                                                        //symbol_class TODO: expand
+.world.culture.artifact.furniture[];                                                   //symbol_class TODO: sort in elsewhere
+.world.culture.artifact.science[];                                                     //symbol_class
+.world.culture.artifact.science.natural[];                                             //symbol_class TODO: expand
+.world.culture.artifact.science.social[];                                              //symbol_class TODO: expand
+.world.culture.artifact.science.formal[];                                              //symbol_class TODO: expand
+(science[]...) .world.culture.artifact.science.apply to : (culture[]...);              //point_class
+.world.culture.artifact.tool[];                                                        //symbol_class
+.world.culture.artifact.tool.cutting[];                                                //symbol_class TODO: expand
+.world.culture.artifact.tool.moving[];                                                 //symbol_class TODO: expand
+.world.culture.artifact.tool.guiding[];                                                //symbol_class TODO: expand
+.world.culture.artifact.tool.shaping[];                                                //symbol_class TODO: expand
+.world.culture.artifact.tool.fastening[];                                              //symbol_class TODO: expand
+.world.culture.artifact.tool.information[];                                            //symbol_class TODO: expand
+.world.culture.artifact.tool.chemical[];                                               //symbol_class TODO: expand
+.world.culture.artifact.tool.weapon[];                                                 //symbol_class TODO: maybe sort into previous
+.world.culture.artifact.trade[];                                                       //symbol_class TODO: expand
+.world.culture.group[];                                                                //symbol_group TODO: expand
+(culture[]...) .world.culture.originate from : (culture[]);                            //point_class
+(culture[]) .world.culture.appropriate what : (culture[]...);                          //point_class
+.world.biology;                                                                        // TODO: expand (biomes)
+.world.biology.fauna;                                                                  // TODO: expand
+.world.biology.fauna.species[];                                                        //symbol_class TODO: expand
+(.character[]) .world.biology.fauna.species is : (species[]...);                       //point_class TODO: expand
+.world.biology.fauna.anatomy;
+(species[]) ! .world.biology.fauna.anthropomorphic _;                                  //point_class TODO: more general body plans?
+.world.biology.fauna.latus[left,
+                           right,
+                           inner,
+                           outer];                                                     //symbol
+(.character[]) .world.biology.fauna.anatomy.head[];                                    //symbol_class
+(.character[], latus[]) .world.biology.fauna.anatomy.head.forehead,
+                                                          temple,
+                                                          ear,
+                                                          jaw,
+                                                          chin,
+                                                          neck,
+                                                          nape[];                      //symbol_class TODO: explode ear
+(.character[], latus[]) .world.biology.fauna.anatomy.head.ear.lobe[];                  //symbol_class
+(.character[]) .world.biology.fauna.anatomy.head.face[];                               //symbol_class
+(.character[], latus[]) .world.biology.fauna.anatomy.head.face.forehead,
+                                                               eye,
+                                                               nose,
+                                                               cheek,
+                                                               mouth,
+                                                               chin[];                 //symbol_class
+(.character[], latus[]) .world.biology.fauna.anatomy.head.face.eye.brow,
+                                                                   lash[];             //symbol_class TODO: expand
+(.character[]) .world.biology.fauna.anatomy.head.face.nose.nostril,
+                                                           bridge[];                   //symbol_class
+(.character[]) .world.biology.fauna.anatomy.head.face.mouth.lip,
+                                                            tongue,
+                                                            gum,
+                                                            tooth[];                   //symbol_class TODO: expand tooth
+(.character[]) .world.biology.fauna.anatomy.torso[];                                   //symbol_class TODO: expand
+(.character[]) .world.biology.fauna.anatomy.torso.chest[];                             //symbol_class TODO: expand
+(.character[]) .world.biology.fauna.anatomy.torso.chest.breast,
+                                                        collarbone,
+                                                        rib,
+                                                        sternum[];                     //symbol_class
+(.character[]) .world.biology.fauna.anatomy.torso.abdomen[];                           //symbol_class TODO: expand
+(.character[]) .world.biology.fauna.anatomy.torso.abdomen.stomach,
+                                                          navel,
+                                                          waist[];                     //symbol_class
+(.character[]) .world.biology.fauna.anatomy.torso.back[];                              //symbol_class TODO: expand
+(.character[]) .world.biology.fauna.anatomy.torso.shoulder_blade[];                    //symbol_class
+(.character[]) .world.biology.fauna.anatomy.torso.spine[];                             //symbol_class
+.world.biology.fauna.anatomy.limb[];                                                   //symbol_class TODO: expand
+(.character[], latus[]) .world.biology.fauna.anatomy.limb.arm[];                       //symbol_class TODO: expand
+(.character[], latus[]) .world.biology.fauna.anatomy.limb.arm.shoulder,
+                                                              armpit,
+                                                              upper_arm,
+                                                              elbow,
+                                                              forearm,
+                                                              wrist,
+                                                              hand[];                  //symbol_class
+(.character[], latus[]) .world.biology.fauna.anatomy.limb.arm.hand.back,
+                                                                   finger,
+                                                                   palm[];             //symbol_class
+(.character[], latus[]) .world.biology.fauna.anatomy.limb.arm.hand.finger.thumb[] (0); //symbol_class
+(.character[], latus[]) .world.biology.fauna.anatomy.limb.arm.hand.finger.index[] (1); //symbol_class
+(.character[], latus[]) .world.biology.fauna.anatomy.limb.arm.hand.finger.middle[] (2);//symbol_class
+(.character[], latus[]) .world.biology.fauna.anatomy.limb.arm.hand.finger.ring[] (3);  //symbol_class
+(.character[], latus[]) .world.biology.fauna.anatomy.limb.arm.hand.finger.pinkie[] (4);//symbol_class
+(.character[], latus[], finger[]) .world.biology.fauna.anatomy.limb.arm.hand.finger.tip,
+                                                                                    nail[]; //symbol
+(.character[], latus[]) .world.biology.fauna.anatomy.leg[];                            //symbol_class TODO: expand
+(.character[], latus[]) .world.biology.fauna.anatomy.limb.leg.hip,
+                                                              thigh,
+                                                              knee,
+                                                              kneecap,
+                                                              shin,
+                                                              lower_leg,
+                                                              calf,
+                                                              foot[];                  //symbol_class
+(.character[], latus[]) .world.biology.fauna.anatomy.limb.leg.foot.ankle,
+                                                                   heel,
+                                                                   sole[];             //symbol_class
+(.character[], latus[]) .world.biology.fauna.anatomy.limb.leg.foot.toe[big (0),
+                                                                       index (1),
+                                                                       middle (2),
+                                                                       fore (3),
+                                                                       little (4)];    //symbol
+(.character[], latus[], toe[]) .world.biology.fauna.anatomy.limb.leg.foot.toe.tip,
+                                                                              nail[];  //symbol
+.world.biology.fauna.anatomy.limb.fin[];                                               //symbol_class TODO: expand
+.world.biology.fauna.anatomy.limb.wing[];                                              //symbol_class TODO: expand
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.fur[];                       //symbol_class
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.fur.color is;                //point_class
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.fur.length is;               //point_class
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.fur.type is;                 //point_class
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.hair[];                      //symbol_class TODO: expand (https://en.wikipedia.org/wiki/Hair)
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.hair.color is;               //point_class
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.hair.length is;              //point_class
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.hair.type is;                //point_class
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.plumage[];                   //symbol_class
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.plumage.color is;            //point_class
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.plumage.length is;           //point_class
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.plumage.type is;             //point_class
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.scales[];                    //symbol_class TODO: expand
+(.character[], anatomy[]...) .world.biology.fauna.anatomy.skin[];                      //symbol_class TODO: expand
+.world.biology.fauna.sensation;                                                        // TODO: move near anatomy
+.world.biology.fauna.sensation.external;                                               // TODO: expand
+(.character[]) .world.biology.fauna.sensation.external.see what;                       //point_class
+(.character[]) .world.biology.fauna.sensation.external.hear what;                      //point_class
+(.character[]) .world.biology.fauna.sensation.external.touch where;                    //point_class
+(.character[]) .world.biology.fauna.sensation.external.taste what;                     //point_class
+(.character[]) .world.biology.fauna.sensation.external.smell what;                     //point_class
+.world.biology.fauna.sensation.internal;                                               // TODO: expand
+(.character[]) .world.biology.fauna.sensation.internal.balance _;                       //point_class TODO: object class
+(.character[]) .world.biology.fauna.sensation.internal.propriocept what ?where;        //point_class
+(.character[], .world.biology.fauna.anatomy[]...)
+    .world.biology.fauna.sensation.internal.hurt type ?intensity;                      //point_class
+(.character[]) ! .world.biology.fauna.sensation.internal.thermocept what ?where;       //point_class
+(.character[]) ! .world.biology.fauna.sensation.internal.hunger intensity;             //point_class
+(.character[]) ! .world.biology.fauna.sensation.internal.thirst intensity;             //point_class
+(.character[]) ! .world.biology.fauna.sensation.internal.nausea intensity;             //point_class
+.world.biology.fauna.reflex;                                                           //symbol_class TODO: expand https://en.wikipedia.org/wiki/Category:Reflexes
+(.character[]) .world.biology.fauna.reflex.blink _;                                    //point_class
+(.character[]) .world.biology.fauna.reflex.blush _;                                    //point_class
+(.character[]) .world.biology.fauna.reflex.breathe _;                                  //point_class
+(.character[]) .world.biology.fauna.reflex.burp _;                                     //point_class
+(.character[]) .world.biology.fauna.reflex.cough _;                                    //point_class
+(.character[]) .world.biology.fauna.reflex.hiccup _;                                   //point_class
+(.character[]) .world.biology.fauna.reflex.retch _;                                    //point_class
+(.character[]) .world.biology.fauna.reflex.shiver where : (anatomy[]...);              //point_class
+(.character[]) .world.biology.fauna.reflex.sneeze _;                                   //point_class
+(.character[]) .world.biology.fauna.reflex.startle _;                                  //point_class
+(.character[]) .world.biology.fauna.reflex.swallow _;                                  //point_class
+(.character[]) .world.biology.fauna.reflex.sweat where : (anatomy[]...);               //point_class
+(.character[]) .world.biology.fauna.reflex.yawn _;                                     //point_class
+.world.biology.flora;                                                                  // TODO: expand
+(.character[]) ! .world.biology.live _;                                                //point_class
+.world.geography;
+.world.geography.natural;
+.world.geography.natural.climate[];                                                    //symbol_class
+.world.geography.natural.climate.weather is;                                           //mixed_class
+.world.geography.natural.climate.weather.temperature is;                               //point_class
+.world.geography.natural.climate.weather.humidity is;                                  //point_class
+.world.geography.natural.climate.weather.pressure is;                                  //point_class
+.world.geography.natural.climate.weather.wind[] ("Beaufort scale");                    //symbol_class
+.world.geography.natural.climate.weather.wind[calm (0),
+                                              light_air (1),
+                                              light_breeze (2),
+                                              gentle_breeze (3),
+                                              moderate_breeze (4),
+                                              fresh_breeze (5),
+                                              strong_breeze (6),
+                                              high_wind (7),
+                                              gale (8),
+                                              strong_gale (9),
+                                              storm (10),
+                                              violent_storm (11),
+                                              hurricane (12)];                         //symbol
+.world.geography.natural.climate.weather.wind is : (wind[]);                           //mixed_class
+.world.geography.natural.climate.weather.wind.storm;                                   //symbol_class
+.world.geography.natural.climate.weather.wind.hurricane;                               //symbol_class
+.world.geography.natural.climate.weather.precipitation[none,
+                                                       rain,
+                                                       hail,
+                                                       snow];                          //symbol
+.world.geography.natural.climate.weather.precipitation is : (precipitation[]);         //mixed_class
+.world.geography.natural.climate.weather.cloud_cover[clear,
+                                                     overcast];                        //symbol
+.world.geography.natural.climate.weather.cloud_cover is : (cloud_cover[]);             //mixed_class
+.world.geography.natural.climate.weather.visibility[clear (0),
+                                                    haze (1),
+                                                    mist (2),
+                                                    fog (3)];                          //symbol
+.world.geography.natural.climate.weather.visibility is : (visibility[]);               //mixed_class
+.world.geography.natural.climate.weather.storm[tornado,
+                                               cyclone,
+                                               typhoon,
+                                               thunderstorm,
+                                               snowstorm,
+                                               lightning,
+                                               thunder];                               //symbol
+.world.geography.natural.climate.weather.storm what : (storm[]);                       //mixed_class
+.world.geography.natural.climate.weather.storm.tornado[];                              //symbol_class
+.world.geography.natural.climate.weather.storm.cyclone[];                              //symbol_class
+.world.geography.natural.climate.weather.storm.typhoon[];                              //symbol_class
+.world.geography.natural.climate.weather.optical[rainbow,
+                                                 parhelion,
+                                                 fata_morgana];                        //symbol
+.world.geography.natural.climate.weather.optical what : (optical[]);                   //mixed_class
+.world.geography.natural.climate.weather.light[aurora];                                //symbol
+.world.geography.natural.climate.weather.light is;                                     //mixed_class
+.world.geography.natural.climate.season[spring (0),
+                                        summer (1),
+                                        autumn (2),
+                                        winter (3)];                                   //symbol
+! .world.geography.natural.climate.season is : (season[]);                             //mixed_class
+.world.geography.natural.climate.region is;                                            //mixed_class
+.world.geography.natural.climate.region.altitude[alvar (0),
+                                                 alpine (1),
+                                                 subalpine (2),
+                                                 montane (3),
+                                                 lower_montane (4),
+                                                 premontane (5)];                      //symbol
+! .world.geography.natural.climate.region.altitude is : (altitude[]);                  //mixed_class
+.world.geography.natural.climate.region.humidity[superarid (0),
+                                                 perarid (1),
+                                                 arid (2),
+                                                 semiarid (3),
+                                                 subhumid (4),
+                                                 humid (5),
+                                                 perhumid (6),
+                                                 superhumid (7)];                      //symbol
+! .world.geography.natural.climate.region.humidity is : (humidity[]);                  //mixed_class
+.world.geography.natural.climate.region.temperature[polar (0),
+                                                    subpolar (1),
+                                                    boreal (2),
+                                                    cool_temperate (3),
+                                                    warm_temperate (4),
+                                                    subtropical (5),
+                                                    tropical (6)];                     //symbol
+! .world.geography.natural.climate.region.temperature is : (temperature[]);            //mixed_class
+.world.geography.natural.land[];                                                       //symbol_class
+.world.geography.natural.land.coastal[];                                               //symbol_class
+.world.geography.natural.land.coastal.beach[];                                         //symbol_class
+.world.geography.natural.land.coastal.cliff[];                                         //symbol_class
+.world.geography.natural.land.coastal.coast[];                                         //symbol_class
+.world.geography.natural.land.coastal.shore[];                                         //symbol_class
+.world.geography.natural.land.coastal.strait[];                                        //symbol_class
+.world.geography.natural.land.oceanic[];                                               //symbol_class
+.world.geography.natural.land.oceanic.cave[];                                          //symbol_class
+.world.geography.natural.land.oceanic.channel[];                                       //symbol_class
+.world.geography.natural.land.oceanic.island[];                                        //symbol_class
+.world.geography.natural.land.oceanic.lagoon[];                                        //symbol_class
+.world.geography.natural.land.oceanic.peninsula[];                                     //symbol_class
+.world.geography.natural.land.oceanic.ocean[];                                         //symbol_class
+.world.geography.natural.land.oceanic.trench[];                                        //symbol_class
+.world.geography.natural.land.cryogenic[];                                             //symbol_class
+.world.geography.natural.land.erosion[];                                               //symbol_class
+.world.geography.natural.land.erosion.canyon[];                                        //symbol_class
+.world.geography.natural.land.erosion.cave[];                                          //symbol_class
+.world.geography.natural.land.erosion.cliff[];                                         //symbol_class
+.world.geography.natural.land.fluvial[];                                               //symbol_class
+.world.geography.natural.land.fluvial.cave[];                                          //symbol_class
+.world.geography.natural.land.fluvial.cliff[];                                         //symbol_class
+.world.geography.natural.land.fluvial.delta[];                                         //symbol_class
+.world.geography.natural.land.fluvial.river[];                                         //symbol_class
+.world.geography.natural.land.fluvial.spring[];                                        //symbol_class
+.world.geography.natural.land.fluvial.swamp[];                                         //symbol_class
+.world.geography.natural.land.fluvial.waterfall[];                                     //symbol_class
+.world.geography.natural.land.impact[];                                                //symbol_class
+.world.geography.natural.land.impact.crater[];                                         //symbol_class
+.world.geography.natural.land.impact.lake[];                                           //symbol_class
+.world.geography.natural.land.lacustrine[];                                            //symbol_class
+.world.geography.natural.land.lacustrine.beach[];                                      //symbol_class
+.world.geography.natural.land.lacustrine.lake[];                                       //symbol_class
+.world.geography.natural.land.lacustrine.oasis[];                                      //symbol_class
+.world.geography.natural.land.lacustrine.pond[];                                       //symbol_class
+.world.geography.natural.land.mountain[];                                              //symbol_class
+.world.geography.natural.land.mountain.mountain[];                                     //symbol_class
+.world.geography.natural.land.mountain.pass[];                                         //symbol_class
+.world.geography.natural.land.mountain.range[];                                        //symbol_class
+.world.geography.natural.land.mountain.valley[];                                       //symbol_class
+.world.geography.natural.land.glacial[];                                               //symbol_class
+.world.geography.natural.land.glacial.glacier[];                                       //symbol_class
+.world.geography.natural.land.slope[];                                                 //symbol_class
+.world.geography.natural.land.slope.hill[];                                            //symbol_class
+.world.geography.natural.land.slope.plain[];                                           //symbol_class
+.world.geography.natural.land.slope.ridge[];                                           //symbol_class
+.world.geography.natural.land.slope.vale[];                                            //symbol_class
+.world.geography.natural.land.tectonic[];                                              //symbol_class
+.world.geography.natural.land.tectonic.fault[];                                        //symbol_class
+.world.geography.natural.land.tectonic.trench[];                                       //symbol_class
+.world.geography.natural.land.volcanic[];                                              //symbol_class
+.world.geography.natural.land.volcanic.geyser[];                                       //symbol_class
+.world.geography.natural.land.volcanic.vent[];                                         //symbol_class
+.world.geography.natural.land.volcanic.volcano[];                                      //symbol_class
+.world.geography.natural.land.weathering[];                                            //symbol_class
+.world.geography.natural.eco[];                                                        //symbol_class TODO: expand
+.world.geography.natural.sky[];                                                        //symbol_class TODO: expand
+.world.geography.human;                                                                // TODO: expand
+.world.geography.human.building[];                                                     //symbol_class
+.world.geography.human.building.residential[];                                         //symbol_class
+.world.geography.human.building.residential.single[];                                  //symbol_class
+.world.geography.human.building.residential.single.cabin[];                            //symbol_class
+.world.geography.human.building.residential.single.cottage[];                          //symbol_class
+.world.geography.human.building.residential.single.house[];                            //symbol_class
+.world.geography.human.building.residential.single.mansion[];                          //symbol_class
+.world.geography.human.building.residential.attached[];                                //symbol_class
+.world.geography.human.building.residential.attached.duplex[];                         //symbol_class
+.world.geography.human.building.residential.attached.townhouse[];                      //symbol_class
+.world.geography.human.building.residential.attached.terrace[];                        //symbol_class
+.world.geography.human.building.residential.multi[];                                   //symbol_class
+.world.geography.human.building.residential.multi.apartment[];                         //symbol_class
+.world.geography.human.building.residential.multi.condominium[];                       //symbol_class
+.world.geography.human.building.residential.multi.dormitory[];                         //symbol_class
+.world.geography.human.building.residential.multi.nursing[];                           //symbol_class
+.world.geography.human.building.residential.multi.retirement[];                        //symbol_class
+.world.geography.human.building.residential.public[];                                  //symbol_class
+.world.geography.human.building.residential.public.residence[];                        //symbol_class
+.world.geography.human.building.residential.public.palace[];                           //symbol_class
+.world.geography.human.building.commercial[];                                          //symbol_class
+.world.geography.human.building.commercial.office[];                                   //symbol_class
+.world.geography.human.building.commercial.office.low_rise[];                          //symbol_class
+.world.geography.human.building.commercial.office.mid_rise[];                          //symbol_class
+.world.geography.human.building.commercial.office.high_rise[];                         //symbol_class
+.world.geography.human.building.commercial.office.skyscraper[];                        //symbol_class
+.world.geography.human.building.commercial.retail[];                                   //symbol_class
+.world.geography.human.building.commercial.hotel[];                                    //symbol_class
+.world.geography.human.building.industrial[];                                          //symbol_class
+.world.geography.human.building.industrial.production[];                               //symbol_class
+.world.geography.human.building.industrial.warehouse[];                                //symbol_class
+.world.geography.human.building.infrastructure[];                                      //symbol_class
+.world.geography.human.building.infrastructure.road[];                                 //symbol_class
+.world.geography.human.building.infrastructure.bridge[];                               //symbol_class
+.world.geography.human.building.agriculture[];                                         //symbol_class
+.world.geography.human.building.agriculture.barn[];                                    //symbol_class
+.world.geography.human.building.agriculture.farmhouse[];                               //symbol_class
+.world.geography.human.building.agriculture.field[];                                   //symbol_class
+.world.geography.human.building.agriculture.greenhouse[];                              //symbol_class
+.world.geography.human.building.agriculture.paddy[];                                   //symbol_class
+.world.geography.human.building.agriculture.shed[];                                    //symbol_class
+.world.geography.human.building.agriculture.silo[];                                    //symbol_class
+.world.geography.human.building.agriculture.stable[];                                  //symbol_class
+.world.geography.human.building.agriculture.vineyard[];                                //symbol_class
+.world.geography.human.building.agriculture.windmill[];                                //symbol_class
+.world.geography.human.building.agriculture.workshop[];                                //symbol_class
+.world.geography.human.building.institutional[];                                       //symbol_class
+.world.geography.human.building.institutional.medical[];                               //symbol_class
+.world.geography.human.building.institutional.medical.clinic[];                        //symbol_class
+.world.geography.human.building.institutional.medical.hospital[];                      //symbol_class
+.world.geography.human.building.institutional.medical.sanatorium[];                    //symbol_class
+.world.geography.human.building.institutional.educational[];                           //symbol_class
+.world.geography.human.building.institutional.educational.archive[];                   //symbol_class
+.world.geography.human.building.institutional.educational.college[];                   //symbol_class
+.world.geography.human.building.institutional.educational.orphanage[];                 //symbol_class
+.world.geography.human.building.institutional.educational.school[];                    //symbol_class
+.world.geography.human.building.institutional.educational.school.preschool[];          //symbol_class
+.world.geography.human.building.institutional.educational.school.elementary[];         //symbol_class
+.world.geography.human.building.institutional.educational.school.secondary[];          //symbol_class
+.world.geography.human.building.institutional.civic[];                                 //symbol_class
+.world.geography.human.building.institutional.civic.arena[];                           //symbol_class
+.world.geography.human.building.institutional.civic.bathhouse[];                       //symbol_class
+.world.geography.human.building.institutional.civic.library[];                         //symbol_class
+.world.geography.human.building.institutional.civic.museum[];                          //symbol_class
+.world.geography.human.building.institutional.civic.shelter[];                         //symbol_class
+.world.geography.human.building.institutional.religious[];                             //symbol_class
+.world.geography.human.building.institutional.religious.shrine[];                      //symbol_class
+.world.geography.human.building.institutional.religious.monastery[];                   //symbol_class
+.world.geography.human.building.institutional.religious.temple[];                      //symbol_class
+.world.geography.human.building.institutional.government[];                            //symbol_class
+.world.geography.human.building.institutional.government.assembly[];                   //symbol_class
+.world.geography.human.building.institutional.government.consulate[];                  //symbol_class
+.world.geography.human.building.institutional.government.courthouse[];                 //symbol_class
+.world.geography.human.building.institutional.government.embassy[];                    //symbol_class
+.world.geography.human.building.institutional.government.parliament[];                 //symbol_class
+.world.geography.human.building.institutional.government.fire_station[];               //symbol_class
+.world.geography.human.building.institutional.government.police_station[];             //symbol_class
+.world.geography.human.building.institutional.military[];                              //symbol_class
+.world.geography.human.building.institutional.military.arsenal[];                      //symbol_class
+.world.geography.human.building.institutional.military.barracks[];                     //symbol_class
+.world.geography.human.building.institutional.military.bunker[];                       //symbol_class
+.world.geography.human.building.institutional.military.wall[];                         //symbol_class
+.world.geography.human.building.institutional.research[];                              //symbol_class
+.world.geography.human.building.institutional.research.excavation_site[];              //symbol_class
+.world.geography.human.building.institutional.research.laboratory[];                   //symbol_class
+.world.geography.human.building.institutional.research.observatory[];                  //symbol_class
+.world.geography.human.building.institutional.research.university[];                   //symbol_class
+.world.geography.human.building.institutional.transport[];                             //symbol_class
+.world.geography.human.building.institutional.transport.aviation[];                    //symbol_class
+.world.geography.human.building.institutional.transport.aviation.airport[];            //symbol_class
+.world.geography.human.building.institutional.transport.aviation.runway[];             //symbol_class
+.world.geography.human.building.institutional.transport.aviation.hangar[];             //symbol_class
+.world.geography.human.building.institutional.transport.land[];                        //symbol_class
+.world.geography.human.building.institutional.transport.land.road[];                   //symbol_class
+.world.geography.human.building.institutional.transport.land.road.highway[];           //symbol_class
+.world.geography.human.building.institutional.transport.land.road.paved_road[];        //symbol_class
+.world.geography.human.building.institutional.transport.land.road.unpaved_road[];      //symbol_class
+.world.geography.human.building.institutional.transport.land.road.dirt_track[];        //symbol_class
+.world.geography.human.building.institutional.transport.land.road.interchange[];       //symbol_class
+.world.geography.human.building.institutional.transport.land.road.bus_station[];       //symbol_class
+.world.geography.human.building.institutional.transport.land.road.gas_station[];       //symbol_class
+.world.geography.human.building.institutional.transport.land.road.garage[];            //symbol_class
+.world.geography.human.building.institutional.transport.land.rail[];                   //symbol_class
+.world.geography.human.building.institutional.transport.land.rail.railroad[];          //symbol_class
+.world.geography.human.building.institutional.transport.land.rail.switch[];            //symbol_class
+.world.geography.human.building.institutional.transport.land.rail.train_station[];     //symbol_class
+.world.geography.human.building.institutional.transport.land.rail.train_depot[];       //symbol_class
+.world.geography.human.building.institutional.transport.water[];                       //symbol_class
+.world.geography.human.building.institutional.transport.water.canal[];                 //symbol_class
+.world.geography.human.building.institutional.transport.water.lighthouse[];            //symbol_class
+.world.geography.human.building.institutional.transport.water.shipyard[];              //symbol_class
+.world.geography.human.building.institutional.transport.water.seaport[];               //symbol_class
+.world.geography.human.building.institutional.transport.water.inland_port[];           //symbol_class
+.world.geography.human.building.institutional.transport.water.boathouse[];             //symbol_class
+.world.geography.human.building.institutional.transport.space[];                       //symbol_class
+.world.geography.human.building.institutional.transport.space.spaceport[];             //symbol_class
+.world.geography.human.building.institutional.transport.space.space_station[];         //symbol_class
+.world.geography.human.building.temporary[];                                           //symbol_class
+.world.geography.human.building.temporary.camp[];                                      //symbol_class
+.world.geography.human.building.temporary.container[];                                 //symbol_class
+.world.geography.human.building.temporary.tent[];                                      //symbol_class
+.world.geography.human.settlement[];                                                   //symbol_class
+.world.geography.human.settlement.miniscule[] (0);                                     //symbol_class
+.world.geography.human.settlement.miniscule.roadhouse[] (0);                           //symbol_class
+.world.geography.human.settlement.miniscule.bed_and_breakfast[] (0);                   //symbol_class
+.world.geography.human.settlement.miniscule.homestead[] (1);                           //symbol_class
+.world.geography.human.settlement.miniscule.neighbourhood[] (1);                       //symbol_class
+.world.geography.human.settlement.miniscule.hamlet[] (2);                              //symbol_class
+.world.geography.human.settlement.miniscule.band[] (2);                                //symbol_class
+.world.geography.human.settlement.miniscule.village[] (3);                             //symbol_class
+.world.geography.human.settlement.miniscule.tribe[] (3);                               //symbol_class
+.world.geography.human.settlement.low[] (1);                                           //symbol_class
+.world.geography.human.settlement.low.suburb[] (0);                                    //symbol_class
+.world.geography.human.settlement.low.locality[] (0);                                  //symbol_class
+.world.geography.human.settlement.low.township[] (1);                                  //symbol_class
+.world.geography.human.settlement.low.subdistrict[] (1);                               //symbol_class
+.world.geography.human.settlement.low.town[] (2);                                      //symbol_class
+.world.geography.human.settlement.low.shire[] (2);                                     //symbol_class
+.world.geography.human.settlement.medium[] (2);                                        //symbol_class
+.world.geography.human.settlement.medium.borough[] (0);                                //symbol_class
+.world.geography.human.settlement.medium.district[] (0);                               //symbol_class
+.world.geography.human.settlement.medium.prefecture[] (1);                             //symbol_class
+.world.geography.human.settlement.medium.county[] (1);                                 //symbol_class
+.world.geography.human.settlement.medium.regiopolis[] (2);                             //symbol_class
+.world.geography.human.settlement.medium.city[] (2);                                   //symbol_class
+.world.geography.human.settlement.high[] (3);                                          //symbol_class
+.world.geography.human.settlement.high.metropolis[] (0);                               //symbol_class
+.world.geography.human.settlement.high.municipality[] (0);                             //symbol_class
+.world.geography.human.settlement.high.conurbation[] (1);                              //symbol_class
+.world.geography.human.settlement.high.global_city[] (1);                              //symbol_class
+.world.geography.human.settlement.high.megalopolis[] (2);                              //symbol_class
+.world.geography.human.settlement.high.megacity[] (2);                                 //symbol_class
+.world.geography.human.settlement.high.gigapolis[] (3);                                //symbol_class
+.world.geography.human.settlement.high.gigacity[] (3);                                 //symbol_class
+.world.geography.human.settlement.extreme[] (4);                                       //symbol_class
+.world.geography.human.settlement.extreme.eperopolis[] (0);                            //symbol_class
+.world.geography.human.settlement.extreme.ecumenopolis[] (1);                          //symbol_class
+(.world.geography.natural.land[]...,
+ .world.geography.human[]...) .world.geography.leads
+                          to : (.world.geography.natural.land[]...,
+                                .world.geography.human[]...);
+.world.geography.human.domain;                                                         // TODO: expand
+.world.cosmology;                                                                      // TODO: expand
+.world.physics;                                                                        // TODO: expand
+
+.object ("Generic description of objects");                                            // TODO: expand (especially composition)
+.object.consist of;                                                                    //point_class
+.object.material[];                                                                    //point_class
+(material[]...) .object.material.boiling_point is;                                     //point_class
+(material[]...) .object.material.brittleness is;                                       //point_class
+(material[]...) .object.material.density is;                                           //point_class
+(material[]...) .object.material.elasticity is;                                        //point_class
+(material[]...) .object.material.hardness is;                                          //point_class
+(material[]...) .object.material.malleability is;                                      //point_class
+(material[]...) .object.material.melting_point is;                                     //point_class
+(material[]...) .object.material.solubility is;                                        //point_class
+(material[]...) .object.material.stiffness is;                                         //point_class
+(material[]...) .object.material.viscosity is;                                         //point_class
+.object.material.metal[];                                                              //symbol_class TODO: expand
+.object.material.metal.alloy[];                                                        //symbol_class TODO: expand
+.object.material.polymer[];                                                            //symbol_class TODO: expand
+.object.material.mineral[];                                                            //symbol_class TODO: expand
+.object.material.inorganic[];                                                          //symbol_class TODO: expand
+.object.material.organic[];                                                            //symbol_class TODO: expand
+.object.material.made_of what : (material[]...);                                       //point_class
+.object.dimension is;                                                                  //point_class
+.object.dimension.height is;                                                           //point_class
+.object.dimension.width is;                                                            //point_class
+.object.dimension.depth is;                                                            //point_class
+.object.dimension.area is;                                                             //point_class
+.object.dimension.volume is;                                                           //point_class
+.object.location is : (location[]) ?what;                                              //point_class
+.object.haptic is;                                                                     //point_class
+.object.haptic.texture is;                                                             //point_class
+(color[]...) .object.optical.color.basic[red,
+                                         orange,
+                                         yellow,
+                                         green,
+                                         cyan,
+                                         blue,
+                                         indigo,
+                                         violet,
+                                         purple,
+                                         magenta,
+                                         pink,
+                                         brown,
+                                         white,
+                                         gray,
+                                         black];                                       //symbol
+.object.optical.color.saturation[pale,
+                                 deep];                                                //symbol
+.object.optical.color.luminance[neon,
+                                bright,
+                                light,
+                                dark];                                                 //symbol_class
+.object.optical.color is : (color[]);                                                  //point_class
+.object.optical.luminescence is;                                                       //point_class
+.object.optical.opacity is;                                                            //point_class
+.object.temperature is;                                                                //point_class
+.object.velocity is;                                                                   //point_class
+.object.weight is;                                                                     //point_class
+
+.abstract;
+.abstract.composition.contains _;                                                      //point_class
+.abstract.number[];                                                                    //symbol_class
+.abstract.number.cardinal[zero (0),
+                          one (1),
+                          two (2),
+                          three (3),
+                          four (4),
+                          five (5),
+                          six (6),
+                          seven (7),
+                          eight (8),
+                          nine (9),
+                          ten (10)];                                                   //symbol
+.abstract.number.ordinal[first (1),
+                         second (2),
+                         third (3),
+                         fourth (4),
+                         fifth (5),
+                         sixth (6),
+                         seventh (7),
+                         eighth (8),
+                         ninth (9),
+                         tenth (10)];                                                  //symbol
+.abstract.position.relative[on,
+                            over,
+                            above,
+                            under,
+                            before,
+                            behind,
+                            next_to,
+                            between,
+                            inside,
+                            outside];                                                  //symbol
+.abstract.position.distance to ?is;
+.abstract.size.relative[smallest (-3),
+                        smaller (-2),
+                        small (-1),
+                        big (1),
+                        bigger (2),
+                        biggest (3)];                                                  //symbol
+.abstract.time.relative[earliest (-3),
+                        earlier (-2),
+                        early (-1),
+                        present (0),
+                        late (1),
+                        later (2),
+                        latest (3)];                                                   //symbol
+
+.story ("Story");
+
+.outline ("Outline");
+.outline.book (0);                                                                     //outline_class
+.outline.story (1);                                                                    //outline_class
+.outline.part (2);                                                                     //outline_class
+.outline.chapter (3);                                                                  //outline_class
+.outline.section (4);                                                                  //outline_class
+.outline.scene (5);                                                                    //outline_class
+.outline.paragraph (6);                                                                //outline_class
+.outline.sentence (7);                                                                 //outline_class

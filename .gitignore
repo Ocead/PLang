@@ -1,0 +1,28 @@
+# File manager
+desktop.ini
+.DS_Store
+.directory
+
+# CLion specific
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/deployment.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/**/contentModel.xml
+.idea/**/other.xml
+
+# Generated artifacts
+build/
+cmake-build-*/
+dist/
+docs/html/
+docs/latex/
+generated/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.plangdb

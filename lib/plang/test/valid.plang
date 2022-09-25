@@ -1,0 +1,203 @@
+// Path
+.; //Qualified root path
+unqualified; //Unqualified single-node path
+unqualified.path; //Unqualified multi-node path
+.qualified; //Qualified single-node path
+.qualified.path; //Qualified multi-node path
+
+. (0, "Test"); //Decorated qualified root path
+unqualified (1, "'Test'"); //Decorated unqualified single-node path
+unqualified.path(-1, '"Test"'); //Decorated unqualified multi-node path
+.qualified (.1, "\"Test\""); //Decorated qualified single-node path
+.qualified.path(-1., '\'Test\''); //Decorated qualified multi-node path
+
+// Symbol class
+[]; //Unqualified local symbol class
+.[]; //Qualified root symbol class
+unqualified_symbol_class[]; //Unqualified single-node symbol class
+unqualified_symbol.class[]; //Unqualified multi-node symbol class
+.qualified_symbol_class[]; //Qualified single-node symbol class
+.qualified_symbol.class[]; //Qualified multi-node symbol class
+
+unqualified_symbol_class,list[]; //Unqualified single-node symbol class list
+unqualified.symbol.class,list[]; //Unqualified multi-node symbol class list
+.qualified_symbol_class,list[]; //Qualified single-node symbol class list
+.qualified.symbol.class,list[]; //Qualified multi-node symbol class list
+
+.[] (0, "Test"); //Decorated qualified root path
+unqualified_symbol_class[] (1, "'Test'"); //Decorated unqualified single-node symbol class
+unqualified_symbol.class[] (-1, '"Test"'); //Decorated unqualified multi-node symbol class
+.qualified_symbol_class[](.5, "\"Test\""); //Decorated qualified single-node symbol class
+.qualified_symbol.class[](-.9, '\'Test\''); //Decorated qualified multi-node symbol class
+
+unqualified_symbol_class,list[] (1, "'Test'"); //Decorated unqualified single-node symbol class list
+unqualified.symbol.class,list[] (-1, '"Test"'); //Decorated unqualified multi-node symbol class list
+.qualified_symbol_class,list[](.5, "\"Test\""); //Decorated qualified single-node symbol class list
+.qualified.symbol.class,list[](-.9, '\'Test\''); //Decorated qualified multi-node symbol class list
+
+// Symbol
+[local_symbol]; //Local symbol
+.[root_symbol]; //Root symbol
+unqualified[symbol]; //Unqualified single-node symbol
+unqualified.symbol[name]; //Unqualified multi-node symbol
+.qualified[symbol]; //Qualified single-node symbol
+.qualified.symbol[name]; //Qualified multi-node symbol
+
+[local_symbol,list]; //Local symbol list
+.[root_symbol,list]; //Root symbol list
+unqualified[symbol,list]; //Unqualified single-node symbol list
+unqualified.symbol[name,list]; //Unqualified multi-node symbol list
+.qualified[symbol,list]; //Qualified single-node symbol list
+.qualified.symbol[name,list]; //Qualified multi-node symbol list
+
+[local_symbol(0)];
+.[root_symbol(1)];
+unqualified[symbol(-1)];
+unqualified.symbol[name(1.)];
+.qualified[symbol(-1.)];
+.qualified.symbol[name(-.9)];
+
+[local_symbol(0),list(0)];
+.[root_symbol(1),list(1)];
+unqualified[symbol(-1),list(0.)];
+unqualified.symbol[name(1.),list(0.0)];
+.qualified[symbol(-1.),list(.1)];
+.qualified.symbol[name(-.9),list(.9)];
+
+// Object class
+?object_class: ();
+.?object_class: ();
+unqualified_object_class?object_class: ();
+unqualified_object.class?object_class: ();
+.qualified_object_class?object_class: ();
+.qualified_object.class?object_class: ("abc", l"Test", g"Test", r"Test", m"Test", .symbol.class[], point.class?:);
+
+// Point class
+.default.point.class default_object_class;
+.point.class ?object_class;
+.dual.point.class default_object_class ?object_class;
+! .singleton.default.point.class default_object_class;
+! .singleton.point.class ?object_class;
+! .singleton.dual.point.class default_object_class ?object_class;
+.default.point.class !singleton_default_object_class;
+.point.class !?singleton_object_class;
+.dual.point.class !singleton_default_object_class !?singleton_object_class;
+! .singleton.default.point.class !singleton_default_object_class;
+! .singleton.point.class !?singleton_object_class;
+! .dual.singleton.point.class !singleton_default_object_class !?singleton_object_class;
+
+(.symbol.class[]) .hinted.default.point.class default_object_class;
+(.symbol.class[]) .hinted.point.class ?object_class;
+(.symbol.class[]) ! .hinted.singleton.default.point.class default_object_class;
+(.symbol.class[]) ! .hinted.singleton.point.class ?object_class;
+(.recursive.symbol.class[]...) .hinted.default.point.class !singleton_default_object_class;
+(.recursive.symbol.class[]...) .hinted.point.class !?singleton_object_class;
+(.recursive.symbol.class[]...) ! .hinted.singleton.default.point.class !singleton_default_object_class;
+(.recursive.symbol.class[]...) ! .hinted.singleton.point.class !?singleton_object_class;
+
+.decorated.default.point.class (0) default_object_class;
+.decorated.point.class (1) ?object_class;
+! .decorated.singleton.default.point.class (-1) default_object_class;
+! .decorated.singleton.point.class (1.) ?object_class;
+.decorated.default.point.class (0.1) !singleton_default_object_class;
+.decorated.point.class (1.0) !?singleton_object_class;
+! .decorated.singleton.default.point.class (-.1) !singleton_default_object_class;
+! .decorated.singleton.point.class (-1.) !?singleton_object_class;
+
+(.symbol.class[], .recursive.symbol.class[]...) .hinted.decorated.default.point.class (0) default_object_class;
+(.symbol.class[], .recursive.symbol.class[]...) .hinted.decorated.point.class (1) ?object_class;
+(.symbol.class[], .recursive.symbol.class[]...) ! .hinted.decorated.singleton.default.point.class (-1) default_object_class;
+(.symbol.class[], .recursive.symbol.class[]...) ! .hinted.decorated.singleton.point.class (1.) ?object_class;
+(.symbol.class[], .recursive.symbol.class[]...) .hinted.decorated.default.point.class (0.1) !singleton_default_object_class;
+(.symbol.class[], .recursive.symbol.class[]...) .hinted.decorated.point.class (1.0) !?singleton_object_class;
+(.symbol.class[], .recursive.symbol.class[]...) ! .hinted.decorated.singleton.default.point.class (-.1) !singleton_default_object_class;
+(.symbol.class[], .recursive.symbol.class[]...) ! .hinted.decorated.singleton.point.class (-1.) !?singleton_object_class;
+
+(.symbol.class.hint[], .recursive.symbol.class.hint[]...) ! .point.class (5.4)
+  default_object_class : (l"like_literal_hint", g"glob_literal_hint")
+  ! ?singleton_object_class : (.recursive.symbol.class.hint[]..., r"regex_literal_hint")
+  ?object_class : (.point.class.hint?:, m"match_literal_hint")
+  <- <* requirement_name [] .indirecting.point.class >>
+    [] ~ .recursive.implied.point.class...
+      : [],
+        ?source_object_class,
+        "explicit_literal",
+        .explicit[symbol],
+        {*explicit_point_id}
+      ?implied_object_class : [],
+        ?source_object_class,
+        "explicit_literal",
+        .explicit[symbol],
+        {*explicit_point_id}>;
+
+// Point
+.symbol.class[symbol] .point.class;
+.symbol.class[symbol] .point.class:"literal";
+.symbol.class[symbol] .point.class?object_class:"literal";
+.symbol.class[symbol] .point.class:"literal" ?object_class:"literal";
+.symbol.class[symbol] ~ .point.class
+  : "literal",
+    .symbol.class[symbol_name],
+    {.symbol.class[symbol_name] .point.class:"object_literal"}
+  ?object_class : .symbol.class[symbol_name],
+    {*0},
+    "literal"
+  ?object_class : {*Test},
+    "literal",
+    .symbol.class[symbol_name]
+  <- {*req_prv}
+  -< {*reg_now}
+  >- {*ipl_now}
+  -> {*ipl_def};
+
+
+(.symbol.class.hint[],
+ .recursive.symbol.class.hint[]...) ! .point.class (5.4)
+               default_object_class : (l"like_literal_hint"
+                                       g"glob_literal_hint")
+          ! ?singleton_object_class : (.recursive.symbol.class.hint[]...,
+                                       r"regex_literal_hint")
+                      ?object_class : (.point.class.hint?:,
+                                       m"match_literal_hint")
+  <- <* requirement_name [] .indirecting.point.class >> [] ~ .recursive.implied.point.class...
+                                                           : [],
+                                                             ?source_object_class,
+                                                             "explicit_literal",
+                                                             .explicit[symbol],
+                                                             {*explicit_point_id}
+                                     ?implied_object_class : [],
+                                                             ?source_object_class,
+                                                             "explicit_literal",
+                                                             .explicit[symbol],
+                                                             {*explicit_point_id}>;
+
+
+(.symbol.class[],
+ .recursive.symbol.class[]...) ! .point.class (0, "Description")
+          default_object_class : ("Comment",
+                                  l"Like filter",
+                                  g"Glob filter",
+                                  r"Regex filter",
+                                  m"Match filter",
+                                  .symbol.class[],
+                                  .recursive.symbol.class[]...,
+                                  .point.class?:,
+                                  .recursive.point.class?:...)
+                 ?object_class : ("Comment",
+                                  l"Like filter",
+                                  g"Glob filter",
+                                  r"Regex filter",
+                                  m"Match filter",
+                                  .symbol.class[],
+                                  .recursive.symbol.class[]...,
+                                  .point.class?:,
+                                  .recursive.point.class?:...)
+       ! singleton_object_class : ("Comment",
+                                  l"Like filter",
+                                  g"Glob filter",
+                                  r"Regex filter",
+                                  m"Match filter",
+                                  .symbol.class[],
+                                  .recursive.symbol.class[]...,
+                                  .point.class?:,
+                                  .recursive.point.class?:...);

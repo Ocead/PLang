@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ANTLRGenerationPreferences">
+    <option name="perGrammarGenerationSettings">
+      <list>
+        <PerGrammarGenerationSettings>
+          <option name="fileName" value="*" />
+          <option name="autoGen" value="true" />
+          <option name="outputDir" value="build/antlr-build" />
+          <option name="libDir" value="" />
+          <option name="encoding" value="" />
+          <option name="pkg" value="" />
+          <option name="language" value="" />
+          <option name="generateVisitor" value="true" />
+        </PerGrammarGenerationSettings>
+        <PerGrammarGenerationSettings>
+          <option name="fileName" value="$PROJECT_DIR$/lang/Plang.g4" />
+          <option name="autoGen" value="true" />
+          <option name="outputDir" value="./lib/plang/src/lang" />
+          <option name="libDir" value="./lang" />
+          <option name="encoding" value="" />
+          <option name="pkg" value="GENERATED" />
+          <option name="language" value="Cpp" />
+          <option name="generateListener" value="false" />
+          <option name="generateVisitor" value="true" />
+        </PerGrammarGenerationSettings>
+      </list>
+    </option>
+  </component>
+  <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
+  <component name="CidrRootsConfiguration">
+    <sourceRoots>
+      <file path="$PROJECT_DIR$/include" />
+      <file path="$PROJECT_DIR$/lib/plang/include" />
+      <file path="$PROJECT_DIR$/lib/plang/src" />
+      <file path="$PROJECT_DIR$/lib/plang/test/include" />
+      <file path="$PROJECT_DIR$/lib/plang/test/src" />
+      <file path="$PROJECT_DIR$/lib/plangcli/include" />
+      <file path="$PROJECT_DIR$/lib/plangcli/src" />
+    </sourceRoots>
+    <excludeRoots>
+      <file path="$PROJECT_DIR$/build" />
+      <file path="$PROJECT_DIR$/deps/Catch2/src" />
+      <file path="$PROJECT_DIR$/deps/antlr4/runtime/Cpp" />
+      <file path="$PROJECT_DIR$/dist" />
+      <file path="$PROJECT_DIR$/lib/plang/src/data" />
+      <file path="$PROJECT_DIR$/lib/plang/src/lang/GENERATED" />
+    </excludeRoots>
+  </component>
+</project>

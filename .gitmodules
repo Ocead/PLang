@@ -1,0 +1,9 @@
+[submodule "deps/antlr4"]
+	path = deps/antlr4
+	url = https://github.com/antlr/antlr4
+[submodule "deps/Catch2"]
+	path = deps/Catch2
+	url = https://github.com/catchorg/Catch2
+[submodule "deps/doxygen-awesome-css"]
+	path = deps/doxygen-awesome-css
+	url = https://github.com/jothepro/doxygen-awesome-css

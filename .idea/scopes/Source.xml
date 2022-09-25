@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Source" pattern="file[libplang]:include//*||file[libplang]:cmake//*||file[libplang]:lib//plang//include//*||file[libplang]:lib//plang//src//*||file[libplang]:lib/plangcli/include//*||file[libplang]:lib/plangcli/src//*" />
+</component>
