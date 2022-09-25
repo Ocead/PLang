@@ -1,0 +1,27 @@
+var classplang_1_1corpus_1_1report =
+[
+    [ "key", "classplang_1_1corpus_1_1report.html#a02dce09d178ba0a484e33b53344ee637", null ],
+    [ "report", "classplang_1_1corpus_1_1report.html#a35507355fed7e7fc9c720d41c34dae1d", null ],
+    [ "~report", "classplang_1_1corpus_1_1report.html#a7ac8d772929bf999184c163d6745fdbd", null ],
+    [ "get_key", "classplang_1_1corpus_1_1report.html#ade048848f385c3b5217847d3bf6dd936", null ],
+    [ "valid", "classplang_1_1corpus_1_1report.html#a45b2e6380dff488438abbf0d5458e35a", null ],
+    [ "mention", "classplang_1_1corpus_1_1report.html#af5a255bf00efd8c8247c9215b735b205", null ],
+    [ "insert", "classplang_1_1corpus_1_1report.html#a72b904e8c9b3fb79ea6ea213ffa38273", null ],
+    [ "update", "classplang_1_1corpus_1_1report.html#a99ca0aeb18116a66151bea32fd51aeb5", null ],
+    [ "remove", "classplang_1_1corpus_1_1report.html#a03315f8446bdeb49065d6b200de53e1c", null ],
+    [ "fail", "classplang_1_1corpus_1_1report.html#a89f8dfcda2b6d4d4b817c94a9cca5b8a", null ],
+    [ "mentioned", "classplang_1_1corpus_1_1report.html#a93a8e1ac3ff71360c602583092bc928d", null ],
+    [ "inserted", "classplang_1_1corpus_1_1report.html#a46a1fb4c144299fe4c943473725f6208", null ],
+    [ "updated", "classplang_1_1corpus_1_1report.html#aa2f1cfadb81f541cffe1ce08a1d4e00a", null ],
+    [ "removed", "classplang_1_1corpus_1_1report.html#a078efa845a5e365fd99803ce0097cae7", null ],
+    [ "failed", "classplang_1_1corpus_1_1report.html#a7103c28ae38e8bd5ac5fe6e295d05986", null ],
+    [ "scope", "classplang_1_1corpus_1_1report.html#a184ae0d5391c49f88aedf929f56dea33", null ],
+    [ "size", "classplang_1_1corpus_1_1report.html#a390c3d86b757889043dc009203391e08", null ],
+    [ "diff_size", "classplang_1_1corpus_1_1report.html#a6a69fbbe3a8e361ad6da9d3e0f8bb84f", null ],
+    [ "_mentioned", "classplang_1_1corpus_1_1report.html#a18edfa250506ae87ce4d3aa10df68061", null ],
+    [ "_inserted", "classplang_1_1corpus_1_1report.html#a7d636b994e75f5ad172cb7065b3207e6", null ],
+    [ "_updated", "classplang_1_1corpus_1_1report.html#a0e90bf8fb602012c03289ce58c5051fd", null ],
+    [ "_removed", "classplang_1_1corpus_1_1report.html#ae4948c496b8ab19f3da5956d96689ec0", null ],
+    [ "_failed", "classplang_1_1corpus_1_1report.html#a402e52a9a4e3bc3deb5adbce23740c70", null ],
+    [ "_scope", "classplang_1_1corpus_1_1report.html#a8cf5af4f73d48d066d244178d1c685ff", null ]
+];

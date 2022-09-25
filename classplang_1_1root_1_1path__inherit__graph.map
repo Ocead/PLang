@@ -1,0 +1,6 @@
+<map id="plang::root::path" name="plang::root::path">
+<area shape="rect" id="node1" title="A node in the corpus&#39; path tree." alt="" coords="181,78,297,105"/>
+<area shape="rect" id="node2" href="$classplang_1_1detail_1_1base__types_1_1persisted.html" title="Base type for persisted classes." alt="" coords="5,5,133,47"/>
+<area shape="rect" id="node3" href="$classplang_1_1detail_1_1base__types_1_1sourced.html" title="Base type for traceable classes." alt="" coords="5,71,133,112"/>
+<area shape="rect" id="node4" href="$classplang_1_1detail_1_1base__types_1_1decorated.html" title="Base type for decorated classes." alt="" coords="5,136,133,177"/>
+</map>

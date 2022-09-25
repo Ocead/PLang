@@ -1,0 +1,8 @@
+<map id="plang::corpus" name="plang::corpus">
+<area shape="rect" id="node1" title="The main interface for interacting with a corpus." alt="" coords="29,363,129,389"/>
+<area shape="rect" id="node2" href="$classplang_1_1detail_1_1corpus.html" title="Provides a basic interface to a database." alt="" coords="5,5,144,32"/>
+<area shape="rect" id="node5" href="$classplang_1_1detail_1_1path__manager.html" title="Handles database actions for paths." alt="" coords="63,80,188,121"/>
+<area shape="rect" id="node3" href="$structplang_1_1detail_1_1corpus__mixins.html" title="Base class for the corpus." alt="" coords="63,273,201,315"/>
+<area shape="rect" id="node4" href="$structplang_1_1detail_1_1mixin__base.html" title=" " alt="" coords="63,169,201,225"/>
+<area shape="rect" id="node6" title=" " alt="" coords="213,87,257,114"/>
+</map>
