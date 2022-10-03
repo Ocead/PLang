@@ -59,23 +59,35 @@ std::map<string_t, format::qualification> cli::qualification_option_map{
         {"full",   format::qualification::FULL  }
 };
 
-std::map<string_t, format::breaks> cli::breaks_option_map{
-        {"compact",  format::breaks::COMPACT },
-        {"one_line", format::breaks::ONE_LINE},
-        {"left",     format::breaks::LEFT    },
-        {"center",   format::breaks::CENTER  }
+std::map<string_t, format::indent> cli::indent_option_map{
+        {"compact",  format::indent::COMPACT },
+        {"one_line", format::indent::ONE_LINE},
+        {"left",     format::indent::LEFT    },
+        {"center",   format::indent::CENTER  }
 };
 
-std::map<string_t, enum cli::codepage> cli::codepage_option_map {
-    {"unicode", cli::codepage::UNICODE},
-    {"powerline", cli::codepage::POWERLINE}
+std::map<string_t, bool_t> cli::bool_option_map{
+        {"1",     true },
+        {"on",    true },
+        {"yes",   true },
+        {"true",  true },
+        {"false", false},
+        {"off",   false},
+        {"no",    false},
+        {"0",     false}
+};
+
+std::map<string_t, enum cli::prompt> cli::prompt_option_map {
+    {"none", cli::prompt::NONE},
+    {"unicode", cli::prompt::UNICODE},
+    {"powerline", cli::prompt::POWERLINE}
 };
 
 cli *cli::current_instance = nullptr;
 
 std::vector<string_t> cli::autocomplete_candidates{};
 
-std::vector<string_t> cli::string_to_args(string_view_t const &str) {
+std::tuple<std::vector<string_t>, std::size_t, std::size_t> cli::string_to_args(string_view_t const &str, int_t cur) {
     //From https://www.unix.com/programming/126160-building-argc-argv-style-structure-string-char.html
     bool in_token;
     bool in_container;
@@ -84,6 +96,9 @@ std::vector<string_t> cli::string_to_args(string_view_t const &str) {
     char c;
     int len;
     int i;
+    bool space;
+    int index    = -1;
+    int position = -1;
 
     std::vector<string_t> args;
     sstream_t ss;
@@ -99,6 +114,12 @@ std::vector<string_t> cli::string_to_args(string_view_t const &str) {
     for (i = 0; i < len; i++) {
         c = str[i];
 
+        if (i == cur) {
+            index = args.size();
+            ss.seekp(0, std::ios::end);
+            position = ss.tellg() / sizeof(string_t::value_type);
+        }
+
         switch (c) {
             /* handle whitespace */
             case ' ':
@@ -108,14 +129,18 @@ std::vector<string_t> cli::string_to_args(string_view_t const &str) {
 
                 if (in_container) {
                     ss << c;
+                    space = false;
                     continue;
                 }
 
                 if (escaped) {
                     escaped = false;
                     ss << c;
+                    space = false;
                     continue;
                 }
+
+                if (ss.str().empty()) { space = true; }
 
                 /* if reached here, we're at end of token */
                 in_token = false;
@@ -132,6 +157,7 @@ std::vector<string_t> cli::string_to_args(string_view_t const &str) {
 
                 if (escaped) {
                     ss << c;
+                    space   = false;
                     escaped = false;
                     continue;
                 }
@@ -154,6 +180,7 @@ std::vector<string_t> cli::string_to_args(string_view_t const &str) {
                         continue;
                     } else {
                         ss << c;
+                        space = false;
                         continue;
                     }
                 }
@@ -175,11 +202,13 @@ std::vector<string_t> cli::string_to_args(string_view_t const &str) {
 
                 if (in_container && str[i + 1] != container_start) {
                     ss << c;
+                    space = false;
                     continue;
                 }
 
                 if (escaped) {
                     ss << c;
+                    space = false;
                     continue;
                 }
 
@@ -190,6 +219,7 @@ std::vector<string_t> cli::string_to_args(string_view_t const &str) {
                 if (!in_token) { in_token = true; }
 
                 ss << c;
+                space = false;
         }
     }
 
@@ -203,7 +233,11 @@ std::vector<string_t> cli::string_to_args(string_view_t const &str) {
         ss.str(string_t());
     }//argv_token_finish();
 
-    return args;
+    if (index != -1 && position != -1) {
+        return {args, index, position};
+    } else {
+        return {args, args.size(), 0};
+    }
 }
 
 char **cli::completion_function(const char *text, int start, int end) {
@@ -211,21 +245,40 @@ char **cli::completion_function(const char *text, int start, int end) {
     string_view_t view{rl_line_buffer};
 
     //language=regexp
-    static std::regex regex{R"(^[\s\t]*:[\w]*)"};
+    static std::regex regex{R"(^[\s\t]*:\w*)"};
     if (auto it = std::regex_iterator(view.begin(), view.end(), regex); it != decltype(it)()) {
         auto command = it->str().substr(1);
-
-        auto com = current_instance->completers.find(command);
-        if (com != current_instance->completers.end()) {
-            auto spos                    = view.find(' ') + 1;
-            cli::autocomplete_candidates = com->second(current_instance->corpus ? &*(current_instance->corpus)
-                                                                                : nullptr,
-                                                       spos != 0 ? view.substr(spos) : string_view_t(),
-                                                       start - spos,
-                                                       end - spos);
+        if (command.size() == view.size() - 1) {
+            if (!command.empty()) {
+                std::vector<string_t> candidates;
+                for (auto const &[k, v] : current_instance->commands) {
+                    if (k.rfind(command, 0) == 0) { candidates.push_back(k); }
+                }
+                cli::autocomplete_candidates = candidates;
+            } else {
+                std::vector<string_t> candidates;
+                candidates.reserve(current_instance->commands.size());
+                std::transform(current_instance->commands.begin(),
+                               current_instance->commands.end(),
+                               std::back_inserter(candidates),
+                               [](auto const &p) -> string_t { return ":" + std::get<0>(p); });
+                cli::autocomplete_candidates = candidates;
+            }
         } else {
-            cli::autocomplete_candidates.clear();
+            auto com = current_instance->completers.find(command);
+            if (com != current_instance->completers.end()) {
+                auto spos                    = view.find(' ') + 1;
+                cli::autocomplete_candidates = com->second(current_instance->corpus ? &*(current_instance->corpus)
+                                                                                    : nullptr,
+                                                           spos != 0 ? view.substr(spos) : string_view_t(),
+                                                           start - spos,
+                                                           end - spos);
+            } else {
+                cli::autocomplete_candidates.clear();
+            }
         }
+    } else {
+        cli::autocomplete_candidates.clear();
     }
     return rl_completion_matches(text, cli::candidate_generator);
 }
@@ -276,11 +329,11 @@ void cli::check_corpus() const {
 }
 
 void cli::set_format() {
-    corpus->set_format(format);
+    corpus->set_format(options.format);
 }
 
 class format cli::get_prompt_format() const {
-    auto prompt_format = format;
+    auto prompt_format = options.format;
     prompt_format.set_output(format::output::READLINE);
     return prompt_format;
 }
@@ -292,7 +345,7 @@ void cli::set_scope(std::optional<path> _scope) {
                                              format::enrich::PLAIN,
                                              format::detail::EXPLICIT_REF,
                                              format::qualification::FULL,
-                                             format::breaks::ONE_LINE));
+                                             format::indent::ONE_LINE));
 }
 
 bool_t cli::prompt_yes_no(string_t const &base_prompt) const {
@@ -326,63 +379,77 @@ int_t cli::_option(class corpus *, std::vector<string_t> const &args) {
         case 2: {
             switch (fnv1a_32(args[0].c_str(), args[0].size())) {
                 case "output"_hash: {
-                    format.set_output(output_option_map[args[1]]);
+                    options.format.set_output(output_option_map[args[1]]);
                     break;
                 }
                 case "enrich"_hash: {
-                    format.set_enrich(enrich_option_map[args[1]]);
+                    options.format.set_enrich(enrich_option_map[args[1]]);
                     break;
                 }
                 case "detail"_hash: {
-                    format.set_detail(detail_option_map[args[1]]);
+                    options.format.set_detail(detail_option_map[args[1]]);
                     break;
                 }
                 case "qualification"_hash: {
-                    format.set_qualification(qualification_option_map[args[1]]);
+                    options.format.set_qualification(qualification_option_map[args[1]]);
                     break;
                 }
-                case "breaks"_hash: {
-                    format.set_breaks(breaks_option_map[args[1]]);
+                case "indent"_hash: {
+                    options.format.set_indent(indent_option_map[args[1]]);
                     break;
                 }
-                case "codepage"_hash: {
-                    codepage = codepage_option_map[args[1]];
+                case "prompt"_hash: {
+                    options.prompt = prompt_option_map[args[1]];
+                }
+                case "implicit"_hash: {
+                    options.implicit = bool_option_map[args[1]];
+                }
+                case "strict"_hash: {
+                    options.strict = bool_option_map[args[1]];
                 }
                 default:
                     break;
             }
-            if (corpus.has_value()) { corpus->set_format(format); }
+            if (corpus.has_value()) { corpus->set_format(options.format); }
         }
         case 1: {
             switch (fnv1a_32(args[0].c_str(), args[0].size())) {
                 case "output"_hash: {
                     auto map = invert(output_option_map);
-                    std::cout << "output=" << map[format.get_output()] << '\n';
+                    std::cout << "output=" << map[options.format.get_output()] << '\n';
                     break;
                 }
                 case "enrich"_hash: {
                     auto map = invert(enrich_option_map);
-                    std::cout << "enrich=" << map[format.get_enrich()] << '\n';
+                    std::cout << "enrich=" << map[options.format.get_enrich()] << '\n';
                     break;
                 }
                 case "detail"_hash: {
                     auto map = invert(detail_option_map);
-                    std::cout << "detail=" << map[format.get_detail()] << '\n';
+                    std::cout << "detail=" << map[options.format.get_detail()] << '\n';
                     break;
                 }
                 case "qualification"_hash: {
                     auto map = invert(qualification_option_map);
-                    std::cout << "qualification=" << map[format.get_qualification()] << '\n';
+                    std::cout << "qualification=" << map[options.format.get_qualification()] << '\n';
                     break;
                 }
-                case "breaks"_hash: {
-                    auto map = invert(breaks_option_map);
-                    std::cout << "breaks=" << map[format.get_breaks()] << '\n';
+                case "indent"_hash: {
+                    auto map = invert(indent_option_map);
+                    std::cout << "indent=" << map[options.format.get_indent()] << '\n';
                     break;
                 }
-                case "codepage"_hash: {
-                    auto map = invert(codepage_option_map);
-                    std::cout << "codepage=" << map[codepage] << '\n';
+                case "prompt"_hash: {
+                    auto map = invert(prompt_option_map);
+                    std::cout << "prompt=" << map[options.prompt] << '\n';
+                    break;
+                }
+                case "implicit"_hash: {
+                    std::cout << "implicit=" << (options.implicit ? "true" : "false") << '\n';
+                    break;
+                }
+                case "strict"_hash: {
+                    std::cout << "strict=" << (options.strict ? "true" : "false") << '\n';
                     break;
                 }
                 default:
@@ -396,6 +463,63 @@ int_t cli::_option(class corpus *, std::vector<string_t> const &args) {
     }
 
     return 0;
+}
+
+std::vector<string_t> cli::_option_complete(class corpus *, const string_view_t &str, uint_t start, uint_t end) {
+    auto [args, i, pos] = string_to_args(str, start);
+
+    std::vector<string_t> values;
+    std::vector<string_t> candidates;
+
+    if (i == 0) {
+        values = {"output", "enrich", "detail", "qualification", "indent", "implicit", "strict"};
+    } else if (i == 1) {
+        switch (fnv1a_32(args[0].c_str(), args[0].size())) {
+            case "output"_hash: {
+                for (auto const &p : output_option_map) { values.emplace_back(p.first); };
+                break;
+            }
+            case "enrich"_hash: {
+                for (auto const &p : enrich_option_map) { values.emplace_back(p.first); };
+                break;
+            }
+            case "detail"_hash: {
+                for (auto const &p : detail_option_map) { values.emplace_back(p.first); };
+                break;
+            }
+            case "qualification"_hash: {
+                for (auto const &p : qualification_option_map) { values.emplace_back(p.first); };
+                break;
+            }
+            case "indent"_hash: {
+                for (auto const &p : indent_option_map) { values.emplace_back(p.first); };
+                break;
+            }
+            case "prompt"_hash: {
+                for (auto const &p : prompt_option_map) { values.emplace_back(p.first); };
+                break;
+            }
+            case "implicit"_hash: {
+                for (auto const &p : bool_option_map) { values.emplace_back(p.first); };
+                break;
+            }
+            case "strict"_hash: {
+                for (auto const &p : bool_option_map) { values.emplace_back(p.first); };
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    if (i < args.size()) {
+        for (auto const &o : values) {
+            if (o.rfind(args[i], 0) == 0) { candidates.push_back(o); }
+        }
+        return candidates;
+    } else {
+        return values;
+    }
 }
 
 int_t cli::_info(class corpus *, string_view_t const &) {
@@ -416,7 +540,7 @@ int_t cli::_new(class corpus *, string_view_t const &args) {
         if (args.empty()) {
             corpus.emplace();
             set_scope(corpus->fetch<path>(corpus->get_root_path_id()));
-            corpus->set_format(format);
+            corpus->set_format(options.format);
 
             return 0;
         } else {
@@ -425,7 +549,7 @@ int_t cli::_new(class corpus *, string_view_t const &args) {
             if (path.has_filename()) {
                 corpus.emplace(path);
                 set_scope(corpus->fetch<class path>(corpus->get_root_path_id()));
-                corpus->set_format(format);
+                corpus->set_format(options.format);
 
                 return 0;
             } else {
@@ -443,7 +567,7 @@ int_t cli::_open(class corpus *_, std::vector<string_t> const &args) {
         if (args.empty()) {
             corpus.emplace();
             set_scope(corpus->fetch<path>(corpus->get_root_path_id()));
-            corpus->set_format(format);
+            corpus->set_format(options.format);
 
             return 0;
         } else {
@@ -452,7 +576,7 @@ int_t cli::_open(class corpus *_, std::vector<string_t> const &args) {
             if (path.has_filename()) {
                 corpus.emplace(path);
                 set_scope(corpus->fetch<class path>(corpus->get_root_path_id()));
-                corpus->set_format(format);
+                corpus->set_format(options.format);
                 file = path;
 
                 return 0;
@@ -501,7 +625,7 @@ int_t cli::_save(class corpus *, string_view_t const &args) {
                 corpus->backup(db);
                 corpus = db;
                 scope  = corpus->fetch<class path>(corpus->get_root_path_id());
-                corpus->set_format(format);
+                corpus->set_format(options.format);
                 file = p;
 
                 unsaved = false;
@@ -582,8 +706,8 @@ int_t cli::_remove(class corpus *, string_view_t const &args) {
     if (corpus.has_value()) {
         auto result = corpus->ref(string_t(args), *scope);
         if (result.has_result()) {
-            auto repr = corpus->remove(result.entry());
-            if (!repr.empty()) {
+            auto [repr, action] = corpus->remove(result.entry());
+            if (action == action::REMOVE) {
                 unsaved = true;
                 return 0;
             } else {
@@ -687,25 +811,45 @@ int_t cli::handle_plang(string_view_t const &view) {
                                                  format::enrich::PLAIN,
                                                  format::detail::EXPLICIT_REF,
                                                  format::qualification::FULL,
-                                                 format::breaks::ONE_LINE));
+                                                 format::indent::ONE_LINE));
     }
 
     return 0;
 }
 
+int_t cli::handle_input(string_view_t const &view) {
+    //language=regexp
+    static std::regex regex{R"(^[\s\t]*:\w*)"};
+    if (auto it = std::regex_iterator(view.begin(), view.end(), regex); it != decltype(it)()) {
+        auto command = it->str().substr(1);
+
+        auto com = commands.find(command);
+        if (com != commands.end()) {
+            auto spos = view.find(' ') + 1;
+            try {
+                return com->second(corpus ? &*corpus : nullptr, spos != 0 ? view.substr(spos) : string_view_t());
+            } catch (std::exception const &e) { std::cerr << e.what() << std::endl; }
+        } else {
+            //TODO: throw unknown_command_error
+        }
+
+    } else if (corpus.has_value()) {
+        handle_plang(view);
+    }
+
+    return 1;
+}
+
 cli::cli()
-    : corpus(),
-      scope(),
-      commands(),
-      help(),
-      dict(en()),
-      format(format::output::ANSI,
-             format::enrich::RICH,
-             format::detail::FULL,
-             format::qualification::FULL,
-             format::breaks::LEFT),
-      unsaved(false),
-      stop() {
+    : options{
+              .format = {format::output::ANSI,
+                         format::enrich::RICH,
+                         format::detail::FULL,
+                         format::qualification::FULL,
+                         format::indent::LEFT},
+              .prompt = prompt::POWERLINE
+},
+      corpus(), scope(), commands(), help(), dict(en()), unsaved(false), stop() {
 
     rl_initialize();
     rl_variable_bind("horizontal-scroll-mode", "off");
@@ -724,7 +868,8 @@ cli::cli()
     register_command(
             "p",
             [this](plang::corpus *c, std::vector<string_t> const &a) { return _option(c, a); },
-            "Get/Set options");
+            "Get/Set options",
+            [this](auto... args) { return _option_complete(args...); });
     register_command(
             "i",
             [this](plang::corpus *c, string_view_t const &a) { return _info(c, a); },
@@ -810,7 +955,7 @@ bool_t cli::register_command(string_t command,
                              string_t description,
                              cmd_complete_func_t completor) {
     auto argv_func = [func](plang::corpus *c, string_view_t const &args) {
-        auto argv = cli::string_to_args(args);
+        auto [argv, argn, argp] = cli::string_to_args(args);
         return func(c, argv);
     };
     return register_command(command, argv_func, description, completor);
@@ -828,72 +973,81 @@ bool_t cli::unregister_command(plang::column_types::string_t command) {
 }
 
 int_t cli::prompt() {
-    format::style file_style{.text       = format::style::color::WHITE,
-                             .background = format::style::color::MAGENTA,
-                             .font       = format::style::font::BOLD};
-    format::style file_arrow_style{.text = format::style::color::MAGENTA};
+    string_t prompt;
 
-    format::style path_style{.text       = format::style::color::WHITE,
-                             .background = format::style::color::BLUE,
-                             .font       = format::style::font::BOLD};
-    format::style path_delim_style{.text = format::style::color::CYAN, .background = format::style::color::BLUE};
-    format::style path_arrow_style{.text = format::style::color::BLUE};
+    if (options.prompt == prompt::POWERLINE) {
+        format::style file_style{.text       = format::style::color::WHITE,
+                                 .background = format::style::color::MAGENTA,
+                                 .font       = format::style::font::BOLD};
+        format::style file_arrow_style{.text = format::style::color::MAGENTA};
 
-    auto prompt_format = get_prompt_format();
+        auto prompt_format = get_prompt_format();
 
-    static const string_t name{"PLang"};
+        static const string_t name{"PLang"};
 
-    auto prompt = prompt_format(" " + name + " ", file_style);
+        prompt = prompt_format(" " + name + " ", file_style);
 
-    if (scope.has_value()) {
-        file_arrow_style.background = format::style::color::BLUE;
-        prompt += prompt_format("\uE0B0 ", file_arrow_style);
+        if (scope.has_value()) {
+            file_arrow_style.background = format::style::color::BLUE;
+            prompt += prompt_format("\uE0B0 ", file_arrow_style);
 
-        auto prompt_scope_path = scope_path;
+            auto prompt_scope_path = scope_path;
 
-        if (prompt_scope_path.size() > 1) {
-            string_t::size_type n = 0;
-            prompt_scope_path     = prompt_scope_path.substr(1);
-            while ((n = prompt_scope_path.find('.', n)) != string_t::npos) {
-                char delim[] = " \001\033[38;5;6m\002\uE0B1\001\033[38;5;15m\002 ";
-                prompt_scope_path.replace(n, 1, delim);
-                n += sizeof(delim);
+            if (prompt_scope_path.size() > 1) {
+                string_t::size_type n = 0;
+                prompt_scope_path     = prompt_scope_path.substr(1);
+                while ((n = prompt_scope_path.find('.', n)) != string_t::npos) {
+                    char delim[] = " \001\033[38;5;6m\002\uE0B1\001\033[38;5;15m\002 ";
+                    prompt_scope_path.replace(n, 1, delim);
+                    n += sizeof(delim);
+                }
             }
+
+            format::style path_style{.text       = format::style::color::WHITE,
+                                     .background = format::style::color::BLUE,
+                                     .font       = format::style::font::BOLD};
+            format::style path_delim_style{.text       = format::style::color::CYAN,
+                                           .background = format::style::color::BLUE};
+            format::style path_arrow_style{.text = format::style::color::BLUE};
+
+            prompt += prompt_format(prompt_scope_path + ' ', path_style);
+            prompt += prompt_format("\uE0B0 ", path_arrow_style);
+        } else {
+            prompt += prompt_format("\uE0B0 ", file_arrow_style);
+        }
+    } else if (options.prompt == prompt::UNICODE) {
+        format::style file_style{.text = format::style::color::MAGENTA, .font = format::style::font::BOLD};
+        auto prompt_format = get_prompt_format();
+        static const string_t name{"PLang"};
+
+        prompt = prompt_format(name, file_style);
+
+        if (scope.has_value()) {
+            format::style path_style{.text = format::style::color::BRIGHT_BLUE, .font = format::style::font::BOLD};
+            prompt += ' ' + options.format(scope_path, path_style);
         }
 
-        prompt += prompt_format(prompt_scope_path + ' ', path_style);
-        prompt += prompt_format("\uE0B0 ", path_arrow_style);
-    } else {
-        prompt += prompt_format("\uE0B0 ", file_arrow_style);
+        prompt += "> ";
     }
 
-
-    char *buffer = readline(prompt.c_str());
-    if (buffer) {
-        string_view_t view{buffer};
-
-        add_history(buffer);
-
-        //language=regexp
-        static std::regex regex{R"(^[\s\t]*:[\w]*)"};
-        if (auto it = std::regex_iterator(view.begin(), view.end(), regex); it != decltype(it)()) {
-            auto command = it->str().substr(1);
-
-            auto com = commands.find(command);
-            if (com != commands.end()) {
-                auto spos = view.find(' ') + 1;
-                try {
-                    return com->second(corpus ? &*corpus : nullptr, spos != 0 ? view.substr(spos) : string_view_t());
-                } catch (std::exception const &e) { std::cerr << e.what() << std::endl; }
-            } else {
-                //TODO: throw unknown_command_error
-            }
-
-        } else if (corpus.has_value()) {
-            handle_plang(buffer);
+    if (options.prompt != prompt::NONE) {
+        char *buffer;
+        buffer = readline(prompt.c_str());
+        if (buffer) {
+            string_view_t view{buffer};
+            add_history(buffer);
+            handle_input(view);
+            free(buffer);
         }
+    } else {
+        string_t buffer;
+        std::getline(std::cin, buffer, '\n');
 
-        free(buffer);
+        if (!buffer.empty()) {
+            string_view_t view{buffer};
+            add_history(buffer.c_str());
+            handle_input(view);
+        }
     }
 
     return -1;

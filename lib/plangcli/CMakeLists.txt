@@ -25,6 +25,10 @@ add_executable(plangcli
 add_executable(plang::plangcli ALIAS plangcli)
 set_target_properties(plangcli PROPERTIES
         OUTPUT_NAME plang)
+set_property(TARGET plangcli
+        APPEND
+        PROPERTY ADDITIONAL_CLEAN_FILES "coverage/*"
+        )
 target_include_directories(plangcli
         PUBLIC ${PROJECT_INCLUDE_DIR})
 target_link_libraries(plangcli
