@@ -35,7 +35,7 @@ in narrative works, regardless of form or topic.
 
 ### Requirements
 
-- [SQLite3](https://www.sqlite.org/index.html) 3.38.0 or higher
+- [SQLite3](https://www.sqlite.org/index.html) 3.36.0 or higher
 
 ## Building
 
@@ -44,7 +44,7 @@ in narrative works, regardless of form or topic.
 - A C++17-compatible toolchain (currently tested on [GCC](https://gcc.gnu.org/) and [Clang](https://clang.llvm.org/))
 - [xxd](https://linux.die.net/man/1/xxd)
 - [CMake](https://cmake.org/) 3.13 or higher
-- [SQLite3](https://www.sqlite.org/index.html) 3.38.0 or higher
+- [SQLite3](https://www.sqlite.org/index.html) 3.36.0 or higher
 - [antlr4](https://github.com/antlr/antlr4) (included as submodule)
 
 #### Additionally required for building the command line:

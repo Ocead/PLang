@@ -57,7 +57,7 @@ add_subdirectory(${CMAKE_HOME_DIRECTORY}/deps/Catch2 ${CMAKE_BINARY_DIR}/libplan
 # region sqlite_orm
 # set(SQLITE_ORM_ENABLE_CXX_17 ON)
 # add_subdirectory(${CMAKE_HOME_DIRECTORY}/deps/sqlite_orm ${CMAKE_BINARY_DIR}/libplang/sqlite_orm EXCLUDE_FROM_ALL)
-find_package(SQLite3 3.38.0 REQUIRED)
+find_package(SQLite3 3.36.0 REQUIRED)
 # endregion
 
 set(CMAKE_CURRENT_HOME_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})

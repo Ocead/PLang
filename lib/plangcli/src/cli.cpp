@@ -1036,8 +1036,9 @@ int_t cli::prompt() {
         if (buffer) {
             string_view_t view{buffer};
             add_history(buffer);
-            handle_input(view);
+            int result = handle_input(view);
             free(buffer);
+            return result;
         }
     } else {
         string_t buffer;
@@ -1046,7 +1047,7 @@ int_t cli::prompt() {
         if (!buffer.empty()) {
             string_view_t view{buffer};
             add_history(buffer.c_str());
-            handle_input(view);
+            return handle_input(view);
         }
     }
 

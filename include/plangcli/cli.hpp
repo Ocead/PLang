@@ -520,7 +520,7 @@ Sets the order for plot points.
 
 namespace plang {
 
-    /// Core class for the interactive PLang command line
+    /// \brief Core class for the interactive PLang command line
     class cli {
 
         /// The type of prompt being used by the command line
@@ -583,7 +583,7 @@ namespace plang {
         /// \return Array of candidates
         static char **completion_function(const char *text, int start, int end);
 
-        /// Global callback function for Readline autocompletion matches
+        /// \brief Global callback function for Readline autocompletion matches
         /// \param text
         /// \param state
         /// \return

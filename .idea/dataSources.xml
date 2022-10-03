@@ -2,10 +2,10 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="Runtime Test Database" uuid="c2f1ea4d-e580-4ccb-8f3f-c236b0efabbf">
-      <driver-ref>06ef79ba-8418-4b11-a6f9-dc605b78ef8a</driver-ref>
+      <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\Johannes\Source\PLang\build\cmake-build-debug-clang\plangcli\test.plangdb</jdbc-url>
+      <jdbc-url>jdbc:sqlite:./build/cmake-build-debug-clang/plangcli/test.plangdb</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <driver-properties>
         <property name="foreign_keys" value="true" />
