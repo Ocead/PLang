@@ -142,14 +142,16 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-types" name="pri-types"></a>
 Private Types</h2></td></tr>
-<tr class="memitem:aa3f880a592bc079e938bcf7c4b8b48cc"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#aa3f880a592bc079e938bcf7c4b8b48cc">codepage</a> { <br />
-&#160;&#160;<a class="el" href="classplang_1_1cli.html#aa3f880a592bc079e938bcf7c4b8b48cca6952a4fad7a08ec6baf4da1d589a2753">UNICODE</a>
+<tr class="memitem:a1d7fe7c5ff49a7c60714cd6f182a2474"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474">prompt</a> { <br />
+&#160;&#160;<a class="el" href="classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474ab50339a10e1de285ac99d4c3990b8693">NONE</a>
 , <br />
-&#160;&#160;<a class="el" href="classplang_1_1cli.html#aa3f880a592bc079e938bcf7c4b8b48cca188e83d68918de3377866cb01f5d1b7c">POWERLINE</a>
+&#160;&#160;<a class="el" href="classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474a6952a4fad7a08ec6baf4da1d589a2753">UNICODE</a>
+, <br />
+&#160;&#160;<a class="el" href="classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474a188e83d68918de3377866cb01f5d1b7c">POWERLINE</a>
 <br />
  }</td></tr>
-<tr class="memdesc:aa3f880a592bc079e938bcf7c4b8b48cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of codepage used by the terminal emulator.  <a href="classplang_1_1cli.html#aa3f880a592bc079e938bcf7c4b8b48cc">More...</a><br /></td></tr>
-<tr class="separator:aa3f880a592bc079e938bcf7c4b8b48cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a1d7fe7c5ff49a7c60714cd6f182a2474"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of prompt being used by the command line.  <a href="classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474">More...</a><br /></td></tr>
+<tr class="separator:a1d7fe7c5ff49a7c60714cd6f182a2474"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72096272b354e261568e286c22665cd4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a72096272b354e261568e286c22665cd4">raw_cmd_func_t</a> = std::function&lt; <a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a>(<a class="el" href="classplang_1_1corpus.html">plang::corpus</a> *, <a class="el" href="namespaceplang_1_1column__types.html#a99e4426ac6a02da0868e26ded6e0e922">string_view_t</a> const &amp;)&gt;</td></tr>
 <tr class="memdesc:a72096272b354e261568e286c22665cd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback type expecting a string.  <a href="classplang_1_1cli.html#a72096272b354e261568e286c22665cd4">More...</a><br /></td></tr>
 <tr class="separator:a72096272b354e261568e286c22665cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,12 +172,14 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a767a1d20d55d51c55947df570f64cd4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a390c3c09ab5bfcb9030c8b33e229a1b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a390c3c09ab5bfcb9030c8b33e229a1b9">set_scope</a> (std::optional&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt; <a class="el" href="classplang_1_1cli.html#a45bc0ff1e9f864b38137b13ad8857a31">scope</a>)</td></tr>
 <tr class="separator:a390c3c09ab5bfcb9030c8b33e229a1b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a632d6f6c7f54191884831de3d65a97e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a632d6f6c7f54191884831de3d65a97e5">prompt_yes_no</a> (<a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> const &amp;<a class="el" href="classplang_1_1cli.html#ad7ef0a7c6ffef206a31328bd1d69f562">prompt</a>) const</td></tr>
+<tr class="memitem:a632d6f6c7f54191884831de3d65a97e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a632d6f6c7f54191884831de3d65a97e5">prompt_yes_no</a> (<a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> const &amp;<a class="el" href="classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474">prompt</a>) const</td></tr>
 <tr class="separator:a632d6f6c7f54191884831de3d65a97e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae94904a6d2b6b8f21d2683a8087f928"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#aae94904a6d2b6b8f21d2683a8087f928">_help</a> (class <a class="el" href="classplang_1_1corpus.html">corpus</a> *, <a class="el" href="namespaceplang_1_1column__types.html#a99e4426ac6a02da0868e26ded6e0e922">string_view_t</a> const &amp;)</td></tr>
 <tr class="separator:aae94904a6d2b6b8f21d2683a8087f928"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57b2c70b93fd7ff25897280e9fc4a848"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a57b2c70b93fd7ff25897280e9fc4a848">_option</a> (class <a class="el" href="classplang_1_1corpus.html">corpus</a> *, std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;)</td></tr>
 <tr class="separator:a57b2c70b93fd7ff25897280e9fc4a848"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7427e02160b06980a6d715737ffb1e95"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a7427e02160b06980a6d715737ffb1e95">_option_complete</a> (class <a class="el" href="classplang_1_1corpus.html">corpus</a> *, <a class="el" href="namespaceplang_1_1column__types.html#a99e4426ac6a02da0868e26ded6e0e922">string_view_t</a> const &amp;, <a class="el" href="namespaceplang_1_1column__types.html#ac20d58de6ac4d2cc7f72bec19d78500e">uint_t</a> start, <a class="el" href="namespaceplang_1_1column__types.html#ac20d58de6ac4d2cc7f72bec19d78500e">uint_t</a> end)</td></tr>
+<tr class="separator:a7427e02160b06980a6d715737ffb1e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7367b949fd61a0cd624b8e85793334aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a7367b949fd61a0cd624b8e85793334aa">_info</a> (class <a class="el" href="classplang_1_1corpus.html">corpus</a> *, <a class="el" href="namespaceplang_1_1column__types.html#a99e4426ac6a02da0868e26ded6e0e922">string_view_t</a> const &amp;)</td></tr>
 <tr class="separator:a7367b949fd61a0cd624b8e85793334aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad45992570e8b42dded85aa97d35f991e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#ad45992570e8b42dded85aa97d35f991e">_quit</a> (class <a class="el" href="classplang_1_1corpus.html">corpus</a> *, <a class="el" href="namespaceplang_1_1column__types.html#a99e4426ac6a02da0868e26ded6e0e922">string_view_t</a> const &amp;)</td></tr>
@@ -218,11 +222,13 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:ac4ce42d6145a90bfa1b5c4b495d770a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae0dacd7e66e077dd473efd192c539a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#aae0dacd7e66e077dd473efd192c539a2">handle_plang</a> (<a class="el" href="namespaceplang_1_1column__types.html#a99e4426ac6a02da0868e26ded6e0e922">string_view_t</a> const &amp;view)</td></tr>
 <tr class="separator:aae0dacd7e66e077dd473efd192c539a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a951dc442c01042f3212db026a0f80962"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a951dc442c01042f3212db026a0f80962">handle_input</a> (<a class="el" href="namespaceplang_1_1column__types.html#a99e4426ac6a02da0868e26ded6e0e922">string_view_t</a> const &amp;view)</td></tr>
+<tr class="separator:a951dc442c01042f3212db026a0f80962"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
 Static Private Member Functions</h2></td></tr>
-<tr class="memitem:aecc9f934528a34820b66d2174a1ec7d7"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#aecc9f934528a34820b66d2174a1ec7d7">string_to_args</a> (<a class="el" href="namespaceplang_1_1column__types.html#a99e4426ac6a02da0868e26ded6e0e922">string_view_t</a> const &amp;str)</td></tr>
-<tr class="separator:aecc9f934528a34820b66d2174a1ec7d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96acf13496947a39c4afb6e541e9ea4e"><td class="memItemLeft" align="right" valign="top">static std::tuple&lt; std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt;, std::size_t, std::size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a96acf13496947a39c4afb6e541e9ea4e">string_to_args</a> (<a class="el" href="namespaceplang_1_1column__types.html#a99e4426ac6a02da0868e26ded6e0e922">string_view_t</a> const &amp;str, <a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> cur=0)</td></tr>
+<tr class="separator:a96acf13496947a39c4afb6e541e9ea4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa87190f697a5721c23f3cb1476fcfb91"><td class="memItemLeft" align="right" valign="top">static char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#aa87190f697a5721c23f3cb1476fcfb91">completion_function</a> (const char *text, int start, int end)</td></tr>
 <tr class="memdesc:aa87190f697a5721c23f3cb1476fcfb91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global callback function for Readline autocomplete.  <a href="classplang_1_1cli.html#aa87190f697a5721c23f3cb1476fcfb91">More...</a><br /></td></tr>
 <tr class="separator:aa87190f697a5721c23f3cb1476fcfb91"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -233,6 +239,22 @@ Static Private Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
+<tr class="memitem:a0560bffafe7d73b5528aba4fd3b00027"><td class="memItemLeft" >struct {</td></tr>
+<tr class="memitem:a7cc006082201e442ceb6ec7559f0427b"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="classplang_1_1format.html">format</a>&#160;&#160;&#160;<a class="el" href="classplang_1_1cli.html#a514b713078bcc10bd00cf81a625dfc40">format</a></td></tr>
+<tr class="memdesc:a7cc006082201e442ceb6ec7559f0427b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set output format.  <a href="structplang_1_1cli_1_1_0d0.html#a7cc006082201e442ceb6ec7559f0427b">More...</a><br /></td></tr>
+<tr class="separator:a7cc006082201e442ceb6ec7559f0427b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86bba6ea88b502e6bc248a92aff22e65"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474">prompt</a>&#160;&#160;&#160;<a class="el" href="classplang_1_1cli.html#a87d0bbcf57e28d3f4d8024f7cabcfc14">prompt</a></td></tr>
+<tr class="memdesc:a86bba6ea88b502e6bc248a92aff22e65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assumed codepage of the output.  <a href="structplang_1_1cli_1_1_0d0.html#a86bba6ea88b502e6bc248a92aff22e65">More...</a><br /></td></tr>
+<tr class="separator:a86bba6ea88b502e6bc248a92aff22e65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57d00a48b0074d2cfe908e2003542ed9"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;&#160;&#160;<a class="el" href="classplang_1_1cli.html#a340e126e61af48da0b9696f3686a5e19">implicit</a></td></tr>
+<tr class="memdesc:a57d00a48b0074d2cfe908e2003542ed9"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>implicit</code> option for the parser  <a href="structplang_1_1cli_1_1_0d0.html#a57d00a48b0074d2cfe908e2003542ed9">More...</a><br /></td></tr>
+<tr class="separator:a57d00a48b0074d2cfe908e2003542ed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12c629ef49b449ff4c1bc1c896e26239"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;&#160;&#160;<a class="el" href="classplang_1_1cli.html#a1ea28c4f49e2dc111699d649811e6f05">strict</a></td></tr>
+<tr class="memdesc:a12c629ef49b449ff4c1bc1c896e26239"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>strict</code> option for the parser  <a href="structplang_1_1cli_1_1_0d0.html#a12c629ef49b449ff4c1bc1c896e26239">More...</a><br /></td></tr>
+<tr class="separator:a12c629ef49b449ff4c1bc1c896e26239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0560bffafe7d73b5528aba4fd3b00027"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a0560bffafe7d73b5528aba4fd3b00027">options</a></td></tr>
+<tr class="memdesc:a0560bffafe7d73b5528aba4fd3b00027"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains options to control the command line and the parser.  <a href="classplang_1_1cli.html#a0560bffafe7d73b5528aba4fd3b00027">More...</a><br /></td></tr>
+<tr class="separator:a0560bffafe7d73b5528aba4fd3b00027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fbb93633c81f39bee2567a074fe79f1"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::filesystem::path &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a8fbb93633c81f39bee2567a074fe79f1">file</a></td></tr>
 <tr class="memdesc:a8fbb93633c81f39bee2567a074fe79f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Path to current file.  <a href="classplang_1_1cli.html#a8fbb93633c81f39bee2567a074fe79f1">More...</a><br /></td></tr>
 <tr class="separator:a8fbb93633c81f39bee2567a074fe79f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -255,12 +277,6 @@ Private Attributes</h2></td></tr>
 <tr class="separator:aa85c2c688aa9e20056927ae4938cd0e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3603a77e722cfc85b2019951f81f6762"><td class="memItemLeft" align="right" valign="top">std::reference_wrapper&lt; const <a class="el" href="namespaceplang.html#a5b17d0700f730d82718e7dae69ca3e31">dict_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a3603a77e722cfc85b2019951f81f6762">dict</a></td></tr>
 <tr class="separator:a3603a77e722cfc85b2019951f81f6762"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a514b713078bcc10bd00cf81a625dfc40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1format.html">format</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a514b713078bcc10bd00cf81a625dfc40">format</a></td></tr>
-<tr class="memdesc:a514b713078bcc10bd00cf81a625dfc40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set output format.  <a href="classplang_1_1cli.html#a514b713078bcc10bd00cf81a625dfc40">More...</a><br /></td></tr>
-<tr class="separator:a514b713078bcc10bd00cf81a625dfc40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b2e16ec0078d1cad08cb4d6d4a3f31d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1cli.html#aa3f880a592bc079e938bcf7c4b8b48cc">codepage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a3b2e16ec0078d1cad08cb4d6d4a3f31d">codepage</a></td></tr>
-<tr class="memdesc:a3b2e16ec0078d1cad08cb4d6d4a3f31d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assumed codepage of the output.  <a href="classplang_1_1cli.html#a3b2e16ec0078d1cad08cb4d6d4a3f31d">More...</a><br /></td></tr>
-<tr class="separator:a3b2e16ec0078d1cad08cb4d6d4a3f31d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4d695c4fe55357572e41661bb8f6198"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#af4d695c4fe55357572e41661bb8f6198">unsaved</a></td></tr>
 <tr class="memdesc:af4d695c4fe55357572e41661bb8f6198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set to <code>true</code>, after each execution of PLang code that changed the corpus.  <a href="classplang_1_1cli.html#af4d695c4fe55357572e41661bb8f6198">More...</a><br /></td></tr>
 <tr class="separator:af4d695c4fe55357572e41661bb8f6198"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -287,10 +303,12 @@ Static Private Attributes</h2></td></tr>
 <tr class="separator:a31f8bf9b315616adb1234f7e1a84e57e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5fdab7eea4b2eff51c3df9cb9045f63"><td class="memItemLeft" align="right" valign="top">static std::map&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="classplang_1_1format.html#a24332e45875807418391c4ba23ce3235">format::qualification</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#ab5fdab7eea4b2eff51c3df9cb9045f63">qualification_option_map</a></td></tr>
 <tr class="separator:ab5fdab7eea4b2eff51c3df9cb9045f63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accc213882712e84ceac37ea9099f9d7f"><td class="memItemLeft" align="right" valign="top">static std::map&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="classplang_1_1format.html#a9f4e0c0a9b4a7ce38e84e64b67df7ef7">format::breaks</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#accc213882712e84ceac37ea9099f9d7f">breaks_option_map</a></td></tr>
-<tr class="separator:accc213882712e84ceac37ea9099f9d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfc1932acf45742dc9083e5948b1be26"><td class="memItemLeft" align="right" valign="top">static std::map&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="classplang_1_1cli.html#aa3f880a592bc079e938bcf7c4b8b48cc">codepage</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#adfc1932acf45742dc9083e5948b1be26">codepage_option_map</a></td></tr>
-<tr class="separator:adfc1932acf45742dc9083e5948b1be26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89bcfa4f2679b108bced07d73471cfac"><td class="memItemLeft" align="right" valign="top">static std::map&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="classplang_1_1format.html#aad88393584872bbce2e74ef171e8fb92">format::indent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a89bcfa4f2679b108bced07d73471cfac">indent_option_map</a></td></tr>
+<tr class="separator:a89bcfa4f2679b108bced07d73471cfac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3af44d2d0456d06af396d14924c86bc6"><td class="memItemLeft" align="right" valign="top">static std::map&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a3af44d2d0456d06af396d14924c86bc6">bool_option_map</a></td></tr>
+<tr class="separator:a3af44d2d0456d06af396d14924c86bc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81566f4d17b8512d6cbe7b750b6cde14"><td class="memItemLeft" align="right" valign="top">static std::map&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474">prompt</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a81566f4d17b8512d6cbe7b750b6cde14">prompt_option_map</a></td></tr>
+<tr class="separator:a81566f4d17b8512d6cbe7b750b6cde14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbc72f3bb2bef8638058168c7befa384"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classplang_1_1cli.html">cli</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#adbc72f3bb2bef8638058168c7befa384">current_instance</a></td></tr>
 <tr class="separator:adbc72f3bb2bef8638058168c7befa384"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19fb40a61d60595ba4aec51e42371f93"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1cli.html#a19fb40a61d60595ba4aec51e42371f93">autocomplete_candidates</a></td></tr>
@@ -370,8 +388,8 @@ Static Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="aa3f880a592bc079e938bcf7c4b8b48cc" name="aa3f880a592bc079e938bcf7c4b8b48cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3f880a592bc079e938bcf7c4b8b48cc">&#9670;&nbsp;</a></span>codepage</h2>
+<a id="a1d7fe7c5ff49a7c60714cd6f182a2474" name="a1d7fe7c5ff49a7c60714cd6f182a2474"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d7fe7c5ff49a7c60714cd6f182a2474">&#9670;&nbsp;</a></span>prompt</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -380,7 +398,7 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum class <a class="el" href="classplang_1_1cli.html#aa3f880a592bc079e938bcf7c4b8b48cc">plang::cli::codepage</a></td>
+          <td class="memname">enum class <a class="el" href="classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474">plang::cli::prompt</a></td>
         </tr>
       </table>
   </td>
@@ -390,11 +408,13 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The type of codepage used by the terminal emulator. </p>
+<p>The type of prompt being used by the command line. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa3f880a592bc079e938bcf7c4b8b48cca6952a4fad7a08ec6baf4da1d589a2753" name="aa3f880a592bc079e938bcf7c4b8b48cca6952a4fad7a08ec6baf4da1d589a2753"></a>UNICODE&#160;</td><td class="fielddoc"><p >Standard unicode. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1d7fe7c5ff49a7c60714cd6f182a2474ab50339a10e1de285ac99d4c3990b8693" name="a1d7fe7c5ff49a7c60714cd6f182a2474ab50339a10e1de285ac99d4c3990b8693"></a>NONE&#160;</td><td class="fielddoc"><p >No prompt. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aa3f880a592bc079e938bcf7c4b8b48cca188e83d68918de3377866cb01f5d1b7c" name="aa3f880a592bc079e938bcf7c4b8b48cca188e83d68918de3377866cb01f5d1b7c"></a>POWERLINE&#160;</td><td class="fielddoc"><p >Unicode + powerline codepoints. </p>
+<tr><td class="fieldname"><a id="a1d7fe7c5ff49a7c60714cd6f182a2474a6952a4fad7a08ec6baf4da1d589a2753" name="a1d7fe7c5ff49a7c60714cd6f182a2474a6952a4fad7a08ec6baf4da1d589a2753"></a>UNICODE&#160;</td><td class="fielddoc"><p >Standard unicode. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1d7fe7c5ff49a7c60714cd6f182a2474a188e83d68918de3377866cb01f5d1b7c" name="a1d7fe7c5ff49a7c60714cd6f182a2474a188e83d68918de3377866cb01f5d1b7c"></a>POWERLINE&#160;</td><td class="fielddoc"><p >Unicode + powerline codepoints. </p>
 </td></tr>
 </table>
 
@@ -440,8 +460,8 @@ Static Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aecc9f934528a34820b66d2174a1ec7d7" name="aecc9f934528a34820b66d2174a1ec7d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecc9f934528a34820b66d2174a1ec7d7">&#9670;&nbsp;</a></span>string_to_args()</h2>
+<a id="a96acf13496947a39c4afb6e541e9ea4e" name="a96acf13496947a39c4afb6e541e9ea4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96acf13496947a39c4afb6e541e9ea4e">&#9670;&nbsp;</a></span>string_to_args()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -450,11 +470,21 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; plang::cli::string_to_args </td>
+          <td class="memname">static std::tuple&lt; std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt;, std::size_t, std::size_t &gt; plang::cli::string_to_args </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a99e4426ac6a02da0868e26ded6e0e922">string_view_t</a> const &amp;&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a>&#160;</td>
+          <td class="paramname"><em>cur</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -772,6 +802,54 @@ Static Private Attributes</h2></td></tr>
           <td></td>
           <td class="paramtype">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;&#160;</td>
           <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7427e02160b06980a6d715737ffb1e95" name="a7427e02160b06980a6d715737ffb1e95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7427e02160b06980a6d715737ffb1e95">&#9670;&nbsp;</a></span>_option_complete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; plang::cli::_option_complete </td>
+          <td>(</td>
+          <td class="paramtype">class <a class="el" href="classplang_1_1corpus.html">corpus</a> *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a99e4426ac6a02da0868e26ded6e0e922">string_view_t</a> const &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#ac20d58de6ac4d2cc7f72bec19d78500e">uint_t</a>&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#ac20d58de6ac4d2cc7f72bec19d78500e">uint_t</a>&#160;</td>
+          <td class="paramname"><em>end</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1548,6 +1626,32 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a951dc442c01042f3212db026a0f80962" name="a951dc442c01042f3212db026a0f80962"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a951dc442c01042f3212db026a0f80962">&#9670;&nbsp;</a></span>handle_input()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> plang::cli::handle_input </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a99e4426ac6a02da0868e26ded6e0e922">string_view_t</a> const &amp;&#160;</td>
+          <td class="paramname"><em>view</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af0742835dad4a28899ed275664928486" name="af0742835dad4a28899ed275664928486"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af0742835dad4a28899ed275664928486">&#9670;&nbsp;</a></span>register_command() <span class="overload">[1/2]</span></h2>
 
@@ -1686,7 +1790,7 @@ Static Private Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> plang::cli::prompt </td>
+          <td class="memname"><a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> <a class="el" href="classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474">plang::cli::prompt</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1720,6 +1824,86 @@ Static Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a514b713078bcc10bd00cf81a625dfc40" name="a514b713078bcc10bd00cf81a625dfc40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a514b713078bcc10bd00cf81a625dfc40">&#9670;&nbsp;</a></span>format</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplang_1_1format.html">format</a> plang::cli::format</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set output format. </p>
+
+</div>
+</div>
+<a id="a87d0bbcf57e28d3f4d8024f7cabcfc14" name="a87d0bbcf57e28d3f4d8024f7cabcfc14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87d0bbcf57e28d3f4d8024f7cabcfc14">&#9670;&nbsp;</a></span>prompt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474">prompt</a> <a class="el" href="classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474">plang::cli::prompt</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assumed codepage of the output. </p>
+
+</div>
+</div>
+<a id="a340e126e61af48da0b9696f3686a5e19" name="a340e126e61af48da0b9696f3686a5e19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a340e126e61af48da0b9696f3686a5e19">&#9670;&nbsp;</a></span>implicit</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> plang::cli::implicit</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>implicit</code> option for the parser </p>
+
+</div>
+</div>
+<a id="a1ea28c4f49e2dc111699d649811e6f05" name="a1ea28c4f49e2dc111699d649811e6f05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ea28c4f49e2dc111699d649811e6f05">&#9670;&nbsp;</a></span>strict</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> plang::cli::strict</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>strict</code> option for the parser </p>
+
+</div>
+</div>
+<a id="a0560bffafe7d73b5528aba4fd3b00027" name="a0560bffafe7d73b5528aba4fd3b00027"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0560bffafe7d73b5528aba4fd3b00027">&#9670;&nbsp;</a></span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct  { ... }  plang::cli::options</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Contains options to control the command line and the parser. </p>
+
+</div>
+</div>
 <a id="a16bee4d2f6110f046cf557305627524f" name="a16bee4d2f6110f046cf557305627524f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a16bee4d2f6110f046cf557305627524f">&#9670;&nbsp;</a></span>output_option_map</h2>
 
@@ -1808,8 +1992,8 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="accc213882712e84ceac37ea9099f9d7f" name="accc213882712e84ceac37ea9099f9d7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accc213882712e84ceac37ea9099f9d7f">&#9670;&nbsp;</a></span>breaks_option_map</h2>
+<a id="a89bcfa4f2679b108bced07d73471cfac" name="a89bcfa4f2679b108bced07d73471cfac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89bcfa4f2679b108bced07d73471cfac">&#9670;&nbsp;</a></span>indent_option_map</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1818,7 +2002,7 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="classplang_1_1format.html#a9f4e0c0a9b4a7ce38e84e64b67df7ef7">format::breaks</a>&gt; plang::cli::breaks_option_map</td>
+          <td class="memname">std::map&lt;<a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="classplang_1_1format.html#aad88393584872bbce2e74ef171e8fb92">format::indent</a>&gt; plang::cli::indent_option_map</td>
         </tr>
       </table>
   </td>
@@ -1830,8 +2014,8 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="adfc1932acf45742dc9083e5948b1be26" name="adfc1932acf45742dc9083e5948b1be26"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfc1932acf45742dc9083e5948b1be26">&#9670;&nbsp;</a></span>codepage_option_map</h2>
+<a id="a3af44d2d0456d06af396d14924c86bc6" name="a3af44d2d0456d06af396d14924c86bc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3af44d2d0456d06af396d14924c86bc6">&#9670;&nbsp;</a></span>bool_option_map</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1840,7 +2024,29 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="classplang_1_1cli.html#aa3f880a592bc079e938bcf7c4b8b48cc">codepage</a>&gt; plang::cli::codepage_option_map</td>
+          <td class="memname">std::map&lt;<a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&gt; plang::cli::bool_option_map</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a81566f4d17b8512d6cbe7b750b6cde14" name="a81566f4d17b8512d6cbe7b750b6cde14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81566f4d17b8512d6cbe7b750b6cde14">&#9670;&nbsp;</a></span>prompt_option_map</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;<a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474">prompt</a>&gt; plang::cli::prompt_option_map</td>
         </tr>
       </table>
   </td>
@@ -2081,54 +2287,6 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a514b713078bcc10bd00cf81a625dfc40" name="a514b713078bcc10bd00cf81a625dfc40"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a514b713078bcc10bd00cf81a625dfc40">&#9670;&nbsp;</a></span>format</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classplang_1_1format.html">format</a> plang::cli::format</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set output format. </p>
-
-</div>
-</div>
-<a id="a3b2e16ec0078d1cad08cb4d6d4a3f31d" name="a3b2e16ec0078d1cad08cb4d6d4a3f31d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b2e16ec0078d1cad08cb4d6d4a3f31d">&#9670;&nbsp;</a></span>codepage</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classplang_1_1cli.html#aa3f880a592bc079e938bcf7c4b8b48cc">codepage</a> <a class="el" href="classplang_1_1cli.html#aa3f880a592bc079e938bcf7c4b8b48cc">plang::cli::codepage</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Assumed codepage of the output. </p>
 
 </div>
 </div>

@@ -8,5 +8,5 @@ var searchData=
   ['mention_5',['mention',['../classplang_1_1corpus_1_1report.html#af5a255bf00efd8c8247c9215b735b205',1,'plang::corpus::report']]],
   ['mentioned_6',['mentioned',['../classplang_1_1corpus_1_1report.html#a93a8e1ac3ff71360c602583092bc928d',1,'plang::corpus::report']]],
   ['mixin_5fbase_7',['mixin_base',['../structplang_1_1detail_1_1mixin__base.html',1,'plang::detail']]],
-  ['mixin_5fbase_3c_20plang_3a_3adetail_3a_3apath_5fmanager_20_3e_8',['mixin_base&lt; plang::detail::path_manager &gt;',['../structplang_1_1detail_1_1mixin__base.html',1,'plang::detail']]]
+  ['mixin_5fbase_3c_20plang_3a_3adetail_3a_3apath_5fmanager_2c_20plang_3a_3adetail_3a_3asymbol_5fclass_5fmanager_20_3e_8',['mixin_base&lt; plang::detail::path_manager, plang::detail::symbol_class_manager &gt;',['../structplang_1_1detail_1_1mixin__base.html',1,'plang::detail']]]
 ];

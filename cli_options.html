@@ -101,22 +101,127 @@ $(document).ready(function(){initNavTree('cli_options.html',''); initResizable()
   <div class="headertitle"><div class="title">Command Line Options </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h2><a class="anchor" id="autotoc_md93"></a>
-color</h2>
-<p >Sets color output to stdout.</p>
-<dl class="section note"><dt>Note</dt><dd>Disable color if you want to pipe the output to a file</dd></dl>
+<div class="toc"><h3>Table of Contents</h3>
+<ul><ul><li class="level2"><a href="#autotoc_md94">output</a></li>
+<li class="level2"><a href="#autotoc_md95">enrich</a></li>
+<li class="level2"><a href="#autotoc_md96">detail</a></li>
+<li class="level2"><a href="#autotoc_md97">qualification</a></li>
+<li class="level2"><a href="#autotoc_md98">indent</a></li>
+<li class="level2"><a href="#autotoc_md99">implicit</a></li>
+<li class="level2"><a href="#autotoc_md100">strict</a></li>
+<li class="level2"><a href="#autotoc_md101">topology</a></li>
+</ul>
+</ul>
+</div>
+<div class="textblock"><h2><a class="anchor" id="autotoc_md94"></a>
+output</h2>
+<p >Sets the assumed frontend connected to stdout</p>
 <dl class="params">
 <dt>Allowed values </dt>
 <dd><table class="params">
 <tr>
-<td class="paramname"><u>true</u> </td><td>Enables color.  </td></tr>
+<td class="paramname"><u>ansi</u> </td><td>Includes formatting through ANSI escape sequences  </td></tr>
 <tr>
-<td class="paramname">false </td><td>Disables color.  </td></tr>
+<td class="paramname">readline </td><td>Includes formatting through ANSI escape sequences with additional markers for Readline  </td></tr>
+<tr>
+<td class="paramname">html </td><td>Includes formatting through HTML tags and CSS stylesheets  </td></tr>
+<tr>
+<td class="paramname">doxygen </td><td>Includes formatting through HTML tags and CSS stylesheets provided by Doxygen  </td></tr>
 </table>
 </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md94"></a>
-wordOrder</h2>
+<h2><a class="anchor" id="autotoc_md95"></a>
+enrich</h2>
+<p >Sets formatting to apply</p>
+<dl class="params">
+<dt>Allowed values </dt>
+<dd><table class="params">
+<tr>
+<td class="paramname">plain </td><td>Plain text without formatting  </td></tr>
+<tr>
+<td class="paramname">color </td><td>Colored text  </td></tr>
+<tr>
+<td class="paramname">font </td><td>Text with font modifications (bold, italic, etc.)  </td></tr>
+<tr>
+<td class="paramname"><u>rich</u> </td><td>Text with color and font modifications  </td></tr>
+</table>
+</dd>
+</dl>
+<h2><a class="anchor" id="autotoc_md96"></a>
+detail</h2>
+<p >Sets how PLang entries should be displayed in output</p>
+<dl class="params">
+<dt>Allowed values </dt>
+<dd><table class="params">
+<tr>
+<td class="paramname">id_ref </td><td>As reference through IDs  </td></tr>
+<tr>
+<td class="paramname">explicit_ref </td><td>As reference without IDs  </td></tr>
+<tr>
+<td class="paramname"><u>definition</u> </td><td>Equivalent PLang markup  </td></tr>
+<tr>
+<td class="paramname">full </td><td>Equivalent PLang markup and related information  </td></tr>
+</table>
+</dd>
+</dl>
+<h2><a class="anchor" id="autotoc_md97"></a>
+qualification</h2>
+<p >Sets how paths are output</p>
+<dl class="params">
+<dt>Allowed values </dt>
+<dd><table class="params">
+<tr>
+<td class="paramname">unique </td><td>Shortened paths where possible  </td></tr>
+<tr>
+<td class="paramname"><u>full</u> </td><td>Always fully-qualified paths  </td></tr>
+</table>
+</dd>
+</dl>
+<h2><a class="anchor" id="autotoc_md98"></a>
+indent</h2>
+<p >Sets how PLang markup is indented</p>
+<dl class="params">
+<dt>Allowed values </dt>
+<dd><table class="params">
+<tr>
+<td class="paramname">compact </td><td>Most compact notation  </td></tr>
+<tr>
+<td class="paramname">one_line </td><td>Spaced one-line notation  </td></tr>
+<tr>
+<td class="paramname"><u>left</u> </td><td>Multiline notation, left aligned  </td></tr>
+<tr>
+<td class="paramname">center </td><td>Multiline notation, centered  </td></tr>
+</table>
+</dd>
+</dl>
+<h2><a class="anchor" id="autotoc_md99"></a>
+implicit</h2>
+<p >Whether entries may be declared implicitly</p>
+<dl class="params">
+<dt>Allowed values </dt>
+<dd><table class="params">
+<tr>
+<td class="paramname"><u>true</u> </td><td></td></tr>
+<tr>
+<td class="paramname">false </td><td></td></tr>
+</table>
+</dd>
+</dl>
+<h2><a class="anchor" id="autotoc_md100"></a>
+strict</h2>
+<p >Whether hints in class declarations are binding</p>
+<dl class="params">
+<dt>Allowed values </dt>
+<dd><table class="params">
+<tr>
+<td class="paramname"><u>true</u> </td><td></td></tr>
+<tr>
+<td class="paramname">false </td><td></td></tr>
+</table>
+</dd>
+</dl>
+<h2><a class="anchor" id="autotoc_md101"></a>
+topology</h2>
 <p >Sets the order for plot points.</p>
 <dl class="params">
 <dt>Allowed values </dt>

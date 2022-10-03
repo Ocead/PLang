@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['invalid_5freference_5ferror_0',['invalid_reference_error',['../classplang_1_1exception_1_1invalid__reference__error.html',1,'plang::exception']]],
-  ['io_5ferror_1',['io_error',['../classplang_1_1exception_1_1io__error.html',1,'plang::exception']]]
+  ['lang_5ferror_0',['lang_error',['../classplang_1_1exception_1_1lang__error.html',1,'plang::exception']]],
+  ['lit_1',['lit',['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit.html',1,'plang::plot::object::clazz::hint::lit'],['../classplang_1_1plot_1_1object_1_1lit.html',1,'plang::plot::object::lit']]]
 ];

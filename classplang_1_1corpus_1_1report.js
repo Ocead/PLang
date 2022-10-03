@@ -18,6 +18,7 @@ var classplang_1_1corpus_1_1report =
     [ "scope", "classplang_1_1corpus_1_1report.html#a184ae0d5391c49f88aedf929f56dea33", null ],
     [ "size", "classplang_1_1corpus_1_1report.html#a390c3d86b757889043dc009203391e08", null ],
     [ "diff_size", "classplang_1_1corpus_1_1report.html#a6a69fbbe3a8e361ad6da9d3e0f8bb84f", null ],
+    [ "corpus", "classplang_1_1corpus_1_1report.html#a9002bb52238d535e9db41c58b03b10cc", null ],
     [ "_mentioned", "classplang_1_1corpus_1_1report.html#a18edfa250506ae87ce4d3aa10df68061", null ],
     [ "_inserted", "classplang_1_1corpus_1_1report.html#a7d636b994e75f5ad172cb7065b3207e6", null ],
     [ "_updated", "classplang_1_1corpus_1_1report.html#a0e90bf8fb602012c03289ce58c5051fd", null ],

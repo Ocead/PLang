@@ -8,14 +8,12 @@ var searchData=
   ['black_5',['BLACK',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74a08d0012388564e95c3b4a7407cf04965',1,'plang::format::style']]],
   ['blue_6',['BLUE',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74a1b3e1ee9bff86431dea6b181365ba65f',1,'plang::format::style']]],
   ['bold_7',['BOLD',['../structplang_1_1format_1_1style.html#af6826256558f061dba9ef7d0e200df19a2909dd0e0336f10b6da9735b859a3d19',1,'plang::format::style']]],
-  ['bool_5ft_8',['bool_t',['../namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146',1,'plang::column_types']]],
-  ['breaks_9',['breaks',['../classplang_1_1format.html#a9f4e0c0a9b4a7ce38e84e64b67df7ef7',1,'plang::format']]],
-  ['breaks_5fmask_10',['BREAKS_MASK',['../classplang_1_1format.html#ad77b92319dcab6d98df2e476bace8204',1,'plang::format']]],
-  ['breaks_5foption_5fmap_11',['breaks_option_map',['../classplang_1_1cli.html#accc213882712e84ceac37ea9099f9d7f',1,'plang::cli']]],
-  ['bright_5fblue_12',['BRIGHT_BLUE',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74ad187a715c27ec1e774325b6715f4da67',1,'plang::format::style']]],
-  ['bright_5fcyan_13',['BRIGHT_CYAN',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74aa74a6a719de5de03a46f89ce260fa4b7',1,'plang::format::style']]],
-  ['bright_5fgreen_14',['BRIGHT_GREEN',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74a7ca9c0eccf9c3fa7fe85fea8404d50a9',1,'plang::format::style']]],
-  ['bright_5fmagenta_15',['BRIGHT_MAGENTA',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74acdbf2435d34544195dd18a6b31953951',1,'plang::format::style']]],
-  ['bright_5fred_16',['BRIGHT_RED',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74a01fd5046e2769cae7b662d3dfbb64045',1,'plang::format::style']]],
-  ['bright_5fyellow_17',['BRIGHT_YELLOW',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74a2373edc9b8eb3a49710b95c6f7906434',1,'plang::format::style']]]
+  ['bool_5foption_5fmap_8',['bool_option_map',['../classplang_1_1cli.html#a3af44d2d0456d06af396d14924c86bc6',1,'plang::cli']]],
+  ['bool_5ft_9',['bool_t',['../namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146',1,'plang::column_types']]],
+  ['bright_5fblue_10',['BRIGHT_BLUE',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74ad187a715c27ec1e774325b6715f4da67',1,'plang::format::style']]],
+  ['bright_5fcyan_11',['BRIGHT_CYAN',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74aa74a6a719de5de03a46f89ce260fa4b7',1,'plang::format::style']]],
+  ['bright_5fgreen_12',['BRIGHT_GREEN',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74a7ca9c0eccf9c3fa7fe85fea8404d50a9',1,'plang::format::style']]],
+  ['bright_5fmagenta_13',['BRIGHT_MAGENTA',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74acdbf2435d34544195dd18a6b31953951',1,'plang::format::style']]],
+  ['bright_5fred_14',['BRIGHT_RED',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74a01fd5046e2769cae7b662d3dfbb64045',1,'plang::format::style']]],
+  ['bright_5fyellow_15',['BRIGHT_YELLOW',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74a2373edc9b8eb3a49710b95c6f7906434',1,'plang::format::style']]]
 ];

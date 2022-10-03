@@ -11,11 +11,11 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:href="structstd_1_1tuple__element_3_010_00_01plang_1_1resolve__entry__result_01_4.html" target="_top" xlink:title=" ">
+<g id="a_node1"><a xlink:href="structstd_1_1tuple__element_3_011_00_01plang_1_1resolve__result_3_01_t_01_4_01_4.html" target="_top" xlink:title=" ">
 <polygon fill="none" stroke="black" points="0,-0.5 0,-41.5 98,-41.5 98,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">std::tuple_element</text>
-<text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; 0, plang::resolve</text>
-<text text-anchor="middle" x="49" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_entry_result &gt;</text>
+<text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; 1, plang::resolve</text>
+<text text-anchor="middle" x="49" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_result&lt; T &gt; &gt;</text>
 </a>
 </g>
 </g>

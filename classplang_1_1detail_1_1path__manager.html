@@ -100,6 +100,7 @@ $(document).ready(function(){initNavTree('classplang_1_1detail_1_1path__manager.
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="classplang_1_1detail_1_1path__manager-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">plang::detail::path_manager Class Reference</div></div>
@@ -113,7 +114,7 @@ $(document).ready(function(){initNavTree('classplang_1_1detail_1_1path__manager.
 <div class="dynheader">
 Inheritance diagram for plang::detail::path_manager:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classplang_1_1detail_1_1path__manager__inherit__graph.svg" width="844" height="134"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classplang_1_1detail_1_1path__manager__inherit__graph.svg" width="1047" height="170"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Handles database actions for paths. </p>
@@ -121,35 +122,35 @@ Inheritance diagram for plang::detail::path_manager:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aab37a9beb0a19c9aa8ea54c11fbf40d7"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#aab37a9beb0a19c9aa8ea54c11fbf40d7">fetch</a> (<a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="namespaceplang.html#a018818cd68b14b518a53d861e5d77edc">texts</a>=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
-<tr class="memdesc:aab37a9beb0a19c9aa8ea54c11fbf40d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches a persisted path node.  <a href="classplang_1_1detail_1_1path__manager.html#aab37a9beb0a19c9aa8ea54c11fbf40d7">More...</a><br /></td></tr>
-<tr class="separator:aab37a9beb0a19c9aa8ea54c11fbf40d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99e8ab8659adbe46862761cc43ca713b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a99e8ab8659adbe46862761cc43ca713b">fetch_n</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> &gt; const &amp;ids, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="namespaceplang.html#a018818cd68b14b518a53d861e5d77edc">texts</a>=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
-<tr class="memdesc:a99e8ab8659adbe46862761cc43ca713b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches multiple persisted path nodes.  <a href="classplang_1_1detail_1_1path__manager.html#a99e8ab8659adbe46862761cc43ca713b">More...</a><br /></td></tr>
-<tr class="separator:a99e8ab8659adbe46862761cc43ca713b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf73a75162d8930b95a8dbce4f9f24a0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#abf73a75162d8930b95a8dbce4f9f24a0">fetch_all</a> (<a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="namespaceplang.html#a018818cd68b14b518a53d861e5d77edc">texts</a>=true, <a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> limit=-1, <a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> offset=0, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
-<tr class="memdesc:abf73a75162d8930b95a8dbce4f9f24a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches all persisted path nodes.  <a href="classplang_1_1detail_1_1path__manager.html#abf73a75162d8930b95a8dbce4f9f24a0">More...</a><br /></td></tr>
-<tr class="separator:abf73a75162d8930b95a8dbce4f9f24a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1411023c85f19d1ef318dd87406842b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#ac1411023c85f19d1ef318dd87406842b">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="classplang_1_1detail_1_1path__manager.html#a9bca79f963243ca5e2f61d426665e588">insert</a>=false, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="namespaceplang.html#a018818cd68b14b518a53d861e5d77edc">texts</a>=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={})</td></tr>
-<tr class="separator:ac1411023c85f19d1ef318dd87406842b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ffc94bf2d4902a1a2826f9f93d3e7e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a8ffc94bf2d4902a1a2826f9f93d3e7e8">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="namespaceplang.html#a018818cd68b14b518a53d861e5d77edc">texts</a>=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
-<tr class="separator:a8ffc94bf2d4902a1a2826f9f93d3e7e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38a86154988f6b7c353a2ee2cd729250"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a38a86154988f6b7c353a2ee2cd729250">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;ent, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="classplang_1_1detail_1_1path__manager.html#a9bca79f963243ca5e2f61d426665e588">insert</a>=false, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="namespaceplang.html#a018818cd68b14b518a53d861e5d77edc">texts</a>=false)</td></tr>
-<tr class="separator:a38a86154988f6b7c353a2ee2cd729250"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af24a03da9fb62fd06d9fb297c918083b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#af24a03da9fb62fd06d9fb297c918083b">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;ent, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="namespaceplang.html#a018818cd68b14b518a53d861e5d77edc">texts</a>=false) const</td></tr>
-<tr class="separator:af24a03da9fb62fd06d9fb297c918083b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe29e7c4a425179297e9f50ec0beb9ef"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#abe29e7c4a425179297e9f50ec0beb9ef">fetch</a> (<a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
+<tr class="memdesc:abe29e7c4a425179297e9f50ec0beb9ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches a persisted path node.  <a href="classplang_1_1detail_1_1path__manager.html#abe29e7c4a425179297e9f50ec0beb9ef">More...</a><br /></td></tr>
+<tr class="separator:abe29e7c4a425179297e9f50ec0beb9ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af29b58d1e1a113589726554dc857f328"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#af29b58d1e1a113589726554dc857f328">fetch_n</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> &gt; const &amp;ids, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
+<tr class="memdesc:af29b58d1e1a113589726554dc857f328"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches multiple persisted path nodes.  <a href="classplang_1_1detail_1_1path__manager.html#af29b58d1e1a113589726554dc857f328">More...</a><br /></td></tr>
+<tr class="separator:af29b58d1e1a113589726554dc857f328"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ae580d27d5ac177338e96bfd97ab375"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a8ae580d27d5ac177338e96bfd97ab375">fetch_all</a> (<a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=true, <a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> limit=-1, <a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> offset=0, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
+<tr class="memdesc:a8ae580d27d5ac177338e96bfd97ab375"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches all persisted path nodes.  <a href="classplang_1_1detail_1_1path__manager.html#a8ae580d27d5ac177338e96bfd97ab375">More...</a><br /></td></tr>
+<tr class="separator:a8ae580d27d5ac177338e96bfd97ab375"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5d06d51e7f030ca81b98dcfd5733ac3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#ab5d06d51e7f030ca81b98dcfd5733ac3">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="classplang_1_1detail_1_1path__manager.html#a9bca79f963243ca5e2f61d426665e588">insert</a>=false, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={})</td></tr>
+<tr class="separator:ab5d06d51e7f030ca81b98dcfd5733ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e90e11f40cb12ecdf0c78b3584ab664"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a2e90e11f40cb12ecdf0c78b3584ab664">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
+<tr class="separator:a2e90e11f40cb12ecdf0c78b3584ab664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d31f676e68e03ab1f96eca62526f6c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a6d31f676e68e03ab1f96eca62526f6c2">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;ent, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="classplang_1_1detail_1_1path__manager.html#a9bca79f963243ca5e2f61d426665e588">insert</a>=false, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false)</td></tr>
+<tr class="separator:a6d31f676e68e03ab1f96eca62526f6c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a892feba6e4e362bb4502e28a5dde214f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a892feba6e4e362bb4502e28a5dde214f">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;ent, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false) const</td></tr>
+<tr class="separator:a892feba6e4e362bb4502e28a5dde214f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9bca79f963243ca5e2f61d426665e588"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a9bca79f963243ca5e2f61d426665e588">insert</a> (<a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> replace=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={})</td></tr>
 <tr class="memdesc:a9bca79f963243ca5e2f61d426665e588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a new path node.  <a href="classplang_1_1detail_1_1path__manager.html#a9bca79f963243ca5e2f61d426665e588">More...</a><br /></td></tr>
 <tr class="separator:a9bca79f963243ca5e2f61d426665e588"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a35daa2e684dc6e6bface247bf04175"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a2a35daa2e684dc6e6bface247bf04175">update</a> (<a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="namespaceplang.html#a018818cd68b14b518a53d861e5d77edc">texts</a>=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={})</td></tr>
-<tr class="memdesc:a2a35daa2e684dc6e6bface247bf04175"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a path node.  <a href="classplang_1_1detail_1_1path__manager.html#a2a35daa2e684dc6e6bface247bf04175">More...</a><br /></td></tr>
-<tr class="separator:a2a35daa2e684dc6e6bface247bf04175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45894d3d023331df67cae5ce38edd48a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a45894d3d023331df67cae5ce38edd48a">update</a> (<a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={})</td></tr>
+<tr class="memdesc:a45894d3d023331df67cae5ce38edd48a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a path node.  <a href="classplang_1_1detail_1_1path__manager.html#a45894d3d023331df67cae5ce38edd48a">More...</a><br /></td></tr>
+<tr class="separator:a45894d3d023331df67cae5ce38edd48a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4a31e74609dd0273c71d580945ad78c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1detail_1_1stream__helper.html">stream_helper</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#ae4a31e74609dd0273c71d580945ad78c">print</a> (<a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id, <a class="el" href="classplang_1_1format.html">format</a> <a class="el" href="classplang_1_1format.html">format</a>, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
 <tr class="memdesc:ae4a31e74609dd0273c71d580945ad78c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a representation of a persisted node.  <a href="classplang_1_1detail_1_1path__manager.html#ae4a31e74609dd0273c71d580945ad78c">More...</a><br /></td></tr>
 <tr class="separator:ae4a31e74609dd0273c71d580945ad78c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6f4c231e8818d74df22488077e43a0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#ad6f4c231e8818d74df22488077e43a0e">remove</a> (<a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> cascade, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={})</td></tr>
-<tr class="memdesc:ad6f4c231e8818d74df22488077e43a0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a persisted node.  <a href="classplang_1_1detail_1_1path__manager.html#ad6f4c231e8818d74df22488077e43a0e">More...</a><br /></td></tr>
-<tr class="separator:ad6f4c231e8818d74df22488077e43a0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb13b1c3ad9394f6f1cf338ee906fff7"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#afb13b1c3ad9394f6f1cf338ee906fff7">remove</a> (<a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> cascade, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={})</td></tr>
+<tr class="memdesc:afb13b1c3ad9394f6f1cf338ee906fff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a persisted node.  <a href="classplang_1_1detail_1_1path__manager.html#afb13b1c3ad9394f6f1cf338ee906fff7">More...</a><br /></td></tr>
+<tr class="separator:afb13b1c3ad9394f6f1cf338ee906fff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7642760f885b798219ab8aa2f67ad3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#ae7642760f885b798219ab8aa2f67ad3f">wipe</a> ()</td></tr>
 <tr class="memdesc:ae7642760f885b798219ab8aa2f67ad3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wipes the whole path tree.  <a href="classplang_1_1detail_1_1path__manager.html#ae7642760f885b798219ab8aa2f67ad3f">More...</a><br /></td></tr>
 <tr class="separator:ae7642760f885b798219ab8aa2f67ad3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,33 +160,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af7eb118263ece40db9a5fe009d76bf83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#af7eb118263ece40db9a5fe009d76bf83">get_root_path_id</a> () const</td></tr>
 <tr class="memdesc:af7eb118263ece40db9a5fe009d76bf83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the id of the root path.  <a href="classplang_1_1detail_1_1path__manager.html#af7eb118263ece40db9a5fe009d76bf83">More...</a><br /></td></tr>
 <tr class="separator:af7eb118263ece40db9a5fe009d76bf83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70fcac42ab753e140bbca2d3373be516"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a70fcac42ab753e140bbca2d3373be516">~path_manager</a> ()=default</td></tr>
-<tr class="separator:a70fcac42ab753e140bbca2d3373be516"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98fa798ecb0a973aa8349bf4064a6e47"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a98fa798ecb0a973aa8349bf4064a6e47">~path_manager</a> ()</td></tr>
+<tr class="separator:a98fa798ecb0a973aa8349bf4064a6e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
-Private Member Functions</h2></td></tr>
-<tr class="memitem:a0c94abd4c43654f67878ecb38f0b9887"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::tuple&lt; <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a>, <a class="el" href="namespaceplang_1_1column__types.html#ac20d58de6ac4d2cc7f72bec19d78500e">uint_t</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a0c94abd4c43654f67878ecb38f0b9887">partially_resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> fully) const</td></tr>
-<tr class="memdesc:a0c94abd4c43654f67878ecb38f0b9887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves a path to persisted nodes to all viable candidates.  <a href="classplang_1_1detail_1_1path__manager.html#a0c94abd4c43654f67878ecb38f0b9887">More...</a><br /></td></tr>
-<tr class="separator:a0c94abd4c43654f67878ecb38f0b9887"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abeb24e39feabce81354d39dc321bf770"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a>, <a class="el" href="namespaceplang_1_1column__types.html#ac20d58de6ac4d2cc7f72bec19d78500e">uint_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#abeb24e39feabce81354d39dc321bf770">_resolve</a> (std::vector&lt; std::tuple&lt; <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a>, <a class="el" href="namespaceplang_1_1column__types.html#ac20d58de6ac4d2cc7f72bec19d78500e">uint_t</a> &gt; &gt; const &amp;candidates, <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> scope=-1) const</td></tr>
-<tr class="memdesc:abeb24e39feabce81354d39dc321bf770"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves a path to persisted nodes to the most viable candidate.  <a href="classplang_1_1detail_1_1path__manager.html#abeb24e39feabce81354d39dc321bf770">More...</a><br /></td></tr>
-<tr class="separator:abeb24e39feabce81354d39dc321bf770"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a538a286e776b20bae03aabc78c551b11"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a538a286e776b20bae03aabc78c551b11">get_children</a> (<a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id) const</td></tr>
-<tr class="separator:a538a286e776b20bae03aabc78c551b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a979d8a1f853f2e985b73a92f3fe23b32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a979d8a1f853f2e985b73a92f3fe23b32">is_parent_of</a> (<a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> parent_id, <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> child_id) const</td></tr>
-<tr class="memdesc:a979d8a1f853f2e985b73a92f3fe23b32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks, whether a path node is parent of another.  <a href="classplang_1_1detail_1_1path__manager.html#a979d8a1f853f2e985b73a92f3fe23b32">More...</a><br /></td></tr>
-<tr class="separator:a979d8a1f853f2e985b73a92f3fe23b32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34363f5cf3479cea379736c92afff19b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a34363f5cf3479cea379736c92afff19b">or_root_id</a> (<a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id) const</td></tr>
-<tr class="separator:a34363f5cf3479cea379736c92afff19b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ce399bc1570f9ff3d312f4ca5bb412c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a6ce399bc1570f9ff3d312f4ca5bb412c">get_full_path</a> (<a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id) const</td></tr>
-<tr class="separator:a6ce399bc1570f9ff3d312f4ca5bb412c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dcfef2fe77f16d84069dbd7471d506a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a3dcfef2fe77f16d84069dbd7471d506a">get_unique_path</a> (<a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id) const</td></tr>
-<tr class="separator:a3dcfef2fe77f16d84069dbd7471d506a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a165fe26bec245d68eb43169abffe0f06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a165fe26bec245d68eb43169abffe0f06">print_helper</a> (<a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;os, <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id, <a class="el" href="classplang_1_1format.html">format</a> <a class="el" href="classplang_1_1format.html">format</a>) const</td></tr>
-<tr class="separator:a165fe26bec245d68eb43169abffe0f06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae1a7642dcc957538abc1c3617a14ac66"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#ae1a7642dcc957538abc1c3617a14ac66">print_decoration</a> (<a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;os, <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id, <a class="el" href="classplang_1_1format.html">format</a> <a class="el" href="classplang_1_1format.html">format</a>) const</td></tr>
+<tr class="separator:ae1a7642dcc957538abc1c3617a14ac66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classplang_1_1detail_1_1corpus"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classplang_1_1detail_1_1corpus')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classplang_1_1detail_1_1corpus.html">plang::detail::corpus</a></td></tr>
 <tr class="memitem:ad30c128389637641318bc7ac93a59303 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#ad30c128389637641318bc7ac93a59303">corpus</a> ()</td></tr>
 <tr class="memdesc:ad30c128389637641318bc7ac93a59303 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="classplang_1_1detail_1_1corpus.html#ad30c128389637641318bc7ac93a59303">More...</a><br /></td></tr>
@@ -193,6 +174,12 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ac49f68df0256ff257694389f5e6fdb07 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#ac49f68df0256ff257694389f5e6fdb07">_open</a> (char const *file)</td></tr>
 <tr class="memdesc:ac49f68df0256ff257694389f5e6fdb07 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a database.  <a href="classplang_1_1detail_1_1corpus.html#ac49f68df0256ff257694389f5e6fdb07">More...</a><br /></td></tr>
 <tr class="separator:ac49f68df0256ff257694389f5e6fdb07 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1cfe6138c878647e9a55abf530caf9e inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#aa1cfe6138c878647e9a55abf530caf9e">_begin</a> ()</td></tr>
+<tr class="separator:aa1cfe6138c878647e9a55abf530caf9e inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dc75f030336ab4d067a199955dc82b0 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#a7dc75f030336ab4d067a199955dc82b0">_rollback</a> ()</td></tr>
+<tr class="separator:a7dc75f030336ab4d067a199955dc82b0 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add69f8c04aef8fba903619a9685ce2a4 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#add69f8c04aef8fba903619a9685ce2a4">_commit</a> ()</td></tr>
+<tr class="separator:add69f8c04aef8fba903619a9685ce2a4 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a110911a2284f184f5354e3f9ec3fc75d inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#a110911a2284f184f5354e3f9ec3fc75d">_check</a> (int code) const</td></tr>
 <tr class="memdesc:a110911a2284f184f5354e3f9ec3fc75d inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads SQLite return codes and throws appropriate exceptions.  <a href="classplang_1_1detail_1_1corpus.html#a110911a2284f184f5354e3f9ec3fc75d">More...</a><br /></td></tr>
 <tr class="separator:a110911a2284f184f5354e3f9ec3fc75d inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -251,6 +238,31 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a96f9de04d3f5e00f745027fd9d27718c inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#a96f9de04d3f5e00f745027fd9d27718c">~corpus</a> () noexcept</td></tr>
 <tr class="memdesc:a96f9de04d3f5e00f745027fd9d27718c inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <a href="classplang_1_1detail_1_1corpus.html#a96f9de04d3f5e00f745027fd9d27718c">More...</a><br /></td></tr>
 <tr class="separator:a96f9de04d3f5e00f745027fd9d27718c inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a0c94abd4c43654f67878ecb38f0b9887"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::tuple&lt; <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a>, <a class="el" href="namespaceplang_1_1column__types.html#ac20d58de6ac4d2cc7f72bec19d78500e">uint_t</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a0c94abd4c43654f67878ecb38f0b9887">partially_resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> fully) const</td></tr>
+<tr class="memdesc:a0c94abd4c43654f67878ecb38f0b9887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves a path to persisted nodes to all viable candidates.  <a href="classplang_1_1detail_1_1path__manager.html#a0c94abd4c43654f67878ecb38f0b9887">More...</a><br /></td></tr>
+<tr class="separator:a0c94abd4c43654f67878ecb38f0b9887"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeb24e39feabce81354d39dc321bf770"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a>, <a class="el" href="namespaceplang_1_1column__types.html#ac20d58de6ac4d2cc7f72bec19d78500e">uint_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#abeb24e39feabce81354d39dc321bf770">_resolve</a> (std::vector&lt; std::tuple&lt; <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a>, <a class="el" href="namespaceplang_1_1column__types.html#ac20d58de6ac4d2cc7f72bec19d78500e">uint_t</a> &gt; &gt; const &amp;candidates, <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> scope=-1) const</td></tr>
+<tr class="memdesc:abeb24e39feabce81354d39dc321bf770"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves a path to persisted nodes to the most viable candidate.  <a href="classplang_1_1detail_1_1path__manager.html#abeb24e39feabce81354d39dc321bf770">More...</a><br /></td></tr>
+<tr class="separator:abeb24e39feabce81354d39dc321bf770"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a538a286e776b20bae03aabc78c551b11"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a538a286e776b20bae03aabc78c551b11">get_children</a> (<a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id) const</td></tr>
+<tr class="separator:a538a286e776b20bae03aabc78c551b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a979d8a1f853f2e985b73a92f3fe23b32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a979d8a1f853f2e985b73a92f3fe23b32">is_parent_of</a> (<a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> parent_id, <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> child_id) const</td></tr>
+<tr class="memdesc:a979d8a1f853f2e985b73a92f3fe23b32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks, whether a path node is parent of another.  <a href="classplang_1_1detail_1_1path__manager.html#a979d8a1f853f2e985b73a92f3fe23b32">More...</a><br /></td></tr>
+<tr class="separator:a979d8a1f853f2e985b73a92f3fe23b32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34363f5cf3479cea379736c92afff19b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a34363f5cf3479cea379736c92afff19b">or_root_id</a> (<a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id) const</td></tr>
+<tr class="separator:a34363f5cf3479cea379736c92afff19b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ce399bc1570f9ff3d312f4ca5bb412c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a6ce399bc1570f9ff3d312f4ca5bb412c">get_full_path</a> (<a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id) const</td></tr>
+<tr class="separator:a6ce399bc1570f9ff3d312f4ca5bb412c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dcfef2fe77f16d84069dbd7471d506a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a3dcfef2fe77f16d84069dbd7471d506a">get_unique_path</a> (<a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id) const</td></tr>
+<tr class="separator:a3dcfef2fe77f16d84069dbd7471d506a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a165fe26bec245d68eb43169abffe0f06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a165fe26bec245d68eb43169abffe0f06">print_helper</a> (<a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;os, <a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> id, <a class="el" href="classplang_1_1format.html">format</a> <a class="el" href="classplang_1_1format.html">format</a>) const</td></tr>
+<tr class="separator:a165fe26bec245d68eb43169abffe0f06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_static_methods_classplang_1_1detail_1_1corpus"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classplang_1_1detail_1_1corpus')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classplang_1_1detail_1_1corpus.html">plang::detail::corpus</a></td></tr>
 <tr class="memitem:a6dcb02285d07196a30d6677a7254e855 inherit pro_static_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classplang_1_1format.html">format</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#a6dcb02285d07196a30d6677a7254e855">_make_inner_format</a> (<a class="el" href="classplang_1_1format.html">format</a> <a class="el" href="classplang_1_1format.html">format</a>)</td></tr>
 <tr class="memdesc:a6dcb02285d07196a30d6677a7254e855 inherit pro_static_methods_classplang_1_1detail_1_1corpus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a format for use in nested printing.  <a href="classplang_1_1detail_1_1corpus.html#a6dcb02285d07196a30d6677a7254e855">More...</a><br /></td></tr>
@@ -261,14 +273,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ae17a78f2105f9921092b0eebebd23c0f inherit pro_attribs_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a70fcac42ab753e140bbca2d3373be516" name="a70fcac42ab753e140bbca2d3373be516"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70fcac42ab753e140bbca2d3373be516">&#9670;&nbsp;</a></span>~path_manager()</h2>
+<a id="a98fa798ecb0a973aa8349bf4064a6e47" name="a98fa798ecb0a973aa8349bf4064a6e47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98fa798ecb0a973aa8349bf4064a6e47">&#9670;&nbsp;</a></span>~path_manager()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">plang::detail::path_manager::~path_manager </td>
@@ -277,11 +286,6 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -587,8 +591,50 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="aab37a9beb0a19c9aa8ea54c11fbf40d7" name="aab37a9beb0a19c9aa8ea54c11fbf40d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab37a9beb0a19c9aa8ea54c11fbf40d7">&#9670;&nbsp;</a></span>fetch()</h2>
+<a id="ae1a7642dcc957538abc1c3617a14ac66" name="ae1a7642dcc957538abc1c3617a14ac66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1a7642dcc957538abc1c3617a14ac66">&#9670;&nbsp;</a></span>print_decoration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp; plang::detail::path_manager::print_decoration </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a>&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classplang_1_1format.html">format</a>&#160;</td>
+          <td class="paramname"><em>format</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe29e7c4a425179297e9f50ec0beb9ef" name="abe29e7c4a425179297e9f50ec0beb9ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe29e7c4a425179297e9f50ec0beb9ef">&#9670;&nbsp;</a></span>fetch()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -603,7 +649,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
-          <td class="paramname"><em>texts</em> = <code>false</code>, </td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -623,7 +669,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>Id of the node </td></tr>
-    <tr><td class="paramname">texts</td><td><code>true</code>, if texts should also be returned </td></tr>
+    <tr><td class="paramname">dynamic</td><td><code>true</code>, if texts should also be returned </td></tr>
   </table>
   </dd>
 </dl>
@@ -631,8 +677,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a99e8ab8659adbe46862761cc43ca713b" name="a99e8ab8659adbe46862761cc43ca713b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99e8ab8659adbe46862761cc43ca713b">&#9670;&nbsp;</a></span>fetch_n()</h2>
+<a id="af29b58d1e1a113589726554dc857f328" name="af29b58d1e1a113589726554dc857f328"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af29b58d1e1a113589726554dc857f328">&#9670;&nbsp;</a></span>fetch_n()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -647,7 +693,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
-          <td class="paramname"><em>texts</em> = <code>false</code>, </td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -667,7 +713,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ids</td><td>Ids of the node </td></tr>
-    <tr><td class="paramname">texts</td><td><code>true</code>, if texts should also be returned </td></tr>
+    <tr><td class="paramname">dynamic</td><td><code>true</code>, if texts should also be returned </td></tr>
   </table>
   </dd>
 </dl>
@@ -675,8 +721,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="abf73a75162d8930b95a8dbce4f9f24a0" name="abf73a75162d8930b95a8dbce4f9f24a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf73a75162d8930b95a8dbce4f9f24a0">&#9670;&nbsp;</a></span>fetch_all()</h2>
+<a id="a8ae580d27d5ac177338e96bfd97ab375" name="a8ae580d27d5ac177338e96bfd97ab375"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ae580d27d5ac177338e96bfd97ab375">&#9670;&nbsp;</a></span>fetch_all()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -685,7 +731,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">std::vector&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt; plang::detail::path_manager::fetch_all </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
-          <td class="paramname"><em>texts</em> = <code>true</code>, </td>
+          <td class="paramname"><em>dynamic</em> = <code>true</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -716,7 +762,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Fetches all persisted path nodes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">texts</td><td><code>true</code>, if texts should also be returned </td></tr>
+    <tr><td class="paramname">dynamic</td><td><code>true</code>, if texts should also be returned </td></tr>
     <tr><td class="paramname">limit</td><td>Limits the output to up to <code><code>limit</code></code> entries </td></tr>
     <tr><td class="paramname">offset</td><td>Skips the first <code><code>offset</code></code> entries </td></tr>
   </table>
@@ -726,8 +772,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="ac1411023c85f19d1ef318dd87406842b" name="ac1411023c85f19d1ef318dd87406842b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1411023c85f19d1ef318dd87406842b">&#9670;&nbsp;</a></span>resolve() <span class="overload">[1/4]</span></h2>
+<a id="ab5d06d51e7f030ca81b98dcfd5733ac3" name="ab5d06d51e7f030ca81b98dcfd5733ac3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5d06d51e7f030ca81b98dcfd5733ac3">&#9670;&nbsp;</a></span>resolve() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -754,7 +800,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
-          <td class="paramname"><em>texts</em> = <code>false</code>, </td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -772,8 +818,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a8ffc94bf2d4902a1a2826f9f93d3e7e8" name="a8ffc94bf2d4902a1a2826f9f93d3e7e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ffc94bf2d4902a1a2826f9f93d3e7e8">&#9670;&nbsp;</a></span>resolve() <span class="overload">[2/4]</span></h2>
+<a id="a2e90e11f40cb12ecdf0c78b3584ab664" name="a2e90e11f40cb12ecdf0c78b3584ab664"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e90e11f40cb12ecdf0c78b3584ab664">&#9670;&nbsp;</a></span>resolve() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -794,7 +840,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
-          <td class="paramname"><em>texts</em> = <code>false</code>, </td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -812,8 +858,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a38a86154988f6b7c353a2ee2cd729250" name="a38a86154988f6b7c353a2ee2cd729250"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38a86154988f6b7c353a2ee2cd729250">&#9670;&nbsp;</a></span>resolve() <span class="overload">[3/4]</span></h2>
+<a id="a6d31f676e68e03ab1f96eca62526f6c2" name="a6d31f676e68e03ab1f96eca62526f6c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d31f676e68e03ab1f96eca62526f6c2">&#9670;&nbsp;</a></span>resolve() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -846,7 +892,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
-          <td class="paramname"><em>texts</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -858,8 +904,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="af24a03da9fb62fd06d9fb297c918083b" name="af24a03da9fb62fd06d9fb297c918083b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af24a03da9fb62fd06d9fb297c918083b">&#9670;&nbsp;</a></span>resolve() <span class="overload">[4/4]</span></h2>
+<a id="a892feba6e4e362bb4502e28a5dde214f" name="a892feba6e4e362bb4502e28a5dde214f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a892feba6e4e362bb4502e28a5dde214f">&#9670;&nbsp;</a></span>resolve() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -886,7 +932,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
-          <td class="paramname"><em>texts</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -942,8 +988,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a2a35daa2e684dc6e6bface247bf04175" name="a2a35daa2e684dc6e6bface247bf04175"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a35daa2e684dc6e6bface247bf04175">&#9670;&nbsp;</a></span>update()</h2>
+<a id="a45894d3d023331df67cae5ce38edd48a" name="a45894d3d023331df67cae5ce38edd48a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45894d3d023331df67cae5ce38edd48a">&#9670;&nbsp;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -958,7 +1004,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
-          <td class="paramname"><em>texts</em> = <code>false</code>, </td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -978,7 +1024,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>Node to update </td></tr>
-    <tr><td class="paramname">texts</td><td><code>true</code>, if texts should also be updated </td></tr>
+    <tr><td class="paramname">dynamic</td><td><code>true</code>, if texts should also be updated </td></tr>
   </table>
   </dd>
 </dl>
@@ -1030,14 +1076,14 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="ad6f4c231e8818d74df22488077e43a0e" name="ad6f4c231e8818d74df22488077e43a0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6f4c231e8818d74df22488077e43a0e">&#9670;&nbsp;</a></span>remove()</h2>
+<a id="afb13b1c3ad9394f6f1cf338ee906fff7" name="afb13b1c3ad9394f6f1cf338ee906fff7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb13b1c3ad9394f6f1cf338ee906fff7">&#9670;&nbsp;</a></span>remove()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> plang::detail::path_manager::remove </td>
+          <td class="memname">std::tuple&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a> &gt; plang::detail::path_manager::remove </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;&#160;</td>
           <td class="paramname"><em>path</em>, </td>

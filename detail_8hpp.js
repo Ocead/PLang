@@ -17,7 +17,7 @@ var detail_8hpp =
       [ "NONE", "detail_8hpp.html#a9ff4aea551afa2db98a64191340e1b58ab50339a10e1de285ac99d4c3990b8693", null ],
       [ "INSERT", "detail_8hpp.html#a9ff4aea551afa2db98a64191340e1b58a61ee777e7f71dc466c3b2c685d8d313b", null ],
       [ "UPDATE", "detail_8hpp.html#a9ff4aea551afa2db98a64191340e1b58a15a8022d0ed9cd9c2a2e756822703eb4", null ],
-      [ "DELETE", "detail_8hpp.html#a9ff4aea551afa2db98a64191340e1b58a32f68a60cef40faedbc6af20298c1a1e", null ],
+      [ "REMOVE", "detail_8hpp.html#a9ff4aea551afa2db98a64191340e1b58a78baf367c4626442174307cdf41c6538", null ],
       [ "FAIL", "detail_8hpp.html#a9ff4aea551afa2db98a64191340e1b58ac2759effffc94bb9acc71d69fe3e8a1f", null ]
     ] ],
     [ "operator&", "detail_8hpp.html#af87491b536efdff05d2b04e5007b5f4b", null ],

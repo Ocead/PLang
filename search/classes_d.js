@@ -1,12 +1,14 @@
 var searchData=
 [
-  ['source_0',['source',['../classplang_1_1root_1_1source.html',1,'plang::root']]],
-  ['sourced_1',['sourced',['../classplang_1_1detail_1_1base__types_1_1sourced.html',1,'plang::detail::base_types']]],
-  ['stmt_2',['stmt',['../classplang_1_1detail_1_1stmt.html',1,'plang::detail']]],
-  ['stmt_5ffinalizer_3',['stmt_finalizer',['../structplang_1_1detail_1_1stmt__finalizer.html',1,'plang::detail']]],
-  ['stream_5fhelper_4',['stream_helper',['../classplang_1_1detail_1_1stream__helper.html',1,'plang::detail']]],
-  ['style_5',['style',['../structplang_1_1format_1_1style.html',1,'plang::format']]],
-  ['subject_6',['subject',['../classplang_1_1plot_1_1point_1_1subject.html',1,'plang::plot::point']]],
-  ['sym_7',['sym',['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1sym.html',1,'plang::plot::object::clazz::hint::sym'],['../classplang_1_1plot_1_1object_1_1sym.html',1,'plang::plot::object::sym'],['../classplang_1_1plot_1_1point_1_1subject_1_1sym.html',1,'plang::plot::point::subject::sym']]],
-  ['symbol_8',['symbol',['../classplang_1_1plot_1_1symbol.html',1,'plang::plot']]]
+  ['tag_0',['tag',['../structplang_1_1detail_1_1corpus_1_1tag.html',1,'plang::detail::corpus']]],
+  ['template_5ftransform_1',['template_transform',['../structplang_1_1detail_1_1template__transform.html',1,'plang::detail']]],
+  ['template_5ftransform_3c_20t_3c_20args_2e_2e_2e_20_3e_20_3e_2',['template_transform&lt; T&lt; Args... &gt; &gt;',['../structplang_1_1detail_1_1template__transform_3_01_t_3_01_args_8_8_8_01_4_01_4.html',1,'plang::detail']]],
+  ['tuple_5felement_3c_200_2c_20plang_3a_3aresolve_5fentry_5fresult_20_3e_3',['tuple_element&lt; 0, plang::resolve_entry_result &gt;',['../structstd_1_1tuple__element_3_010_00_01plang_1_1resolve__entry__result_01_4.html',1,'std']]],
+  ['tuple_5felement_3c_200_2c_20plang_3a_3aresolve_5fresult_3c_20t_20_3e_20_3e_4',['tuple_element&lt; 0, plang::resolve_result&lt; T &gt; &gt;',['../structstd_1_1tuple__element_3_010_00_01plang_1_1resolve__result_3_01_t_01_4_01_4.html',1,'std']]],
+  ['tuple_5felement_3c_201_2c_20plang_3a_3aresolve_5fentry_5fresult_20_3e_5',['tuple_element&lt; 1, plang::resolve_entry_result &gt;',['../structstd_1_1tuple__element_3_011_00_01plang_1_1resolve__entry__result_01_4.html',1,'std']]],
+  ['tuple_5felement_3c_201_2c_20plang_3a_3aresolve_5fresult_3c_20t_20_3e_20_3e_6',['tuple_element&lt; 1, plang::resolve_result&lt; T &gt; &gt;',['../structstd_1_1tuple__element_3_011_00_01plang_1_1resolve__result_3_01_t_01_4_01_4.html',1,'std']]],
+  ['tuple_5felement_3c_202_2c_20plang_3a_3aresolve_5fentry_5fresult_20_3e_7',['tuple_element&lt; 2, plang::resolve_entry_result &gt;',['../structstd_1_1tuple__element_3_012_00_01plang_1_1resolve__entry__result_01_4.html',1,'std']]],
+  ['tuple_5felement_3c_202_2c_20plang_3a_3aresolve_5fresult_3c_20t_20_3e_20_3e_8',['tuple_element&lt; 2, plang::resolve_result&lt; T &gt; &gt;',['../structstd_1_1tuple__element_3_012_00_01plang_1_1resolve__result_3_01_t_01_4_01_4.html',1,'std']]],
+  ['tuple_5fsize_3c_20plang_3a_3aresolve_5fentry_5fresult_20_3e_9',['tuple_size&lt; plang::resolve_entry_result &gt;',['../structstd_1_1tuple__size_3_01plang_1_1resolve__entry__result_01_4.html',1,'std']]],
+  ['tuple_5fsize_3c_20plang_3a_3aresolve_5fresult_3c_20t_20_3e_20_3e_10',['tuple_size&lt; plang::resolve_result&lt; T &gt; &gt;',['../structstd_1_1tuple__size_3_01plang_1_1resolve__result_3_01_t_01_4_01_4.html',1,'std']]]
 ];

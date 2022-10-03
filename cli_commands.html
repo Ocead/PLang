@@ -108,25 +108,26 @@ $(document).ready(function(){initNavTree('cli_commands.html',''); initResizable(
 <li class="level2"><a href="#autotoc_md75">Quit command line</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md76">Database files</a><ul><li class="level2"><a href="#autotoc_md77">Creating/Opening a database file</a></li>
-<li class="level2"><a href="#autotoc_md78">Save changes to a database file</a></li>
-<li class="level2"><a href="#autotoc_md79">Closing a database file</a></li>
+<li class="level1"><a href="#autotoc_md76">Database files</a><ul><li class="level2"><a href="#autotoc_md77">Creating a database file</a></li>
+<li class="level2"><a href="#autotoc_md78">Opening a database file</a></li>
+<li class="level2"><a href="#autotoc_md79">Save changes to a database file</a></li>
+<li class="level2"><a href="#autotoc_md80">Closing a database file</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md80">Markup files</a><ul><li class="level2"><a href="#autotoc_md81">Run a markup file</a></li>
-<li class="level2"><a href="#autotoc_md82">Export corpus to a markup file</a></li>
+<li class="level1"><a href="#autotoc_md81">Markup files</a><ul><li class="level2"><a href="#autotoc_md82">Run a markup file</a></li>
+<li class="level2"><a href="#autotoc_md83">Export corpus to a markup file</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md83">Traversal, querying</a><ul><li class="level2"><a href="#autotoc_md84">Change scope</a></li>
-<li class="level2"><a href="#autotoc_md85">List entries</a></li>
-<li class="level2"><a href="#autotoc_md86">Search entries</a></li>
+<li class="level1"><a href="#autotoc_md84">Traversal, querying</a><ul><li class="level2"><a href="#autotoc_md85">Change scope</a></li>
+<li class="level2"><a href="#autotoc_md86">List entries</a></li>
+<li class="level2"><a href="#autotoc_md87">Search entries</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md87">Manipulation</a><ul><li class="level2"><a href="#autotoc_md88">Delete entries</a></li>
-<li class="level2"><a href="#autotoc_md89">Copy entries</a></li>
-<li class="level2"><a href="#autotoc_md90">Move entries</a></li>
-<li class="level2"><a href="#autotoc_md91">Undo</a></li>
-<li class="level2"><a href="#autotoc_md92">Redo</a></li>
+<li class="level1"><a href="#autotoc_md88">Manipulation</a><ul><li class="level2"><a href="#autotoc_md89">Delete entries</a></li>
+<li class="level2"><a href="#autotoc_md90">Copy entries</a></li>
+<li class="level2"><a href="#autotoc_md91">Move entries</a></li>
+<li class="level2"><a href="#autotoc_md92">Undo</a></li>
+<li class="level2"><a href="#autotoc_md93">Redo</a></li>
 </ul>
 </li>
 </ul>
@@ -174,7 +175,14 @@ Quit command line</h2>
 <h1><a class="anchor" id="autotoc_md76"></a>
 Database files</h1>
 <h2><a class="anchor" id="autotoc_md77"></a>
-Creating/Opening a database file</h2>
+Creating a database file</h2>
+<div class="fragment"><div class="line">:n</div>
+</div><!-- fragment --><dl class="params">
+<dt>Parameters </dt>
+<dd>(<em>none</em>) </dd>
+</dl>
+<h2><a class="anchor" id="autotoc_md78"></a>
+Opening a database file</h2>
 <div class="fragment"><div class="line">:o &lt;file&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -182,7 +190,7 @@ Creating/Opening a database file</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md78"></a>
+<h2><a class="anchor" id="autotoc_md79"></a>
 Save changes to a database file</h2>
 <div class="fragment"><div class="line">:s &lt;file&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -191,16 +199,16 @@ Save changes to a database file</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md79"></a>
+<h2><a class="anchor" id="autotoc_md80"></a>
 Closing a database file</h2>
 <div class="fragment"><div class="line">:w</div>
 </div><!-- fragment --><dl class="params">
 <dt>Parameters </dt>
 <dd>(<em>none</em>) </dd>
 </dl>
-<h1><a class="anchor" id="autotoc_md80"></a>
+<h1><a class="anchor" id="autotoc_md81"></a>
 Markup files</h1>
-<h2><a class="anchor" id="autotoc_md81"></a>
+<h2><a class="anchor" id="autotoc_md82"></a>
 Run a markup file</h2>
 <div class="fragment"><div class="line">:r &lt;file&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -209,7 +217,7 @@ Run a markup file</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md82"></a>
+<h2><a class="anchor" id="autotoc_md83"></a>
 Export corpus to a markup file</h2>
 <div class="fragment"><div class="line">:e &lt;file&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -218,9 +226,9 @@ Export corpus to a markup file</h2>
   </table>
   </dd>
 </dl>
-<h1><a class="anchor" id="autotoc_md83"></a>
+<h1><a class="anchor" id="autotoc_md84"></a>
 Traversal, querying</h1>
-<h2><a class="anchor" id="autotoc_md84"></a>
+<h2><a class="anchor" id="autotoc_md85"></a>
 Change scope</h2>
 <div class="fragment"><div class="line">@&lt;path&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -229,7 +237,7 @@ Change scope</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md85"></a>
+<h2><a class="anchor" id="autotoc_md86"></a>
 List entries</h2>
 <div class="fragment"><div class="line">:l &lt;ref&gt; ...</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -238,10 +246,10 @@ List entries</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md86"></a>
+<h2><a class="anchor" id="autotoc_md87"></a>
 Search entries</h2>
 <div class="fragment"><div class="line">:f &lt;name&gt; ...</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md87"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md88"></a>
 Manipulation</h1>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -249,7 +257,7 @@ Manipulation</h1>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md88"></a>
+<h2><a class="anchor" id="autotoc_md89"></a>
 Delete entries</h2>
 <div class="fragment"><div class="line">:x &lt;ref&gt; ...</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -258,7 +266,7 @@ Delete entries</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md89"></a>
+<h2><a class="anchor" id="autotoc_md90"></a>
 Copy entries</h2>
 <div class="fragment"><div class="line">:c &lt;from&gt; &lt;to&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -268,7 +276,7 @@ Copy entries</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md90"></a>
+<h2><a class="anchor" id="autotoc_md91"></a>
 Move entries</h2>
 <div class="fragment"><div class="line">:v &lt;from&gt; &lt;to&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -278,14 +286,14 @@ Move entries</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md91"></a>
+<h2><a class="anchor" id="autotoc_md92"></a>
 Undo</h2>
 <div class="fragment"><div class="line">:z</div>
 </div><!-- fragment --><dl class="params">
 <dt>Parameters </dt>
 <dd>(<em>none</em>) </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md92"></a>
+<h2><a class="anchor" id="autotoc_md93"></a>
 Redo</h2>
 <div class="fragment"><div class="line">:y</div>
 </div><!-- fragment --><dl class="params">

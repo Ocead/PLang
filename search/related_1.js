@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['path_5fmanager_0',['path_manager',['../classplang_1_1root_1_1path.html#ab73ceb948e592037576e7a34ff1612d3',1,'plang::root::path']]]
+  ['corpus_0',['corpus',['../classplang_1_1detail_1_1base__types_1_1persisted.html#a94a213de9d8c6b717a273a8c6ca139bc',1,'plang::detail::base_types::persisted']]]
 ];

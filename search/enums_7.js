@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['qualification_0',['qualification',['../classplang_1_1format.html#a24332e45875807418391c4ba23ce3235',1,'plang::format']]]
+  ['prompt_0',['prompt',['../classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474',1,'plang::cli']]]
 ];

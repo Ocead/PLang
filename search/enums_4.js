@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['enrich_0',['enrich',['../classplang_1_1format.html#afb0c97418a9bbf661b3d7fd89c304026',1,'plang::format']]]
+  ['font_0',['font',['../structplang_1_1format_1_1style.html#af6826256558f061dba9ef7d0e200df19',1,'plang::format::style']]]
 ];

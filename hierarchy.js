@@ -7,33 +7,29 @@ var hierarchy =
     [ "plang::detail::corpus", "classplang_1_1detail_1_1corpus.html", [
       [ "plang::corpus", "classplang_1_1corpus.html", null ],
       [ "plang::detail::path_manager", "classplang_1_1detail_1_1path__manager.html", [
-        [ "plang::detail::mixin_base< plang::detail::path_manager >", "structplang_1_1detail_1_1mixin__base.html", [
+        [ "plang::detail::mixin_base< plang::detail::path_manager, plang::detail::symbol_class_manager >", "structplang_1_1detail_1_1mixin__base.html", [
           [ "plang::detail::corpus_mixins", "structplang_1_1detail_1_1corpus__mixins.html", [
             [ "plang::corpus", "classplang_1_1corpus.html", null ]
           ] ]
         ] ],
-        [ "plang::detail::mixin_base< Tps >", "structplang_1_1detail_1_1mixin__base.html", null ]
-      ] ]
+        [ "plang::detail::mixin_base< Tps >", "structplang_1_1detail_1_1mixin__base.html", null ],
+        [ "plang::detail::symbol_class_manager", "classplang_1_1detail_1_1symbol__class__manager.html", [
+          [ "plang::detail::mixin_base< plang::detail::path_manager, plang::detail::symbol_class_manager >", "structplang_1_1detail_1_1mixin__base.html", null ],
+          [ "plang::detail::mixin_base< Tps >", "structplang_1_1detail_1_1mixin__base.html", null ]
+        ] ]
+      ] ],
+      [ "plang::detail::symbol_class_manager", "classplang_1_1detail_1_1symbol__class__manager.html", null ],
+      [ "plang::detail::symbol_manager", "classplang_1_1detail_1_1symbol__manager.html", null ]
     ] ],
     [ "plang::detail::base_types::decorated", "classplang_1_1detail_1_1base__types_1_1decorated.html", [
       [ "plang::plot::object::clazz", "classplang_1_1plot_1_1object_1_1clazz.html", null ],
       [ "plang::plot::symbol", "classplang_1_1plot_1_1symbol.html", null ],
       [ "plang::root::path", "classplang_1_1root_1_1path.html", null ]
     ] ],
-    [ "entry_ref_t", null, [
-      [ "plang::entry_ref", "classplang_1_1entry__ref.html", null ]
-    ] ],
-    [ "entry_t", null, [
-      [ "plang::entry", "classplang_1_1entry.html", null ]
-    ] ],
-    [ "entry_type_t", null, [
-      [ "plang::entry_type", "classplang_1_1entry__type.html", null ]
-    ] ],
     [ "plang::format", "classplang_1_1format.html", null ],
     [ "plang::detail::fun_col< TableTp, ColTp, I >", "classplang_1_1detail_1_1fun__col.html", null ],
     [ "hash", null, [
-      [ "std::hash< plang::detail::cls_col< TableTp, ColTp, I > >", "structstd_1_1hash_3_01plang_1_1detail_1_1cls__col_3_01_table_tp_00_01_col_tp_00_01_i_01_4_01_4.html", null ],
-      [ "std::hash< plang::entry_type >", "structstd_1_1hash_3_01plang_1_1entry__type_01_4.html", null ]
+      [ "std::hash< plang::detail::cls_col< TableTp, ColTp, I > >", "structstd_1_1hash_3_01plang_1_1detail_1_1cls__col_3_01_table_tp_00_01_col_tp_00_01_i_01_4_01_4.html", null ]
     ] ],
     [ "std::hash< plang::detail::corpus::tag< T > >", "structstd_1_1hash_3_01plang_1_1detail_1_1corpus_1_1tag_3_01_t_01_4_01_4.html", null ],
     [ "std::hash< plang::detail::fun_col< TableTp, ColTp, I > >", "structstd_1_1hash_3_01plang_1_1detail_1_1fun__col_3_01_table_tp_00_01_col_tp_00_01_i_01_4_01_4.html", null ],
@@ -85,6 +81,9 @@ var hierarchy =
       ] ]
     ] ],
     [ "plang::detail::base_types::sourced", "classplang_1_1detail_1_1base__types_1_1sourced.html", [
+      [ "plang::plot::symbol", "classplang_1_1plot_1_1symbol.html", null ],
+      [ "plang::plot::symbol::clazz", "classplang_1_1plot_1_1symbol_1_1clazz.html", null ],
+      [ "plang::plot::symbol::clazz::hint", "classplang_1_1plot_1_1symbol_1_1clazz_1_1hint.html", null ],
       [ "plang::root::path", "classplang_1_1root_1_1path.html", null ]
     ] ],
     [ "plang::detail::stmt_finalizer", "structplang_1_1detail_1_1stmt__finalizer.html", null ],
@@ -95,7 +94,7 @@ var hierarchy =
     [ "plang::detail::template_transform< T >", "structplang_1_1detail_1_1template__transform.html", null ],
     [ "plang::detail::template_transform< T< Args... > >", "structplang_1_1detail_1_1template__transform_3_01_t_3_01_args_8_8_8_01_4_01_4.html", null ],
     [ "Tps", null, [
-      [ "plang::detail::mixin_base< plang::detail::path_manager >", "structplang_1_1detail_1_1mixin__base.html", null ],
+      [ "plang::detail::mixin_base< plang::detail::path_manager, plang::detail::symbol_class_manager >", "structplang_1_1detail_1_1mixin__base.html", null ],
       [ "plang::detail::mixin_base< Tps >", "structplang_1_1detail_1_1mixin__base.html", null ]
     ] ],
     [ "std::tuple", null, [

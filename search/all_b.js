@@ -9,7 +9,7 @@ var searchData=
   ['lang_5ferror_5fhint_5fmatch_6',['LANG_ERROR_HINT_MATCH',['../namespaceplang.html#a018818cd68b14b518a53d861e5d77edcaf74d1e314f02d0b3be7d85e0795014d5',1,'plang']]],
   ['lang_5ferror_5fmalformed_5fexpression_7',['LANG_ERROR_MALFORMED_EXPRESSION',['../namespaceplang.html#a018818cd68b14b518a53d861e5d77edca052e943aba8817a5365b8dff9b01cf75',1,'plang']]],
   ['lang_5ferror_5fredefinition_8',['LANG_ERROR_REDEFINITION',['../namespaceplang.html#a018818cd68b14b518a53d861e5d77edca6ea49e6d79419fa59261c3ec8f649457',1,'plang']]],
-  ['left_9',['LEFT',['../classplang_1_1format.html#a9f4e0c0a9b4a7ce38e84e64b67df7ef7a684d325a7303f52e64011467ff5c5758',1,'plang::format']]],
+  ['left_9',['LEFT',['../classplang_1_1format.html#aad88393584872bbce2e74ef171e8fb92a684d325a7303f52e64011467ff5c5758',1,'plang::format']]],
   ['license_10',['License',['../license.html',1,'']]],
   ['light_5fgray_11',['LIGHT_GRAY',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74ac09e4a151f766014faf9f6cf2683213a',1,'plang::format::style']]],
   ['like_12',['LIKE',['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit.html#a0b10656673728fa7436e45d8d48c6d66aa7598964efa10e649f92662b79e8d4d3',1,'plang::plot::object::clazz::hint::lit']]],

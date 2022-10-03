@@ -5,5 +5,5 @@ var searchData=
   ['pnt_2',['PNT',['../namespaceplang_1_1lang.html#ad153f803c229f0412791a34522b1aec6aa76553b7c674bd24efa0bacdc496a54c',1,'plang::lang']]],
   ['pnt_5fl_3',['PNT_L',['../namespaceplang_1_1lang.html#ad153f803c229f0412791a34522b1aec6ad0198f4297827b3643188c1505ba5dfc',1,'plang::lang']]],
   ['pnt_5fr_4',['PNT_R',['../namespaceplang_1_1lang.html#ad153f803c229f0412791a34522b1aec6ab3bc3b841c69115bca7eb845ef271f4c',1,'plang::lang']]],
-  ['powerline_5',['POWERLINE',['../classplang_1_1cli.html#aa3f880a592bc079e938bcf7c4b8b48cca188e83d68918de3377866cb01f5d1b7c',1,'plang::cli']]]
+  ['powerline_5',['POWERLINE',['../classplang_1_1cli.html#a1d7fe7c5ff49a7c60714cd6f182a2474a188e83d68918de3377866cb01f5d1b7c',1,'plang::cli']]]
 ];

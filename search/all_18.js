@@ -14,7 +14,7 @@ var searchData=
   ['_7emalformed_5fcommand_5ferror_11',['~malformed_command_error',['../classplang_1_1exception_1_1malformed__command__error.html#a44689906f396aeea25b87ab27bbe8f3a',1,'plang::exception::malformed_command_error']]],
   ['_7eno_5fcorpus_5ferror_12',['~no_corpus_error',['../classplang_1_1exception_1_1no__corpus__error.html#a81256be3b1adc1c625687a27ee36bd96',1,'plang::exception::no_corpus_error']]],
   ['_7epath_13',['~path',['../classplang_1_1root_1_1path.html#a7f5f64c2b21b4b234b35c295246497dc',1,'plang::root::path']]],
-  ['_7epath_5fmanager_14',['~path_manager',['../classplang_1_1detail_1_1path__manager.html#a70fcac42ab753e140bbca2d3373be516',1,'plang::detail::path_manager']]],
+  ['_7epath_5fmanager_14',['~path_manager',['../classplang_1_1detail_1_1path__manager.html#a98fa798ecb0a973aa8349bf4064a6e47',1,'plang::detail::path_manager']]],
   ['_7epersisted_15',['~persisted',['../classplang_1_1detail_1_1base__types_1_1persisted.html#ad5f9651a643d61adc9b3cff00dfb6304',1,'plang::detail::base_types::persisted']]],
   ['_7ereport_16',['~report',['../classplang_1_1corpus_1_1report.html#a7ac8d772929bf999184c163d6745fdbd',1,'plang::corpus::report']]],
   ['_7eresolve_5fentry_5fresult_17',['~resolve_entry_result',['../classplang_1_1resolve__entry__result.html#a22befa3efea4d948b5de11f0fac8bc38',1,'plang::resolve_entry_result']]],
@@ -22,5 +22,6 @@ var searchData=
   ['_7esource_19',['~source',['../classplang_1_1root_1_1source.html#a9311da52295239bb51c8464a7c4960da',1,'plang::root::source']]],
   ['_7esourced_20',['~sourced',['../classplang_1_1detail_1_1base__types_1_1sourced.html#a91d3a4b58fd7f8f9b52bc81729672d14',1,'plang::detail::base_types::sourced']]],
   ['_7estream_5fhelper_21',['~stream_helper',['../classplang_1_1detail_1_1stream__helper.html#ac3bac610a9cdc54fc8ed53919c4f2f51',1,'plang::detail::stream_helper']]],
-  ['_7eunknown_5fcommand_5ferror_22',['~unknown_command_error',['../classplang_1_1exception_1_1unknown__command__error.html#a9fe43ca5a831a092cee2ff448a2e43f0',1,'plang::exception::unknown_command_error']]]
+  ['_7esymbol_5fclass_5fmanager_22',['~symbol_class_manager',['../classplang_1_1detail_1_1symbol__class__manager.html#ab99d2a5214145330f98855c0ad3a142a',1,'plang::detail::symbol_class_manager']]],
+  ['_7eunknown_5fcommand_5ferror_23',['~unknown_command_error',['../classplang_1_1exception_1_1unknown__command__error.html#a9fe43ca5a831a092cee2ff448a2e43f0',1,'plang::exception::unknown_command_error']]]
 ];

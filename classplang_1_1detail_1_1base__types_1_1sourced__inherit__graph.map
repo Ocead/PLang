@@ -1,4 +1,7 @@
 <map id="plang::detail::base_types::sourced" name="plang::detail::base_types::sourced">
-<area shape="rect" id="node1" title="Base type for traceable classes." alt="" coords="5,5,133,47"/>
-<area shape="rect" id="node2" href="$classplang_1_1root_1_1path.html" title="A node in the corpus&#39; path tree." alt="" coords="11,95,127,121"/>
+<area shape="rect" id="node1" title="Base type for traceable classes." alt="" coords="5,90,133,131"/>
+<area shape="rect" id="node2" href="$classplang_1_1plot_1_1symbol.html" title=" " alt="" coords="181,5,313,32"/>
+<area shape="rect" id="node3" href="$classplang_1_1plot_1_1symbol_1_1clazz.html" title=" " alt="" coords="181,57,313,98"/>
+<area shape="rect" id="node4" href="$classplang_1_1plot_1_1symbol_1_1clazz_1_1hint.html" title=" " alt="" coords="181,122,313,163"/>
+<area shape="rect" id="node5" href="$classplang_1_1root_1_1path.html" title="A node in the corpus&#39; path tree." alt="" coords="189,188,305,215"/>
 </map>

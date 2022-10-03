@@ -2,7 +2,7 @@ var searchData=
 [
   ['cau_5fl_0',['CAU_L',['../namespaceplang_1_1lang.html#ad153f803c229f0412791a34522b1aec6ae0e99fd694ca303b4bc082a004969097',1,'plang::lang']]],
   ['cau_5fr_1',['CAU_R',['../namespaceplang_1_1lang.html#ad153f803c229f0412791a34522b1aec6a818c0fcbb9eb71bf2aa5a8a62dbf3e89',1,'plang::lang']]],
-  ['center_2',['CENTER',['../classplang_1_1format.html#a9f4e0c0a9b4a7ce38e84e64b67df7ef7ac397289ee45877be0cd49811fe245b4e',1,'plang::format']]],
+  ['center_2',['CENTER',['../classplang_1_1format.html#aad88393584872bbce2e74ef171e8fb92ac397289ee45877be0cd49811fe245b4e',1,'plang::format']]],
   ['cli_5fconfirm_5foverride_5fsave_3',['CLI_CONFIRM_OVERRIDE_SAVE',['../namespaceplang.html#a018818cd68b14b518a53d861e5d77edcab7d10baa7d18f223a0d5fa1fd5c16682',1,'plang']]],
   ['cli_5fconfirm_5fsave_4',['CLI_CONFIRM_SAVE',['../namespaceplang.html#a018818cd68b14b518a53d861e5d77edca4d487e4015d1b139f036bc7f177fd7b2',1,'plang']]],
   ['cli_5fconfirm_5funsaved_5fquit_5',['CLI_CONFIRM_UNSAVED_QUIT',['../namespaceplang.html#a018818cd68b14b518a53d861e5d77edcaccc2a8eb1e06055720f8c44af012f56c',1,'plang']]],
@@ -29,7 +29,7 @@ var searchData=
   ['comment_26',['COMMENT',['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit.html#a0b10656673728fa7436e45d8d48c6d66af2cd320b55767434dd48d81b165ea956',1,'plang::plot::object::clazz::hint::lit::COMMENT()'],['../namespaceplang_1_1lang.html#ad153f803c229f0412791a34522b1aec6af2cd320b55767434dd48d81b165ea956',1,'plang::lang::COMMENT()']]],
   ['comment_5fl_27',['COMMENT_L',['../namespaceplang_1_1lang.html#ad153f803c229f0412791a34522b1aec6a5765fc36f3afdfea3fd2bb5a5762bdfe',1,'plang::lang']]],
   ['comment_5fr_28',['COMMENT_R',['../namespaceplang_1_1lang.html#ad153f803c229f0412791a34522b1aec6a7822b3a426eb206068fab0a3cecf13c8',1,'plang::lang']]],
-  ['compact_29',['COMPACT',['../classplang_1_1format.html#a9f4e0c0a9b4a7ce38e84e64b67df7ef7abbd53c25a2b976c1757ce1f9dbe8bd1f',1,'plang::format']]],
+  ['compact_29',['COMPACT',['../classplang_1_1format.html#aad88393584872bbce2e74ef171e8fb92abbd53c25a2b976c1757ce1f9dbe8bd1f',1,'plang::format']]],
   ['context_30',['CONTEXT',['../namespaceplang_1_1lang.html#ad153f803c229f0412791a34522b1aec6a03dcdeb793b893c48eda7952aac3c03c',1,'plang::lang']]],
   ['cyan_31',['CYAN',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74a344dd8cd533280795b9db82ef0c92749',1,'plang::format::style']]]
 ];

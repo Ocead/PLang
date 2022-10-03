@@ -10,6 +10,8 @@ var namespaceplang_1_1detail =
     [ "stmt", "classplang_1_1detail_1_1stmt.html", "classplang_1_1detail_1_1stmt" ],
     [ "stmt_finalizer", "structplang_1_1detail_1_1stmt__finalizer.html", "structplang_1_1detail_1_1stmt__finalizer" ],
     [ "stream_helper", "classplang_1_1detail_1_1stream__helper.html", "classplang_1_1detail_1_1stream__helper" ],
+    [ "symbol_class_manager", "classplang_1_1detail_1_1symbol__class__manager.html", "classplang_1_1detail_1_1symbol__class__manager" ],
+    [ "symbol_manager", "classplang_1_1detail_1_1symbol__manager.html", null ],
     [ "template_transform", "structplang_1_1detail_1_1template__transform.html", null ],
     [ "template_transform< T< Args... > >", "structplang_1_1detail_1_1template__transform_3_01_t_3_01_args_8_8_8_01_4_01_4.html", "structplang_1_1detail_1_1template__transform_3_01_t_3_01_args_8_8_8_01_4_01_4" ],
     [ "col", "namespaceplang_1_1detail.html#a7b6c1a28d49232a7ee5916745c591aa9", null ]

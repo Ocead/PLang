@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['breaks_0',['breaks',['../classplang_1_1format.html#a9f4e0c0a9b4a7ce38e84e64b67df7ef7',1,'plang::format']]]
+  ['color_0',['color',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74',1,'plang::format::style']]]
 ];

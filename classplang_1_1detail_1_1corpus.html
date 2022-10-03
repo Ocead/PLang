@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('classplang_1_1detail_1_1corpus.html','
 <div class="dynheader">
 Inheritance diagram for plang::detail::corpus:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classplang_1_1detail_1_1corpus__inherit__graph.svg" width="844" height="152"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classplang_1_1detail_1_1corpus__inherit__graph.svg" width="1064" height="215"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Provides a basic interface to a database. </p>
@@ -164,6 +164,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:ac49f68df0256ff257694389f5e6fdb07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#ac49f68df0256ff257694389f5e6fdb07">_open</a> (char const *file)</td></tr>
 <tr class="memdesc:ac49f68df0256ff257694389f5e6fdb07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a database.  <a href="classplang_1_1detail_1_1corpus.html#ac49f68df0256ff257694389f5e6fdb07">More...</a><br /></td></tr>
 <tr class="separator:ac49f68df0256ff257694389f5e6fdb07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1cfe6138c878647e9a55abf530caf9e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#aa1cfe6138c878647e9a55abf530caf9e">_begin</a> ()</td></tr>
+<tr class="separator:aa1cfe6138c878647e9a55abf530caf9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dc75f030336ab4d067a199955dc82b0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#a7dc75f030336ab4d067a199955dc82b0">_rollback</a> ()</td></tr>
+<tr class="separator:a7dc75f030336ab4d067a199955dc82b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add69f8c04aef8fba903619a9685ce2a4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#add69f8c04aef8fba903619a9685ce2a4">_commit</a> ()</td></tr>
+<tr class="separator:add69f8c04aef8fba903619a9685ce2a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a110911a2284f184f5354e3f9ec3fc75d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#a110911a2284f184f5354e3f9ec3fc75d">_check</a> (int code) const</td></tr>
 <tr class="memdesc:a110911a2284f184f5354e3f9ec3fc75d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads SQLite return codes and throws appropriate exceptions.  <a href="classplang_1_1detail_1_1corpus.html#a110911a2284f184f5354e3f9ec3fc75d">More...</a><br /></td></tr>
 <tr class="separator:a110911a2284f184f5354e3f9ec3fc75d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -404,6 +410,81 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="aa1cfe6138c878647e9a55abf530caf9e" name="aa1cfe6138c878647e9a55abf530caf9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1cfe6138c878647e9a55abf530caf9e">&#9670;&nbsp;</a></span>_begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int plang::detail::corpus::_begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7dc75f030336ab4d067a199955dc82b0" name="a7dc75f030336ab4d067a199955dc82b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dc75f030336ab4d067a199955dc82b0">&#9670;&nbsp;</a></span>_rollback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int plang::detail::corpus::_rollback </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="add69f8c04aef8fba903619a9685ce2a4" name="add69f8c04aef8fba903619a9685ce2a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add69f8c04aef8fba903619a9685ce2a4">&#9670;&nbsp;</a></span>_commit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int plang::detail::corpus::_commit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

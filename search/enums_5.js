@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['font_0',['font',['../structplang_1_1format_1_1style.html#af6826256558f061dba9ef7d0e200df19',1,'plang::format::style']]]
+  ['indent_0',['indent',['../classplang_1_1format.html#aad88393584872bbce2e74ef171e8fb92',1,'plang::format']]]
 ];

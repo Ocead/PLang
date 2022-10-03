@@ -114,11 +114,12 @@ $(document).ready(function(){initNavTree('corpus_8hpp.html',''); initResizable()
 <code>#include &lt;<a class="el" href="base_8hpp_source.html">plang/base.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="detail_8hpp_source.html">plang/corpus/detail.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="path_8hpp_source.html">plang/corpus/path.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="corpus_2plot_8hpp_source.html">plang/corpus/plot.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="plot_8hpp_source.html">plang/plot.hpp</a>&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for corpus.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="corpus_8hpp__incl.svg" width="863" height="336"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="corpus_8hpp__incl.svg" width="1414" height="486"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -143,15 +144,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplang_1_1detail_1_1corpus__mixins.html">plang::detail::corpus_mixins</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for the corpus.  <a href="structplang_1_1detail_1_1corpus__mixins.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1entry.html">plang::entry</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Any single persist-able entry.  <a href="classplang_1_1entry.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1entry__ref.html">plang::entry_ref</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to any persist-able entry.  <a href="classplang_1_1entry__ref.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1entry__type.html">plang::entry_type</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Any persist-able type.  <a href="classplang_1_1entry__type.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1resolve__entry__result.html">plang::resolve_entry_result</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Result type of variant-typed resolve methods.  <a href="classplang_1_1resolve__entry__result.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,8 +160,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstd_1_1tuple__element_3_011_00_01plang_1_1resolve__entry__result_01_4.html">std::tuple_element&lt; 1, plang::resolve_entry_result &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstd_1_1tuple__element_3_012_00_01plang_1_1resolve__entry__result_01_4.html">std::tuple_element&lt; 2, plang::resolve_entry_result &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstd_1_1hash_3_01plang_1_1entry__type_01_4.html">std::hash&lt; plang::entry_type &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -189,12 +179,21 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a2007ea253163252b17d226e61895a8c6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceplang.html#a2007ea253163252b17d226e61895a8c6">plang::entry_t</a> = std::variant&lt; std::monostate, <a class="el" href="classplang_1_1root_1_1source.html">plang::source</a>, <a class="el" href="classplang_1_1root_1_1path.html">plang::path</a>, <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plang::plot::symbol::clazz</a>, <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz_1_1hint.html">plang::plot::symbol::clazz::hint</a>, <a class="el" href="classplang_1_1plot_1_1symbol.html">plang::plot::symbol</a>, <a class="el" href="classplang_1_1plot_1_1symbol_1_1compound.html">plang::plot::symbol::compound</a>, <a class="el" href="classplang_1_1plot_1_1point_1_1clazz.html">plang::plot::point::clazz</a>, <a class="el" href="classplang_1_1plot_1_1point_1_1clazz_1_1hint.html">plang::plot::point::clazz::hint</a>, <a class="el" href="classplang_1_1plot_1_1point_1_1subject_1_1sym.html">plang::plot::point::subject::sym</a>, <a class="el" href="classplang_1_1plot_1_1point_1_1subject_1_1cls.html">plang::plot::point::subject::cls</a>, <a class="el" href="classplang_1_1plot_1_1point.html">plang::plot::point</a>, <a class="el" href="classplang_1_1plot_1_1object_1_1clazz.html">plang::plot::object::clazz</a>, <a class="el" href="classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit.html">plang::plot::object::clazz::hint::lit</a>, <a class="el" href="classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1sym.html">plang::plot::object::clazz::hint::sym</a>, <a class="el" href="classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1pnt.html">plang::plot::object::clazz::hint::pnt</a>, <a class="el" href="classplang_1_1plot_1_1object_1_1lit.html">plang::plot::object::lit</a>, <a class="el" href="classplang_1_1plot_1_1object_1_1sym.html">plang::plot::object::sym</a>, <a class="el" href="classplang_1_1plot_1_1object_1_1cls.html">plang::plot::object::cls</a>, <a class="el" href="classplang_1_1plot_1_1object_1_1pnt.html">plang::plot::object::pnt</a> &gt;</td></tr>
 <tr class="memdesc:a2007ea253163252b17d226e61895a8c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variant of all persist-able classes.  <a href="namespaceplang.html#a2007ea253163252b17d226e61895a8c6">More...</a><br /></td></tr>
 <tr class="separator:a2007ea253163252b17d226e61895a8c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6330287f0bb6f6579aef241e24b0b1fb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceplang.html#a6330287f0bb6f6579aef241e24b0b1fb">plang::entry</a> = entry_t</td></tr>
+<tr class="memdesc:a6330287f0bb6f6579aef241e24b0b1fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Any single persist-able entry.  <a href="namespaceplang.html#a6330287f0bb6f6579aef241e24b0b1fb">More...</a><br /></td></tr>
+<tr class="separator:a6330287f0bb6f6579aef241e24b0b1fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0434f024dfd0b0e2b510534e93c6a13e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceplang.html#a0434f024dfd0b0e2b510534e93c6a13e">plang::entry_ref_t</a> = typename detail::template_transform&lt; entry_t &gt;::template type&lt; std::reference_wrapper &gt;</td></tr>
 <tr class="memdesc:a0434f024dfd0b0e2b510534e93c6a13e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variant of references to persist-able entries.  <a href="namespaceplang.html#a0434f024dfd0b0e2b510534e93c6a13e">More...</a><br /></td></tr>
 <tr class="separator:a0434f024dfd0b0e2b510534e93c6a13e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5d3d39cd78ce4c9753f7f96de823647"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceplang.html#ae5d3d39cd78ce4c9753f7f96de823647">plang::entry_ref</a> = entry_ref_t</td></tr>
+<tr class="memdesc:ae5d3d39cd78ce4c9753f7f96de823647"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to any persist-able entry.  <a href="namespaceplang.html#ae5d3d39cd78ce4c9753f7f96de823647">More...</a><br /></td></tr>
+<tr class="separator:ae5d3d39cd78ce4c9753f7f96de823647"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d7f5e7e6a1e3cb8244f04334b275865"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceplang.html#a0d7f5e7e6a1e3cb8244f04334b275865">plang::entry_type_t</a> = typename detail::template_transform&lt; entry_t &gt;::template type&lt; detail::corpus::tag &gt;</td></tr>
 <tr class="memdesc:a0d7f5e7e6a1e3cb8244f04334b275865"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variant of tags for persist-able types.  <a href="namespaceplang.html#a0d7f5e7e6a1e3cb8244f04334b275865">More...</a><br /></td></tr>
 <tr class="separator:a0d7f5e7e6a1e3cb8244f04334b275865"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc56a754a27f7c532f6c26276807639c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceplang.html#afc56a754a27f7c532f6c26276807639c">plang::entry_type</a> = entry_type_t</td></tr>
+<tr class="memdesc:afc56a754a27f7c532f6c26276807639c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Any persist-able type.  <a href="namespaceplang.html#afc56a754a27f7c532f6c26276807639c">More...</a><br /></td></tr>
+<tr class="separator:afc56a754a27f7c532f6c26276807639c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f3ca53538eb08b9a169f64bfe7e5d92"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceplang.html#a0f3ca53538eb08b9a169f64bfe7e5d92">plang::resolve_entry_ref_result</a> = std::tuple&lt; entry &amp;, std::vector&lt; entry &gt;, action &gt;</td></tr>
 <tr class="memdesc:a0f3ca53538eb08b9a169f64bfe7e5d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Result type of variant-typed resolve methods.  <a href="namespaceplang.html#a0f3ca53538eb08b9a169f64bfe7e5d92">More...</a><br /></td></tr>
 <tr class="separator:a0f3ca53538eb08b9a169f64bfe7e5d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
