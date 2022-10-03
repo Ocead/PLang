@@ -53,9 +53,9 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include <plang/base.hpp>
 #include <plang/corpus/detail.hpp>
-#include <unordered_map>
 
 namespace plang::detail {
 
@@ -78,7 +78,8 @@ namespace plang::detail {
         /// Setting this to the id of the root node will treat \p path as fully-qualified.
         /// \return Tuple of the most fit node and the index it matches \p path up to.<br/>
         /// \throw plang::exception::ambiguous_reference_error If two or more nodes are most viable
-        std::tuple<pkey_t, uint_t> _resolve(std::vector<std::tuple<pkey_t, uint_t>> const& candidates, pkey_t scope = -1) const;
+        std::tuple<pkey_t, uint_t> _resolve(std::vector<std::tuple<pkey_t, uint_t>> const &candidates,
+                                            pkey_t scope = -1) const;
 
         std::vector<pkey_t> get_children(pkey_t id) const;
 
@@ -100,48 +101,51 @@ namespace plang::detail {
 
         ostream_t &print_helper(ostream_t &os, pkey_t id, format format) const;
 
+    protected:
+        ostream_t &print_decoration(ostream_t &os, pkey_t id, format format) const;
+
     public:
         /// \brief Fetches a persisted path node
         /// \param id Id of the node
-        /// \param texts `true`, if texts should also be returned
+        /// \param dynamic `true`, if texts should also be returned
         /// \return The persisted node
-        std::optional<path> fetch(pkey_t id, bool_t texts = false, corpus::tag<class path> = {}) const;
+        std::optional<path> fetch(pkey_t id, bool_t dynamic = false, corpus::tag<class path> = {}) const;
 
         /// \brief Fetches multiple persisted path nodes
         /// \param ids Ids of the node
-        /// \param texts `true`, if texts should also be returned
+        /// \param dynamic `true`, if texts should also be returned
         /// \return The persisted nodes
         std::vector<path> fetch_n(std::vector<pkey_t> const &ids,
-                                  bool_t texts            = false,
+                                  bool_t dynamic          = false,
                                   corpus::tag<class path> = {}) const;
 
         /// \brief Fetches all persisted path nodes
-        /// \param texts `true`, if texts should also be returned
+        /// \param dynamic `true`, if texts should also be returned
         /// \param limit Limits the output to up to <code>\p limit</code> entries
         /// \param offset Skips the first <code>\p offset</code> entries
         /// \return The list of persisted path nodes
         std::vector<path>
-        fetch_all(bool_t texts = true, int_t limit = -1, int_t offset = 0, corpus::tag<class path> = {}) const;
+        fetch_all(bool_t dynamic = true, int_t limit = -1, int_t offset = 0, corpus::tag<class path> = {}) const;
 
         resolve_result<path> resolve(std::vector<string_t> const &path,
                                      class path const &ctx,
                                      bool_t insert           = false,
-                                     bool_t texts            = false,
+                                     bool_t dynamic          = false,
                                      corpus::tag<class path> = {});
 
         resolve_result<path> resolve(std::vector<string_t> const &path,
                                      class path const &ctx,
-                                     bool_t texts            = false,
+                                     bool_t dynamic          = false,
                                      corpus::tag<class path> = {}) const;
 
         resolve_ref_result<path> resolve(std::vector<string_t> const &path,
                                          class path &ent,
                                          class path const &ctx,
-                                         bool_t insert = false,
-                                         bool_t texts  = false);
+                                         bool_t insert  = false,
+                                         bool_t dynamic = false);
 
         resolve_ref_result<path>
-        resolve(std::vector<string_t> const &path, class path &ent, class path const &ctx, bool_t texts = false) const;
+        resolve(std::vector<string_t> const &path, class path &ent, class path const &ctx, bool_t dynamic = false) const;
 
         /// \brief Inserts a new path node
         /// \param path Node to insert
@@ -151,9 +155,9 @@ namespace plang::detail {
 
         /// \brief Updates a path node
         /// \param path Node to update
-        /// \param texts `true`, if texts should also be updated
+        /// \param dynamic `true`, if texts should also be updated
         /// \return The updated node
-        action update(path &path, bool_t texts = false, corpus::tag<class path> = {});
+        action update(path &path, bool_t dynamic = false, corpus::tag<class path> = {});
 
         /// \brief Returns a representation of a persisted node
         /// \param id Id of the node to represent
@@ -165,7 +169,7 @@ namespace plang::detail {
         /// \param path Node to remove
         /// \param cascade <code>true</code>, if dependant objects should be removed to
         /// \return The representation of the removed node
-        string_t remove(path &path, bool_t cascade, corpus::tag<class path> = {});
+        std::tuple<string_t, action> remove(path &path, bool_t cascade, corpus::tag<class path> = {});
 
         /// \brief Wipes the whole path tree
         /// \warning Calling this function will delete <b>all</b> content from the corpus!
@@ -184,7 +188,7 @@ namespace plang::detail {
         /// \details The root node is defined by having an empty name and being its own parent
         pkey_t get_root_path_id() const;
 
-        ~path_manager() = default;
+        ~path_manager();
     };
 
 }// namespace plang::detail

@@ -517,7 +517,10 @@ TEST_CASE("Path API", "[api]") {
                 auto r  = corpus.resolve<path>({"abc"}, root, true).entry();
                 auto id = r.get_id();
 
-                REQUIRE(corpus.remove(r, false) == ".abc");
+                auto [repr, action] = corpus.remove(r, false);
+
+                REQUIRE(repr == ".abc");
+                REQUIRE(action == action::REMOVE);
                 REQUIRE(!corpus.fetch<path>(id).has_value());
             }
 
@@ -526,7 +529,10 @@ TEST_CASE("Path API", "[api]") {
                 auto id = r1.get_parent_id();
                 auto r  = corpus.fetch<path>(id).value();
 
-                REQUIRE(corpus.remove(r, false) == ".abc");
+                auto [repr, action] = corpus.remove(r, false);
+
+                REQUIRE(repr == ".abc");
+                REQUIRE(action == action::FAIL);
                 REQUIRE(corpus.fetch<path>(id).has_value());
             }
 
@@ -544,7 +550,10 @@ TEST_CASE("Path API", "[api]") {
                 auto r  = corpus.resolve<path>({"abc"}, root, true).entry();
                 auto id = r.get_id();
 
-                REQUIRE(corpus.remove(r, true) == ".abc");
+                auto [repr, action] = corpus.remove(r, true);
+
+                REQUIRE(repr == ".abc");
+                REQUIRE(action == action::REMOVE);
                 REQUIRE(!corpus.fetch<path>(id).has_value());
             }
 
@@ -553,7 +562,10 @@ TEST_CASE("Path API", "[api]") {
                 auto id = r1.get_parent_id();
                 auto r  = corpus.fetch<path>(id).value();
 
-                REQUIRE(corpus.remove(r, true) == ".abc");
+                auto [repr, action] = corpus.remove(r, true);
+
+                REQUIRE(repr == ".abc");
+                REQUIRE(action == action::REMOVE);
                 REQUIRE(!corpus.fetch<path>(id).has_value());
             }
 
@@ -568,7 +580,7 @@ TEST_CASE("Path API", "[api]") {
         }
     }
 
-    corpus.wipe();
+    //corpus.wipe();
 }
 
 TEST_CASE("Path Parser", "[parser]") {
@@ -814,5 +826,5 @@ TEST_CASE("Path Parser", "[parser]") {
         }
     }
 
-    corpus.wipe();
+    //corpus.wipe();
 }

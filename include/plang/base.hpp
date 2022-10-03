@@ -37,7 +37,7 @@ namespace plang {
         /// Maps to <code>DOUBLE PRECISION</code> in SQLite
         using float_t  = std::double_t;
         /// \brief Character type
-        using char_t = char;
+        using char_t   = char;
         /// \brief Text type
         ///
         /// Maps to <code>Text</code> in SQLite
@@ -101,7 +101,7 @@ namespace plang {
 
             /// \brief Explicit constructor
             /// \param val Initialization value
-            constexpr inline fun_col(ColTp &&val) noexcept
+            constexpr inline fun_col(ColTp const &val) noexcept
                 : value(val) {}
 
             /// \brief Copy assignment
@@ -171,7 +171,7 @@ namespace plang {
                 /// \brief Default constructor
                 ///
                 /// Sets the primary key to a value invalid for persistence
-                constexpr persisted() noexcept;
+                persisted() noexcept;
 
             public:
                 /// \brief Returns the primary key
@@ -197,7 +197,7 @@ namespace plang {
                 /// \brief Default constructor
                 ///
                 /// Sets the source id to a value invalid for persistence
-                constexpr sourced() noexcept;
+                sourced() noexcept;
 
                 /// \brief Constructs this object with a source
                 /// \param source Source of this object

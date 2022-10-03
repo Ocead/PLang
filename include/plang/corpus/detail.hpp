@@ -32,7 +32,7 @@ namespace plang {
         static const decltype(value) ENRICH_MASK;
         static const decltype(value) DETAIL_MASK;
         static const decltype(value) QUALIFICATION_MASK;
-        static const decltype(value) BREAKS_MASK;
+        static const decltype(value) INDENT_MASK;
 
     public:
         static const format PLAIN;
@@ -126,7 +126,7 @@ namespace plang {
         };
 
         /// \brief Rules for multiline printing
-        enum class breaks : decltype(value) {
+        enum class indent : decltype(value) {
             COMPACT  = 0b00 << 7,///< \brief No line breaks or extra spaces
             ONE_LINE = 0b01 << 7,///< \brief One expression per line
             LEFT     = 0b10 << 7,///< \brief Indent following lines of an expression from the left
@@ -168,11 +168,11 @@ namespace plang {
         /// \param enrich The enrich mode
         /// \param detail The detail level
         /// \param qualification The qualification level
-        /// \param breaks The line break mode
-        inline constexpr format(output output, enrich enrich, detail detail, qualification qualification, breaks breaks)
+        /// \param indent The line break mode
+        inline constexpr format(output output, enrich enrich, detail detail, qualification qualification, indent indent)
             : value(static_cast<decltype(value)>(output) | static_cast<decltype(value)>(enrich) |
                     static_cast<decltype(value)>(detail) | static_cast<decltype(value)>(qualification) |
-                    static_cast<decltype(value)>(breaks)) {}
+                    static_cast<decltype(value)>(indent)) {}
 
         /// \brief Returns the output mode
         /// \return The output mode
@@ -224,14 +224,14 @@ namespace plang {
 
         // \brief Returns the line break rule
         /// \return The line break rule
-        inline constexpr breaks get_breaks() const {
-            return static_cast<enum breaks>(value & BREAKS_MASK);
+        inline constexpr indent get_indent() const {
+            return static_cast<enum indent>(value & INDENT_MASK);
         }
 
         /// \brief Sets the line break rule
-        /// \param breaks The line break rule
-        inline constexpr void set_breaks(breaks breaks) {
-            value = (value & ~BREAKS_MASK) | static_cast<decltype(value)>(breaks);
+        /// \param indent The line break rule
+        inline constexpr void set_indent(indent indent) {
+            value = (value & ~INDENT_MASK) | static_cast<decltype(value)>(indent);
         }
 
         template<typename T>
@@ -250,6 +250,12 @@ namespace plang {
         /// \return The formatted string
         string_t operator()(string_t const &str, style const &style) const;
 
+        /// Applies a style to a character
+        /// \param chr Character to format
+        /// \param style Style to apply
+        /// \return The formatted string
+        string_t operator()(char_t str, style const &style) const;
+
         /// \brief Default destructor
         inline ~format() noexcept = default;
     };
@@ -259,7 +265,7 @@ namespace plang {
         NONE,  ///< \brief No action performed
         INSERT,///< \brief Entry was inserted
         UPDATE,///< \brief Entry was updated
-        DELETE,///< \brief Entry was deleted
+        REMOVE,///< \brief Entry was deleted
         FAIL   ///< \brief Action failed
     };
 
@@ -275,7 +281,7 @@ namespace plang {
             : Base(std::forward<Base>(fref)) {}
 
         inline bool_t has_result() const {
-            return std::get<0>(*this).index() != 0;
+            return std::get<0>(*this).has_value();
         }
 
         inline T &entry() {
@@ -396,6 +402,12 @@ namespace plang {
             /// \brief Opens a database
             /// \param file Path to the database file
             void _open(char const *file);
+
+            int _begin();
+
+            int _rollback();
+
+            int _commit();
 
             /// \brief Reads SQLite return codes and throws appropriate exceptions
             /// \param code Return code

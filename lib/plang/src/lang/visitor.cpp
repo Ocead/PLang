@@ -4,10 +4,51 @@
 
 #include "lang/visitor.hpp"
 #include <algorithm>
+#include <plang/error.hpp>
 #include "lang/forms.hpp"
 
+using namespace plang;
+using namespace plang::plot;
 using namespace plang::lang;
 using namespace plang::lang::generated;
+
+resolve_entry_result form_to_path(corpus &corpus, path const &scope, path_form const &form) {
+    std::vector<string_t> nodes;
+    nodes.reserve(form.nodes.size() + (form.qualified ? 1 : 0));
+    if (form.qualified) { nodes.push_back(""); }
+    std::transform(form.nodes.begin(), form.nodes.end(), std::back_inserter(nodes), [](auto &e) {
+        return std::any_cast<antlr4::tree::TerminalNode *>(e)->toString();
+    });
+
+    auto result = corpus.resolve(nodes, detail::corpus::tag<path>(), scope, true);
+
+    if (result.has_result() && form.decoration) {
+        auto &path = std::get<class path>(result.entry());
+        if (form.decoration->ordinal) {
+            string_t ordinal_str   = form.decoration->ordinal->toString();
+            plang::float_t ordinal = std::stod(ordinal_str);
+            path.set_ordinal(ordinal);
+        } else {
+            path.set_ordinal();
+        }
+
+        if (form.decoration->description) {
+            string_t desc_str = form.decoration->description->toString();
+            char delim        = desc_str[0];
+            std::istringstream ss{desc_str, std::ios_base::in};
+            string_t desc;
+            ss >> std::quoted(desc, delim, '\\');
+            path.set_description(desc);
+        } else {
+            path.set_description();
+        }
+
+        auto action = corpus.update(path, true);
+        return {result.entry(), {}, result.action() != action::NONE ? result.action() : action};
+    }
+
+    return result;
+}
 
 void visitor::sort_result(plang::column_types::string_t &&repr, plang::resolve_entry_result &ref) {
     switch (ref.action()) {
@@ -20,7 +61,7 @@ void visitor::sort_result(plang::column_types::string_t &&repr, plang::resolve_e
         case action::UPDATE:
             _report.update(std::move(ref.entry()));
             break;
-        case action::DELETE:
+        case action::REMOVE:
             break;
         case action::FAIL:
             _report.fail(std::move(repr), std::move(ref.candidates()));
@@ -32,10 +73,12 @@ visitor::visitor()
       scope(std::nullopt),
       _report() {}
 
-visitor::visitor(class corpus &corpus, const plang::root::path &scope)
+visitor::visitor(class corpus &corpus, const plang::root::path &scope, bool_t strict, bool_t implicit)
     : corpus(&corpus),
       scope(scope),
-      _report() {}
+      _report(),
+      strict(strict),
+      implicit(implicit) {}
 
 std::any visitor::visitDeclSVO(generated::PlangParser::DeclSVOContext *ctx) {
     auto result = PlangBaseVisitor::visitDeclSVO(ctx);
@@ -83,7 +126,7 @@ namespace plang::lang {
         }
         std::any visitContextDecl(PlangParser::ContextDeclContext *ctx) override {
             auto result = visitContext(ctx->context());
-            auto path = std::any_cast<plang::resolve_entry_result>(result);
+            auto path   = std::any_cast<plang::resolve_entry_result>(result);
             if (path.has_result()) {
                 scope           = std::get<class path>(path.entry());
                 _report.scope() = scope;
@@ -153,14 +196,8 @@ namespace plang::lang {
             if (ctx->decoration()) {
                 form.decoration = std::any_cast<decoration_form>(visitDecoration(ctx->decoration()));
             }
-            std::vector<string_t> nodes;
-            nodes.reserve(form.nodes.size() + (form.qualified ? 1 : 0));
-            if (form.qualified) { nodes.push_back(""); }
-            std::transform(form.nodes.begin(), form.nodes.end(), std::back_inserter(nodes), [](auto &e) {
-                return std::any_cast<antlr4::tree::TerminalNode *>(e)->toString();
-            });
 
-            auto result = corpus->resolve(nodes, detail::corpus::tag<path>(), scope.value(), true);
+            auto result = form_to_path(*corpus, *scope, form);
 
             if (result.has_result() && form.decoration) {
                 auto &path = std::get<class path>(result.entry());
@@ -209,23 +246,153 @@ namespace plang::lang {
     class symbol_visitor : public virtual visitor {
     public:
         std::any visitSymbolUnqualifiedClass(PlangParser::SymbolUnqualifiedClassContext *ctx) override {
-            auto form = std::any_cast<path_form>(visitPathUnqualifiedPath(ctx->pathUnqualifiedPath()));
-            return symbol_class_form{form, {}, false};
+            symbol_class_form form;
+
+            if (ctx->pathUnqualifiedPath()) {
+                auto path_form = std::any_cast<struct path_form>(visitPathUnqualifiedPath(ctx->pathUnqualifiedPath()));
+                form           = symbol_class_form{path_form, {}, false};
+            } else {
+                form = symbol_class_form{{}, {}, false};
+            }
+
+            if (ctx->symbolClassList()) {
+                auto list = std::any_cast<any_vector>(visitSymbolClassList(ctx->symbolClassList()));
+
+                for (auto const &e : list) { form.list.push_back(e); }
+            }
+
+            return form;
         }
 
         std::any visitSymbolQualifiedClass(PlangParser::SymbolQualifiedClassContext *ctx) override {
-            auto form = std::any_cast<path_form>(visitPathQualifiedPath(ctx->pathQualifiedPath()));
-            return symbol_class_form{form, {}, false};
+            auto path_form = std::any_cast<struct path_form>(visitPathQualifiedPath(ctx->pathQualifiedPath()));
+            auto form      = symbol_class_form{path_form, {}, false};
+
+            if (ctx->symbolClassList()) {
+                auto list = std::any_cast<any_vector>(visitSymbolClassList(ctx->symbolClassList()));
+
+                for (auto const &e : list) { form.list.push_back(e); }
+            }
+
+            return form;
         }
 
-        std::any visitSymbolRecursiveClass(PlangParser::SymbolRecursiveClassContext *ctx) override {
-            auto form      = std::any_cast<symbol_class_form>(visitSymbolSimpleClass(ctx->symbolSimpleClass()));
-            form.recursive = true;
+        std::any visitSymbolClass(PlangParser::SymbolClassContext *ctx) override {
+            auto form = std::any_cast<symbol_class_form>(visitSymbolSimpleClass(ctx->symbolSimpleClass()));
+            if (ctx->OP_RECUR()) { form.recursive = true; }
             return form;
+        }
+
+        std::any visitSymbolClassDecl(PlangParser::SymbolClassDeclContext *ctx) override {
+            auto form = std::any_cast<symbol_class_form>(visitSymbolSimpleClass(ctx->symbolSimpleClass()));
+            if (ctx->decoration()) {
+                form.path.decoration = std::any_cast<decoration_form>(visitDecoration(ctx->decoration()));
+            }
+
+            any_vector classes;
+
+            auto path = form_to_path(*corpus, *scope, form.path);
+            if (!path.has_result()) {
+                return path;
+            }
+            auto result =
+                    corpus->resolve({}, detail::corpus::tag<symbol::clazz>(), std::get<class path>(path.entry()), true);
+            classes.push_back(result);
+
+            for (auto const &e : form.list) {
+                *form.path.nodes.rbegin() = e;
+                auto p                    = form_to_path(*corpus, *scope, form.path);
+                if (!p.has_result()) {
+                    return p;
+                }
+                auto r = corpus->resolve({}, detail::corpus::tag<symbol::clazz>(), p.entry(), true);
+                classes.push_back(r);
+            }
+
+            if (ctx->hintSymbolClassList()) {
+                auto hint_forms = std::any_cast<any_vector>(visitHintSymbolClassList(ctx->hintSymbolClassList()));
+                std::vector<symbol::clazz::hint> hints;
+                any_vector hint_classes;
+
+                for (auto const &e : hint_forms) {
+                    auto hint_form = std::any_cast<symbol_class_form>(e);
+                    auto p         = form_to_path(*corpus, *scope, hint_form.path);
+                    if (!p.has_result()) {
+                        return p;
+                    }
+                    auto result2 = corpus->resolve({},
+                                                   detail::corpus::tag<symbol::clazz>(),
+                                                   std::get<class path>(p.entry()),
+                                                   implicit);
+
+                    hint_classes.push_back(result2);
+
+                    if (result2.action() == action::FAIL) {
+                        //TODO: Throw runtime error
+                    } else {
+                        symbol::clazz::hint h{std::get<symbol::clazz>(result2.entry())};
+                        h.set_recursive(hint_form.recursive);
+
+                        hints.push_back(h);
+
+                        for (auto const &e2 : hint_form.list) {
+                            *hint_form.path.nodes.rbegin() = e2;
+                            auto p2                        = form_to_path(*corpus, *scope, hint_form.path);
+                            if (!p2.has_result()) {
+                                return p2;
+                            }
+                            auto r2 = corpus->resolve({},
+                                                      detail::corpus::tag<symbol::clazz>(),
+                                                      std::get<class path>(p2.entry()),
+                                                      implicit);
+                            symbol::clazz::hint h2{std::get<symbol::clazz>(r2.entry())};
+                            h2.set_recursive(hint_form.recursive);
+
+                            hints.push_back(h2);
+                            hint_classes.push_back(r2);
+                        }
+                    }
+                }
+
+                for (auto &c : classes) {
+                    resolve_entry_result &r2 = *std::any_cast<resolve_entry_result>(&c);
+                    symbol::clazz &clazz     = std::get<symbol::clazz>(r2.entry());
+                    clazz.get_hints()        = hints;
+
+                    auto a = corpus->update(clazz, true);
+                    if (r2.action() != action::INSERT && r2.action() != action::FAIL) { r2 = {clazz, {}, a}; }
+                }
+
+                classes.reserve(classes.size() + hint_classes.size());
+                classes.insert(classes.end(),
+                               std::make_move_iterator(hint_classes.begin()),
+                               std::make_move_iterator(hint_classes.end()));
+            }
+
+            return classes;
+        }
+
+        std::any visitSymbolClassRef(PlangParser::SymbolClassRefContext *ctx) override {
+            auto form = std::any_cast<symbol_class_form>(visitSymbolClass(ctx->symbolClass()));
+
+            auto p = form_to_path(*corpus, *scope, form.path);
+            if (p.has_result()) {
+                auto result = corpus->resolve({},
+                                              detail::corpus::tag<symbol::clazz>(),
+                                              std::get<class path>(p.entry()),
+                                              false);
+                return result;
+            } else {
+                return p;
+            }
         }
     };
 
-    class visitor_impl : public virtual visitor, public path_visitor, public context_visitor, public hint_visitor {
+    class visitor_impl : public virtual visitor,
+                         public path_visitor,
+                         public symbol_visitor,
+                         public context_visitor,
+                         public hint_visitor {
 
     protected:
         std::any aggregateResult(std::any aggregate, std::any next_result) override {
@@ -275,16 +442,21 @@ namespace plang::lang {
         }
 
     public:
-        visitor_impl(class corpus &corpus, plang::path const &scope)
-            : visitor(corpus, scope) {}
+        visitor_impl(class corpus &corpus, plang::path const &scope, bool_t strict, bool_t implicit)
+            : visitor(corpus, scope, strict, implicit) {}
     };
 
 }// namespace plang::lang
 
-std::unique_ptr<visitor> plang::lang::make_visitor(corpus &corpus, plang::path const &scope) {
-    return std::make_unique<visitor_impl>(std::ref(corpus), std::cref(scope));
+std::unique_ptr<visitor>
+plang::lang::make_visitor(corpus &corpus, plang::path const &scope, bool_t strict, bool_t implicit) {
+    return std::make_unique<visitor_impl>(std::ref(corpus), std::cref(scope), strict, implicit);
 }
 
-std::unique_ptr<visitor> plang::lang::make_visitor(corpus const &corpus, plang::path const &scope) {
-    return std::make_unique<visitor_impl>(std::ref(const_cast<class corpus &>(corpus)), std::cref(scope));
+std::unique_ptr<visitor>
+plang::lang::make_visitor(corpus const &corpus, plang::path const &scope, bool_t strict, bool_t implicit) {
+    return std::make_unique<visitor_impl>(std::ref(const_cast<class corpus &>(corpus)),
+                                          std::cref(scope),
+                                          strict,
+                                          implicit);
 }

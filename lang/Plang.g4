@@ -171,38 +171,27 @@ pathRef
 
 // Symbol class
 
+symbolClassListElement
+    : WS* OP_LIST WS* pathUnqualifiedNode;
+symbolClassList
+    : symbolClassListElement+;
 symbolUnqualifiedClass
-    : pathUnqualifiedPath? OP_SYM;
+    : (pathUnqualifiedPath symbolClassList?)? OP_SYM;
 symbolQualifiedClass
-    : pathQualifiedPath OP_SYM;
+    : pathQualifiedPath symbolClassList? OP_SYM;
 symbolSimpleClass
     : symbolUnqualifiedClass
     | symbolQualifiedClass;
-symbolRecursiveClass
-    : symbolSimpleClass OP_RECUR;
-symbolClassListElement
-    : pathUnqualifiedNode;
-symbolClassListElements
-    : WS* OP_LIST WS* symbolClassListElement;
-symbolUnqualifiedClassList
-    : pathUnqualifiedPath symbolClassListElements+ OP_SYM;
-symbolQualifiedClassList
-    : pathQualifiedPath symbolClassListElements+ OP_SYM;
-symbolClassList
-    : symbolUnqualifiedClassList
-    | symbolQualifiedClassList;
 symbolClass
     : symbolSimpleClass
-    | symbolClassList
-    | symbolRecursiveClass;
+      OP_RECUR?;
 
 symbolClassDecl
     : (hintSymbolClassList WS*)?
-      (symbolSimpleClass
-    | symbolClassList)
+      symbolSimpleClass
       (WS* decoration)?;
 symbolClassRef
-    : symbolSimpleClass;
+    : symbolClass;
 
 // Symbol
 
@@ -357,14 +346,14 @@ causalSymbolRef
 causalDef
     : causalSymbolRef WS*
       (OP_NEGATE WS*)?
-      (pointClass) WS*
+      pointClassName (OP_RECUR)? WS*
       (objectCausalDefaultDecl WS*)?
       (objectCausalInlineDecl WS*)*;
 causalIndirectDef
     : (causalDef OP_INDIR WS*)?
       causalSymbolRef WS*
       (OP_NEGATE WS*)?
-      (pointClass) WS*
+      pointClassName (OP_RECUR)? WS*
       (objectCausalDefaultDecl WS*)?
       (objectCausalInlineDecl WS*)*;
 causalConcreteDef

@@ -135,7 +135,18 @@ Quits the application.
 
 # Database files
 
-## Creating/Opening a database file
+## Creating a database file
+
+```
+   :n
+```
+
+<dl class="params">
+<dt>Parameters</dt>
+<dd>(<i>none</i>)</dd>
+</dl>
+
+## Opening a database file
 
 ```
 :o <file>
@@ -261,11 +272,143 @@ Quits the application.
 /**
 \page cli_options Command Line Options
 
-## color
+[TOC]
 
-Sets color output to stdout.
+## output
 
-\note Disable color if you want to pipe the output to a file
+Sets the assumed frontend connected to stdout
+
+<dl class="params">
+<dt>Allowed values</dt>
+<dd>
+<table class="params">
+<tr>
+<td class="paramname"><u>ansi</u></td>
+<td>Includes formatting through ANSI escape sequences</td>
+</tr>
+<tr>
+<td class="paramname">readline</td>
+<td>Includes formatting through ANSI escape sequences with additional markers for Readline</td>
+</tr>
+<tr>
+<td class="paramname">html</td>
+<td>Includes formatting through HTML tags and CSS stylesheets</td>
+</tr>
+<tr>
+<td class="paramname">doxygen</td>
+<td>Includes formatting through HTML tags and CSS stylesheets provided by Doxygen</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+## enrich
+
+Sets formatting to apply
+
+<dl class="params">
+<dt>Allowed values</dt>
+<dd>
+<table class="params">
+<tr>
+<td class="paramname">plain</td>
+<td>Plain text without formatting</td>
+</tr>
+<tr>
+<td class="paramname">color</td>
+<td>Colored text</td>
+</tr>
+<tr>
+<td class="paramname">font</td>
+<td>Text with font modifications (bold, italic, etc.)</td>
+</tr>
+<tr>
+<td class="paramname"><u>rich</u></td>
+<td>Text with color and font modifications</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+## detail
+
+Sets how PLang entries should be displayed in output
+
+<dl class="params">
+<dt>Allowed values</dt>
+<dd>
+<table class="params">
+<tr>
+<td class="paramname">id_ref</td>
+<td>As reference through IDs</td>
+</tr>
+<tr>
+<td class="paramname">explicit_ref</td>
+<td>As reference without IDs</td>
+</tr>
+<tr>
+<td class="paramname"><u>definition</u></td>
+<td>Equivalent PLang markup</td>
+</tr>
+<tr>
+<td class="paramname">full</td>
+<td>Equivalent PLang markup and related information</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+## qualification
+
+Sets how paths are output
+
+<dl class="params">
+<dt>Allowed values</dt>
+<dd>
+<table class="params">
+<tr>
+<td class="paramname">unique</td>
+<td>Shortened paths where possible</td>
+</tr>
+<tr>
+<td class="paramname"><u>full</u></td>
+<td>Always fully-qualified paths</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+## indent
+
+Sets how PLang markup is indented
+
+<dl class="params">
+<dt>Allowed values</dt>
+<dd>
+<table class="params">
+<tr>
+<td class="paramname">compact</td>
+<td>Most compact notation</td>
+</tr>
+<tr>
+<td class="paramname">one_line</td>
+<td>Spaced one-line notation</td>
+</tr>
+<tr>
+<td class="paramname"><u>left</u></td>
+<td>Multiline notation, left aligned</td>
+</tr>
+<tr>
+<td class="paramname">center</td>
+<td>Multiline notation, centered</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+## implicit
+
+Whether entries may be declared implicitly
 
 <dl class="params">
 <dt>Allowed values</dt>
@@ -273,17 +416,37 @@ Sets color output to stdout.
 <table class="params">
 <tr>
 <td class="paramname"><u>true</u></td>
-<td>Enables color.</td>
+<td></td>
 </tr>
 <tr>
 <td class="paramname">false</td>
-<td>Disables color.</td>
+<td></td>
 </tr>
 </table>
 </dd>
 </dl>
 
-## wordOrder
+## strict
+
+Whether hints in class declarations are binding
+
+<dl class="params">
+<dt>Allowed values</dt>
+<dd>
+<table class="params">
+<tr>
+<td class="paramname"><u>true</u></td>
+<td></td>
+</tr>
+<tr>
+<td class="paramname">false</td>
+<td></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+## topology
 
 Sets the order for plot points.
 
@@ -360,11 +523,20 @@ namespace plang {
     /// Core class for the interactive PLang command line
     class cli {
 
-        /// The type of codepage used by the terminal emulator
-        enum class codepage {
+        /// The type of prompt being used by the command line
+        enum class prompt {
+            NONE,    ///< \brief No prompt
             UNICODE, ///< \brief Standard unicode
             POWERLINE///< \brief Unicode + powerline codepoints
         };
+
+        /// \brief Contains options to control the command line and the parser
+        struct {
+            format format;  ///< \brief Set output format
+            prompt prompt;  ///< \brief Assumed codepage of the output
+            bool_t implicit;///< \brief <code>implicit</code> option for the parser
+            bool_t strict;  ///< \brief <code>strict</code> option for the parser
+        } options;
 
         /// \brief Callback type expecting a string
         using raw_cmd_func_t = std::function<int_t(plang::corpus *, string_view_t const &)>;
@@ -381,8 +553,9 @@ namespace plang {
         static std::map<string_t, format::enrich> enrich_option_map;
         static std::map<string_t, format::detail> detail_option_map;
         static std::map<string_t, format::qualification> qualification_option_map;
-        static std::map<string_t, format::breaks> breaks_option_map;
-        static std::map<string_t, codepage> codepage_option_map;
+        static std::map<string_t, format::indent> indent_option_map;
+        static std::map<string_t, bool_t> bool_option_map;
+        static std::map<string_t, prompt> prompt_option_map;
         static cli *current_instance;
         static std::vector<string_t> autocomplete_candidates;
 
@@ -394,16 +567,14 @@ namespace plang {
         std::unordered_map<string_t, cmd_complete_func_t> completers;///< \brief Registered completers
         std::vector<string_t> help;
         std::reference_wrapper<const dict_t> dict;
-        format format;    ///< \brief Set output format
-        codepage codepage;///< \brief Assumed codepage of the output
-        bool_t unsaved;   ///< \brief Set to `true`, after each execution of PLang code that changed the corpus
-        bool_t stop;      ///< \brief Stop token for \ref prompt_loop
+        bool_t unsaved;///< \brief Set to `true`, after each execution of PLang code that changed the corpus
+        bool_t stop;   ///< \brief Stop token for \ref prompt_loop
 
         char **(*old_rl_acf)(const char *, int, int);///< \brief Old Readline autocomplete function
         cli *old_instance;                           ///< \brief Old instance managing Readline
-        const char *old_w_br_chars;     ///< \brief Old word breaking characters
+        const char *old_w_br_chars;                  ///< \brief Old word breaking characters
 
-        static std::vector<string_t> string_to_args(string_view_t const &str);
+        static std::tuple<std::vector<string_t>, std::size_t, std::size_t> string_to_args(string_view_t const &str, int_t cur = 0);
 
         /// \brief Global callback function for Readline autocomplete
         /// \param text
@@ -418,7 +589,7 @@ namespace plang {
         /// \return
         static char *candidate_generator(const char *text, int state);
 
-        static std::vector<string_t> complete_filename(string_view_t const& arg);
+        static std::vector<string_t> complete_filename(string_view_t const &arg);
 
         void check_corpus() const;
 
@@ -432,6 +603,7 @@ namespace plang {
 
         int_t _help(class corpus *, string_view_t const &);
         int_t _option(class corpus *, std::vector<string_t> const &);
+        std::vector<string_t> _option_complete(class corpus *, string_view_t const &, uint_t start, uint_t end);
         int_t _info(class corpus *, string_view_t const &);
         int_t _quit(class corpus *, string_view_t const &);
         int_t _new(class corpus *, string_view_t const &);
@@ -455,6 +627,8 @@ namespace plang {
         int_t handle_command(string_view_t const &view);
 
         int_t handle_plang(string_view_t const &view);
+
+        int_t handle_input(string_view_t const &view);
 
     public:
         /// \brief Default constructor

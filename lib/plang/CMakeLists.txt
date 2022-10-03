@@ -69,11 +69,14 @@ compile_resource(PLANG_RESOURCES xxd "${CMAKE_CURRENT_RESOURCE_DIR}/sql")
 
 add_library(plang
         src/base.cpp
+        src/plot.cpp
         src/corpus.cpp
         src/error.cpp
 
         src/corpus/path.cpp
         src/corpus/detail.cpp
+
+        src/corpus/plot/symbol_class.cpp
 
         src/data/sqlite_undo.c
 
@@ -107,7 +110,8 @@ target_link_libraries(plang
 #         ${SQLite3_LIBRARIES})
 
 add_executable(test_plang
-        test/src/corpus/root/path.cpp)
+        test/src/corpus/root/path.cpp
+        test/src/corpus/plot/symbol_class.cpp)
 target_include_directories(test_plang
         PUBLIC ${CMAKE_HOME_DIRECTORY}/include
         PRIVATE ${CMAKE_CURRENT_HOME_DIRECTORY}/test/include
@@ -116,4 +120,5 @@ target_include_directories(test_plang
 #         PRIVATE PLANG_TEST_DB="catch.plangdb")
 target_link_libraries(test_plang
         PUBLIC plang::libplang
+        PRIVATE antlr4::antlr4_static
         PRIVATE Catch2::Catch2WithMain)

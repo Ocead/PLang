@@ -28,9 +28,12 @@ namespace plang::lang {
         std::optional<path> scope;
         corpus::report _report;
 
+        bool_t strict;  ///< \brief <code>true</code>, if hints on class entries must be followed
+        bool_t implicit;///< \brief <code>true</code>, if implicit declarations of entries should be allowed
+
         visitor();
 
-        visitor(class corpus &corpus, path const &scope);
+        visitor(class corpus &corpus, path const &scope, bool_t strict, bool_t implicit);
 
     public:
         std::any visitDeclSVO(generated::PlangParser::DeclSVOContext *ctx) override;
@@ -39,12 +42,14 @@ namespace plang::lang {
 
         corpus::report const &get_report() const;
 
-        path const & get_scope() const;
+        path const &get_scope() const;
     };
 
-    std::unique_ptr<visitor> make_visitor(corpus &corpus, plang::path const &scope);
+    std::unique_ptr<visitor>
+    make_visitor(corpus &corpus, plang::path const &scope, bool_t strict = false, bool_t implicit = true);
 
-    std::unique_ptr<visitor> make_visitor(corpus const &corpus, plang::path const &scope);
+    std::unique_ptr<visitor>
+    make_visitor(corpus const &corpus, plang::path const &scope, bool_t strict = false, bool_t implicit = true);
 
 }// namespace plang::lang
 

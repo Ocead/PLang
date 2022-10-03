@@ -19,7 +19,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS plot_symbol_class_uindex
     on plot_symbol_class (id);
 
 CREATE UNIQUE INDEX IF NOT EXISTS plot_symbol_class_path_id_uindex
-    on plot_symbol_class (id, path_id);
+    on plot_symbol_class (path_id);
 
 CREATE TABLE IF NOT EXISTS plot_symbol_class_hint
 (

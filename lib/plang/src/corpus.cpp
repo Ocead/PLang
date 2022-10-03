@@ -25,10 +25,10 @@ const decltype(format::value) format::OUTPUT_MASK        = 0b000000011;
 const decltype(format::value) format::ENRICH_MASK        = 0b000001100;
 const decltype(format::value) format::DETAIL_MASK        = 0b000110000;
 const decltype(format::value) format::QUALIFICATION_MASK = 0b001000000;
-const decltype(format::value) format::BREAKS_MASK        = 0b110000000;
+const decltype(format::value) format::INDENT_MASK        = 0b110000000;
 
 const format format::PLAIN =
-        format(output::ANSI, enrich::PLAIN, detail::DEFINITION, qualification::FULL, breaks::CENTER);
+        format(output::ANSI, enrich::PLAIN, detail::DEFINITION, qualification::FULL, indent::CENTER);
 
 corpus::report::report() = default;
 
@@ -63,7 +63,11 @@ void corpus::report::insert(plang::entry &&entry) {
     if (valid(key)) {
         _mentioned.erase(key);
 
-        if (_updated.find(key) == _updated.end()) { _inserted[key] = std::move(entry); }
+        if (_updated.find(key) == _updated.end()) {
+            _inserted[key] = std::move(entry);
+        } else {
+            _inserted.insert(_updated.extract(key));
+        }
     }
 }
 
@@ -151,10 +155,28 @@ corpus::report corpus::execute(istream_t &stream, path const &scope) {
     parser.setBuildParseTree(true);
     PlangParser::StartSVOContext *tree = parser.startSVO();
 
-    auto visitor = lang::make_visitor(*this, scope);
-    auto result  = visitor->visitStartSVO(tree);
+    if (parser.getNumberOfSyntaxErrors() == 0) {
+        detail::corpus::_begin();
 
-    return visitor->get_report();
+        auto visitor = lang::make_visitor(*this, scope);
+        auto result  = visitor->visitStartSVO(tree);
+
+        auto report = visitor->get_report();
+
+        if (report.failed().empty()) {
+            detail::corpus::_commit();
+        } else {
+            report._mentioned.clear();
+            report._inserted.clear();
+            report._updated.clear();
+            report._removed.clear();
+            detail::corpus::_rollback();
+        }
+
+        return report;
+    } else {
+        return report();
+    }
 }
 
 corpus::report corpus::execute(string_t const &expr, path const &scope) {
@@ -173,10 +195,28 @@ corpus::report corpus::decl(istream_t &stream, path const &scope) {
     parser.setBuildParseTree(true);
     PlangParser::DeclSVOContext *tree = parser.declSVO();
 
-    auto visitor = lang::make_visitor(*this, scope);
-    auto result  = visitor->visitDeclSVO(tree);
+    if (parser.getNumberOfSyntaxErrors() == 0) {
+        detail::corpus::_begin();
 
-    return visitor->get_report();
+        auto visitor = lang::make_visitor(*this, scope);
+        auto result  = visitor->visitDeclSVO(tree);
+
+        auto report = visitor->get_report();
+
+        if (report.failed().empty()) {
+            detail::corpus::_commit();
+        } else {
+            report._mentioned.clear();
+            report._inserted.clear();
+            report._updated.clear();
+            report._removed.clear();
+            detail::corpus::_rollback();
+        }
+
+        return report;
+    } else {
+        return report();
+    }
 }
 
 corpus::report corpus::decl(string_t const &expr, path const &scope) {
@@ -195,10 +235,14 @@ resolve_entry_result corpus::ref(istream_t &stream, path const &scope) const {
     parser.setBuildParseTree(true);
     PlangParser::RefContext *tree = parser.ref();
 
-    auto visitor = lang::make_visitor(*this, scope);
-    auto result  = visitor->visitRef(tree);
+    if (parser.getNumberOfSyntaxErrors() == 0) {
+        auto visitor = lang::make_visitor(*this, scope);
+        auto result  = visitor->visitRef(tree);
 
-    return std::any_cast<resolve_entry_result>(std::move(result));
+        return std::any_cast<resolve_entry_result>(std::move(result));
+    } else {
+        return {};
+    }
 }
 
 resolve_entry_result corpus::ref(string_t const &expr, path const &scope) const {
@@ -206,14 +250,14 @@ resolve_entry_result corpus::ref(string_t const &expr, path const &scope) const 
     return ref(is, scope);
 }
 
-plang::entry corpus::fetch(entry_type type, pkey_t id, bool_t texts) const {
+plang::entry corpus::fetch(entry_type type, pkey_t id, bool_t dynamic) const {
     return std::visit(
             [&](auto const &type) -> plang::entry {
                 using TI = std::remove_reference_t<std::remove_const_t<decltype(type)>>;
                 using T  = typename TI::type;
 
-                if constexpr (std::is_same_v<path, T>) {
-                    auto result = detail::corpus_mixins::fetch(id, texts, type);
+                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
+                    auto result = detail::corpus_mixins::fetch(id, dynamic, type);
                     if (result.has_value()) {
                         return {result.value()};
                     } else {
@@ -226,14 +270,14 @@ plang::entry corpus::fetch(entry_type type, pkey_t id, bool_t texts) const {
             type);
 }
 
-std::vector<plang::entry> corpus::fetch_n(entry_type type, std::vector<pkey_t> const &ids, bool_t texts) const {
+std::vector<plang::entry> corpus::fetch_n(entry_type type, std::vector<pkey_t> const &ids, bool_t dynamic) const {
     return std::visit(
             [&](auto const &type) -> std::vector<plang::entry> {
                 using TI = std::remove_reference_t<std::remove_const_t<decltype(type)>>;
                 using T  = typename TI::type;
 
-                if constexpr (std::is_same_v<path, T>) {
-                    auto vec = detail::corpus_mixins::fetch_n(ids, texts, type);
+                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
+                    auto vec = detail::corpus_mixins::fetch_n(ids, dynamic, type);
                     if (!vec.empty()) {
                         std::vector<plang::entry> ent_vec{};
                         ent_vec.reserve(vec.size());
@@ -252,14 +296,14 @@ std::vector<plang::entry> corpus::fetch_n(entry_type type, std::vector<pkey_t> c
             type);
 }
 
-std::vector<plang::entry> corpus::fetch_all(entry_type type, bool_t texts, int_t limit, int_t offset) const {
+std::vector<plang::entry> corpus::fetch_all(entry_type type, bool_t dynamic, int_t limit, int_t offset) const {
     return std::visit(
             [&](auto const &type) -> std::vector<plang::entry> {
                 using TI = std::remove_reference_t<std::remove_const_t<decltype(type)>>;
                 using T  = typename TI::type;
 
-                if constexpr (std::is_same_v<path, T>) {
-                    auto vec = detail::corpus_mixins::fetch_all(texts, limit, offset, type);
+                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
+                    auto vec = detail::corpus_mixins::fetch_all(dynamic, limit, offset, type);
                     if (!vec.empty()) {
                         std::vector<plang::entry> ent_vec{};
                         ent_vec.reserve(vec.size());
@@ -282,7 +326,7 @@ resolve_entry_result corpus::resolve(const std::vector<string_t> &path,
                                      plang::entry_type type,
                                      const plang::entry &context,
                                      bool_t insert,
-                                     bool_t texts) {
+                                     bool_t dynamic) {
     auto result = std::visit(
             [&](auto &type, auto &ctx) -> resolve_entry_result {
                 using TI = std::remove_reference_t<decltype(type)>;
@@ -297,9 +341,9 @@ resolve_entry_result corpus::resolve(const std::vector<string_t> &path,
                         if constexpr (detail::is_resolve_defined<std::tuple<decltype(path),
                                                                             decltype(ctx),
                                                                             decltype(insert),
-                                                                            decltype(texts),
+                                                                            decltype(dynamic),
                                                                             decltype(type)>>::value) {
-                            auto [val_, vec_, ac_] = detail::corpus_mixins::resolve(path, ctx, insert, texts, type);
+                            auto [val_, vec_, ac_] = detail::corpus_mixins::resolve(path, ctx, insert, dynamic, type);
                             if (val_.has_value()) {
                                 return {std::move(val_.value()), std::move(vec_), ac_};
                             } else {
@@ -330,15 +374,15 @@ resolve_entry_result corpus::resolve(const std::vector<string_t> &path,
 }
 
 resolve_entry_result
-corpus::resolve(const std::vector<string_t> &path, entry_type type, const entry &context, bool_t texts) const {
-    return const_cast<corpus *>(this)->resolve(path, type, context, false, texts);
+corpus::resolve(const std::vector<string_t> &path, entry_type type, const entry &context, bool_t dynamic) const {
+    return const_cast<corpus *>(this)->resolve(path, type, context, false, dynamic);
 }
 
 resolve_entry_ref_result corpus::resolve(const std::vector<string_t> &path,
                                          plang::entry &entry,
                                          plang::entry const &context,
                                          bool_t insert,
-                                         bool_t texts) {
+                                         bool_t dynamic) {
     auto [vector, ac] = std::visit(
             [&](auto &ent, auto const &ctx) -> std::tuple<std::vector<plang::entry>, action> {
                 using T = std::remove_reference_t<decltype(ent)>;
@@ -350,8 +394,8 @@ resolve_entry_ref_result corpus::resolve(const std::vector<string_t> &path,
                                                                         decltype(ent),
                                                                         decltype(ctx),
                                                                         decltype(insert),
-                                                                        decltype(texts)>>::value) {
-                        return detail::corpus_mixins::resolve(path, ent, ctx, insert, texts);
+                                                                        decltype(dynamic)>>::value) {
+                        return detail::corpus_mixins::resolve(path, ent, ctx, insert, dynamic);
                     } else
                         return std::make_tuple(std::ref(ent), std::vector<T>(), action::FAIL);
                 }(ent, ctx);
@@ -376,8 +420,8 @@ resolve_entry_ref_result corpus::resolve(const std::vector<string_t> &path,
 resolve_entry_ref_result corpus::resolve(const std::vector<string_t> &path,
                                          plang::entry &entry,
                                          plang::entry const &context,
-                                         bool_t texts) const {
-    return const_cast<corpus *>(this)->resolve(path, entry, context, false, texts);
+                                         bool_t dynamic) const {
+    return const_cast<corpus *>(this)->resolve(path, entry, context, false, dynamic);
 }
 
 action corpus::insert(plang::entry &entry, bool_t replace) {
@@ -385,7 +429,7 @@ action corpus::insert(plang::entry &entry, bool_t replace) {
             [&](auto const &entry) -> action {
                 using T = std::remove_reference_t<std::remove_const_t<decltype(entry)>>;
 
-                if constexpr (std::is_same_v<path, T>) {
+                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
                     return detail::corpus_mixins::insert(entry, replace, corpus::tag<T>());
                 } else {
                     throw new std::logic_error(string_t("Insert for ") + typeid(T).name() + " is not implemented.");
@@ -394,13 +438,13 @@ action corpus::insert(plang::entry &entry, bool_t replace) {
             entry);
 }
 
-action corpus::update(plang::entry &entry, bool_t texts) {
+action corpus::update(plang::entry &entry, bool_t dynamic) {
     return std::visit(
             [&](auto const &entry) -> action {
                 using T = std::remove_reference_t<std::remove_const_t<decltype(entry)>>;
 
-                if constexpr (std::is_same_v<path, T>) {
-                    return detail::corpus_mixins::insert(entry, texts, corpus::tag<T>());
+                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
+                    return detail::corpus_mixins::insert(entry, dynamic, corpus::tag<T>());
                 } else {
                     throw new std::logic_error(string_t("Update for ") + typeid(T).name() + " is not implemented.");
                 }
@@ -413,7 +457,7 @@ detail::stream_helper corpus::print(plang::entry const &entry, format format) co
             [this, format](auto const &entry) -> detail::stream_helper {
                 using T = std::decay_t<decltype(entry)>;
 
-                if constexpr (std::is_same_v<path, T>) {
+                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
                     return detail::corpus_mixins::print(entry.get_id(), format, corpus::tag<T>());
                 } else {
                     throw std::logic_error(string_t("Print for ") + typeid(T).name() + " is not implemented.");
@@ -422,12 +466,12 @@ detail::stream_helper corpus::print(plang::entry const &entry, format format) co
             const_cast<plang::entry &>(entry));
 }
 
-string_t corpus::remove(plang::entry &entry, bool_t cascade) {
+std::tuple<string_t, action> corpus::remove(plang::entry &entry, bool_t cascade) {
     return std::visit(
-            [&](auto &entry) -> string_t {
+            [&](auto &entry) -> std::tuple<string_t, action> {
                 using T = std::decay_t<decltype(entry)>;
 
-                if constexpr (std::is_same_v<path, T>) {
+                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
                     return detail::corpus_mixins::remove(entry, cascade, corpus::tag<T>());
                 } else {
                     throw new std::logic_error(string_t("Remove for ") + typeid(T).name() + " is not implemented.");

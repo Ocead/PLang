@@ -13,6 +13,7 @@
 #include <plang/base.hpp>
 #include <plang/corpus/detail.hpp>
 #include <plang/corpus/path.hpp>
+#include <plang/corpus/plot.hpp>
 #include <plang/plot.hpp>
 
 namespace std {
@@ -86,10 +87,12 @@ namespace plang {
         /// \brief Common derived class template for distributed overloading
         /// \tparam Tps Distributed overloading types
         /// \extends plang::detail::path_manager
+        /// \extends plang::detail::symbol_class_manager
         template<typename... Tps>
         struct mixin_base : virtual public Tps... {
         public:
             using Tps::fetch...;
+            using Tps::fetch_n...;
             using Tps::fetch_all...;
             using Tps::insert...;
             using Tps::resolve...;
@@ -99,7 +102,8 @@ namespace plang {
         };
 
         /// \brief Base class for the corpus
-        struct corpus_mixins : virtual public mixin_base<plang::detail::path_manager> {};
+        struct corpus_mixins
+            : virtual public mixin_base<plang::detail::path_manager, plang::detail::symbol_class_manager> {};
 
     }// namespace detail
 
@@ -127,30 +131,21 @@ namespace plang {
 
     /// \brief Any single persist-able entry
     /// \sa plang::entry_t
-    class entry : public entry_t {
-    public:
-        using entry_t::entry_t;
-    };
+    using entry = entry_t;
 
     /// \brief Variant of references to persist-able entries
     using entry_ref_t = typename detail::template_transform<entry_t>::template type<std::reference_wrapper>;
 
     /// \brief Reference to any persist-able entry
     /// \sa plang::entry_ref_t
-    class entry_ref : public entry_ref_t {
-    public:
-        using entry_ref_t::entry_ref_t;
-    };
+    using entry_ref = entry_ref_t;
 
     /// \brief Variant of tags for persist-able types
     using entry_type_t = typename detail::template_transform<entry_t>::template type<detail::corpus::tag>;
 
     /// \brief Any persist-able type
     /// \sa plang::entry_type_t
-    class entry_type : public entry_type_t {
-    public:
-        using entry_type_t::entry_type_t;
-    };
+    using entry_type = entry_type_t;
 
 
     /// \brief Result type of variant-typed resolve methods
@@ -290,6 +285,8 @@ namespace plang {
 
             /// \brief Default destructor
             ~report() noexcept;
+
+            friend class corpus;
         };
 
         /// \brief Constructs a corpus in memory
@@ -338,30 +335,30 @@ namespace plang {
         /// \brief Returns a persisted entry
         /// \tparam T Type to fetch
         /// \param [in] id Id of the entry
-        /// \param [in] texts `true`, if texts should also be returned
+        /// \param [in] dynamic `true`, if texts should also be returned
         /// \return The persisted entry, if it exists
         template<typename T, typename = std::enable_if_t<std::is_base_of_v<plang::persisted, T>>>
-        std::optional<T> fetch(pkey_t id, bool_t texts = false) const {
+        std::optional<T> fetch(pkey_t id, bool_t dynamic = false) const {
             static_assert(std::is_base_of_v<plang::persisted, T>);
-            return detail::corpus_mixins::fetch(id, texts, detail::corpus::tag<T>());
+            return detail::corpus_mixins::fetch(id, dynamic, detail::corpus::tag<T>());
         }
 
         /// \brief Returns a persisted entry
         /// \param [in] type Id of the type
         /// \param [in] id Id of the entry
-        /// \param [in] texts `true`, if texts should also be returned
+        /// \param [in] dynamic `true`, if texts should also be returned
         /// \return The persisted entry, if it exists
-        entry fetch(entry_type type, pkey_t id, bool_t texts = false) const;
+        entry fetch(entry_type type, pkey_t id, bool_t dynamic = false) const;
 
         /// \brief Returns multiple persisted entries
         /// \tparam T Type to fetch
         /// \param [in] ids Ids of the entries
-        /// \param [in] texts `true`, if texts should also be returned
+        /// \param [in] dynamic `true`, if texts should also be returned
         /// \return The persisted entries, if existent
         template<typename T, typename = std::enable_if_t<std::is_base_of_v<plang::persisted, T>>>
-        std::vector<T> fetch_n(std::vector<pkey_t> const &ids, bool_t texts = false) const {
+        std::vector<T> fetch_n(std::vector<pkey_t> const &ids, bool_t dynamic = false) const {
             static_assert(std::is_base_of_v<plang::persisted, T>);
-            return detail::corpus_mixins(fetch_n(ids, texts, detail::corpus::tag<T>()));
+            return detail::corpus_mixins(fetch_n(ids, dynamic, detail::corpus::tag<T>()));
         }
 
         /// \brief Returns multiple persisted entries
@@ -369,27 +366,27 @@ namespace plang {
         /// \param ids Ids of the entries
         /// \param texts `true`, if texts should also be returned
         /// \return The persisted entries, if existent
-        std::vector<entry> fetch_n(entry_type type, std::vector<pkey_t> const &ids, bool_t texts = false) const;
+        std::vector<entry> fetch_n(entry_type type, std::vector<pkey_t> const &ids, bool_t dynamic = false) const;
 
         /// \brief Returns all persisted entries of a type
         /// \tparam T Type to fetch
-        /// \param [in] texts `true`, if texts should also be returned
+        /// \param [in] dynamic `true`, if texts should also be returned
         /// \param [in] limit Limits the output to up to <code>\p limit</code> entries
         /// \param [in] offset Skips the first <code>\p offset</code> entries
         /// \return The list of persisted entries
         template<typename T>
-        std::vector<T> fetch_all(bool_t texts = false, int_t limit = -1, int_t offset = 0) const {
+        std::vector<T> fetch_all(bool_t dynamic = false, int_t limit = -1, int_t offset = 0) const {
             static_assert(std::is_base_of_v<plang::persisted, T>);
-            return detail::corpus_mixins::fetch_all(texts, limit, offset, detail::corpus::tag<T>());
+            return detail::corpus_mixins::fetch_all(dynamic, limit, offset, detail::corpus::tag<T>());
         }
 
         /// \brief Returns all persisted entries of a type
         /// \param [in] type ID of the type to fetch
-        /// \param [in] texts `true`, if texts should also be returned
+        /// \param [in] dynamic `true`, if texts should also be returned
         /// \param [in] limit Limits the output to up to \p limit entries
         /// \param [in] offset Skips the first \p offset entries
         /// \return The list of persisted entries
-        std::vector<entry> fetch_all(entry_type type, bool_t texts = false, int_t limit = -1, int_t offset = 0) const;
+        std::vector<entry> fetch_all(entry_type type, bool_t dynamic = false, int_t limit = -1, int_t offset = 0) const;
 
         /// \brief Resolves an entry for a given context
         /// \tparam T Type of the entry to resolve
@@ -397,14 +394,14 @@ namespace plang {
         /// \param [in] path Path to the entry
         /// \param [in] context Context for resolving the entry
         /// \param [in] insert `true`, if the entry should be created if non-existent
-        /// \param [in] texts `true`, if texts should also be returned
+        /// \param [in] dynamic `true`, if texts should also be returned
         /// \return The resolved entry and other possible candidates
         template<typename T, typename C>
         inline resolve_result<T> resolve(std::vector<string_t> const &path,
                                          C const &context = std::monostate(),
                                          bool_t insert    = false,
-                                         bool_t texts     = false) {
-            return corpus_mixins::resolve(path, context, insert, texts, corpus::tag<T>());
+                                         bool_t dynamic   = false) {
+            return corpus_mixins::resolve(path, context, insert, dynamic, corpus::tag<T>());
         }
 
         /// \brief Resolves an unknown entry for a given context
@@ -412,38 +409,38 @@ namespace plang {
         /// \param [in] type Type of the entry
         /// \param [in] context Context to resolve in
         /// \param [in] insert `true`, if the entry should be created if non-existent
-        /// \param [in] texts `true`, if texts should also be returned
+        /// \param [in] dynamic `true`, if texts should also be returned
         /// \return The resolved entry and other possible candidates
         resolve_entry_result resolve(std::vector<string_t> const &path,
                                      entry_type type,
                                      entry const &context = entry(),
                                      bool_t insert        = false,
-                                     bool_t texts         = false);
+                                     bool_t dynamic       = false);
 
         /// \brief Resolves an entry for a given context
         /// \tparam T Type of the entry to resolve
         /// \tparam C Type of the context to resolve in
         /// \param [in] path Path to the entry
         /// \param [in] context Context for resolving the entry
-        /// \param [in] texts `true`, if texts should also be returned
+        /// \param [in] dynamic `true`, if texts should also be returned
         /// \return The resolved entry and other possible candidates
         template<typename T, typename C>
         inline resolve_result<T> resolve(std::vector<string_t> const &path,
                                          C const &context = std::monostate(),
-                                         bool_t texts     = false) const {
-            return corpus_mixins::resolve(path, context, texts, corpus::tag<T>());
+                                         bool_t dynamic   = false) const {
+            return corpus_mixins::resolve(path, context, dynamic, corpus::tag<T>());
         }
 
         /// \brief Resolves an unknown entry for a given context without inserts
         /// \param [in] path Path to the entry
         /// \param [in] type Type of the entry
         /// \param [in] context Context to resolve in
-        /// \param [in] texts `true`, if texts should also be returned
+        /// \param [in] dynamic `true`, if texts should also be returned
         /// \return The resolved entry and other possible candidates
         resolve_entry_result resolve(std::vector<string_t> const &path,
                                      entry_type type,
                                      entry const &context = entry(),
-                                     bool_t texts         = false) const;
+                                     bool_t dynamic       = false) const;
 
         /// \brief Resolves an entry for a given context
         /// \param [in] path Path to the entry
@@ -451,25 +448,25 @@ namespace plang {
         /// If the resolution succeeds, \p entry is updated to represent the resolved entry.
         /// \param [in] context Context to resolve in
         /// \param [in] insert `true`, if the entry should be created if non-existent
-        /// \param [in] texts `true`, if texts should also be returned
+        /// \param [in] dynamic `true`, if texts should also be returned
         /// \return The resolved entry and other possible candidates
         resolve_entry_ref_result resolve(std::vector<string_t> const &path,
                                          entry &entry,
                                          plang::entry const &context = plang::entry(),
                                          bool_t insert               = false,
-                                         bool_t texts                = false);
+                                         bool_t dynamic              = false);
 
         /// \brief Resolves an entry for a given context without inserts
         /// \param [in] path Path to the entry
         /// \param [in,out] entry Entry to resolve.
         /// If the resolution succeeds, \p entry is updated to represent the resolved entry.
         /// \param [in] context Context to resolve in
-        /// \param [in] texts `true`, if texts should also be returned
+        /// \param [in] dynamic `true`, if texts should also be returned
         /// \return The resolved entry and other possible candidates
         resolve_entry_ref_result resolve(std::vector<string_t> const &path,
                                          plang::entry &entry,
                                          plang::entry const &context = plang::entry(),
-                                         bool_t texts                = false) const;
+                                         bool_t dynamic              = false) const;
 
         /// \brief Inserts a persist-able entry into the corpus
         /// \tparam T Type of the entry
@@ -492,19 +489,19 @@ namespace plang {
         /// \brief Updates a persist-able entry in the corpus
         /// \tparam T Type of the entry
         /// \param [in,out] t Object to update
-        /// \param [in] texts `true`, if texts should also be updated
+        /// \param [in] dynamic `true`, if texts should also be updated
         /// \return The effective action
         template<typename T>
-        action update(T &t, bool_t texts = false) {
+        action update(T &t, bool_t dynamic = false) {
             static_assert(std::is_base_of_v<plang::persisted, T>);
-            return detail::corpus_mixins::update(t, texts, detail::corpus::tag<T>());
+            return detail::corpus_mixins::update(t, dynamic, detail::corpus::tag<T>());
         };
 
         /// \brief Updates a persist-able entry in the corpus
         /// \param [in,out] entry Object to update
-        /// \param [in] texts `true`, if texts should also be updated
+        /// \param [in] dynamic `true`, if texts should also be updated
         /// \return The effective action
-        action update(entry &entry, bool_t texts = false);
+        action update(entry &entry, bool_t dynamic = false);
 
         /// \brief Prints a persisted entry with default format
         /// \tparam T Type of the entry
@@ -548,7 +545,7 @@ namespace plang {
         /// \param [in] cascade <code>true</code>, if dependant entries should be removed to
         /// \return The representation of the removed entry
         template<typename T>
-        string_t remove(T &t, bool_t cascade = false) {
+        std::tuple<string_t, action> remove(T &t, bool_t cascade = false) {
             static_assert(std::is_base_of_v<plang::persisted, T>);
             return detail::corpus_mixins::remove(t, cascade, detail::corpus::tag<T>());
         };
@@ -558,7 +555,7 @@ namespace plang {
         /// \param [in] cascade <code>true</code>, if dependant entries should be removed to
         /// \return The representation of the removed entry
         /// \details Calling this function with an empty entry returns an empty string.
-        string_t remove(entry &entry, bool_t cascade = false);
+        std::tuple<string_t, action> remove(entry &entry, bool_t cascade = false);
 
         using detail::corpus::get_format;
         using detail::corpus::get_inner_format;
@@ -618,8 +615,8 @@ namespace std {
         return std::get<I>(static_cast<typename plang::resolve_entry_result::Base &>(r));
     }
 
-    template<>
-    struct hash<plang::entry_type> : public hash<plang::entry_type_t> {};
+    //template<>
+    //struct hash<plang::entry_type> : public hash<plang::entry_type_t> {};
 
 }// namespace std
 

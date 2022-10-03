@@ -419,6 +419,10 @@ string_t format::get_font_end(const plang::format::style &style) const {
     return buffer;
 }
 
+string_t format::operator()(plang::column_types::char_t chr, const plang::format::style &style) const {
+    return operator()(string_t(1, chr), style);
+}
+
 string_t const &format::get_close() const {
     static string_t closes[4]{"\033[0m", "\001\033[0m\002", "</span>", "</span>"};
 
@@ -484,7 +488,7 @@ void detail::stmt_finalizer::operator()(sqlite3_stmt *stmt) {
 format detail::corpus::_make_inner_format(format format) {
     class format result = format;
     result.set_detail(format::detail::EXPLICIT_REF);
-    result.set_breaks(format::breaks::COMPACT);
+    result.set_indent(format::indent::COMPACT);
     return result;
 }
 
@@ -494,18 +498,20 @@ detail::corpus::corpus()
                    format::enrich::PLAIN,
                    format::detail::DEFINITION,
                    format::qualification::FULL,
-                   format::breaks::LEFT),
+                   format::indent::LEFT),
       inner_format(format::output::ANSI,
                    format::enrich::PLAIN,
                    format::detail::EXPLICIT_REF,
                    format::qualification::FULL,
-                   format::breaks::ONE_LINE),
+                   format::indent::ONE_LINE),
       db() {}
 
 void detail::corpus::regexp(sqlite3_context *ctx, int argc, sqlite3_value **argv) {
     std::regex re{reinterpret_cast<const char *>(sqlite3_value_text(argv[0]))};
 
-    sqlite3_result_int(ctx, std::regex_match(reinterpret_cast<const char *>(sqlite3_value_text(argv[1])), re));
+    if (argc == 2) {
+        sqlite3_result_int(ctx, std::regex_match(reinterpret_cast<const char *>(sqlite3_value_text(argv[1])), re));
+    }
 }
 
 void detail::corpus::_open(char const *file) {
@@ -514,6 +520,21 @@ void detail::corpus::_open(char const *file) {
     _check(sqlite3_open(file, &ptr));
     db.reset(ptr, sqlite3_close);
     sqlite3_create_function(db.get(), "regexp", 2, SQLITE_UTF8, nullptr, regexp, nullptr, nullptr);
+}
+
+int detail::corpus::_begin() {
+    //language=sqlite
+    return _check(_exec("BEGIN TRANSACTION;"));
+}
+
+int detail::corpus::_rollback() {
+    //language=sqlite
+    return _check(_exec("ROLLBACK;"));
+}
+
+int detail::corpus::_commit() {
+    //language=sqlite
+    return _check(_exec("COMMIT;"));
 }
 
 int detail::corpus::_check(int code) const {

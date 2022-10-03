@@ -226,29 +226,7 @@ ostream_t &path_manager::print_helper(ostream_t &os, pkey_t id, format format) c
         }
         case format::detail::DEFINITION:
         case format::detail::FULL: {
-            auto p = fetch(id, true).value();
-            if (p.ordinal.has_value() || p.description.has_value()) {
-                os << ' ' << format("(", format::style::for_op(lang::op::HINT_L));
-
-                if (p.ordinal.has_value()) {
-                    auto ord = std::to_string(p.get_ordinal().value());
-                    ord.erase(ord.find_last_not_of('0') + 1, std::string::npos);
-                    ord.erase(ord.find_last_not_of('.') + 1, std::string::npos);
-                    os << format(ord, format::style{.text = format::style::color::BRIGHT_BLUE});
-                    if (p.description.has_value()) { os << format(",", format::style::for_op(lang::op::LIST)) << ' '; }
-                }
-
-                if (p.description.has_value()) {
-                    auto desc    = p.get_description().value();
-                    char_t delim = desc.find('"') != string_t::npos ? '\'' : '"';
-                    sstream_t ss;
-                    ss << std::quoted(desc, delim);
-                    os << format(ss.str(), format::style::for_op(lang::op::STR_DELIM_DOUBLE));
-                }
-
-                os << format(")", format::style::for_op(lang::op::HINT_R));
-            }
-
+            print_decoration(os, id, format);
             os << format(";", format::style::for_op(lang::op::DECL));
             break;
         }
@@ -257,7 +235,34 @@ ostream_t &path_manager::print_helper(ostream_t &os, pkey_t id, format format) c
     return os;
 }
 
-std::optional<path> path_manager::fetch(pkey_t id, bool_t texts, corpus::tag<class path>) const {
+ostream_t &path_manager::print_decoration(ostream_t &os, pkey_t id, format format) const {
+    auto p = fetch(id, true).value();
+    if (p.ordinal.has_value() || p.description.has_value()) {
+        os << ' ' << format("(", format::style::for_op(lang::op::HINT_L));
+
+        if (p.ordinal.has_value()) {
+            auto ord = std::to_string(p.get_ordinal().value());
+            ord.erase(ord.find_last_not_of('0') + 1, std::string::npos);
+            ord.erase(ord.find_last_not_of('.') + 1, std::string::npos);
+            os << format(ord, format::style{.text = format::style::color::BRIGHT_BLUE});
+            if (p.description.has_value()) { os << format(",", format::style::for_op(lang::op::LIST)) << ' '; }
+        }
+
+        if (p.description.has_value()) {
+            auto desc    = p.get_description().value();
+            char_t delim = desc.find('"') != string_t::npos ? '\'' : '"';
+            sstream_t ss;
+            ss << std::quoted(desc, delim);
+            os << format(ss.str(), format::style::for_op(lang::op::STR_DELIM_DOUBLE));
+        }
+
+        os << format(")", format::style::for_op(lang::op::HINT_R));
+    }
+
+    return os;
+}
+
+std::optional<path> path_manager::fetch(pkey_t id, bool_t dynamic, corpus::tag<class path>) const {
     //TODO: Switch for texts
     //language=sqlite
     static const string_t query{R"__SQL__(
@@ -279,7 +284,7 @@ WHERE id = ?;
             } else {
                 path.ordinal.reset();
             }
-            if (texts && sqlite3_column_type(&*stmt, 4) != SQLITE_NULL) {
+            if (dynamic && sqlite3_column_type(&*stmt, 4) != SQLITE_NULL) {
                 if (auto *desc = reinterpret_cast<const char *>(sqlite3_column_text(&*stmt, 4))) {
                     path.description = string_t(desc);
                 } else {
@@ -294,7 +299,7 @@ WHERE id = ?;
     });
 }
 
-std::vector<path> path_manager::fetch_n(const std::vector<pkey_t> &ids, bool_t texts, corpus::tag<class path>) const {
+std::vector<path> path_manager::fetch_n(const std::vector<pkey_t> &ids, bool_t dynamic, corpus::tag<class path>) const {
     //language=sqlite
     static const string_t query{R"__SQL__(
 SELECT *
@@ -329,7 +334,7 @@ WHERE id in (SELECT key
             path.name      = string_t(reinterpret_cast<const char *>(sqlite3_column_text(&*stmt, 1)));
             path.parent_id = sqlite3_column_int(&*stmt, 2);
             path.ordinal   = sqlite3_column_int(&*stmt, 3);
-            if (texts) {
+            if (dynamic) {
                 if (auto *desc = reinterpret_cast<const char *>(sqlite3_column_text(&*stmt, 4))) {
                     path.description = string_t(desc);
                 } else {
@@ -344,7 +349,7 @@ WHERE id in (SELECT key
     return result;
 }
 
-std::vector<path> path_manager::fetch_all(bool_t texts, int_t limit, int_t offset, corpus::tag<class path>) const {
+std::vector<path> path_manager::fetch_all(bool_t dynamic, int_t limit, int_t offset, corpus::tag<class path>) const {
     //language=sqlite
     static const string_t query{R"__SQL__(
 SELECT id, name, parent_id, ordinal, description, source_id FROM path
@@ -368,7 +373,7 @@ LIMIT ?1 OFFSET ?1 * ?2;
             } else {
                 path.ordinal.reset();
             }
-            if (texts && sqlite3_column_type(&*stmt, 4) != SQLITE_NULL) {
+            if (dynamic && sqlite3_column_type(&*stmt, 4) != SQLITE_NULL) {
                 if (auto *desc = reinterpret_cast<const char *>(sqlite3_column_text(&*stmt, 4))) {
                     path.description = string_t(desc);
                 } else {
@@ -386,10 +391,10 @@ LIMIT ?1 OFFSET ?1 * ?2;
 resolve_result<path> path_manager::resolve(const std::vector<string_t> &path,
                                            const class path &ctx,
                                            column_types::bool_t insert,
-                                           column_types::bool_t texts,
+                                           column_types::bool_t dynamic,
                                            corpus::tag<class path>) {
     class path node;
-    auto result          = resolve(path, node, ctx, insert, texts);
+    auto result          = resolve(path, node, ctx, insert, dynamic);
     auto &[res, can, ac] = result;
     if (res.is_persisted()) {
         return std::move(result);
@@ -400,16 +405,16 @@ resolve_result<path> path_manager::resolve(const std::vector<string_t> &path,
 
 resolve_result<path> path_manager::resolve(const std::vector<string_t> &path,
                                            const class path &ctx,
-                                           column_types::bool_t texts,
+                                           column_types::bool_t dynamic,
                                            corpus::tag<class path> tag) const {
-    return const_cast<path_manager *>(this)->resolve(path, ctx, false, texts, tag);
+    return const_cast<path_manager *>(this)->resolve(path, ctx, false, dynamic, tag);
 }
 
 resolve_ref_result<path> path_manager::resolve(const std::vector<string_t> &path,
                                                class path &ent,
                                                const class path &ctx,
                                                bool_t insert,
-                                               bool_t texts) {
+                                               bool_t dynamic) {
     if (!path.empty()) {
         auto candidates  = partially_resolve(path, false);
         auto [id, depth] = _resolve(candidates, ctx.get_id());
@@ -444,22 +449,22 @@ resolve_ref_result<path> path_manager::resolve(const std::vector<string_t> &path
         } else {
             std::vector<class path> can_vec;
             std::transform(candidates.begin(), candidates.end(), std::back_inserter(can_vec), [&](auto const &arg) {
-                return fetch(std::get<0>(arg), texts).value();
+                return fetch(std::get<0>(arg), dynamic).value();
             });
 
             return {ent, std::move(can_vec), action::FAIL};
         }
     } else {
         ent = ctx;
-        return {ent, fetch_n(get_children(ctx.get_id()), texts), action::NONE};
+        return {ent, fetch_n(get_children(ctx.get_id()), dynamic), action::NONE};
     }
 }
 
 resolve_ref_result<path> path_manager::resolve(const std::vector<string_t> &path,
                                                class path &ent,
                                                const class path &ctx,
-                                               column_types::bool_t texts) const {
-    return const_cast<path_manager *>(this)->resolve(path, ent, ctx, false, texts);
+                                               column_types::bool_t dynamic) const {
+    return const_cast<path_manager *>(this)->resolve(path, ent, ctx, false, dynamic);
 }
 
 action path_manager::insert(path &path, bool_t replace, corpus::tag<class path>) {
@@ -515,7 +520,7 @@ RETURNING path.id;
     return action;
 }
 
-action path_manager::update(path &path, bool_t texts, corpus::tag<class path>) {
+action path_manager::update(path &path, bool_t dynamic, corpus::tag<class path>) {
     //language=sqlite
     static const string_t query_t{R"__SQL__(
 UPDATE path
@@ -542,8 +547,8 @@ RETURNING path.id;
     /*static thread_local*/ stmt stmt_t;
     /*static thread_local*/ stmt stmt_n;
 
-    auto &query   = texts ? query_t : query_n;
-    auto &stmt    = texts ? stmt_t : stmt_n;
+    auto &query   = dynamic ? query_t : query_n;
+    auto &stmt    = dynamic ? stmt_t : stmt_n;
     action action = action::FAIL;
 
     if (path.get_id() != get_root_path_id() && is_parent_of(path.get_id(), path.get_parent_id())) {
@@ -561,7 +566,7 @@ RETURNING path.id;
         } else {
             sqlite3_bind_null(&*stmt, 4);
         }
-        if (texts) {
+        if (dynamic) {
             if (path.description) {
                 auto const &description = path.get_description().value();
                 sqlite3_bind_text(&*stmt, 5, description.c_str(), description.length(), nullptr);
@@ -587,7 +592,7 @@ stream_helper path_manager::print(pkey_t id, format format, corpus::tag<class pa
     return [this, id, format](auto &os) -> ostream_t & { return print_helper(os, id, format); };
 }
 
-string_t path_manager::remove(path &path, bool_t cascade, corpus::tag<class path>) {
+std::tuple<string_t, action> path_manager::remove(path &path, bool_t cascade, corpus::tag<class path>) {
     //language=sqlite
     static const string_t query{R"__SQL__(
 DELETE
@@ -595,21 +600,24 @@ FROM path
 WHERE id = ?1
   and (?2 or (not exists(SELECT * FROM path WHERE parent_id = ?1)) and
              not exists(SELECT * FROM plot_symbol_class WHERE path_id = ?1) and
-             not exists(SELECT * FROM plot_point_class WHERE path_id = ?1));
+             not exists(SELECT * FROM plot_point_class WHERE path_id = ?1))
+RETURNING id;
 )__SQL__"};
 
     /*static thread_local*/ stmt stmt;
 
-    return _reuse(stmt, query, [&]() -> string_t {
+    return _reuse(stmt, query, [&]() -> std::tuple<string_t, action> {
         if (path.is_root()) { throw std::logic_error("Cannot delete root path"); }
 
         sqlite3_bind_int(&*stmt, 1, path.get_id());
         sqlite3_bind_int(&*stmt, 2, cascade);
         string_t repr = path.is_persisted() ? print(path.get_id(), get_format())() : "";
 
-        _check(sqlite3_step(&*stmt));
-
-        return repr;
+        if (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
+            return {repr, action::REMOVE};
+        } else {
+            return {repr, action::FAIL};
+        }
     });
 }
 
@@ -665,3 +673,5 @@ WHERE id == parent_id;
         }
     });
 }
+
+path_manager::~path_manager() = default;

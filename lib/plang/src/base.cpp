@@ -8,7 +8,7 @@ using namespace plang;
 
 //region persisted
 
-constexpr detail::base_types::persisted::persisted() noexcept
+detail::base_types::persisted::persisted() noexcept
     : id(-1) {}
 
 pkey_t detail::base_types::persisted::get_id() const noexcept {
@@ -25,7 +25,7 @@ detail::base_types::persisted::~persisted() noexcept = default;
 
 //region sourced
 
-constexpr detail::base_types::sourced::sourced() noexcept
+detail::base_types::sourced::sourced() noexcept
     : source_id() {}
 
 detail::base_types::sourced::sourced(const root::source &source) noexcept
