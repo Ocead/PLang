@@ -37,7 +37,7 @@ corpus::report::key corpus::report::get_key(entry const &entry) {
             [](auto const &e) -> corpus::report::key {
                 using T = std::remove_const_t<std::remove_reference_t<decltype(e)>>;
                 if constexpr (!std::is_same_v<T, std::monostate>) {
-                    return {plang::entry_type(detail::corpus::tag<T>()), e.get_id()};
+                    return {plang::entry_type(detail::corpus::tag<T>()), int_t(e.get_id())};
                 } else {
                     return {entry_type(), -1};
                 }
@@ -250,14 +250,14 @@ resolve_entry_result corpus::ref(string_t const &expr, path const &scope) const 
     return ref(is, scope);
 }
 
-plang::entry corpus::fetch(entry_type type, pkey_t id, bool_t dynamic) const {
+plang::entry corpus::fetch(entry_type type, pkey<void> id, bool_t dynamic) const {
     return std::visit(
             [&](auto const &type) -> plang::entry {
                 using TI = std::remove_reference_t<std::remove_const_t<decltype(type)>>;
                 using T  = typename TI::type;
 
                 if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
-                    auto result = detail::corpus_mixins::fetch(id, dynamic, type);
+                    auto result = detail::corpus_mixins::fetch(pkey<T>(int_t(id)), dynamic, type);
                     if (result.has_value()) {
                         return {result.value()};
                     } else {
@@ -270,14 +270,18 @@ plang::entry corpus::fetch(entry_type type, pkey_t id, bool_t dynamic) const {
             type);
 }
 
-std::vector<plang::entry> corpus::fetch_n(entry_type type, std::vector<pkey_t> const &ids, bool_t dynamic) const {
+std::vector<plang::entry> corpus::fetch_n(entry_type type, std::vector<pkey<void>> const &ids, bool_t dynamic) const {
     return std::visit(
             [&](auto const &type) -> std::vector<plang::entry> {
                 using TI = std::remove_reference_t<std::remove_const_t<decltype(type)>>;
                 using T  = typename TI::type;
 
                 if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
-                    auto vec = detail::corpus_mixins::fetch_n(ids, dynamic, type);
+                    std::vector<pkey<T>> typed_ids;
+                    std::transform(ids.begin(), ids.end(), std::back_inserter(typed_ids), [](auto const &i) {
+                        return int_t(i);
+                    });
+                    auto vec = detail::corpus_mixins::fetch_n(typed_ids, dynamic, type);
                     if (!vec.empty()) {
                         std::vector<plang::entry> ent_vec{};
                         ent_vec.reserve(vec.size());

@@ -17,7 +17,7 @@ symbol::clazz::hint::hint(const symbol::clazz &clazz, bool_t recursive)
     }
 }
 
-int_t symbol::clazz::hint::get_hint_id() const {
+pkey<symbol::clazz> symbol::clazz::hint::get_hint_id() const {
     return hint_id;
 }
 
@@ -43,7 +43,7 @@ symbol::clazz::clazz(const root::path &path, std::vector<hint> &&hints)
     }
 }
 
-int_t symbol::clazz::get_path_id() const {
+pkey<path> symbol::clazz::get_path_id() const {
     return path_id;
 }
 

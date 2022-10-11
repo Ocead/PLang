@@ -16,7 +16,7 @@
         <tab type="usergroup" url="@ref cli" title="The Command Line">
             <tab type="user" url="@ref cli_man" title="Manual page"/>
             <tab type="user" url="@ref cli_commands" title="Command Reference"/>
-            <tab type="user" url="@ref cli_options" title="Command Line Reference"/>
+            <tab type="user" url="@ref cli_options" title="Command Line Options"/>
         </tab>
         <tab type="modules" visible="no" title="" intro=""/>
         <tab type="namespaces" visible="yes" title="">

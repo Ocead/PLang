@@ -16,21 +16,21 @@ namespace plang::detail {
 /// \brief Contains the data model for the plot
 namespace plang::plot {
 
-    class symbol : public plang::persisted, public sourced, public plang::decorated {
+    class symbol : public plang::persisted<symbol>, public sourced, public plang::decorated {
     public:
-        class clazz : public plang::persisted, public sourced {
+        class clazz : public plang::persisted<clazz>, public sourced {
         public:
-            class hint : public plang::persisted, public sourced {
+            class hint : public plang::persisted<hint>, public sourced {
             protected:
-                col<hint, int_t> hint_id;   ///< \brief Symbol class hinted to
-                col<hint, bool_t> recursive;///< \brief <code>true</code>, if contained symbol classes are also valid
+                col<hint, pkey<clazz>> hint_id;///< \brief Symbol class hinted to
+                col<hint, bool_t> recursive;   ///< \brief <code>true</code>, if contained symbol classes are also valid
 
                 hint();
 
             public:
                 hint(symbol::clazz const &clazz, bool_t recursive = false);
 
-                int_t get_hint_id() const;
+                pkey<clazz> get_hint_id() const;
 
                 void set_hint(symbol::clazz const &clazz);
 
@@ -46,18 +46,18 @@ namespace plang::plot {
             clazz();
 
         protected:
-            col<clazz, int_t> path_id;///< \brief Path of the symbol class
-            std::vector<hint> hints;  ///< \brief Hints for compound symbols
+            col<clazz, pkey<path>> path_id;///< \brief Path of the symbol class
+            std::vector<hint> hints;       ///< \brief Hints for compound symbols
 
         public:
             /// \brief Constructs an unpersisted symbol class under a path
             /// \param path Path of the symbol class
             /// \param hints Hints of the symbol class
-            clazz(path const &path, std::vector<hint> && hints = {});
+            clazz(path const &path, std::vector<hint> &&hints = {});
 
             /// \brief Returns the path id of the node
             /// \return The path id of the node
-            int_t get_path_id() const;
+            pkey<path> get_path_id() const;
 
             /// \brief Sets the path of the node
             /// \param parent The new path of the node
@@ -70,63 +70,63 @@ namespace plang::plot {
             friend class plang::detail::symbol_class_manager;
         };
 
-        class compound : public plang::persisted {
+        class compound : public plang::persisted<compound> {
         protected:
-            col<compound, int_t> symbol_id;
-            col<compound, int_t> compound_id;
+            col<compound, pkey<symbol>> symbol_id;
+            col<compound, pkey<symbol>> compound_id;
             col<compound, int_t> distance;
         };
 
     protected:
         col<symbol, string_t> name;
-        col<symbol, int_t> class_id;
+        col<symbol, pkey<clazz>> class_id;
 
         friend class plang::detail::symbol_manager;
     };
 
-    class point : public plang::persisted {
+    class point : public plang::persisted<point> {
     public:
-        class clazz : public plang::persisted {
+        class clazz : public plang::persisted<clazz> {
         public:
-            class hint : public plang::persisted {
+            class hint : public plang::persisted<hint> {
             protected:
-                col<hint, int_t> class_id;
-                col<hint, int_t> hint_id;
+                col<hint, pkey<clazz>> class_id;
+                col<hint, pkey<symbol::clazz>> hint_id;
                 col<hint, bool_t> recursive;
             };
 
         protected:
-            col<clazz, int_t> path_id;
+            col<clazz, pkey<path>> path_id;
             col<clazz, bool_t> singleton;
         };
 
         class subject {
         public:
-            class sym : public plang::persisted {
+            class sym : public plang::persisted<sym> {
             protected:
-                col<sym, int_t> point_id;
-                col<sym, int_t> symbol_id;
+                col<sym, pkey<point>> point_id;
+                col<sym, pkey<symbol>> symbol_id;
             };
 
-            class cls : public plang::persisted {
+            class cls : public plang::persisted<cls> {
             protected:
-                col<cls, int_t> point_id;
-                col<cls, int_t> symbol_class_id;
+                col<cls, pkey<point>> point_id;
+                col<cls, pkey<symbol::clazz>> symbol_class_id;
             };
         };
 
     protected:
-        col<point, int_t> class_id;
+        col<point, pkey<clazz>> class_id;
         col<point, bool_t> truth;
     };
 
     class object {
     public:
-        class clazz : public plang::persisted, public plang::decorated {
+        class clazz : public plang::persisted<clazz>, public plang::decorated {
         public:
             class hint {
             public:
-                class lit : public plang::persisted {
+                class lit : public plang::persisted<lit> {
                 public:
                     enum class type : int_t {
                         COMMENT = 0,
@@ -137,7 +137,7 @@ namespace plang::plot {
                     };
 
                 protected:
-                    col<lit, int_t> class_id;
+                    col<lit, pkey<clazz>> class_id;
                     col<lit, string_t> hint;
                     type type;
 
@@ -145,58 +145,58 @@ namespace plang::plot {
                         return static_cast<int>(type);
                     }
 
-                    void _set_type(int type) {
-                        lit::type = static_cast<enum type>(type);
+                    void _set_type(int _type) {
+                        lit::type = static_cast<enum type>(_type);
                     }
                 };
 
-                class sym : public plang::persisted {
+                class sym : public plang::persisted<sym> {
                 protected:
-                    col<sym, int_t> class_id;
-                    col<sym, int_t> hint_id;
+                    col<sym, pkey<clazz>> class_id;
+                    col<sym, pkey<symbol>> hint_id;
                     col<sym, bool_t> recursive;
                 };
 
-                class pnt : public plang::persisted {
+                class pnt : public plang::persisted<pnt> {
                 protected:
-                    col<pnt, int_t> class_id;
-                    col<pnt, int_t> hint_id;
+                    col<pnt, pkey<clazz>> class_id;
+                    col<pnt, pkey<point>> hint_id;
                     col<pnt, bool_t> recursive;
                 };
             };
 
         protected:
-            col<clazz, int_t> point_class_id;
+            col<clazz, pkey<point::clazz>> point_class_id;
             col<clazz, string_t> name;
             col<clazz, bool_t> singleton;
         };
 
-        class lit : public plang::persisted {
+        class lit : public plang::persisted<lit> {
         protected:
-            col<lit, int_t> class_id;
-            col<lit, int_t> point_id;
+            col<lit, pkey<clazz>> class_id;
+            col<lit, pkey<point>> point_id;
             col<lit, string_t> object;
         };
 
-        class sym : public plang::persisted {
+        class sym : public plang::persisted<sym> {
         protected:
-            col<sym, int_t> class_id;
-            col<sym, int_t> point_id;
-            col<sym, int_t> object_id;
+            col<sym, pkey<clazz>> class_id;
+            col<sym, pkey<point>> point_id;
+            col<sym, pkey<symbol>> object_id;
         };
 
-        class cls : public plang::persisted {
+        class cls : public plang::persisted<cls> {
         protected:
-            col<cls, int_t> class_id;
-            col<cls, int_t> point_id;
-            col<cls, int_t> object_id;
+            col<cls, pkey<clazz>> class_id;
+            col<cls, pkey<point>> point_id;
+            col<cls, pkey<symbol::clazz>> object_id;
         };
 
-        class pnt : public plang::persisted {
+        class pnt : public plang::persisted<pnt> {
         protected:
-            col<pnt, int_t> class_id;
-            col<pnt, int_t> point_id;
-            col<pnt, int_t> object_id;
+            col<pnt, pkey<clazz>> class_id;
+            col<pnt, pkey<point>> point_id;
+            col<pnt, pkey<point>> object_id;
         };
 
         object() = delete;

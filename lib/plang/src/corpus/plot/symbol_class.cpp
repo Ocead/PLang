@@ -10,7 +10,7 @@ using namespace plang::op;
 using namespace plang::plot;
 using namespace plang::detail;
 
-ostream_t &symbol_class_manager::print_helper(ostream_t &os, pkey_t id, format format) const {
+ostream_t &symbol_class_manager::print_helper(ostream_t &os, pkey<plot::symbol::clazz> id, format format) const {
     auto inner_format = format;
     inner_format.set_detail(format::detail::EXPLICIT_REF);
     auto clazz = fetch(id, format.get_detail() >= format::detail::DEFINITION).value();
@@ -43,7 +43,7 @@ ostream_t &symbol_class_manager::print_helper(ostream_t &os, pkey_t id, format f
     return os;
 }
 
-std::vector<symbol::clazz::hint> symbol_class_manager::_fetch_hints(pkey_t id) const {
+std::vector<symbol::clazz::hint> symbol_class_manager::_fetch_hints(pkey<plot::symbol::clazz> id) const {
     //language=sqlite
     static const string_t query{R"__SQL__(
 SELECT id, hint_id, recursive, source_id FROM plot_symbol_class_hint
@@ -55,7 +55,7 @@ WHERE class_id = ?;
     return _reuse(stmt, query, [&]() {
         std::vector<symbol::clazz::hint> hints;
 
-        sqlite3_bind_int(&*stmt, 1, id);
+        sqlite3_bind_int64(&*stmt, 1, id);
 
         while (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
             symbol::clazz::hint hint;
@@ -71,7 +71,7 @@ WHERE class_id = ?;
     });
 }
 
-void symbol_class_manager::_update_hints(pkey_t id, std::vector<symbol::clazz::hint> &hints) {
+void symbol_class_manager::_update_hints(pkey<plot::symbol::clazz> id, std::vector<symbol::clazz::hint> &hints) {
     //language=sqlite
     static const string_t query_h{R"__SQL__(
 INSERT INTO plot_symbol_class_hint (id, class_id, hint_id, recursive, source_id)
@@ -90,16 +90,16 @@ WHERE class_id = $1;
     class stmt stmt_r;
 
     _reuse(stmt_r, query_r, [&]() {
-        sqlite3_bind_int(&*stmt_r, 1, id);
+        sqlite3_bind_int64(&*stmt_r, 1, id);
         _check(sqlite3_step(&*stmt_r));
     });
 
     for (auto &h : hints) {
-        h.id = _reuse(stmt, query_h, [&]() -> pkey_t {
-            sqlite3_bind_int(&*stmt, 1, id);
-            sqlite3_bind_int(&*stmt, 2, h.hint_id);
-            sqlite3_bind_int(&*stmt, 3, h.recursive);
-            sqlite3_bind_int(&*stmt, 4, _get_source_id());
+        h.id = _reuse(stmt, query_h, [&]() -> pkey<plot::symbol::clazz::hint> {
+            sqlite3_bind_int64(&*stmt, 1, id);
+            sqlite3_bind_int64(&*stmt, 2, h.hint_id);
+            sqlite3_bind_int64(&*stmt, 3, h.recursive);
+            sqlite3_bind_int64(&*stmt, 4, _get_source_id());
 
             if (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
                 return sqlite3_column_int(&*stmt, 0);
@@ -110,7 +110,9 @@ WHERE class_id = $1;
     }
 }
 
-std::optional<symbol::clazz> symbol_class_manager::fetch(pkey_t id, bool_t dynamic, tag<symbol::clazz>) const {
+std::optional<symbol::clazz> symbol_class_manager::fetch(pkey<plot::symbol::clazz> id,
+                                                         bool_t dynamic,
+                                                         tag<symbol::clazz>) const {
     //language=sqlite
     static const string_t query{R"__SQL__(
 SELECT id, path_id, source_id FROM plot_symbol_class
@@ -120,7 +122,7 @@ WHERE id = ?;
     /*static thread_local*/ stmt stmt;
 
     auto clazz = _reuse(stmt, query, [&]() -> std::optional<symbol::clazz> {
-        sqlite3_bind_int(&*stmt, 1, id);
+        sqlite3_bind_int64(&*stmt, 1, id);
         if (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
             symbol::clazz clazz;
             clazz.id        = sqlite3_column_int(&*stmt, 0);
@@ -137,7 +139,7 @@ WHERE id = ?;
     return clazz;
 }
 
-std::vector<symbol::clazz> symbol_class_manager::fetch_n(const std::vector<pkey_t> &ids,
+std::vector<symbol::clazz> symbol_class_manager::fetch_n(const std::vector<pkey<plot::symbol::clazz>> &ids,
                                                          bool_t dynamic,
                                                          tag<symbol::clazz>) const {
     //language=sqlite
@@ -249,7 +251,7 @@ WHERE path_id = ?;
         /*static thread_local*/ stmt stmt;
 
         auto result = _reuse(stmt, query, [&]() -> std::optional<symbol::clazz> {
-            sqlite3_bind_int(&*stmt, 1, ctx.get_id());
+            sqlite3_bind_int64(&*stmt, 1, ctx.get_id());
             if (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
                 symbol::clazz clazz;
                 clazz.id        = sqlite3_column_int(&*stmt, 0);
@@ -314,9 +316,9 @@ RETURNING plot_symbol_class.id;
 
     action action = action::FAIL;
 
-    clazz.id = _reuse(stmt, query, [&] {
-        sqlite3_bind_int(&*stmt, 1, clazz.path_id);
-        sqlite3_bind_int(&*stmt, 2, _get_source_id());
+    clazz.id = _reuse(stmt, query, [&]() -> pkey<plot::symbol::clazz> {
+        sqlite3_bind_int64(&*stmt, 1, clazz.path_id);
+        sqlite3_bind_int64(&*stmt, 2, _get_source_id());
         int id = -1;
         if (auto ret = sqlite3_step(&*stmt); ret == SQLITE_ROW) {
             clazz.id = id   = sqlite3_column_int(&*stmt, 0);
@@ -355,9 +357,9 @@ RETURNING plot_symbol_class.id;
     if (!clazz.is_persisted()) { return action::FAIL; }
 
     _reuse(stmt, query, [&]() -> class symbol::clazz & {
-        sqlite3_bind_int(&*stmt, 1, clazz.get_id());
-        sqlite3_bind_int(&*stmt, 2, clazz.get_path_id());
-        sqlite3_bind_int(&*stmt, 3, _get_source_id());
+        sqlite3_bind_int64(&*stmt, 1, clazz.get_id());
+        sqlite3_bind_int64(&*stmt, 2, clazz.get_path_id());
+        sqlite3_bind_int64(&*stmt, 3, _get_source_id());
 
         if (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
             action = action::UPDATE;
@@ -373,7 +375,9 @@ RETURNING plot_symbol_class.id;
     return action;
 }
 
-stream_helper symbol_class_manager::print(pkey_t id, format format, corpus::tag<class symbol::clazz>) const {
+stream_helper symbol_class_manager::print(pkey<plot::symbol::clazz> id,
+                                          format format,
+                                          corpus::tag<class symbol::clazz>) const {
     return [this, id, format](auto &os) -> ostream_t & { return print_helper(os, id, format); };
 }
 
@@ -396,12 +400,12 @@ RETURNING id;
 
     if (clazz.is_persisted()) {
         return _reuse(stmt, query, [&]() -> std::tuple<string_t, action> {
-            sqlite3_bind_int(&*stmt, 1, clazz.get_id());
+            sqlite3_bind_int64(&*stmt, 1, clazz.get_id());
             sqlite3_bind_int(&*stmt, 2, cascade ? 1 : 0);
             string_t repr = print(clazz.get_id(), get_format())();
 
             if (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
-                auto id  = sqlite3_column_int(&*stmt, 0);
+                auto id  = sqlite3_column_int64(&*stmt, 0);
                 clazz.id = -1;
                 return {repr, action::REMOVE};
             } else {

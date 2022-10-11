@@ -16,28 +16,35 @@ namespace plang {
 
     /// \brief Contains the basic column types for persistence
     namespace column_types {
+
         /// \brief Boolean type
         ///
         /// Maps to <code>BOOLEAN</code> in SQLite
-        using bool_t   = bool;
+        using bool_t = bool;
+
         /// \brief Integer type
         ///
         /// Maps to <code>INTEGER</code> in SQLite
-        using uint_t   = std::uint32_t;
+        using uint_t = std::uint32_t;
+
         /// \brief Integer type
         ///
         /// Maps to <code>INTEGER</code> in SQLite
-        using int_t    = std::int32_t;
+        using int_t = std::int32_t;
+
         /// \brief Long integer type
         ///
         /// Maps to <code>BIGINT</code> in SQLite
-        using long_t   = std::int64_t;
+        using long_t = std::int64_t;
+
         /// \brief Floating point type
         ///
         /// Maps to <code>DOUBLE PRECISION</code> in SQLite
-        using float_t  = std::double_t;
+        using float_t = std::double_t;
+
         /// \brief Character type
-        using char_t   = char;
+        using char_t = char;
+
         /// \brief Text type
         ///
         /// Maps to <code>Text</code> in SQLite
@@ -159,31 +166,91 @@ namespace plang {
         /// \brief Contains abstract classes contained in multiple tables
         namespace base_types {
 
+            template<typename T>
             class persisted;
 
-            using pkey_t = int_t;
+            /// \brief Strongly typed primary/foreign key
+            /// \tparam T Type the key refers to
+            template<typename T = void>
+            struct pkey {
+                std::int64_t id;///< \brief Numerical id
+
+                /// \brief Default constructor
+                constexpr pkey()
+                    : id(-1) {}
+
+                /// \brief Constructs a key from an integer
+                /// \param [in] id ID
+                constexpr pkey(decltype(pkey::id) id)
+                    : id(id) {}
+
+                /// \brief Copy constructor
+                /// \param [in] ref Original object
+                constexpr pkey(pkey const &ref) = default;
+
+                /// \brief Compares equality between key of same type
+                /// \param [in] rhs Right-hand side object
+                /// \return <code>true</code>, if keys are equal
+                constexpr inline bool_t operator==(pkey const &rhs) const {
+                    return id == rhs.id;
+                }
+
+                /// \brief Compares inequality between key of same type
+                /// \param [in] rhs Right-hand side object
+                /// \return <code>true</code>, if keys are not equal
+                constexpr inline bool_t operator!=(pkey const &rhs) const {
+                    return id != rhs.id;
+                }
+
+                /// \brief Deleted constructor from key of other type
+                /// \tparam R Type of the original's key
+                /// \param [in] ref Original object
+                template<typename R, typename std::enable_if_t<std::negation_v<std::is_same<T, R>>>>
+                constexpr pkey(pkey<R> const &ref) = delete;
+
+                /// \brief Deleted implicit conversion to key of other type
+                /// \tparam R Type of other key
+                /// \return Nothing, because deleted
+                template<typename R, typename std::enable_if_t<std::negation_v<std::is_same<T, R>>>>
+                constexpr operator pkey<R>() = delete;
+
+                /// \brief Implicitly converts the key to the underlying type
+                /// \return The id in underlying type
+                constexpr operator decltype(pkey::id)() const {
+                    return id;
+                }
+
+                /// \brief Default destructor
+                ~pkey() = default;
+            };
 
             /// \brief Base type for persisted classes
+            template<typename T>
             class persisted {
             protected:
-                pkey_t id;///< \brief Primary key for all persisted objects
+                pkey<T> id;///< \brief Primary key for all persisted objects
 
                 /// \brief Default constructor
                 ///
                 /// Sets the primary key to a value invalid for persistence
-                persisted() noexcept;
+                persisted() noexcept
+                    : id(-1) {}
 
             public:
                 /// \brief Returns the primary key
                 /// \return The primary key
-                pkey_t get_id() const noexcept;
+                pkey<T> get_id() const noexcept {
+                    return id;
+                }
 
                 /// \brief Returns <code>true</code>, if the object is persisted
                 /// \return <code>true</code>,if the object is persisted
-                bool_t is_persisted() const noexcept;
+                bool_t is_persisted() const noexcept {
+                    return id >= 0;
+                }
 
                 /// \brief Default destructor
-                ~persisted() noexcept;
+                ~persisted() noexcept = default;
 
                 friend class detail::corpus;
             };
@@ -191,7 +258,7 @@ namespace plang {
             /// \brief Base type for traceable classes
             class sourced {
             protected:
-                std::optional<col<sourced, int_t>> source_id;///< \brief Id of the source of the object
+                std::optional<col<sourced, pkey<root::source>>> source_id;///< \brief Id of the source of the object
 
 
                 /// \brief Default constructor
@@ -207,7 +274,7 @@ namespace plang {
                 /// \brief Returns the source id
                 /// \return The source id
 
-                std::optional<int_t> get_source_id() const noexcept;
+                std::optional<pkey<root::source>> get_source_id() const noexcept;
 
                 /// \brief Sets the source of the object
                 /// \param source Source of this object
@@ -266,7 +333,7 @@ namespace plang {
         /// \details The corpus holds entries of this class to track the changes and their origin to it.
         /// There are no interfaces to directly interact with this class' table.
         /// Instead the \ref plang::corpus  manages it automatically.
-        class source : public persisted {
+        class source : public persisted<source> {
         public:
             using clock_t      = std::chrono::system_clock;///< \brief Clock type used for generating timestamps
             using time_point_t = clock_t::time_point;      ///< \brief Timestamp type
@@ -314,14 +381,14 @@ namespace plang {
         };
 
         /// \brief A node in the corpus' path tree
-        class path : public persisted, public sourced, public decorated {
+        class path : public persisted<path>, public sourced, public decorated {
         private:
             /// \brief Constructor for internal use
             path();
 
         protected:
-            col<path, string_t> name;  ///< \brief The name of the node
-            col<path, int_t> parent_id;///< \brief The id of the parent node
+            col<path, string_t> name;       ///< \brief The name of the node
+            col<path, pkey<path>> parent_id;///< \brief The id of the parent node
 
         public:
             /// \brief Constructs an unpersisted path as child of another
@@ -340,7 +407,7 @@ namespace plang {
 
             /// \brief Returns the parent id of the node
             /// \return The parent id of the node
-            int_t get_parent_id() const;
+            pkey<path> get_parent_id() const;
 
             /// \brief Sets the parent of the node
             /// \param parent The new parent of the node
@@ -364,6 +431,19 @@ namespace plang {
 
 /// \brief Contains specializations of standard library templates
 namespace std {
+
+    /// \internal
+    /// \brief Specialization of std::hash for primary/foreign key types
+    /// \tparam T Type the key references
+    template<typename T>
+    struct hash<plang::pkey<T>> {
+        /// \brief Computes the hash for a primary/foreign key
+        /// \param ref Primary/foreign key
+        /// \return Calculated hash value
+        constexpr std::size_t operator()(plang::pkey<T> const &ref) const noexcept {
+            return std::hash<decltype(plang::pkey<T>::id)>()(ref);
+        }
+    };
 
     /// \internal
     /// \brief Specialization of std::hash for fundamental column types

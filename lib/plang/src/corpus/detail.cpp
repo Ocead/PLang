@@ -644,7 +644,7 @@ RETURNING id;
     });
 }
 
-pkey_t detail::corpus::_get_source_id() {
+pkey<source> detail::corpus::_get_source_id() {
     if (!source.is_persisted()) { _create_source(); }
 
     return source.get_id();

@@ -10,8 +10,8 @@
 using namespace plang;
 using namespace plang::detail;
 
-std::vector<std::tuple<pkey_t, uint_t>> path_manager::partially_resolve(const std::vector<string_t> &path,
-                                                                        bool_t fully) const {
+std::vector<std::tuple<pkey<path>, uint_t>> path_manager::partially_resolve(const std::vector<string_t> &path,
+                                                                            bool_t fully) const {
     //language=sqlite
     static const string_t query{R"__SQL__(
 WITH RECURSIVE ar AS (SELECT ?1 as ray),
@@ -50,7 +50,7 @@ FROM max
         ss >> json_array;
     }
 
-    std::vector<std::tuple<pkey_t, uint_t>> map{};
+    std::vector<std::tuple<pkey<class path>, uint_t>> map{};
 
     _reuse(stmt, query, [&] {
         sqlite3_bind_text(&*stmt, 1, json_array.c_str(), json_array.length(), nullptr);
@@ -63,8 +63,8 @@ FROM max
     return map;
 }
 
-std::tuple<pkey_t, uint_t> path_manager::_resolve(std::vector<std::tuple<pkey_t, uint_t>> const &candidates_,
-                                                  pkey_t scope) const {
+std::tuple<pkey<path>, uint_t> path_manager::_resolve(std::vector<std::tuple<pkey<path>, uint_t>> const &candidates_,
+                                                      pkey<path> scope) const {
     auto candidates = candidates_;
     auto size       = candidates.size();
     if (size == 1) {
@@ -87,7 +87,7 @@ std::tuple<pkey_t, uint_t> path_manager::_resolve(std::vector<std::tuple<pkey_t,
     }
 }
 
-std::vector<pkey_t> path_manager::get_children(pkey_t id) const {
+std::vector<pkey<path>> path_manager::get_children(pkey<path> id) const {
 
     //language=sqlite
     static const string_t query{R"__SQL__(
@@ -99,7 +99,7 @@ ORDER BY coalesce((SELECT max(ordinal) FROM path WHERE parent_id = $1), ordinal)
 
     /*static thread_local*/ stmt stmt;
 
-    std::vector<pkey_t> result;
+    std::vector<pkey<path>> result;
 
     _reuse(stmt, query, [&] {
         sqlite3_bind_int64(&*stmt, 1, id);
@@ -109,7 +109,7 @@ ORDER BY coalesce((SELECT max(ordinal) FROM path WHERE parent_id = $1), ordinal)
     return result;
 }
 
-bool_t path_manager::is_parent_of(pkey_t parent_id, pkey_t node_id) const {
+bool_t path_manager::is_parent_of(pkey<path> parent_id, pkey<path> node_id) const {
     //language=sqlite
     static const string_t query{R"__SQL__(
 WITH RECURSIVE ids AS (SELECT ?1 as parent_id, ?2 as node_id),
@@ -129,8 +129,8 @@ SELECT exists(SELECT * FROM cte WHERE parent_id == node_id and node_id is not nu
     /*static thread_local*/ stmt stmt;
 
     return _reuse(stmt, query, [&] {
-        sqlite3_bind_int(&*stmt, 1, parent_id);
-        sqlite3_bind_int(&*stmt, 2, node_id);
+        sqlite3_bind_int64(&*stmt, 1, parent_id);
+        sqlite3_bind_int64(&*stmt, 2, node_id);
         if (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
             return !!sqlite3_column_int(&*stmt, 0);
         } else {
@@ -139,7 +139,7 @@ SELECT exists(SELECT * FROM cte WHERE parent_id == node_id and node_id is not nu
     });
 }
 
-pkey_t path_manager::or_root_id(plang::detail::base_types::pkey_t id) const {
+pkey<path> path_manager::or_root_id(plang::detail::base_types::pkey<path> id) const {
     //language=sqlite
     static const string_t query{R"__SQL__(
 SELECT coalesce(max(p.id), (SELECT id FROM path p2 WHERE p2.id == p2.parent_id)) FROM path p
@@ -149,7 +149,7 @@ WHERE p.id = ?;
     /*static thread_local*/ stmt stmt;
 
     return _reuse(stmt, query, [&] {
-        sqlite3_bind_int(&*stmt, 1, id);
+        sqlite3_bind_int64(&*stmt, 1, id);
         if (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
             return sqlite3_column_int(&*stmt, 0);
         } else {
@@ -158,7 +158,7 @@ WHERE p.id = ?;
     });
 }
 
-std::vector<string_t> path_manager::get_full_path(pkey_t id) const {
+std::vector<string_t> path_manager::get_full_path(pkey<path> id) const {
     //language=sqlite
     static const string_t query{R"__SQL__(
 WITH RECURSIVE cte(n, id, parent_id, name) AS (SELECT 0, id, parent_id, name
@@ -179,7 +179,7 @@ ORDER BY n DESC;
     std::vector<string_t> result;
 
     _reuse(stmt, query, [&] {
-        sqlite3_bind_int(&*stmt, 1, id);
+        sqlite3_bind_int64(&*stmt, 1, id);
         while (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
             result.push_back(string_t(reinterpret_cast<const char *>(sqlite3_column_text(&*stmt, 0))));
         }
@@ -188,7 +188,7 @@ ORDER BY n DESC;
     return result;
 }
 
-std::vector<string_t> path_manager::get_unique_path(pkey_t id) const {
+std::vector<string_t> path_manager::get_unique_path(pkey<path> id) const {
     //language=sqlite
     static const string_t query{R"__SQL__(
 SELECT id, name, parent_id, ordinal, description, source_id FROM path
@@ -200,7 +200,7 @@ LIMIT ?1 OFFSET ?1 * ?2;
     std::vector<string_t> result;
 
     _reuse(stmt, query, [&] {
-        sqlite3_bind_int(&*stmt, 1, id);
+        sqlite3_bind_int64(&*stmt, 1, id);
         while (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
             result.push_back(string_t(reinterpret_cast<const char *>(sqlite3_column_text(&*stmt, 1))));
         }
@@ -209,7 +209,7 @@ LIMIT ?1 OFFSET ?1 * ?2;
     return result;
 }
 
-ostream_t &path_manager::print_helper(ostream_t &os, pkey_t id, format format) const {
+ostream_t &path_manager::print_helper(ostream_t &os, pkey<path> id, format format) const {
     const auto nodes = (format.get_qualification() == format::qualification::FULL) ? get_full_path(id)
                                                                                    : get_unique_path(id);
 
@@ -235,7 +235,7 @@ ostream_t &path_manager::print_helper(ostream_t &os, pkey_t id, format format) c
     return os;
 }
 
-ostream_t &path_manager::print_decoration(ostream_t &os, pkey_t id, format format) const {
+ostream_t &path_manager::print_decoration(ostream_t &os, pkey<path> id, format format) const {
     auto p = fetch(id, true).value();
     if (p.ordinal.has_value() || p.description.has_value()) {
         os << ' ' << format("(", format::style::for_op(lang::op::HINT_L));
@@ -262,7 +262,7 @@ ostream_t &path_manager::print_decoration(ostream_t &os, pkey_t id, format forma
     return os;
 }
 
-std::optional<path> path_manager::fetch(pkey_t id, bool_t dynamic, corpus::tag<class path>) const {
+std::optional<path> path_manager::fetch(pkey<path> id, bool_t dynamic, corpus::tag<class path>) const {
     //TODO: Switch for texts
     //language=sqlite
     static const string_t query{R"__SQL__(
@@ -273,7 +273,7 @@ WHERE id = ?;
     /*static thread_local*/ stmt stmt;
 
     return _reuse(stmt, query, [&]() -> std::optional<path> {
-        sqlite3_bind_int(&*stmt, 1, id);
+        sqlite3_bind_int64(&*stmt, 1, id);
         if (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
             path path;
             path.id        = sqlite3_column_int(&*stmt, 0);
@@ -299,7 +299,9 @@ WHERE id = ?;
     });
 }
 
-std::vector<path> path_manager::fetch_n(const std::vector<pkey_t> &ids, bool_t dynamic, corpus::tag<class path>) const {
+std::vector<path> path_manager::fetch_n(const std::vector<pkey<path>> &ids,
+                                        bool_t dynamic,
+                                        corpus::tag<class path>) const {
     //language=sqlite
     static const string_t query{R"__SQL__(
 SELECT *
@@ -490,9 +492,9 @@ RETURNING path.id;
 
     action action = action::FAIL;
 
-    path.id = _reuse(stmt, query, [&] {
+    path.id = _reuse(stmt, query, [&]() -> pkey<class path> {
         sqlite3_bind_text(&*stmt, 1, path.name.c_str(), path.name.length(), nullptr);
-        sqlite3_bind_int(&*stmt, 2, path.parent_id);
+        sqlite3_bind_int64(&*stmt, 2, path.parent_id);
         if (path.ordinal) {
             sqlite3_bind_double(&*stmt, 3, path.ordinal.value());
         } else {
@@ -503,7 +505,7 @@ RETURNING path.id;
         } else {
             sqlite3_bind_null(&*stmt, 4);
         }
-        sqlite3_bind_int(&*stmt, 5, _get_source_id());
+        sqlite3_bind_int64(&*stmt, 5, _get_source_id());
         int id = -1;
         if (sqlite3_step(&*stmt) == SQLITE_ROW) {
             id     = sqlite3_column_int(&*stmt, 0);
@@ -558,9 +560,9 @@ RETURNING path.id;
     _reuse(stmt, query, [&]() -> class path & {
         if (!path.is_persisted()) { throw std::logic_error("Cannot update unpersisted path"); }
 
-        sqlite3_bind_int(&*stmt, 1, path.get_id());
+        sqlite3_bind_int64(&*stmt, 1, path.get_id());
         sqlite3_bind_text(&*stmt, 2, path.get_name().c_str(), path.get_name().length(), nullptr);
-        sqlite3_bind_int(&*stmt, 3, path.get_parent_id());
+        sqlite3_bind_int64(&*stmt, 3, path.get_parent_id());
         if (path.ordinal) {
             sqlite3_bind_double(&*stmt, 4, path.get_ordinal().value());
         } else {
@@ -574,7 +576,7 @@ RETURNING path.id;
                 sqlite3_bind_null(&*stmt, 5);
             }
         }
-        sqlite3_bind_int(&*stmt, 6, _get_source_id());
+        sqlite3_bind_int64(&*stmt, 6, _get_source_id());
 
         if (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
             action = action::UPDATE;
@@ -588,7 +590,7 @@ RETURNING path.id;
     return action;
 }
 
-stream_helper path_manager::print(pkey_t id, format format, corpus::tag<class path>) const {
+stream_helper path_manager::print(pkey<path> id, format format, corpus::tag<class path>) const {
     return [this, id, format](auto &os) -> ostream_t & { return print_helper(os, id, format); };
 }
 
@@ -609,7 +611,7 @@ RETURNING id;
     return _reuse(stmt, query, [&]() -> std::tuple<string_t, action> {
         if (path.is_root()) { throw std::logic_error("Cannot delete root path"); }
 
-        sqlite3_bind_int(&*stmt, 1, path.get_id());
+        sqlite3_bind_int64(&*stmt, 1, path.get_id());
         sqlite3_bind_int(&*stmt, 2, cascade);
         string_t repr = path.is_persisted() ? print(path.get_id(), get_format())() : "";
 
@@ -650,12 +652,12 @@ RETURNING path.id;
     /*static thread_local*/ stmt stmt;
 
     _reuse(stmt, query, [&] {
-        sqlite3_bind_int(&*stmt, 1, _get_source_id());
+        sqlite3_bind_int64(&*stmt, 1, _get_source_id());
         if (_check(sqlite3_step(&*stmt)) != SQLITE_ROW) { throw std::runtime_error("Could not create root path."); }
     });
 }
 
-pkey_t path_manager::get_root_path_id() const {
+pkey<path> path_manager::get_root_path_id() const {
     //language=sqlite
     static const string_t query{R"__SQL__(
 SELECT id FROM path

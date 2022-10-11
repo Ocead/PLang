@@ -68,8 +68,8 @@ namespace plang::detail {
         /// \param fully <code>true</code>, if the path should be treated as fully-qualified
         /// \return Map of fitting nodes. The key is the persisted node's id,
         /// the value is the index the node's path matches \p path up to.
-        std::vector<std::tuple<pkey_t, uint_t>> partially_resolve(std::vector<string_t> const &path,
-                                                                  bool_t fully) const;
+        std::vector<std::tuple<pkey<path>, uint_t>> partially_resolve(std::vector<string_t> const &path,
+                                                                      bool_t fully) const;
 
         /// \brief Resolves a path to persisted nodes to the most viable candidate
         /// \param candidates List of candidates as returned by \ref path_manager::partially_resolve
@@ -78,44 +78,44 @@ namespace plang::detail {
         /// Setting this to the id of the root node will treat \p path as fully-qualified.
         /// \return Tuple of the most fit node and the index it matches \p path up to.<br/>
         /// \throw plang::exception::ambiguous_reference_error If two or more nodes are most viable
-        std::tuple<pkey_t, uint_t> _resolve(std::vector<std::tuple<pkey_t, uint_t>> const &candidates,
-                                            pkey_t scope = -1) const;
+        std::tuple<pkey<path>, uint_t> _resolve(std::vector<std::tuple<pkey<path>, uint_t>> const &candidates,
+                                                pkey<path> scope = -1) const;
 
-        std::vector<pkey_t> get_children(pkey_t id) const;
+        std::vector<pkey<path>> get_children(pkey<path> id) const;
 
         /// \brief Checks, whether a path node is parent of another
         /// \param parent_id Supposed parent node id
         /// \param child_id Supposed child node id
         /// \return <code>true</code>, if the path node with id \p parent_id
         /// is parent of the parent node with id \p child_id
-        bool_t is_parent_of(pkey_t parent_id, pkey_t child_id) const;
+        bool_t is_parent_of(pkey<path> parent_id, pkey<path> child_id) const;
 
         /// Returns the passed node id, if it's persisted and the root node id otherwise
         /// \param id Node id
         /// \return The passed node id, if it's persisted and the root node id otherwise
-        pkey_t or_root_id(pkey_t id) const;
+        pkey<path> or_root_id(pkey<path> id) const;
 
-        std::vector<string_t> get_full_path(pkey_t id) const;
+        std::vector<string_t> get_full_path(pkey<path> id) const;
 
-        std::vector<string_t> get_unique_path(pkey_t id) const;
+        std::vector<string_t> get_unique_path(pkey<path> id) const;
 
-        ostream_t &print_helper(ostream_t &os, pkey_t id, format format) const;
+        ostream_t &print_helper(ostream_t &os, pkey<path> id, format format) const;
 
     protected:
-        ostream_t &print_decoration(ostream_t &os, pkey_t id, format format) const;
+        ostream_t &print_decoration(ostream_t &os, pkey<path> id, format format) const;
 
     public:
         /// \brief Fetches a persisted path node
         /// \param id Id of the node
         /// \param dynamic `true`, if texts should also be returned
         /// \return The persisted node
-        std::optional<path> fetch(pkey_t id, bool_t dynamic = false, corpus::tag<class path> = {}) const;
+        std::optional<path> fetch(pkey<path> id, bool_t dynamic = false, corpus::tag<class path> = {}) const;
 
         /// \brief Fetches multiple persisted path nodes
         /// \param ids Ids of the node
         /// \param dynamic `true`, if texts should also be returned
         /// \return The persisted nodes
-        std::vector<path> fetch_n(std::vector<pkey_t> const &ids,
+        std::vector<path> fetch_n(std::vector<pkey<path>> const &ids,
                                   bool_t dynamic          = false,
                                   corpus::tag<class path> = {}) const;
 
@@ -144,8 +144,10 @@ namespace plang::detail {
                                          bool_t insert  = false,
                                          bool_t dynamic = false);
 
-        resolve_ref_result<path>
-        resolve(std::vector<string_t> const &path, class path &ent, class path const &ctx, bool_t dynamic = false) const;
+        resolve_ref_result<path> resolve(std::vector<string_t> const &path,
+                                         class path &ent,
+                                         class path const &ctx,
+                                         bool_t dynamic = false) const;
 
         /// \brief Inserts a new path node
         /// \param path Node to insert
@@ -163,7 +165,7 @@ namespace plang::detail {
         /// \param id Id of the node to represent
         /// \param format Format options for printing
         /// \return The representation of the node
-        stream_helper print(pkey_t id, format format, corpus::tag<class path> = {}) const;
+        stream_helper print(pkey<path> id, format format, corpus::tag<class path> = {}) const;
 
         /// \brief Removes a persisted node
         /// \param path Node to remove
@@ -186,7 +188,7 @@ namespace plang::detail {
         /// \brief Returns the id of the root path
         /// \return The id of the root path
         /// \details The root node is defined by having an empty name and being its own parent
-        pkey_t get_root_path_id() const;
+        pkey<path> get_root_path_id() const;
 
         ~path_manager();
     };

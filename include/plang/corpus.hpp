@@ -206,7 +206,7 @@ namespace plang {
         /// \brief Provides a report of the effective operations from parsing PLang code
         class report {
         public:
-            using key = std::tuple<entry_type, pkey_t>;
+            using key = std::tuple<entry_type, pkey<void>>;
 
         private:
             std::unordered_map<key, entry> _mentioned;                    ///< \brief Mentioned entries
@@ -337,9 +337,9 @@ namespace plang {
         /// \param [in] id Id of the entry
         /// \param [in] dynamic `true`, if texts should also be returned
         /// \return The persisted entry, if it exists
-        template<typename T, typename = std::enable_if_t<std::is_base_of_v<plang::persisted, T>>>
-        std::optional<T> fetch(pkey_t id, bool_t dynamic = false) const {
-            static_assert(std::is_base_of_v<plang::persisted, T>);
+        template<typename T, typename = std::enable_if_t<std::is_base_of_v<plang::persisted<T>, T>>>
+        std::optional<T> fetch(pkey<T> id, bool_t dynamic = false) const {
+            static_assert(std::is_base_of_v<plang::persisted<T>, T>);
             return detail::corpus_mixins::fetch(id, dynamic, detail::corpus::tag<T>());
         }
 
@@ -348,16 +348,16 @@ namespace plang {
         /// \param [in] id Id of the entry
         /// \param [in] dynamic `true`, if texts should also be returned
         /// \return The persisted entry, if it exists
-        entry fetch(entry_type type, pkey_t id, bool_t dynamic = false) const;
+        entry fetch(entry_type type, pkey<void> id, bool_t dynamic = false) const;
 
         /// \brief Returns multiple persisted entries
         /// \tparam T Type to fetch
         /// \param [in] ids Ids of the entries
         /// \param [in] dynamic `true`, if texts should also be returned
         /// \return The persisted entries, if existent
-        template<typename T, typename = std::enable_if_t<std::is_base_of_v<plang::persisted, T>>>
-        std::vector<T> fetch_n(std::vector<pkey_t> const &ids, bool_t dynamic = false) const {
-            static_assert(std::is_base_of_v<plang::persisted, T>);
+        template<typename T, typename = std::enable_if_t<std::is_base_of_v<plang::persisted<T>, T>>>
+        std::vector<T> fetch_n(std::vector<pkey<T>> const &ids, bool_t dynamic = false) const {
+            static_assert(std::is_base_of_v<plang::persisted<T>, T>);
             return detail::corpus_mixins(fetch_n(ids, dynamic, detail::corpus::tag<T>()));
         }
 
@@ -366,7 +366,7 @@ namespace plang {
         /// \param ids Ids of the entries
         /// \param texts `true`, if texts should also be returned
         /// \return The persisted entries, if existent
-        std::vector<entry> fetch_n(entry_type type, std::vector<pkey_t> const &ids, bool_t dynamic = false) const;
+        std::vector<entry> fetch_n(entry_type type, std::vector<pkey<void>> const &ids, bool_t dynamic = false) const;
 
         /// \brief Returns all persisted entries of a type
         /// \tparam T Type to fetch
@@ -376,7 +376,7 @@ namespace plang {
         /// \return The list of persisted entries
         template<typename T>
         std::vector<T> fetch_all(bool_t dynamic = false, int_t limit = -1, int_t offset = 0) const {
-            static_assert(std::is_base_of_v<plang::persisted, T>);
+            static_assert(std::is_base_of_v<plang::persisted<T>, T>);
             return detail::corpus_mixins::fetch_all(dynamic, limit, offset, detail::corpus::tag<T>());
         }
 
@@ -475,7 +475,7 @@ namespace plang {
         /// \return The effective action
         template<typename T>
         action insert(T &t, bool_t replace = false) {
-            static_assert(std::is_base_of_v<plang::persisted, T>);
+            static_assert(std::is_base_of_v<plang::persisted<T>, T>);
             return detail::corpus_mixins::insert(static_cast<T &>(t), replace, detail::corpus::tag<T>());
         };
 
@@ -493,7 +493,7 @@ namespace plang {
         /// \return The effective action
         template<typename T>
         action update(T &t, bool_t dynamic = false) {
-            static_assert(std::is_base_of_v<plang::persisted, T>);
+            static_assert(std::is_base_of_v<plang::persisted<T>, T>);
             return detail::corpus_mixins::update(t, dynamic, detail::corpus::tag<T>());
         };
 
@@ -519,7 +519,7 @@ namespace plang {
         /// \return The representation of the entry
         template<typename T>
         detail::stream_helper print(T const &t, format format) const {
-            static_assert(std::is_base_of_v<plang::persisted, T>);
+            static_assert(std::is_base_of_v<plang::persisted<T>, T>);
             return detail::corpus_mixins::print(t.get_id(), format, detail::corpus::tag<T>());
         };
 
@@ -546,7 +546,7 @@ namespace plang {
         /// \return The representation of the removed entry
         template<typename T>
         std::tuple<string_t, action> remove(T &t, bool_t cascade = false) {
-            static_assert(std::is_base_of_v<plang::persisted, T>);
+            static_assert(std::is_base_of_v<plang::persisted<T>, T>);
             return detail::corpus_mixins::remove(t, cascade, detail::corpus::tag<T>());
         };
 

@@ -91,16 +91,16 @@ namespace plang {
         enum class output : decltype(value) {
             /// \brief For ANSI terminals
             /// \details Output will contain ANSI escape sequences like <code>\033[1;31m</code>.
-            ANSI    = 0b00 << 0,
+            ANSI     = 0b00 << 0,
             /// \brief For use within GNU Readline
-            READLINE    = 0b01 << 0,
+            READLINE = 0b01 << 0,
             /// \brief For usage in HTML pages
             /// \details Output will contain ANSI escape sequences like
             /// <code>&lt;span style="color: red;"&gt;&lt;/span&gt;</code>
-            HTML    = 0b10 << 0,
+            HTML     = 0b10 << 0,
             /// \brief Like \ref output::HTML, but with different tags
             /// \details This output mode may override styles
-            DOXYGEN = 0b11 << 0
+            DOXYGEN  = 0b11 << 0
         };
 
         /// \brief Types for formatting
@@ -417,11 +417,11 @@ namespace plang {
             /// \brief Prepares a SQLite query
             /// \param stmt Target statement
             /// \param query SQL query
-            void _prepare(stmt & stmt, string_t const &query) const;
+            void _prepare(stmt &stmt, string_t const &query) const;
 
             /// \brief Resets a prepared statement
             /// \param stmt Statement to reset
-            void _reset(stmt & stmt) const;
+            void _reset(stmt &stmt) const;
 
             /// \brief Executes one or multiple SQL statements
             /// \param query SQL string
@@ -472,7 +472,7 @@ namespace plang {
 
             /// \brief Returns the current sessions source id
             /// \return The current sessions source id
-            pkey_t _get_source_id();
+            pkey<class source> _get_source_id();
 
             /// \brief Closes a database
             void _close();

@@ -6,23 +6,6 @@
 
 using namespace plang;
 
-//region persisted
-
-detail::base_types::persisted::persisted() noexcept
-    : id(-1) {}
-
-pkey_t detail::base_types::persisted::get_id() const noexcept {
-    return id;
-}
-
-bool_t detail::base_types::persisted::is_persisted() const noexcept {
-    return id >= 0;
-}
-
-detail::base_types::persisted::~persisted() noexcept = default;
-
-//endregion persisted
-
 //region sourced
 
 detail::base_types::sourced::sourced() noexcept
@@ -31,7 +14,7 @@ detail::base_types::sourced::sourced() noexcept
 detail::base_types::sourced::sourced(const root::source &source) noexcept
     : source_id(source.get_id()) {}
 
-std::optional<int_t> detail::base_types::sourced::get_source_id() const noexcept {
+std::optional<pkey<class root::source>> detail::base_types::sourced::get_source_id() const noexcept {
     return source_id;
 }
 void detail::base_types::sourced::set_source_id(root::source const &source) noexcept {
@@ -83,19 +66,19 @@ root::source::source(std::optional<string_t> &&name,
       start(start),
       end(start) {}
 
-std::optional<string_t> const &source::get_name() const noexcept {
+std::optional<string_t> const &root::source::get_name() const noexcept {
     return name;
 }
-std::optional<string_t> const &source::get_version() const noexcept {
+std::optional<string_t> const &root::source::get_version() const noexcept {
     return version;
 }
-std::optional<string_t> const &source::get_url() const noexcept {
+std::optional<string_t> const &root::source::get_url() const noexcept {
     return url;
 }
-root::source::time_point_t source::get_start() const noexcept {
+root::source::time_point_t root::source::get_start() const noexcept {
     return start;
 }
-root::source::time_point_t source::get_an_end() const noexcept {
+root::source::time_point_t root::source::get_an_end() const noexcept {
     return end;
 }
 
@@ -142,7 +125,7 @@ bool root::path::set_name(const string_t &_name) {
     }
 }
 
-int_t root::path::get_parent_id() const {
+pkey<path> root::path::get_parent_id() const {
     return parent_id;
 }
 
