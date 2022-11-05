@@ -1,6 +1,6 @@
 var classplang_1_1corpus_1_1report =
 [
-    [ "key", "classplang_1_1corpus_1_1report.html#a02dce09d178ba0a484e33b53344ee637", null ],
+    [ "key", "classplang_1_1corpus_1_1report.html#a9c62e7ab5fc7039c02e2c21856961718", null ],
     [ "report", "classplang_1_1corpus_1_1report.html#a35507355fed7e7fc9c720d41c34dae1d", null ],
     [ "~report", "classplang_1_1corpus_1_1report.html#a7ac8d772929bf999184c163d6745fdbd", null ],
     [ "get_key", "classplang_1_1corpus_1_1report.html#ade048848f385c3b5217847d3bf6dd936", null ],

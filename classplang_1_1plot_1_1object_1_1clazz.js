@@ -5,7 +5,7 @@ var classplang_1_1plot_1_1object_1_1clazz =
       [ "pnt", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1pnt.html", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1pnt" ],
       [ "sym", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1sym.html", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1sym" ]
     ] ],
-    [ "point_class_id", "classplang_1_1plot_1_1object_1_1clazz.html#a26a61a6ed8ede3ca4de4983b9505295a", null ],
+    [ "point_class_id", "classplang_1_1plot_1_1object_1_1clazz.html#a53996a0fed4d8945f6d77276535c88f3", null ],
     [ "name", "classplang_1_1plot_1_1object_1_1clazz.html#abfebccaadaca33c572a39d10fd1d6a3d", null ],
     [ "singleton", "classplang_1_1plot_1_1object_1_1clazz.html#ad5086539bb80efa2e7ae0ef9e1e41f1f", null ]
 ];

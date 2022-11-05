@@ -1,6 +1,6 @@
 <map id="plang::plot::symbol" name="plang::plot::symbol">
-<area shape="rect" id="node1" title=" " alt="" coords="181,78,313,105"/>
-<area shape="rect" id="node2" href="$classplang_1_1detail_1_1base__types_1_1persisted.html" title="Base type for persisted classes." alt="" coords="5,5,133,47"/>
-<area shape="rect" id="node3" href="$classplang_1_1detail_1_1base__types_1_1sourced.html" title="Base type for traceable classes." alt="" coords="5,71,133,112"/>
-<area shape="rect" id="node4" href="$classplang_1_1detail_1_1base__types_1_1decorated.html" title="Base type for decorated classes." alt="" coords="5,136,133,177"/>
+<area shape="rect" id="node1" title=" " alt="" coords="241,78,373,105"/>
+<area shape="rect" id="node2" href="$classplang_1_1detail_1_1base__types_1_1persisted.html" title=" " alt="" coords="5,5,193,47"/>
+<area shape="rect" id="node3" href="$classplang_1_1detail_1_1base__types_1_1sourced.html" title="Base type for traceable classes." alt="" coords="35,71,163,112"/>
+<area shape="rect" id="node4" href="$classplang_1_1detail_1_1base__types_1_1decorated.html" title="Base type for decorated classes." alt="" coords="35,136,163,177"/>
 </map>

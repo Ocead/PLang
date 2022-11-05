@@ -40,7 +40,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="ocead.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PLang<span id="projectnumber">&#160;v0.0.1</span>
+   <div id="projectname">PLang<span id="projectnumber">&#160;0.0.1α</span>
    </div>
    <div id="projectbrief">Interactive markup language for narrative works</div>
   </td>
@@ -99,6 +99,9 @@ $(document).ready(function(){initNavTree('classplang_1_1detail_1_1symbol__manage
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="classplang_1_1detail_1_1symbol__manager-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">plang::detail::symbol_manager Class Reference</div></div>
 </div><!--header-->
@@ -108,11 +111,50 @@ $(document).ready(function(){initNavTree('classplang_1_1detail_1_1symbol__manage
 <div class="dynheader">
 Inheritance diagram for plang::detail::symbol_manager:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classplang_1_1detail_1_1symbol__manager__inherit__graph.svg" width="154" height="127"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classplang_1_1detail_1_1symbol__manager__inherit__graph.svg" width="1244" height="210"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a03d7e3f6b4ba511141bd602dbe8b32b4"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a03d7e3f6b4ba511141bd602dbe8b32b4">fetch</a> (<a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; id, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;={}) const</td></tr>
+<tr class="separator:a03d7e3f6b4ba511141bd602dbe8b32b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad95dd715c9df479545592939078a35e0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#ad95dd715c9df479545592939078a35e0">fetch_n</a> (std::vector&lt; <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; &gt; const &amp;ids, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;={}) const</td></tr>
+<tr class="separator:ad95dd715c9df479545592939078a35e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d0fdc73c8ddd300ad263636cac82683"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a5d0fdc73c8ddd300ad263636cac82683">fetch_all</a> (<a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=true, <a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> limit=-1, <a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> offset=0, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;={}) const</td></tr>
+<tr class="separator:a5d0fdc73c8ddd300ad263636cac82683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71a7fefcc95aa7567fa60f7178edd3f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a71a7fefcc95aa7567fa60f7178edd3f5">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a9080286f9bd675255efd629ca56a4711">insert</a>=false, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;={})</td></tr>
+<tr class="separator:a71a7fefcc95aa7567fa60f7178edd3f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a891b9a14a95aafd57505dab7ca2b5480"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a891b9a14a95aafd57505dab7ca2b5480">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;={}) const</td></tr>
+<tr class="separator:a891b9a14a95aafd57505dab7ca2b5480"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c4dd1f369c441fd678845b94e311483"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a5c4dd1f369c441fd678845b94e311483">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;ent, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a9080286f9bd675255efd629ca56a4711">insert</a>=false, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false)</td></tr>
+<tr class="separator:a5c4dd1f369c441fd678845b94e311483"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4cf2cdd566b4f066646cb756c475ef0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#af4cf2cdd566b4f066646cb756c475ef0">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;ent, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false) const</td></tr>
+<tr class="separator:af4cf2cdd566b4f066646cb756c475ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb323c82fe0727b460ea2ce6659dd833"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#adb323c82fe0727b460ea2ce6659dd833">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a9080286f9bd675255efd629ca56a4711">insert</a>=false, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;={})</td></tr>
+<tr class="separator:adb323c82fe0727b460ea2ce6659dd833"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b9124389206a2cb9c4ad69acb1e9332"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a6b9124389206a2cb9c4ad69acb1e9332">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;={}) const</td></tr>
+<tr class="separator:a6b9124389206a2cb9c4ad69acb1e9332"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc281e9fc34566c285988bad23522d78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#afc281e9fc34566c285988bad23522d78">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;ent, class <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a9080286f9bd675255efd629ca56a4711">insert</a>=false, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false)</td></tr>
+<tr class="separator:afc281e9fc34566c285988bad23522d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c16ab353df053eaa465d8fc2a5d6d79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a3c16ab353df053eaa465d8fc2a5d6d79">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;ent, class <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false) const</td></tr>
+<tr class="separator:a3c16ab353df053eaa465d8fc2a5d6d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9080286f9bd675255efd629ca56a4711"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a9080286f9bd675255efd629ca56a4711">insert</a> (<a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;sym, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> replace=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;={})</td></tr>
+<tr class="separator:a9080286f9bd675255efd629ca56a4711"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a7ea5d28ff8c6ae9efab78c6eb7a0bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a3a7ea5d28ff8c6ae9efab78c6eb7a0bd">update</a> (<a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;sym, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;={})</td></tr>
+<tr class="separator:a3a7ea5d28ff8c6ae9efab78c6eb7a0bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af66fbda7562eb29506d807404ceca063"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1detail_1_1stream__helper.html">stream_helper</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#af66fbda7562eb29506d807404ceca063">print</a> (<a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; id, <a class="el" href="classplang_1_1format.html">format</a> <a class="el" href="classplang_1_1format.html">format</a>, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;={}) const</td></tr>
+<tr class="separator:af66fbda7562eb29506d807404ceca063"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab59cafcb392cecc417bac7d875271862"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#ab59cafcb392cecc417bac7d875271862">remove</a> (<a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;sym, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> cascade, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;={})</td></tr>
+<tr class="separator:ab59cafcb392cecc417bac7d875271862"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a313dab5e60eba12763f523786bcb2d4b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a313dab5e60eba12763f523786bcb2d4b">~symbol_manager</a> ()</td></tr>
+<tr class="separator:a313dab5e60eba12763f523786bcb2d4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ab4e86f5670411e285693def45601a1b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#ab4e86f5670411e285693def45601a1b5">print_helper</a> (<a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;os, <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; id, <a class="el" href="classplang_1_1format.html">format</a> <a class="el" href="classplang_1_1format.html">format</a>) const</td></tr>
+<tr class="separator:ab4e86f5670411e285693def45601a1b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9216076d4b106138016abbe78d6218ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a9216076d4b106138016abbe78d6218ac">print_decoration</a> (<a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;os, <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; id, <a class="el" href="classplang_1_1format.html">format</a> <a class="el" href="classplang_1_1format.html">format</a>) const</td></tr>
+<tr class="separator:a9216076d4b106138016abbe78d6218ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classplang_1_1detail_1_1corpus"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classplang_1_1detail_1_1corpus')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classplang_1_1detail_1_1corpus.html">plang::detail::corpus</a></td></tr>
 <tr class="memitem:ad30c128389637641318bc7ac93a59303 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#ad30c128389637641318bc7ac93a59303">corpus</a> ()</td></tr>
 <tr class="memdesc:ad30c128389637641318bc7ac93a59303 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="classplang_1_1detail_1_1corpus.html#ad30c128389637641318bc7ac93a59303">More...</a><br /></td></tr>
@@ -154,9 +196,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ab1e1f05be9cd105450aeb393a315f7d0 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#ab1e1f05be9cd105450aeb393a315f7d0">_create_source</a> ()</td></tr>
 <tr class="memdesc:ab1e1f05be9cd105450aeb393a315f7d0 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the current source.  <a href="classplang_1_1detail_1_1corpus.html#ab1e1f05be9cd105450aeb393a315f7d0">More...</a><br /></td></tr>
 <tr class="separator:ab1e1f05be9cd105450aeb393a315f7d0 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7c611de9dd75e91fd02d33ad24d8131 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#aa7c611de9dd75e91fd02d33ad24d8131">_get_source_id</a> ()</td></tr>
-<tr class="memdesc:aa7c611de9dd75e91fd02d33ad24d8131 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current sessions source id.  <a href="classplang_1_1detail_1_1corpus.html#aa7c611de9dd75e91fd02d33ad24d8131">More...</a><br /></td></tr>
-<tr class="separator:aa7c611de9dd75e91fd02d33ad24d8131 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8374f4b90a94f1f2efd3c72ce80b8932 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; class <a class="el" href="classplang_1_1root_1_1source.html">source</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#a8374f4b90a94f1f2efd3c72ce80b8932">_get_source_id</a> ()</td></tr>
+<tr class="memdesc:a8374f4b90a94f1f2efd3c72ce80b8932 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current sessions source id.  <a href="classplang_1_1detail_1_1corpus.html#a8374f4b90a94f1f2efd3c72ce80b8932">More...</a><br /></td></tr>
+<tr class="separator:a8374f4b90a94f1f2efd3c72ce80b8932 inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a55844d3de792d95c264e1cc55061fa inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#a2a55844d3de792d95c264e1cc55061fa">_close</a> ()</td></tr>
 <tr class="memdesc:a2a55844d3de792d95c264e1cc55061fa inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes a database.  <a href="classplang_1_1detail_1_1corpus.html#a2a55844d3de792d95c264e1cc55061fa">More...</a><br /></td></tr>
 <tr class="separator:a2a55844d3de792d95c264e1cc55061fa inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,15 +226,871 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a96f9de04d3f5e00f745027fd9d27718c inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#a96f9de04d3f5e00f745027fd9d27718c">~corpus</a> () noexcept</td></tr>
 <tr class="memdesc:a96f9de04d3f5e00f745027fd9d27718c inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <a href="classplang_1_1detail_1_1corpus.html#a96f9de04d3f5e00f745027fd9d27718c">More...</a><br /></td></tr>
 <tr class="separator:a96f9de04d3f5e00f745027fd9d27718c inherit pro_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classplang_1_1detail_1_1symbol__class__manager')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html">plang::detail::symbol_class_manager</a></td></tr>
+<tr class="memitem:a736dbd371c8039202c1f25cf48aca48f inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#a736dbd371c8039202c1f25cf48aca48f">print_helper</a> (<a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;os, <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt; id, <a class="el" href="classplang_1_1format.html">format</a> <a class="el" href="classplang_1_1format.html">format</a>) const</td></tr>
+<tr class="separator:a736dbd371c8039202c1f25cf48aca48f inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04365ef7905bb32afdde648411a52a2e inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz_1_1hint.html">plot::symbol::clazz::hint</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#a04365ef7905bb32afdde648411a52a2e">_fetch_hints</a> (<a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt; id) const</td></tr>
+<tr class="separator:a04365ef7905bb32afdde648411a52a2e inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d917fdd9ad56af60f8ea0f91f521d56 inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#a2d917fdd9ad56af60f8ea0f91f521d56">_update_hints</a> (<a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt; id, std::vector&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz_1_1hint.html">plot::symbol::clazz::hint</a> &gt; &amp;hints)</td></tr>
+<tr class="separator:a2d917fdd9ad56af60f8ea0f91f521d56 inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37d54929ad784428da00f7ff79c1d9e2 inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#a37d54929ad784428da00f7ff79c1d9e2">fetch</a> (<a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt; id, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;={}) const</td></tr>
+<tr class="separator:a37d54929ad784428da00f7ff79c1d9e2 inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4633480a06b057f03e5ac8a29c28847d inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#a4633480a06b057f03e5ac8a29c28847d">fetch_n</a> (std::vector&lt; <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt; &gt; const &amp;ids, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;={}) const</td></tr>
+<tr class="separator:a4633480a06b057f03e5ac8a29c28847d inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad7f8023269ac2e3d9aedf017aa75ed4 inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#aad7f8023269ac2e3d9aedf017aa75ed4">fetch_all</a> (<a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=true, <a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> limit=-1, <a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> offset=0, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;={}) const</td></tr>
+<tr class="separator:aad7f8023269ac2e3d9aedf017aa75ed4 inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8c85a8a67b33c521d496e1947830689 inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#aa8c85a8a67b33c521d496e1947830689">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#ae27aa99418a50246c860fb971c6aedc8">insert</a>=false, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;={})</td></tr>
+<tr class="separator:aa8c85a8a67b33c521d496e1947830689 inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8cb19fd262e1381bdc35207af82252f inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#ac8cb19fd262e1381bdc35207af82252f">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;={}) const</td></tr>
+<tr class="separator:ac8cb19fd262e1381bdc35207af82252f inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e427136090b15cbf79543593d8c98bc inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#a7e427136090b15cbf79543593d8c98bc">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &amp;ent, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#ae27aa99418a50246c860fb971c6aedc8">insert</a>=false, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false)</td></tr>
+<tr class="separator:a7e427136090b15cbf79543593d8c98bc inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94a2156578eb8203299d649595b70b6a inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#a94a2156578eb8203299d649595b70b6a">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &amp;ent, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false) const</td></tr>
+<tr class="separator:a94a2156578eb8203299d649595b70b6a inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae27aa99418a50246c860fb971c6aedc8 inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#ae27aa99418a50246c860fb971c6aedc8">insert</a> (<a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &amp;clazz, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> replace=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;={})</td></tr>
+<tr class="separator:ae27aa99418a50246c860fb971c6aedc8 inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe0736844af39e410eabe504c4b1767f inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#abe0736844af39e410eabe504c4b1767f">update</a> (<a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &amp;clazz, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;={})</td></tr>
+<tr class="separator:abe0736844af39e410eabe504c4b1767f inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a456794e2fa2cdd134ed1051be4c81f9d inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1detail_1_1stream__helper.html">stream_helper</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#a456794e2fa2cdd134ed1051be4c81f9d">print</a> (<a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt; id, <a class="el" href="classplang_1_1format.html">format</a> <a class="el" href="classplang_1_1format.html">format</a>, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;={}) const</td></tr>
+<tr class="separator:a456794e2fa2cdd134ed1051be4c81f9d inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a302ca0c8290c11e03567ef8d07bb22ab inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#a302ca0c8290c11e03567ef8d07bb22ab">remove</a> (<a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &amp;clazz, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> cascade, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;={})</td></tr>
+<tr class="separator:a302ca0c8290c11e03567ef8d07bb22ab inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab99d2a5214145330f98855c0ad3a142a inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__class__manager.html#ab99d2a5214145330f98855c0ad3a142a">~symbol_class_manager</a> ()</td></tr>
+<tr class="separator:ab99d2a5214145330f98855c0ad3a142a inherit pro_methods_classplang_1_1detail_1_1symbol__class__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classplang_1_1detail_1_1path__manager"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classplang_1_1detail_1_1path__manager')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classplang_1_1detail_1_1path__manager.html">plang::detail::path_manager</a></td></tr>
+<tr class="memitem:ae9a74f28a5ff67e12fdf135d776b3f27 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#ae9a74f28a5ff67e12fdf135d776b3f27">is_parent_of</a> (<a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt; parent_id, <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt; child_id) const</td></tr>
+<tr class="memdesc:ae9a74f28a5ff67e12fdf135d776b3f27 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks, whether a path node is parent of another.  <a href="classplang_1_1detail_1_1path__manager.html#ae9a74f28a5ff67e12fdf135d776b3f27">More...</a><br /></td></tr>
+<tr class="separator:ae9a74f28a5ff67e12fdf135d776b3f27 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd34bb40a06830d7ba1cc36c14ad3b23 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#afd34bb40a06830d7ba1cc36c14ad3b23">print_decoration</a> (<a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;os, <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt; id, <a class="el" href="classplang_1_1format.html">format</a> <a class="el" href="classplang_1_1format.html">format</a>) const</td></tr>
+<tr class="separator:afd34bb40a06830d7ba1cc36c14ad3b23 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a506fa7424e2ae9f8e5ce53be2650d438 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a506fa7424e2ae9f8e5ce53be2650d438">fetch</a> (<a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt; id, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
+<tr class="memdesc:a506fa7424e2ae9f8e5ce53be2650d438 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches a persisted path node.  <a href="classplang_1_1detail_1_1path__manager.html#a506fa7424e2ae9f8e5ce53be2650d438">More...</a><br /></td></tr>
+<tr class="separator:a506fa7424e2ae9f8e5ce53be2650d438 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ce715650c3a7f8d7707725c20dfa783 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a4ce715650c3a7f8d7707725c20dfa783">fetch_n</a> (std::vector&lt; <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt; &gt; const &amp;ids, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
+<tr class="memdesc:a4ce715650c3a7f8d7707725c20dfa783 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches multiple persisted path nodes.  <a href="classplang_1_1detail_1_1path__manager.html#a4ce715650c3a7f8d7707725c20dfa783">More...</a><br /></td></tr>
+<tr class="separator:a4ce715650c3a7f8d7707725c20dfa783 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ae580d27d5ac177338e96bfd97ab375 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a8ae580d27d5ac177338e96bfd97ab375">fetch_all</a> (<a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=true, <a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> limit=-1, <a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a> offset=0, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
+<tr class="memdesc:a8ae580d27d5ac177338e96bfd97ab375 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches all persisted path nodes.  <a href="classplang_1_1detail_1_1path__manager.html#a8ae580d27d5ac177338e96bfd97ab375">More...</a><br /></td></tr>
+<tr class="separator:a8ae580d27d5ac177338e96bfd97ab375 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5d06d51e7f030ca81b98dcfd5733ac3 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#ab5d06d51e7f030ca81b98dcfd5733ac3">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="classplang_1_1detail_1_1path__manager.html#a9bca79f963243ca5e2f61d426665e588">insert</a>=false, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={})</td></tr>
+<tr class="separator:ab5d06d51e7f030ca81b98dcfd5733ac3 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e90e11f40cb12ecdf0c78b3584ab664 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a2e90e11f40cb12ecdf0c78b3584ab664">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
+<tr class="separator:a2e90e11f40cb12ecdf0c78b3584ab664 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d31f676e68e03ab1f96eca62526f6c2 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a6d31f676e68e03ab1f96eca62526f6c2">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;ent, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="classplang_1_1detail_1_1path__manager.html#a9bca79f963243ca5e2f61d426665e588">insert</a>=false, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false)</td></tr>
+<tr class="separator:a6d31f676e68e03ab1f96eca62526f6c2 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a892feba6e4e362bb4502e28a5dde214f inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a892feba6e4e362bb4502e28a5dde214f">resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;ent, class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;ctx, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false) const</td></tr>
+<tr class="separator:a892feba6e4e362bb4502e28a5dde214f inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bca79f963243ca5e2f61d426665e588 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a9bca79f963243ca5e2f61d426665e588">insert</a> (<a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> replace=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={})</td></tr>
+<tr class="memdesc:a9bca79f963243ca5e2f61d426665e588 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a new path node.  <a href="classplang_1_1detail_1_1path__manager.html#a9bca79f963243ca5e2f61d426665e588">More...</a><br /></td></tr>
+<tr class="separator:a9bca79f963243ca5e2f61d426665e588 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45894d3d023331df67cae5ce38edd48a inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a45894d3d023331df67cae5ce38edd48a">update</a> (<a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic=false, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={})</td></tr>
+<tr class="memdesc:a45894d3d023331df67cae5ce38edd48a inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a path node.  <a href="classplang_1_1detail_1_1path__manager.html#a45894d3d023331df67cae5ce38edd48a">More...</a><br /></td></tr>
+<tr class="separator:a45894d3d023331df67cae5ce38edd48a inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a514f4a7de5086792c40bd1b483f51faf inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1detail_1_1stream__helper.html">stream_helper</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a514f4a7de5086792c40bd1b483f51faf">print</a> (<a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt; id, <a class="el" href="classplang_1_1format.html">format</a> <a class="el" href="classplang_1_1format.html">format</a>, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={}) const</td></tr>
+<tr class="memdesc:a514f4a7de5086792c40bd1b483f51faf inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a representation of a persisted node.  <a href="classplang_1_1detail_1_1path__manager.html#a514f4a7de5086792c40bd1b483f51faf">More...</a><br /></td></tr>
+<tr class="separator:a514f4a7de5086792c40bd1b483f51faf inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb13b1c3ad9394f6f1cf338ee906fff7 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#afb13b1c3ad9394f6f1cf338ee906fff7">remove</a> (<a class="el" href="classplang_1_1root_1_1path.html">path</a> &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> cascade, <a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; class <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;={})</td></tr>
+<tr class="memdesc:afb13b1c3ad9394f6f1cf338ee906fff7 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a persisted node.  <a href="classplang_1_1detail_1_1path__manager.html#afb13b1c3ad9394f6f1cf338ee906fff7">More...</a><br /></td></tr>
+<tr class="separator:afb13b1c3ad9394f6f1cf338ee906fff7 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7642760f885b798219ab8aa2f67ad3f inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#ae7642760f885b798219ab8aa2f67ad3f">wipe</a> ()</td></tr>
+<tr class="memdesc:ae7642760f885b798219ab8aa2f67ad3f inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wipes the whole path tree.  <a href="classplang_1_1detail_1_1path__manager.html#ae7642760f885b798219ab8aa2f67ad3f">More...</a><br /></td></tr>
+<tr class="separator:ae7642760f885b798219ab8aa2f67ad3f inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8f6d7f8589e4f7ece3e9b070d3218b8 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#ad8f6d7f8589e4f7ece3e9b070d3218b8">ensure_root_path</a> ()</td></tr>
+<tr class="memdesc:ad8f6d7f8589e4f7ece3e9b070d3218b8 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensures that a corpus contains a root path.  <a href="classplang_1_1detail_1_1path__manager.html#ad8f6d7f8589e4f7ece3e9b070d3218b8">More...</a><br /></td></tr>
+<tr class="separator:ad8f6d7f8589e4f7ece3e9b070d3218b8 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae32f326aa8d5e4b0985ceef90da07b28 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#ae32f326aa8d5e4b0985ceef90da07b28">get_root_path_id</a> () const</td></tr>
+<tr class="memdesc:ae32f326aa8d5e4b0985ceef90da07b28 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the id of the root path.  <a href="classplang_1_1detail_1_1path__manager.html#ae32f326aa8d5e4b0985ceef90da07b28">More...</a><br /></td></tr>
+<tr class="separator:ae32f326aa8d5e4b0985ceef90da07b28 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98fa798ecb0a973aa8349bf4064a6e47 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1path__manager.html#a98fa798ecb0a973aa8349bf4064a6e47">~path_manager</a> ()</td></tr>
+<tr class="separator:a98fa798ecb0a973aa8349bf4064a6e47 inherit pro_methods_classplang_1_1detail_1_1path__manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a7a60a865644a1ab535eef0c3b9f6b25a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#a7a60a865644a1ab535eef0c3b9f6b25a">select_symbol</a> (<a class="el" href="classplang_1_1detail_1_1stmt.html">stmt</a> &amp;<a class="el" href="classplang_1_1detail_1_1stmt.html">stmt</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> dynamic) const</td></tr>
+<tr class="separator:a7a60a865644a1ab535eef0c3b9f6b25a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc930567f6a2760f83088abee15f96a0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::tuple&lt; <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;, <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;, <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;, <a class="el" href="namespaceplang_1_1column__types.html#ac20d58de6ac4d2cc7f72bec19d78500e">uint_t</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1symbol__manager.html#acc930567f6a2760f83088abee15f96a0">partially_resolve</a> (std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;<a class="el" href="classplang_1_1root_1_1path.html">path</a>, <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> fully) const</td></tr>
+<tr class="separator:acc930567f6a2760f83088abee15f96a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_static_methods_classplang_1_1detail_1_1corpus"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classplang_1_1detail_1_1corpus')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classplang_1_1detail_1_1corpus.html">plang::detail::corpus</a></td></tr>
 <tr class="memitem:a6dcb02285d07196a30d6677a7254e855 inherit pro_static_methods_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classplang_1_1format.html">format</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#a6dcb02285d07196a30d6677a7254e855">_make_inner_format</a> (<a class="el" href="classplang_1_1format.html">format</a> <a class="el" href="classplang_1_1format.html">format</a>)</td></tr>
 <tr class="memdesc:a6dcb02285d07196a30d6677a7254e855 inherit pro_static_methods_classplang_1_1detail_1_1corpus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a format for use in nested printing.  <a href="classplang_1_1detail_1_1corpus.html#a6dcb02285d07196a30d6677a7254e855">More...</a><br /></td></tr>
 <tr class="separator:a6dcb02285d07196a30d6677a7254e855 inherit pro_static_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70757b6b430a9452887292c037eb5df5 inherit pro_static_methods_classplang_1_1detail_1_1corpus"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename ... &gt; typename V, typename T &gt; </td></tr>
+<tr class="memitem:a70757b6b430a9452887292c037eb5df5 inherit pro_static_methods_classplang_1_1detail_1_1corpus"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#a70757b6b430a9452887292c037eb5df5">vector_to_json</a> (V&lt; T &gt; const &amp;vec)</td></tr>
+<tr class="separator:a70757b6b430a9452887292c037eb5df5 inherit pro_static_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94cd03b7c9b0a3efcfe67da55e023c95 inherit pro_static_methods_classplang_1_1detail_1_1corpus"><td class="memTemplParams" colspan="2">template&lt;typename I &gt; </td></tr>
+<tr class="memitem:a94cd03b7c9b0a3efcfe67da55e023c95 inherit pro_static_methods_classplang_1_1detail_1_1corpus"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#a94cd03b7c9b0a3efcfe67da55e023c95">vector_to_json</a> (I from, I to)</td></tr>
+<tr class="separator:a94cd03b7c9b0a3efcfe67da55e023c95 inherit pro_static_methods_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classplang_1_1detail_1_1corpus"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classplang_1_1detail_1_1corpus')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classplang_1_1detail_1_1corpus.html">plang::detail::corpus</a></td></tr>
 <tr class="memitem:ae17a78f2105f9921092b0eebebd23c0f inherit pro_attribs_classplang_1_1detail_1_1corpus"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; sqlite3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1corpus.html#ae17a78f2105f9921092b0eebebd23c0f">db</a></td></tr>
 <tr class="memdesc:ae17a78f2105f9921092b0eebebd23c0f inherit pro_attribs_classplang_1_1detail_1_1corpus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the database connection.  <a href="classplang_1_1detail_1_1corpus.html#ae17a78f2105f9921092b0eebebd23c0f">More...</a><br /></td></tr>
 <tr class="separator:ae17a78f2105f9921092b0eebebd23c0f inherit pro_attribs_classplang_1_1detail_1_1corpus"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a313dab5e60eba12763f523786bcb2d4b" name="a313dab5e60eba12763f523786bcb2d4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a313dab5e60eba12763f523786bcb2d4b">&#9670;&nbsp;</a></span>~symbol_manager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">plang::detail::symbol_manager::~symbol_manager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7a60a865644a1ab535eef0c3b9f6b25a" name="a7a60a865644a1ab535eef0c3b9f6b25a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a60a865644a1ab535eef0c3b9f6b25a">&#9670;&nbsp;</a></span>select_symbol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> plang::detail::symbol_manager::select_symbol </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classplang_1_1detail_1_1stmt.html">stmt</a> &amp;&#160;</td>
+          <td class="paramname"><em>stmt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>dynamic</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acc930567f6a2760f83088abee15f96a0" name="acc930567f6a2760f83088abee15f96a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc930567f6a2760f83088abee15f96a0">&#9670;&nbsp;</a></span>partially_resolve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::tuple&lt; <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1root_1_1path.html">path</a> &gt;, <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> &gt;, <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;, <a class="el" href="namespaceplang_1_1column__types.html#ac20d58de6ac4d2cc7f72bec19d78500e">uint_t</a> &gt; &gt; plang::detail::symbol_manager::partially_resolve </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>fully</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab4e86f5670411e285693def45601a1b5" name="ab4e86f5670411e285693def45601a1b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4e86f5670411e285693def45601a1b5">&#9670;&nbsp;</a></span>print_helper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp; plang::detail::symbol_manager::print_helper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classplang_1_1format.html">format</a>&#160;</td>
+          <td class="paramname"><em>format</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9216076d4b106138016abbe78d6218ac" name="a9216076d4b106138016abbe78d6218ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9216076d4b106138016abbe78d6218ac">&#9670;&nbsp;</a></span>print_decoration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp; plang::detail::symbol_manager::print_decoration </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5">ostream_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classplang_1_1format.html">format</a>&#160;</td>
+          <td class="paramname"><em>format</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a03d7e3f6b4ba511141bd602dbe8b32b4" name="a03d7e3f6b4ba511141bd602dbe8b32b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03d7e3f6b4ba511141bd602dbe8b32b4">&#9670;&nbsp;</a></span>fetch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; plang::detail::symbol_manager::fetch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad95dd715c9df479545592939078a35e0" name="ad95dd715c9df479545592939078a35e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad95dd715c9df479545592939078a35e0">&#9670;&nbsp;</a></span>fetch_n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; plang::detail::symbol_manager::fetch_n </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>ids</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5d0fdc73c8ddd300ad263636cac82683" name="a5d0fdc73c8ddd300ad263636cac82683"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d0fdc73c8ddd300ad263636cac82683">&#9670;&nbsp;</a></span>fetch_all()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; plang::detail::symbol_manager::fetch_all </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a>&#160;</td>
+          <td class="paramname"><em>limit</em> = <code>-1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#adeacf0c07a122e042f1ff9564e051056">int_t</a>&#160;</td>
+          <td class="paramname"><em>offset</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a71a7fefcc95aa7567fa60f7178edd3f5" name="a71a7fefcc95aa7567fa60f7178edd3f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71a7fefcc95aa7567fa60f7178edd3f5">&#9670;&nbsp;</a></span>resolve() <span class="overload">[1/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; plang::detail::symbol_manager::resolve </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>insert</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a891b9a14a95aafd57505dab7ca2b5480" name="a891b9a14a95aafd57505dab7ca2b5480"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a891b9a14a95aafd57505dab7ca2b5480">&#9670;&nbsp;</a></span>resolve() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; plang::detail::symbol_manager::resolve </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5c4dd1f369c441fd678845b94e311483" name="a5c4dd1f369c441fd678845b94e311483"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c4dd1f369c441fd678845b94e311483">&#9670;&nbsp;</a></span>resolve() <span class="overload">[3/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; plang::detail::symbol_manager::resolve </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;&#160;</td>
+          <td class="paramname"><em>ent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>insert</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af4cf2cdd566b4f066646cb756c475ef0" name="af4cf2cdd566b4f066646cb756c475ef0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4cf2cdd566b4f066646cb756c475ef0">&#9670;&nbsp;</a></span>resolve() <span class="overload">[4/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; plang::detail::symbol_manager::resolve </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;&#160;</td>
+          <td class="paramname"><em>ent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">class <a class="el" href="classplang_1_1root_1_1path.html">path</a> const &amp;&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb323c82fe0727b460ea2ce6659dd833" name="adb323c82fe0727b460ea2ce6659dd833"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb323c82fe0727b460ea2ce6659dd833">&#9670;&nbsp;</a></span>resolve() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; plang::detail::symbol_manager::resolve </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">class <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> const &amp;&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>insert</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6b9124389206a2cb9c4ad69acb1e9332" name="a6b9124389206a2cb9c4ad69acb1e9332"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b9124389206a2cb9c4ad69acb1e9332">&#9670;&nbsp;</a></span>resolve() <span class="overload">[6/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplang_1_1resolve__result.html">resolve_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; plang::detail::symbol_manager::resolve </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">class <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> const &amp;&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc281e9fc34566c285988bad23522d78" name="afc281e9fc34566c285988bad23522d78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc281e9fc34566c285988bad23522d78">&#9670;&nbsp;</a></span>resolve() <span class="overload">[7/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; plang::detail::symbol_manager::resolve </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;&#160;</td>
+          <td class="paramname"><em>ent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">class <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> const &amp;&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>insert</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c16ab353df053eaa465d8fc2a5d6d79" name="a3c16ab353df053eaa465d8fc2a5d6d79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c16ab353df053eaa465d8fc2a5d6d79">&#9670;&nbsp;</a></span>resolve() <span class="overload">[8/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceplang.html#ace3096a5eda9ccee79ba433774059560">resolve_ref_result</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt; plang::detail::symbol_manager::resolve </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;&#160;</td>
+          <td class="paramname"><em>ent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">class <a class="el" href="classplang_1_1plot_1_1symbol_1_1clazz.html">plot::symbol::clazz</a> const &amp;&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9080286f9bd675255efd629ca56a4711" name="a9080286f9bd675255efd629ca56a4711"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9080286f9bd675255efd629ca56a4711">&#9670;&nbsp;</a></span>insert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a> plang::detail::symbol_manager::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;&#160;</td>
+          <td class="paramname"><em>sym</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>replace</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3a7ea5d28ff8c6ae9efab78c6eb7a0bd" name="a3a7ea5d28ff8c6ae9efab78c6eb7a0bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a7ea5d28ff8c6ae9efab78c6eb7a0bd">&#9670;&nbsp;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a> plang::detail::symbol_manager::update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;&#160;</td>
+          <td class="paramname"><em>sym</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>dynamic</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af66fbda7562eb29506d807404ceca063" name="af66fbda7562eb29506d807404ceca063"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af66fbda7562eb29506d807404ceca063">&#9670;&nbsp;</a></span>print()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplang_1_1detail_1_1stream__helper.html">stream_helper</a> plang::detail::symbol_manager::print </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classplang_1_1format.html">format</a>&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab59cafcb392cecc417bac7d875271862" name="ab59cafcb392cecc417bac7d875271862"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab59cafcb392cecc417bac7d875271862">&#9670;&nbsp;</a></span>remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::tuple&lt; <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a>, <a class="el" href="namespaceplang.html#a9ff4aea551afa2db98a64191340e1b58">action</a> &gt; plang::detail::symbol_manager::remove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &amp;&#160;</td>
+          <td class="paramname"><em>sym</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>cascade</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structplang_1_1detail_1_1corpus_1_1tag.html">corpus::tag</a>&lt; <a class="el" href="classplang_1_1plot_1_1symbol.html">plot::symbol</a> &gt;&#160;</td>
+          <td class="paramname"> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/plang/corpus/plot/<a class="el" href="symbol_8hpp_source.html">symbol.hpp</a></li>
 </ul>

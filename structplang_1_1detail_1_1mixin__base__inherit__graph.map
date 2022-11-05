@@ -1,7 +1,8 @@
 <map id="plang::detail::mixin_base&lt; Tps &gt;" name="plang::detail::mixin_base&lt; Tps &gt;">
-<area shape="rect" id="node1" title="Common derived class template for distributed overloading." alt="" coords="103,259,233,300"/>
-<area shape="rect" id="node2" href="$classplang_1_1detail_1_1path__manager.html" title="Handles database actions for paths." alt="" coords="5,80,131,121"/>
-<area shape="rect" id="node4" href="$classplang_1_1detail_1_1symbol__class__manager.html" title=" " alt="" coords="97,169,239,211"/>
-<area shape="rect" id="node3" href="$classplang_1_1detail_1_1corpus.html" title="Provides a basic interface to a database." alt="" coords="48,5,187,32"/>
-<area shape="rect" id="node5" title=" " alt="" coords="263,177,307,203"/>
+<area shape="rect" id="node1" title="Common derived class template for distributed overloading." alt="" coords="747,85,877,127"/>
+<area shape="rect" id="node2" href="$classplang_1_1detail_1_1path__manager.html" title="Handles database actions for paths." alt="" coords="192,5,317,47"/>
+<area shape="rect" id="node4" href="$classplang_1_1detail_1_1symbol__class__manager.html" title=" " alt="" coords="365,60,508,101"/>
+<area shape="rect" id="node3" href="$classplang_1_1detail_1_1corpus.html" title="Provides a basic interface to a database." alt="" coords="5,71,144,98"/>
+<area shape="rect" id="node5" href="$classplang_1_1detail_1_1symbol__manager.html" title=" " alt="" coords="556,115,699,156"/>
+<area shape="rect" id="node6" title=" " alt="" coords="605,181,649,207"/>
 </map>

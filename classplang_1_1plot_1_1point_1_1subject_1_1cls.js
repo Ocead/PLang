@@ -1,5 +1,5 @@
 var classplang_1_1plot_1_1point_1_1subject_1_1cls =
 [
-    [ "point_id", "classplang_1_1plot_1_1point_1_1subject_1_1cls.html#a1d2851c1da36bd17369d835f6e594bb5", null ],
-    [ "symbol_class_id", "classplang_1_1plot_1_1point_1_1subject_1_1cls.html#ad9aa2b20c72f95bf807c40f811338e5b", null ]
+    [ "point_id", "classplang_1_1plot_1_1point_1_1subject_1_1cls.html#a07120042abceda51654929b2759d2f3b", null ],
+    [ "symbol_class_id", "classplang_1_1plot_1_1point_1_1subject_1_1cls.html#a74f48ff380fe5382b92262c744e8af37", null ]
 ];

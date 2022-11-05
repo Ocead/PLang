@@ -37,7 +37,7 @@ var NAVTREE =
     [ "The Command Line", "cli.html", [
       [ "Manual page", "cli_man.html", null ],
       [ "Command Reference", "cli_commands.html", null ],
-      [ "Command Line Reference", "cli_options.html", null ]
+      [ "Command Line Options", "cli_options.html", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -78,11 +78,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"classplang_1_1corpus_1_1report.html#a18edfa250506ae87ce4d3aa10df68061",
-"classplang_1_1detail_1_1symbol__class__manager.html#a302ca0c8290c11e03567ef8d07bb22ab",
-"classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1pnt.html#aa03982982346db65a5f83c950c3176c3",
-"detail_8hpp.html#a9ff4aea551afa2db98a64191340e1b58",
-"namespaceplang_1_1lang.html#ad153f803c229f0412791a34522b1aec6ad202409d456dc2e00f4814b7bf7a2bd1"
+"classplang_1_1corpus_1_1report.html#a390c3d86b757889043dc009203391e08",
+"classplang_1_1detail_1_1symbol__class__manager.html",
+"classplang_1_1format.html#afb0c97418a9bbf661b3d7fd89c304026a4aaf23261cd3bd2064183cf1b53f1023",
+"classplang_1_1root_1_1path.html#ab73ceb948e592037576e7a34ff1612d3",
+"namespaceplang.html#a2007ea253163252b17d226e61895a8c6",
+"structstd_1_1tuple__element_3_012_00_01plang_1_1resolve__result_3_01_t_01_4_01_4.html#a7eab6dfe9fc96a5aab7541d9bb6c0c60"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

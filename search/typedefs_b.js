@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['raw_5fcmd_5ffunc_5ft_0',['raw_cmd_func_t',['../classplang_1_1cli.html#a72096272b354e261568e286c22665cd4',1,'plang::cli']]],
-  ['resolve_5fentry_5fref_5fresult_1',['resolve_entry_ref_result',['../namespaceplang.html#a0f3ca53538eb08b9a169f64bfe7e5d92',1,'plang']]],
-  ['resolve_5fref_5fresult_2',['resolve_ref_result',['../namespaceplang.html#ace3096a5eda9ccee79ba433774059560',1,'plang']]]
+  ['sstream_5ft_0',['sstream_t',['../namespaceplang_1_1column__types.html#af90884518784aac44b7c9affebe690eb',1,'plang::column_types']]],
+  ['string_5ft_1',['string_t',['../namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6',1,'plang::column_types']]],
+  ['string_5fview_5ft_2',['string_view_t',['../namespaceplang_1_1column__types.html#a99e4426ac6a02da0868e26ded6e0e922',1,'plang::column_types']]]
 ];

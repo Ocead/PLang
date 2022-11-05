@@ -40,7 +40,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="ocead.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PLang<span id="projectnumber">&#160;v0.0.1</span>
+   <div id="projectname">PLang<span id="projectnumber">&#160;0.0.1α</span>
    </div>
    <div id="projectbrief">Interactive markup language for narrative works</div>
   </td>
@@ -101,6 +101,12 @@ $(document).ready(function(){initNavTree('lang_base_path.html',''); initResizabl
   <div class="headertitle"><div class="title">Paths </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><ul><li class="level2"><a href="#autotoc_md0">Declaration</a></li>
+<li class="level2"><a href="#autotoc_md1">Reference</a></li>
+</ul>
+</ul>
+</div>
 <div class="textblock"><p >PLang utilizes a path tree to organize a corpus' contents at the lowest level. Subsequent types of entries all have a path they are located under and paths may be part of their declaration. Nodes within a path are delimited with a <code>.</code> operator. A leading <code>.</code> denotes a fully qualified (or absolute) path. A path that omits the leading <code>.</code> and zero or more parent nodes is unqualified. Unqualified paths may be used for valid declarations, as long as they are unique. The context the declaration is made in, as well as the kind of entry that is declared may broaden what is considered a unique path within the context of the declaration. Fully qualified paths are unique be default.</p>
 <p >A corpus always contains at least its root path, which can be referenced by <code>.</code>. This is the only path in the corpus that may not be deleted.</p>
 <h2><a class="anchor" id="autotoc_md0"></a>
@@ -116,6 +122,7 @@ Declaration</h2>
 </div><!-- fragment --><p> The ordinal controls where the path is placed in listings. The description is at the moment a hint for the user. The arguments of the decoration may be omitted.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Reference</h2>
+<p >Paths are referenced as they are declared (without the closing <code>;</code>). A reference to a path is part of most other declarations. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

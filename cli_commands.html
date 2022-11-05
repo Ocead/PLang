@@ -40,7 +40,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="ocead.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PLang<span id="projectnumber">&#160;v0.0.1</span>
+   <div id="projectname">PLang<span id="projectnumber">&#160;0.0.1α</span>
    </div>
    <div id="projectbrief">Interactive markup language for narrative works</div>
   </td>
@@ -102,39 +102,39 @@ $(document).ready(function(){initNavTree('cli_commands.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md74">General</a><ul><li class="level2"><a href="#autotoc_md75">Print help</a></li>
-<li class="level2"><a href="#autotoc_md76">Get/Set options</a></li>
-<li class="level2"><a href="#autotoc_md77">Print current information</a></li>
-<li class="level2"><a href="#autotoc_md78">Quit command line</a></li>
+<ul><li class="level1"><a href="#autotoc_md77">General</a><ul><li class="level2"><a href="#autotoc_md78">Print help</a></li>
+<li class="level2"><a href="#autotoc_md79">Get/Set options</a></li>
+<li class="level2"><a href="#autotoc_md80">Print current information</a></li>
+<li class="level2"><a href="#autotoc_md81">Quit command line</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md79">Database files</a><ul><li class="level2"><a href="#autotoc_md80">Creating a database file</a></li>
-<li class="level2"><a href="#autotoc_md81">Opening a database file</a></li>
-<li class="level2"><a href="#autotoc_md82">Save changes to a database file</a></li>
-<li class="level2"><a href="#autotoc_md83">Closing a database file</a></li>
+<li class="level1"><a href="#autotoc_md82">Database files</a><ul><li class="level2"><a href="#autotoc_md83">Creating a database file</a></li>
+<li class="level2"><a href="#autotoc_md84">Opening a database file</a></li>
+<li class="level2"><a href="#autotoc_md85">Save changes to a database file</a></li>
+<li class="level2"><a href="#autotoc_md86">Closing a database file</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md84">Markup files</a><ul><li class="level2"><a href="#autotoc_md85">Run a markup file</a></li>
-<li class="level2"><a href="#autotoc_md86">Export corpus to a markup file</a></li>
+<li class="level1"><a href="#autotoc_md87">Markup files</a><ul><li class="level2"><a href="#autotoc_md88">Run a markup file</a></li>
+<li class="level2"><a href="#autotoc_md89">Export corpus to a markup file</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md87">Traversal, querying</a><ul><li class="level2"><a href="#autotoc_md88">Change scope</a></li>
-<li class="level2"><a href="#autotoc_md89">List entries</a></li>
-<li class="level2"><a href="#autotoc_md90">Search entries</a></li>
+<li class="level1"><a href="#autotoc_md90">Traversal, querying</a><ul><li class="level2"><a href="#autotoc_md91">Change scope</a></li>
+<li class="level2"><a href="#autotoc_md92">List entries</a></li>
+<li class="level2"><a href="#autotoc_md93">Search entries</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md91">Manipulation</a><ul><li class="level2"><a href="#autotoc_md92">Delete entries</a></li>
-<li class="level2"><a href="#autotoc_md93">Copy entries</a></li>
-<li class="level2"><a href="#autotoc_md94">Move entries</a></li>
-<li class="level2"><a href="#autotoc_md95">Undo</a></li>
-<li class="level2"><a href="#autotoc_md96">Redo</a></li>
+<li class="level1"><a href="#autotoc_md94">Manipulation</a><ul><li class="level2"><a href="#autotoc_md95">Delete entries</a></li>
+<li class="level2"><a href="#autotoc_md96">Copy entries</a></li>
+<li class="level2"><a href="#autotoc_md97">Move entries</a></li>
+<li class="level2"><a href="#autotoc_md98">Undo</a></li>
+<li class="level2"><a href="#autotoc_md99">Redo</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<div class="textblock"><h1><a class="anchor" id="autotoc_md74"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md77"></a>
 General</h1>
-<h2><a class="anchor" id="autotoc_md75"></a>
+<h2><a class="anchor" id="autotoc_md78"></a>
 Print help</h2>
 <div class="fragment"><div class="line">:h</div>
 </div><!-- fragment --><p >Prints a list of availabe commands with a brief description.</p>
@@ -142,7 +142,7 @@ Print help</h2>
 <dt>Parameters </dt>
 <dd>(<em>none</em>) </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md76"></a>
+<h2><a class="anchor" id="autotoc_md79"></a>
 Get/Set options</h2>
 <div class="fragment"><div class="line">:p &lt;option&gt; &lt;value&gt;</div>
 </div><!-- fragment --><p >Gets or sets an option of the command line.</p>
@@ -154,7 +154,7 @@ Get/Set options</h2>
   </dd>
 </dl>
 <p>See the <a class="el" href="cli_options.html">Command Line Options</a> page for a list of available options.</p>
-<h2><a class="anchor" id="autotoc_md77"></a>
+<h2><a class="anchor" id="autotoc_md80"></a>
 Print current information</h2>
 <div class="fragment"><div class="line">:i &lt;ref&gt;</div>
 </div><!-- fragment --><p >Prints information about an entry in the corpus.</p>
@@ -164,7 +164,7 @@ Print current information</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md78"></a>
+<h2><a class="anchor" id="autotoc_md81"></a>
 Quit command line</h2>
 <div class="fragment"><div class="line">:q</div>
 </div><!-- fragment --><p >Quits the application.</p>
@@ -172,16 +172,16 @@ Quit command line</h2>
 <dt>Parameters </dt>
 <dd>(<em>none</em>) </dd>
 </dl>
-<h1><a class="anchor" id="autotoc_md79"></a>
+<h1><a class="anchor" id="autotoc_md82"></a>
 Database files</h1>
-<h2><a class="anchor" id="autotoc_md80"></a>
+<h2><a class="anchor" id="autotoc_md83"></a>
 Creating a database file</h2>
 <div class="fragment"><div class="line">:n</div>
 </div><!-- fragment --><dl class="params">
 <dt>Parameters </dt>
 <dd>(<em>none</em>) </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md81"></a>
+<h2><a class="anchor" id="autotoc_md84"></a>
 Opening a database file</h2>
 <div class="fragment"><div class="line">:o &lt;file&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -190,7 +190,7 @@ Opening a database file</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md82"></a>
+<h2><a class="anchor" id="autotoc_md85"></a>
 Save changes to a database file</h2>
 <div class="fragment"><div class="line">:s &lt;file&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -199,16 +199,16 @@ Save changes to a database file</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md83"></a>
+<h2><a class="anchor" id="autotoc_md86"></a>
 Closing a database file</h2>
 <div class="fragment"><div class="line">:w</div>
 </div><!-- fragment --><dl class="params">
 <dt>Parameters </dt>
 <dd>(<em>none</em>) </dd>
 </dl>
-<h1><a class="anchor" id="autotoc_md84"></a>
+<h1><a class="anchor" id="autotoc_md87"></a>
 Markup files</h1>
-<h2><a class="anchor" id="autotoc_md85"></a>
+<h2><a class="anchor" id="autotoc_md88"></a>
 Run a markup file</h2>
 <div class="fragment"><div class="line">:r &lt;file&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -217,7 +217,7 @@ Run a markup file</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md86"></a>
+<h2><a class="anchor" id="autotoc_md89"></a>
 Export corpus to a markup file</h2>
 <div class="fragment"><div class="line">:e &lt;file&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -226,9 +226,9 @@ Export corpus to a markup file</h2>
   </table>
   </dd>
 </dl>
-<h1><a class="anchor" id="autotoc_md87"></a>
+<h1><a class="anchor" id="autotoc_md90"></a>
 Traversal, querying</h1>
-<h2><a class="anchor" id="autotoc_md88"></a>
+<h2><a class="anchor" id="autotoc_md91"></a>
 Change scope</h2>
 <div class="fragment"><div class="line">@&lt;path&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -237,7 +237,7 @@ Change scope</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md89"></a>
+<h2><a class="anchor" id="autotoc_md92"></a>
 List entries</h2>
 <div class="fragment"><div class="line">:l &lt;ref&gt; ...</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -246,10 +246,10 @@ List entries</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md90"></a>
+<h2><a class="anchor" id="autotoc_md93"></a>
 Search entries</h2>
 <div class="fragment"><div class="line">:f &lt;name&gt; ...</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md91"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md94"></a>
 Manipulation</h1>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -257,7 +257,7 @@ Manipulation</h1>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md92"></a>
+<h2><a class="anchor" id="autotoc_md95"></a>
 Delete entries</h2>
 <div class="fragment"><div class="line">:x &lt;ref&gt; ...</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -266,7 +266,7 @@ Delete entries</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md93"></a>
+<h2><a class="anchor" id="autotoc_md96"></a>
 Copy entries</h2>
 <div class="fragment"><div class="line">:c &lt;from&gt; &lt;to&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -276,7 +276,7 @@ Copy entries</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md94"></a>
+<h2><a class="anchor" id="autotoc_md97"></a>
 Move entries</h2>
 <div class="fragment"><div class="line">:v &lt;from&gt; &lt;to&gt;</div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
@@ -286,14 +286,14 @@ Move entries</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md95"></a>
+<h2><a class="anchor" id="autotoc_md98"></a>
 Undo</h2>
 <div class="fragment"><div class="line">:z</div>
 </div><!-- fragment --><dl class="params">
 <dt>Parameters </dt>
 <dd>(<em>none</em>) </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md96"></a>
+<h2><a class="anchor" id="autotoc_md99"></a>
 Redo</h2>
 <div class="fragment"><div class="line">:y</div>
 </div><!-- fragment --><dl class="params">

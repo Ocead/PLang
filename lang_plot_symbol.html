@@ -40,7 +40,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="ocead.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PLang<span id="projectnumber">&#160;v0.0.1</span>
+   <div id="projectname">PLang<span id="projectnumber">&#160;0.0.1α</span>
    </div>
    <div id="projectbrief">Interactive markup language for narrative works</div>
   </td>
@@ -101,11 +101,22 @@ $(document).ready(function(){initNavTree('lang_plot_symbol.html',''); initResiza
   <div class="headertitle"><div class="title">Symbols </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="#autotoc_md2">Symbol classes</a><ul><li class="level2"><a href="#autotoc_md3">Declaration</a></li>
+<li class="level2"><a href="#autotoc_md4">Reference</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#autotoc_md5">Symbols</a><ul><li class="level2"><a href="#autotoc_md6">Declaration</a></li>
+<li class="level2"><a href="#autotoc_md7">Reference</a></li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="textblock"><h1><a class="anchor" id="autotoc_md2"></a>
 Symbol classes</h1>
 <p >Symbol classes structure everything you can make statements about, the symbols. The symbol classes serve here as a primary type or kind of symbol. For example:</p>
 <ul>
-<li>the symbol class <code>.charcter[]</code> contains each person, character, speaking role, NPC, etc.</li>
+<li>the symbol class <code>.character[]</code> contains each person, character, speaking role, NPC, etc.</li>
 <li>every food item would be a symbol of the class <code>.world.culture.artifact.food[]</code></li>
 <li>every color is shelved under <code>.object.optical.color[]</code> and</li>
 <li>each place of interest under <code>.world.geography.natural[]</code> or <code>.world.geography.human.building[]</code>.</li>
@@ -128,13 +139,40 @@ Declaration</h2>
 <p >To override the hint list of a symbol class, re-declare it with the new hint list. To delete the hint list of a symbol class, re-declare it an empty hint list (<code>()</code>);</p>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Reference</h2>
-<p >To reference a symbol class, type the fully-qualified or any unique path of the class followed by a pair or square brackets (<code>[]</code>). Given no conflicting declarations exist, these lines would all reference the same symbol class:</p>
+<p >To reference a symbol class, type the fully-qualified or any unique path of the class followed by a pair of square brackets (<code>[]</code>). Given no conflicting declarations exist, these lines would all reference the same symbol class:</p>
 <div class="fragment"><div class="line">.world.culture.artifact.food[]</div>
 <div class="line">world.culture.artifact.food[]</div>
 <div class="line">culture.artifact.food[]</div>
 <div class="line">artifact.food[]</div>
 <div class="line">food[]</div>
-</div><!-- fragment --><p >What counts as a unique path may broaden depending on the context the reference is made in. </p>
+</div><!-- fragment --><p >What counts as a unique path may broaden depending on the context the reference is made in.</p>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Symbols</h1>
+<p >Symbols act as the subjects and objects to make statements about/with. Extending the examples from the symbol classes:</p>
+<ul>
+<li><code>.character[protagonist]</code> and <code>.character[narrator]</code> are instances of characters</li>
+<li><code>.world.culture.artifact.food[pizza]</code> is an instance of food</li>
+<li><code>.object.optical.color[red]</code> and <code>.object.optical.color[green]</code> are colors</li>
+<li><code>.world.geography.human[protagonists_home]</code> and <code>.world.geography.natural[a_random_tree]</code> might be places of interest</li>
+</ul>
+<p >Within a single class, all symbol names again have to be unique. There may be multiple symbols with the same name, as long as they all have different classes. In the latter case, the paths to the symbol classes may be used to identify a specific symbol.</p>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Declaration</h2>
+<p >Again, square brackets (<code>[]</code>) signify a symbol, with the name of the symbol placed in between the brackets, like so:</p>
+<div class="fragment"><div class="line">.character[protagonist];</div>
+</div><!-- fragment --><p> This would declare a symbol named "protagonist" from the class <code>.character</code>.</p>
+<p >Symbols may be decorated in the same way as paths and symbol classes. The decoration is applied within the symbol brackets:</p>
+<div class="fragment"><div class="line">.character[protagonist (0, <span class="stringliteral">&quot;This is the protagonist&quot;</span>)];</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
+Reference</h2>
+<p >To reference a symbol, write any unique combination of the symbol classes path and the symbol name in square brackets.</p>
+<p >Given no conflicting declarations exists, these lines would all reference the same symbol:</p>
+<div class="fragment"><div class="line">.world.geography.natural[a_random_tree]</div>
+<div class="line">world.geography.natural[a_random_tree]</div>
+<div class="line">geography.natural[a_random_tree]</div>
+<div class="line">natural[a_random_tree]</div>
+<div class="line">[a_random_tree]</div>
+</div><!-- fragment --><p >What counts as a unique reference may broaden depending on the context the reference is made in. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

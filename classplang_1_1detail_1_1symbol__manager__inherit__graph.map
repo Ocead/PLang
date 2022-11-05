@@ -1,4 +1,10 @@
 <map id="plang::detail::symbol_manager" name="plang::detail::symbol_manager">
-<area shape="rect" id="node1" title=" " alt="" coords="5,80,148,121"/>
-<area shape="rect" id="node2" href="$classplang_1_1detail_1_1corpus.html" title="Provides a basic interface to a database." alt="" coords="7,5,146,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="556,83,699,124"/>
+<area shape="rect" id="node5" href="$structplang_1_1detail_1_1mixin__base.html" title=" " alt="" coords="747,5,904,105"/>
+<area shape="rect" id="node8" href="$structplang_1_1detail_1_1mixin__base.html" title="Common derived class template for distributed overloading." alt="" coords="760,129,891,171"/>
+<area shape="rect" id="node2" href="$classplang_1_1detail_1_1corpus.html" title="Provides a basic interface to a database." alt="" coords="5,111,144,138"/>
+<area shape="rect" id="node3" href="$classplang_1_1detail_1_1symbol__class__manager.html" title=" " alt="" coords="365,112,508,153"/>
+<area shape="rect" id="node4" href="$classplang_1_1detail_1_1path__manager.html" title="Handles database actions for paths." alt="" coords="192,163,317,204"/>
+<area shape="rect" id="node6" href="$structplang_1_1detail_1_1corpus__mixins.html" title="Base class for the corpus." alt="" coords="952,35,1091,76"/>
+<area shape="rect" id="node7" href="$classplang_1_1corpus.html" title="The main interface for interacting with a corpus." alt="" coords="1139,42,1239,69"/>
 </map>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PLang: plang::detail::base_types::persisted Class Reference</title>
+<title>PLang: plang::detail::base_types::persisted&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -40,7 +40,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="ocead.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">PLang<span id="projectnumber">&#160;v0.0.1</span>
+   <div id="projectname">PLang<span id="projectnumber">&#160;0.0.1α</span>
    </div>
    <div id="projectbrief">Interactive markup language for narrative works</div>
   </td>
@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('classplang_1_1detail_1_1base__types_1_
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classplang_1_1detail_1_1base__types_1_1persisted-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">plang::detail::base_types::persisted Class Reference</div></div>
+  <div class="headertitle"><div class="title">plang::detail::base_types::persisted&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -112,37 +112,33 @@ $(document).ready(function(){initNavTree('classplang_1_1detail_1_1base__types_1_
  <a href="classplang_1_1detail_1_1base__types_1_1persisted.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="base_8hpp_source.html">base.hpp</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for plang::detail::base_types::persisted:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classplang_1_1detail_1_1base__types_1_1persisted__inherit__graph.svg" width="346" height="1115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Base type for persisted classes. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+class plang::detail::base_types::persisted&lt; T &gt;</div><p >Base type for persisted classes. </p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ace8d5d60c3fa3fbe593f983f628af192"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html#ace8d5d60c3fa3fbe593f983f628af192">get_id</a> () const noexcept</td></tr>
-<tr class="memdesc:ace8d5d60c3fa3fbe593f983f628af192"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the primary key.  <a href="classplang_1_1detail_1_1base__types_1_1persisted.html#ace8d5d60c3fa3fbe593f983f628af192">More...</a><br /></td></tr>
-<tr class="separator:ace8d5d60c3fa3fbe593f983f628af192"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafacc5f497a01490d8e1a995db740501"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html#aafacc5f497a01490d8e1a995db740501">is_persisted</a> () const noexcept</td></tr>
-<tr class="memdesc:aafacc5f497a01490d8e1a995db740501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <code>true</code>, if the object is persisted.  <a href="classplang_1_1detail_1_1base__types_1_1persisted.html#aafacc5f497a01490d8e1a995db740501">More...</a><br /></td></tr>
-<tr class="separator:aafacc5f497a01490d8e1a995db740501"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5f9651a643d61adc9b3cff00dfb6304"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html#ad5f9651a643d61adc9b3cff00dfb6304">~persisted</a> () noexcept</td></tr>
-<tr class="memdesc:ad5f9651a643d61adc9b3cff00dfb6304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <a href="classplang_1_1detail_1_1base__types_1_1persisted.html#ad5f9651a643d61adc9b3cff00dfb6304">More...</a><br /></td></tr>
-<tr class="separator:ad5f9651a643d61adc9b3cff00dfb6304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a082e6fdda451250473223736f15d9d90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html#a082e6fdda451250473223736f15d9d90">get_id</a> () const noexcept</td></tr>
+<tr class="memdesc:a082e6fdda451250473223736f15d9d90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the primary key.  <a href="classplang_1_1detail_1_1base__types_1_1persisted.html#a082e6fdda451250473223736f15d9d90">More...</a><br /></td></tr>
+<tr class="separator:a082e6fdda451250473223736f15d9d90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ad2f4f9e6c258c303b021dc50c6c220"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html#a4ad2f4f9e6c258c303b021dc50c6c220">is_persisted</a> () const noexcept</td></tr>
+<tr class="memdesc:a4ad2f4f9e6c258c303b021dc50c6c220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <code>true</code>, if the object is persisted.  <a href="classplang_1_1detail_1_1base__types_1_1persisted.html#a4ad2f4f9e6c258c303b021dc50c6c220">More...</a><br /></td></tr>
+<tr class="separator:a4ad2f4f9e6c258c303b021dc50c6c220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af55a5ae3ddb53ff53243bb7d7461f19e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html#af55a5ae3ddb53ff53243bb7d7461f19e">~persisted</a> () noexcept=default</td></tr>
+<tr class="memdesc:af55a5ae3ddb53ff53243bb7d7461f19e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <a href="classplang_1_1detail_1_1base__types_1_1persisted.html#af55a5ae3ddb53ff53243bb7d7461f19e">More...</a><br /></td></tr>
+<tr class="separator:af55a5ae3ddb53ff53243bb7d7461f19e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a1af8326e24c1ce0625413232d8f01eef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html#a1af8326e24c1ce0625413232d8f01eef">persisted</a> () noexcept</td></tr>
-<tr class="memdesc:a1af8326e24c1ce0625413232d8f01eef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="classplang_1_1detail_1_1base__types_1_1persisted.html#a1af8326e24c1ce0625413232d8f01eef">More...</a><br /></td></tr>
-<tr class="separator:a1af8326e24c1ce0625413232d8f01eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59d97038f40e912242d70358b5881f4a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html#a59d97038f40e912242d70358b5881f4a">persisted</a> () noexcept</td></tr>
+<tr class="memdesc:a59d97038f40e912242d70358b5881f4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="classplang_1_1detail_1_1base__types_1_1persisted.html#a59d97038f40e912242d70358b5881f4a">More...</a><br /></td></tr>
+<tr class="separator:a59d97038f40e912242d70358b5881f4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a2b1cabd6214e8b39349ac56d6e2ad470"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html#a2b1cabd6214e8b39349ac56d6e2ad470">id</a></td></tr>
-<tr class="memdesc:a2b1cabd6214e8b39349ac56d6e2ad470"><td class="mdescLeft">&#160;</td><td class="mdescRight">Primary key for all persisted objects.  <a href="classplang_1_1detail_1_1base__types_1_1persisted.html#a2b1cabd6214e8b39349ac56d6e2ad470">More...</a><br /></td></tr>
-<tr class="separator:a2b1cabd6214e8b39349ac56d6e2ad470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a992153577af0c00d1d7d5672262bb894"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html#a992153577af0c00d1d7d5672262bb894">id</a></td></tr>
+<tr class="memdesc:a992153577af0c00d1d7d5672262bb894"><td class="mdescLeft">&#160;</td><td class="mdescRight">Primary key for all persisted objects.  <a href="classplang_1_1detail_1_1base__types_1_1persisted.html#a992153577af0c00d1d7d5672262bb894">More...</a><br /></td></tr>
+<tr class="separator:a992153577af0c00d1d7d5672262bb894"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -150,17 +146,19 @@ Friends</h2></td></tr>
 <tr class="separator:a94a213de9d8c6b717a273a8c6ca139bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a1af8326e24c1ce0625413232d8f01eef" name="a1af8326e24c1ce0625413232d8f01eef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1af8326e24c1ce0625413232d8f01eef">&#9670;&nbsp;</a></span>persisted()</h2>
+<a id="a59d97038f40e912242d70358b5881f4a" name="a59d97038f40e912242d70358b5881f4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59d97038f40e912242d70358b5881f4a">&#9670;&nbsp;</a></span>persisted()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">plang::detail::base_types::persisted::persisted </td>
+          <td class="memname"><a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html">plang::detail::base_types::persisted</a>&lt; T &gt;::<a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html">persisted</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -168,7 +166,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -178,17 +176,19 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="ad5f9651a643d61adc9b3cff00dfb6304" name="ad5f9651a643d61adc9b3cff00dfb6304"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5f9651a643d61adc9b3cff00dfb6304">&#9670;&nbsp;</a></span>~persisted()</h2>
+<a id="af55a5ae3ddb53ff53243bb7d7461f19e" name="af55a5ae3ddb53ff53243bb7d7461f19e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af55a5ae3ddb53ff53243bb7d7461f19e">&#9670;&nbsp;</a></span>~persisted()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">plang::detail::base_types::persisted::~persisted </td>
+          <td class="memname"><a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html">plang::detail::base_types::persisted</a>&lt; T &gt;::~<a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html">persisted</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -196,7 +196,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -206,17 +206,19 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ace8d5d60c3fa3fbe593f983f628af192" name="ace8d5d60c3fa3fbe593f983f628af192"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace8d5d60c3fa3fbe593f983f628af192">&#9670;&nbsp;</a></span>get_id()</h2>
+<a id="a082e6fdda451250473223736f15d9d90" name="a082e6fdda451250473223736f15d9d90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a082e6fdda451250473223736f15d9d90">&#9670;&nbsp;</a></span>get_id()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> plang::detail::base_types::persisted::get_id </td>
+          <td class="memname"><a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; T &gt; <a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html">plang::detail::base_types::persisted</a>&lt; T &gt;::get_id </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -224,7 +226,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -234,17 +236,19 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="aafacc5f497a01490d8e1a995db740501" name="aafacc5f497a01490d8e1a995db740501"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafacc5f497a01490d8e1a995db740501">&#9670;&nbsp;</a></span>is_persisted()</h2>
+<a id="a4ad2f4f9e6c258c303b021dc50c6c220" name="a4ad2f4f9e6c258c303b021dc50c6c220"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ad2f4f9e6c258c303b021dc50c6c220">&#9670;&nbsp;</a></span>is_persisted()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> plang::detail::base_types::persisted::is_persisted </td>
+          <td class="memname"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> <a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html">plang::detail::base_types::persisted</a>&lt; T &gt;::is_persisted </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -252,7 +256,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -268,6 +272,8 @@ Friends</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -286,17 +292,19 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a2b1cabd6214e8b39349ac56d6e2ad470" name="a2b1cabd6214e8b39349ac56d6e2ad470"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b1cabd6214e8b39349ac56d6e2ad470">&#9670;&nbsp;</a></span>id</h2>
+<a id="a992153577af0c00d1d7d5672262bb894" name="a992153577af0c00d1d7d5672262bb894"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a992153577af0c00d1d7d5672262bb894">&#9670;&nbsp;</a></span>id</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceplang_1_1detail_1_1base__types.html#a6a1ab69c9a0283789cfe8475059e89f3">pkey_t</a> plang::detail::base_types::persisted::id</td>
+          <td class="memname"><a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt;T&gt; <a class="el" href="classplang_1_1detail_1_1base__types_1_1persisted.html">plang::detail::base_types::persisted</a>&lt; T &gt;::id</td>
         </tr>
       </table>
   </td>
