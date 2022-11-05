@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS plot_symbol_class
         CONSTRAINT plot_symbol_class_source_id_fk
             REFERENCES source
             ON DELETE CASCADE
-            DEFERRABLE initially deferred
+            DEFERRABLE initially deferred,
+    UNIQUE (path_id) ON CONFLICT ABORT
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS plot_symbol_class_uindex
@@ -49,22 +50,24 @@ CREATE UNIQUE INDEX IF NOT EXISTS plot_symbol_class_hint_uindex
 
 CREATE TABLE IF NOT EXISTS plot_symbol
 (
-    id        integer not null
+    id          integer not null
         CONSTRAINT plot_symbol_pk
             PRIMARY KEY autoincrement,
-    name      text    not null
-        CHECK (name regexp '^[^\[\]]*$'),
-    class_id  integer not null
+    name        text    not null
+        CHECK (name regexp '^[^\[\]]+$'),
+    class_id    integer not null
         CONSTRAINT plot_symbol_class_fk
             REFERENCES plot_symbol_class
             ON DELETE CASCADE
             DEFERRABLE initially deferred,
-    ordinal   integer,
-    source_id integer
+    ordinal     integer,
+    description text,
+    source_id   integer
         CONSTRAINT plot_symbol_source_id_fk
             REFERENCES source
             ON DELETE CASCADE
-            DEFERRABLE initially deferred
+            DEFERRABLE initially deferred,
+    UNIQUE (name, class_id) ON CONFLICT ABORT
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS plot_symbol_id_uindex
@@ -94,7 +97,8 @@ CREATE TABLE IF NOT EXISTS plot_symbol_compound
         CONSTRAINT plot_symbol_compound_source_id_fk
             REFERENCES source
             ON DELETE CASCADE
-            DEFERRABLE initially deferred
+            DEFERRABLE initially deferred,
+    UNIQUE (symbol_id, compound_id, distance) ON CONFLICT ABORT
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS plot_symbol_compound_id_uindex

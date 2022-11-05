@@ -12,8 +12,8 @@ using namespace plang;
 using namespace plang::plot;
 using namespace plang::op;
 
-TEST_CASE("Symbol Class API", "[api]") {
-    auto corpus = make_corpus();
+TEST_CASE("2.1.1. Symbol Class API", "[api]") {
+    auto &corpus = make_corpus();
 
     auto count = corpus.fetch_all<symbol::clazz>(false).size();
     REQUIRE(count == 0);
@@ -317,7 +317,7 @@ TEST_CASE("Symbol Class API", "[api]") {
     }
 
     SECTION("Print") {
-        FAIL("Not implemented");
+        NOT_IMPLEMENTED();
     }
 
     SECTION("Remove") {
@@ -398,8 +398,8 @@ TEST_CASE("Symbol Class API", "[api]") {
     // corpus.wipe();
 }
 
-TEST_CASE("Symbol Class Parser", "[parser]") {
-    auto corpus = make_corpus();
+TEST_CASE("2.1.2. Symbol Class Parser", "[parser]") {
+    auto &corpus = make_corpus();
 
     auto count = corpus.fetch_all<symbol::clazz>(false).size();
     REQUIRE(count == 0);
@@ -503,13 +503,15 @@ TEST_CASE("Symbol Class Parser", "[parser]") {
             }
         }
 
-        SECTION("Ambiguous symbol class") {
-            corpus.resolve<symbol::clazz>({"path1", "ambiguous"}, root, true);
-            corpus.resolve<symbol::clazz>({"path2", "ambiguous"}, root, true);
+        SECTION("Ambiguous") {
+            SECTION("Ambiguous symbol class") {
+                corpus.resolve<symbol::clazz>({"path1", "ambiguous"}, root, true);
+                corpus.resolve<symbol::clazz>({"path2", "ambiguous"}, root, true);
 
-            auto ref = corpus.ref(R"(ambiguous[])", root);
+                auto ref = corpus.ref(R"(ambiguous[])", root);
 
-            REQUIRE(!ref.has_result());
+                REQUIRE(!ref.has_result());
+            }
         }
     }
 

@@ -58,3 +58,33 @@ std::vector<symbol::clazz::hint> &symbol::clazz::get_hints() {
 std::vector<symbol::clazz::hint> const &symbol::clazz::get_hints() const {
     return hints;
 }
+
+symbol::symbol() = default;
+
+symbol::symbol(string_t name, const symbol::clazz &clazz)
+    : name(name),
+      class_id(clazz.get_id()) {
+    if (!clazz.is_persisted()) {
+        // TODO: Throw exception
+    }
+}
+
+const string_t &symbol::get_name() const {
+    return name;
+}
+
+void symbol::set_name(string_t &&_name) {
+    name = std::move(_name);
+}
+
+pkey<symbol::clazz> symbol::get_class_id() const {
+    return class_id;
+}
+
+void symbol::set_class(const symbol::clazz &clazz) {
+    if (clazz.is_persisted()) {
+        class_id = clazz.get_id();
+    } else {
+        // TODO: Throw exception
+    }
+}

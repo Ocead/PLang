@@ -37,18 +37,7 @@ FROM max
 
     /*static thread_local*/ stmt stmt;
 
-
-    string_t json_array;
-    if (path.empty()) {
-        json_array = "[]";
-    } else {
-        sstream_t ss{};
-        ss << "[";
-        for (auto &n : path) ss << std::quoted(n) << ",";
-        ss.seekp(-1, std::ios_base::end);
-        ss << "]";
-        ss >> json_array;
-    }
+    string_t json_array = vector_to_json(path);
 
     std::vector<std::tuple<pkey<class path>, uint_t>> map{};
 
@@ -306,7 +295,7 @@ std::vector<path> path_manager::fetch_n(const std::vector<pkey<path>> &ids,
     static const string_t query{R"__SQL__(
 SELECT *
 FROM path
-WHERE id in (SELECT key
+WHERE id in (SELECT value
              FROM json_each(?1, '$'));
 )__SQL__"};
 
@@ -315,18 +304,7 @@ WHERE id in (SELECT key
     std::vector<path> result;
     result.reserve(ids.size());
 
-    string_t json_array{[&ids] {
-        if (ids.empty()) {
-            return string_t("[]");
-        } else {
-            sstream_t ss{};
-            ss << "[";
-            for (auto &n : ids) ss << std::to_string(n) << ",";
-            ss.seekp(-1, std::ios_base::end);
-            ss << "]";
-            return ss.str();
-        }
-    }()};
+    string_t json_array = vector_to_json(ids);
 
     _reuse(stmt, query, [&] {
         sqlite3_bind_text(&*stmt, 1, json_array.c_str(), json_array.size(), nullptr);
@@ -472,8 +450,13 @@ resolve_ref_result<path> path_manager::resolve(const std::vector<string_t> &path
 action path_manager::insert(path &path, bool_t replace, corpus::tag<class path>) {
     //language=sqlite
     static const string_t query_r{R"__SQL__(
-INSERT OR REPLACE INTO path (id, name, parent_id, ordinal, description, source_id)
+INSERT INTO path (id, name, parent_id, ordinal, description, source_id)
 VALUES ((SELECT coalesce(max(id) + 1, 0) FROM path), ?1, ?2, ?3, ?4, ?5)
+ON CONFLICT DO UPDATE SET ordinal = excluded.ordinal,
+                          description = excluded.description,
+                          source_id = excluded.source_id
+WHERE name = excluded.name
+  and parent_id = excluded.parent_id
 RETURNING path.id;
 )__SQL__"};
 
@@ -600,9 +583,9 @@ std::tuple<string_t, action> path_manager::remove(path &path, bool_t cascade, co
 DELETE
 FROM path
 WHERE id = ?1
-  and (?2 or (not exists(SELECT * FROM path WHERE parent_id = ?1)) and
+  and (?2 or (not exists(SELECT * FROM path WHERE parent_id = ?1) and
              not exists(SELECT * FROM plot_symbol_class WHERE path_id = ?1) and
-             not exists(SELECT * FROM plot_point_class WHERE path_id = ?1))
+             not exists(SELECT * FROM plot_point_class WHERE path_id = ?1)))
 RETURNING id;
 )__SQL__"};
 

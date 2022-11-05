@@ -15,14 +15,20 @@ namespace {
     std::optional<plang::corpus> corpus;
 }
 
-inline plang::corpus make_corpus() {
+inline plang::corpus &make_corpus() {
     using namespace plang;
 
-    plang::corpus corpus{PLANG_TEST_DB};
+    ::corpus = plang::corpus{PLANG_TEST_DB};
     auto format = format::PLAIN;
     format.set_detail(format::detail::EXPLICIT_REF);
-    corpus.set_format(format);
-    return corpus;
+    ::corpus->set_format(format);
+    return *::corpus;
 }
+
+#ifdef PLANG_TEST_FAIL_NOT_IMPLEMENTED
+#define NOT_IMPLEMENTED() FAIL("Not implemented")
+#else
+#define NOT_IMPLEMENTED() static_cast<void>(nullptr)
+#endif
 
 #endif//PLANG_HELPER_HPP

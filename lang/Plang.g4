@@ -13,10 +13,10 @@ OP_SINGLE : '!';
 OP_NEGATE : '~';
 fragment OP_STR_DELIM_SINGLE : '\'';
 fragment OP_STR_DELIM_DOUBLE : '"';
-OP_STR_L : 'l';
-OP_STR_G : 'g';
-OP_STR_R : 'r';
-OP_STR_M : 'm';
+fragment OP_STR_L : 'l';
+fragment OP_STR_G : 'g';
+fragment OP_STR_R : 'r';
+fragment OP_STR_M : 'm';
 OP_HINT_L : '(';
 OP_HINT_R : ')';
 OP_SYM_L : '[';
@@ -67,6 +67,15 @@ STRING
     : (OP_STR_DELIM_SINGLE STRING_LITERAL_SINGLE OP_STR_DELIM_SINGLE)
     | (OP_STR_DELIM_DOUBLE STRING_LITERAL_DOUBLE OP_STR_DELIM_DOUBLE);
 
+LSTRING
+    : OP_STR_L STRING;
+GSTRING
+    : OP_STR_G STRING;
+RSTRING
+    : OP_STR_R STRING;
+MSTRING
+    : OP_STR_M STRING;
+
 // TODO: Implement other word orders
 start
     : startSVO;
@@ -108,13 +117,13 @@ ref
 hintCommentLiteral
     : STRING;
 hintLikeLiteral
-    : OP_STR_L STRING;
+    : LSTRING;
 hintGlobLiteral
-    : OP_STR_G STRING;
+    : GSTRING;
 hintRegexpLiteral
-    : OP_STR_R STRING;
+    : RSTRING;
 hintMatchLiteral
-    : OP_STR_M STRING;
+    : MSTRING;
 
 hintLiteral
     : hintCommentLiteral

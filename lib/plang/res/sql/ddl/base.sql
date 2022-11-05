@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS path
         CONSTRAINT path_pk
             PRIMARY KEY autoincrement,
     name        text    not null
-        CHECK (name regexp '^[^.?!()\[\]{\}]*$'),
+        CHECK (name regexp '^[^.?!()\[\]{\}]*$')
+        CHECK (length(name) > 0 or id == parent_id),
     parent_id   integer not null
         CONSTRAINT path_path_id_fk
             REFERENCES path
@@ -31,7 +32,8 @@ CREATE TABLE IF NOT EXISTS path
         CONSTRAINT path_source_id_fk
             REFERENCES source
             ON DELETE CASCADE
-            DEFERRABLE initially deferred
+            DEFERRABLE initially deferred,
+    UNIQUE (name, parent_id) ON CONFLICT ABORT
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS path_id_uindex

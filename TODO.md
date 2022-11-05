@@ -31,8 +31,8 @@
 <td>&emsp;Symbols</td>
 <td style="text-align: center;">✔</td>
 <td style="text-align: center;">✔</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
 <td style="text-align: center;"></td>
 </tr>
 <tr>

@@ -14,13 +14,13 @@
 namespace plang::lang {
 
     struct decoration_form {
-        antlr4::tree::TerminalNode * ordinal;
-        antlr4::tree::TerminalNode * description;
+        antlr4::tree::TerminalNode *ordinal;
+        antlr4::tree::TerminalNode *description;
     };
 
     struct literal_form {
         std::any string;
-        std::any modifier;
+        char_t modifier;
     };
 
     struct path_form {
@@ -35,11 +35,14 @@ namespace plang::lang {
         bool_t recursive;
     };
 
+    struct single_symbol_form {
+        antlr4::tree::TerminalNode *name;
+        std::optional<decoration_form> decoration;
+    };
+
     struct symbol_form {
         path_form path;
-        std::any name;
         any_vector list;
-        std::optional<decoration_form> decoration;
     };
 
     struct object_class_form {

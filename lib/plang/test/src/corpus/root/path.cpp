@@ -11,8 +11,8 @@
 using namespace plang;
 using namespace plang::op;
 
-TEST_CASE("Path API", "[api]") {
-    auto corpus = make_corpus();
+TEST_CASE("1.1.1. Path API", "[api]") {
+    auto &corpus = make_corpus();
 
     auto count = corpus.fetch_all<path>(false).size();
     REQUIRE(count == 1);
@@ -488,25 +488,25 @@ TEST_CASE("Path API", "[api]") {
 
         SECTION("Qualified paths") {
             SECTION("Root path") {
-                FAIL("Not implemented");
+                NOT_IMPLEMENTED();
             }
 
             SECTION("Single-node path") {
-                FAIL("Not implemented");
+                NOT_IMPLEMENTED();
             }
 
             SECTION("Multi-node path") {
-                FAIL("Not implemented");
+                NOT_IMPLEMENTED();
             }
         }
 
         SECTION("Unique paths") {
             SECTION("Single-node path") {
-                FAIL("Not implemented");
+                NOT_IMPLEMENTED();
             }
 
             SECTION("Multi-node path") {
-                FAIL("Not implemented");
+                NOT_IMPLEMENTED();
             }
         }
     }
@@ -536,8 +536,9 @@ TEST_CASE("Path API", "[api]") {
                 REQUIRE(corpus.fetch<path>(id).has_value());
             }
 
-            SECTION("Remove root path without children") {}
-            REQUIRE_THROWS(corpus.remove(root, false));
+            SECTION("Remove root path without children") {
+                REQUIRE_THROWS(corpus.remove(root, false));
+            }
 
             SECTION("Remove root path with children") {
                 corpus.resolve<path>({"abc"}, root, true);
@@ -583,8 +584,8 @@ TEST_CASE("Path API", "[api]") {
     //corpus.wipe();
 }
 
-TEST_CASE("Path Parser", "[parser]") {
-    auto corpus = make_corpus();
+TEST_CASE("1.1.2. Path Parser", "[parser]") {
+    auto &corpus = make_corpus();
 
     auto count = corpus.fetch_all<path>(false).size();
     REQUIRE(count == 1);

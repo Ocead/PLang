@@ -12,7 +12,7 @@ using namespace plang::plot;
 using namespace plang::lang;
 using namespace plang::lang::generated;
 
-resolve_entry_result form_to_path(corpus &corpus, path const &scope, path_form const &form) {
+std::vector<string_t> form_to_vector(path_form const &form) {
     std::vector<string_t> nodes;
     nodes.reserve(form.nodes.size() + (form.qualified ? 1 : 0));
     if (form.qualified) { nodes.push_back(""); }
@@ -20,6 +20,11 @@ resolve_entry_result form_to_path(corpus &corpus, path const &scope, path_form c
         return std::any_cast<antlr4::tree::TerminalNode *>(e)->toString();
     });
 
+    return nodes;
+}
+
+resolve_entry_result form_to_path(corpus &corpus, path const &scope, path_form const &form) {
+    auto nodes  = form_to_vector(form);
     auto result = corpus.resolve(nodes, detail::corpus::tag<path>(), scope, true);
 
     if (result.has_result() && form.decoration) {
@@ -138,23 +143,23 @@ namespace plang::lang {
 
     class hint_visitor : public virtual visitor {
         std::any visitHintCommentLiteral(PlangParser::HintCommentLiteralContext *ctx) override {
-            return literal_form{ctx->STRING(), {}};
+            return literal_form{ctx->STRING(), '\0'};
         }
 
         std::any visitHintLikeLiteral(PlangParser::HintLikeLiteralContext *ctx) override {
-            return literal_form{ctx->STRING(), ctx->OP_STR_L()};
+            return literal_form{ctx->LSTRING(), 'l'};
         }
 
         std::any visitHintGlobLiteral(PlangParser::HintGlobLiteralContext *ctx) override {
-            return literal_form{ctx->STRING(), ctx->OP_STR_G()};
+            return literal_form{ctx->GSTRING(), 'g'};
         }
 
         std::any visitHintRegexpLiteral(PlangParser::HintRegexpLiteralContext *ctx) override {
-            return literal_form{ctx->STRING(), ctx->OP_STR_R()};
+            return literal_form{ctx->RSTRING(), 'r'};
         }
 
         std::any visitHintMatchLiteral(PlangParser::HintMatchLiteralContext *ctx) override {
-            return literal_form{ctx->STRING(), ctx->OP_STR_M()};
+            return literal_form{ctx->MSTRING(), 'm'};
         }
 
     public:
@@ -292,19 +297,14 @@ namespace plang::lang {
             any_vector classes;
 
             auto path = form_to_path(*corpus, *scope, form.path);
-            if (!path.has_result()) {
-                return path;
-            }
-            auto result =
-                    corpus->resolve({}, detail::corpus::tag<symbol::clazz>(), std::get<class path>(path.entry()), true);
+            if (!path.has_result()) { return path; }
+            auto result = corpus->resolve({}, detail::corpus::tag<symbol::clazz>(), path.entry(), true);
             classes.push_back(result);
 
             for (auto const &e : form.list) {
                 *form.path.nodes.rbegin() = e;
                 auto p                    = form_to_path(*corpus, *scope, form.path);
-                if (!p.has_result()) {
-                    return p;
-                }
+                if (!p.has_result()) { return p; }
                 auto r = corpus->resolve({}, detail::corpus::tag<symbol::clazz>(), p.entry(), true);
                 classes.push_back(r);
             }
@@ -317,9 +317,7 @@ namespace plang::lang {
                 for (auto const &e : hint_forms) {
                     auto hint_form = std::any_cast<symbol_class_form>(e);
                     auto p         = form_to_path(*corpus, *scope, hint_form.path);
-                    if (!p.has_result()) {
-                        return p;
-                    }
+                    if (!p.has_result()) { return p; }
                     auto result2 = corpus->resolve({},
                                                    detail::corpus::tag<symbol::clazz>(),
                                                    std::get<class path>(p.entry()),
@@ -338,13 +336,8 @@ namespace plang::lang {
                         for (auto const &e2 : hint_form.list) {
                             *hint_form.path.nodes.rbegin() = e2;
                             auto p2                        = form_to_path(*corpus, *scope, hint_form.path);
-                            if (!p2.has_result()) {
-                                return p2;
-                            }
-                            auto r2 = corpus->resolve({},
-                                                      detail::corpus::tag<symbol::clazz>(),
-                                                      std::get<class path>(p2.entry()),
-                                                      implicit);
+                            if (!p2.has_result()) { return p2; }
+                            auto r2 = corpus->resolve({}, detail::corpus::tag<symbol::clazz>(), p2.entry(), implicit);
                             symbol::clazz::hint h2{std::get<symbol::clazz>(r2.entry())};
                             h2.set_recursive(hint_form.recursive);
 
@@ -384,6 +377,91 @@ namespace plang::lang {
                 return result;
             } else {
                 return p;
+            }
+        }
+
+        std::any visitSymbolDecoratedName(PlangParser::SymbolDecoratedNameContext *ctx) override {
+            std::optional<decoration_form> decoration_form;
+            if (ctx->decoration()) {
+                decoration_form = std::any_cast<struct decoration_form>(visitDecoration(ctx->decoration()));
+            }
+
+            return single_symbol_form{.name = ctx->symbolName()->IDENTIFIER(), .decoration = decoration_form};
+        }
+
+        std::any visitSymbol(PlangParser::SymbolContext *ctx) override {
+            symbol_form form;
+            if (ctx->path()) { form.path = std::any_cast<path_form>(visitPath(ctx->path())); }
+            form.list.push_back(single_symbol_form{.name = ctx->symbolName()->IDENTIFIER()});
+
+            return form;
+        }
+
+        std::any visitSymbolListDef(PlangParser::SymbolListDefContext *ctx) override {
+            symbol_form form;
+            if (ctx->path()) { form.path = std::any_cast<path_form>(visitPath(ctx->path())); }
+
+            std::size_t i                              = 0;
+            PlangParser::SymbolDecoratedNameContext *c = nullptr;
+            while ((c = ctx->symbolDecoratedName(i++))) {
+                auto single_form = visitSymbolDecoratedName(c);
+                form.list.emplace_back(std::move(single_form));
+            };
+
+            return form;
+        }
+
+        std::any visitSymbolDecl(PlangParser::SymbolDeclContext *ctx) override {
+            auto symbol_form = std::any_cast<struct symbol_form>(visitSymbolListDef(ctx->symbolListDef()));
+
+            any_vector symbols;
+            auto p = form_to_path(*corpus, *scope, symbol_form.path);
+            if (!p.has_result()) { return p; }
+            auto c = corpus->resolve({}, detail::corpus::tag<symbol::clazz>(), p.entry(), true);
+
+            for (auto const &s : symbol_form.list) {
+                auto const &form = *std::any_cast<single_symbol_form>(&s);
+                auto result = corpus->resolve({form.name->toString()}, detail::corpus::tag<symbol>(), c.entry(), true);
+                if (result.action() != action::FAIL && form.decoration.has_value()) {
+                    auto &sym = std::get<plot::symbol>(result.entry());
+                    if (form.decoration->ordinal) {
+                        sym.set_ordinal(std::stod(form.decoration->ordinal->toString()));
+                    } else {
+                        sym.set_ordinal();
+                    }
+                    if (form.decoration->description) {
+                        string_t desc_str = form.decoration->description->toString();
+                        char delim        = desc_str[0];
+                        std::istringstream ss{desc_str, std::ios_base::in};
+                        string_t desc;
+                        ss >> std::quoted(desc, delim, '\\');
+                        sym.set_description(desc);
+                    } else {
+                        sym.set_description();
+                    }
+                    auto r2 = corpus->update(sym, true);
+                    symbols.emplace_back(std::move(r2));
+                }
+                symbols.emplace_back(std::move(result));
+            }
+
+            return symbols;
+        }
+
+        std::any visitSymbolRef(PlangParser::SymbolRefContext *ctx) override {
+            if (ctx->symbol()) {
+                auto form = std::any_cast<symbol_form>(visitSymbol(ctx->symbol()));
+                std::vector<string_t> path;
+                if (form.path.qualified) { path.push_back(""); }
+                std::transform(form.path.nodes.begin(), form.path.nodes.end(), std::back_inserter(path), [](auto &e) {
+                    return std::any_cast<antlr4::tree::TerminalNode *>(e)->toString();
+                });
+                path.push_back(std::any_cast<single_symbol_form>(&form.list[0])->name->toString());
+                auto result = corpus->resolve(path, detail::corpus::tag<plot::symbol>(), *scope);
+                return result;
+            } else {
+                //TODO: Implement compound symbol reference
+                return resolve_entry_result();
             }
         }
     };

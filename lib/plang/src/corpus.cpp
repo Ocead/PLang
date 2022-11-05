@@ -433,7 +433,8 @@ action corpus::insert(plang::entry &entry, bool_t replace) {
             [&](auto const &entry) -> action {
                 using T = std::remove_reference_t<std::remove_const_t<decltype(entry)>>;
 
-                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
+                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T> ||
+                              std::is_same_v<plot::symbol, T>) {
                     return detail::corpus_mixins::insert(entry, replace, corpus::tag<T>());
                 } else {
                     throw new std::logic_error(string_t("Insert for ") + typeid(T).name() + " is not implemented.");
@@ -447,7 +448,8 @@ action corpus::update(plang::entry &entry, bool_t dynamic) {
             [&](auto const &entry) -> action {
                 using T = std::remove_reference_t<std::remove_const_t<decltype(entry)>>;
 
-                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
+                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T> ||
+                              std::is_same_v<plot::symbol, T>) {
                     return detail::corpus_mixins::insert(entry, dynamic, corpus::tag<T>());
                 } else {
                     throw new std::logic_error(string_t("Update for ") + typeid(T).name() + " is not implemented.");
@@ -461,7 +463,8 @@ detail::stream_helper corpus::print(plang::entry const &entry, format format) co
             [this, format](auto const &entry) -> detail::stream_helper {
                 using T = std::decay_t<decltype(entry)>;
 
-                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
+                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T> ||
+                              std::is_same_v<plot::symbol, T>) {
                     return detail::corpus_mixins::print(entry.get_id(), format, corpus::tag<T>());
                 } else {
                     throw std::logic_error(string_t("Print for ") + typeid(T).name() + " is not implemented.");
@@ -475,7 +478,8 @@ std::tuple<string_t, action> corpus::remove(plang::entry &entry, bool_t cascade)
             [&](auto &entry) -> std::tuple<string_t, action> {
                 using T = std::decay_t<decltype(entry)>;
 
-                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
+                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T> ||
+                              std::is_same_v<plot::symbol, T>) {
                     return detail::corpus_mixins::remove(entry, cascade, corpus::tag<T>());
                 } else {
                     throw new std::logic_error(string_t("Remove for ") + typeid(T).name() + " is not implemented.");

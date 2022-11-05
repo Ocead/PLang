@@ -25,8 +25,8 @@ using namespace plang::op;
 format::style const &format::style::for_op(lang::op op) {
     static style core{.text = format::style::color::BLUE, .font = format::style::font::BOLD};
     static style red{.text = format::style::color::RED, .font = format::style::font::BOLD};
-    static style sym{.text = format::style::color::MAGENTA, .font = format::style::font::BOLD};
-    static style sym_par{.text = format::style::color::MAGENTA};
+    static style sym{.text = format::style::color::BRIGHT_MAGENTA, .font = format::style::font::BOLD};
+    static style sym_par{.text = format::style::color::BRIGHT_MAGENTA};
     static style pnt{.text = format::style::color::CYAN, .font = format::style::font::BOLD};
     static style pnt_par{.text = format::style::color::CYAN};
     static style cau{.text = format::style::color::YELLOW, .font = format::style::font::BOLD};
@@ -39,6 +39,7 @@ format::style const &format::style::for_op(lang::op op) {
     switch (op) {
         case lang::op::PATH:
         case lang::op::RECUR:
+            return com_par;
         case lang::op::ID:
         case lang::op::REQ_PRV:
         case lang::op::REQ_NOW:

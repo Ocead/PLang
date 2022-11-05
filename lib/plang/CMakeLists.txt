@@ -77,6 +77,7 @@ add_library(plang
         src/corpus/detail.cpp
 
         src/corpus/plot/symbol_class.cpp
+        src/corpus/plot/symbol.cpp
 
         src/data/sqlite_undo.c
 
@@ -96,9 +97,9 @@ target_include_directories(plang
         PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
         PRIVATE ${CMAKE_HOME_DIRECTORY}/deps/sqlite_orm/include)
 target_compile_definitions(plang
-        PRIVATE -DPLANG_VERSION="${CMAKE_PROJECT_VERSION}"
-        PRIVATE -DSQLITE_CORE
-        PRIVATE -DSQLITE_ENABLE_UNDO)
+        PRIVATE PLANG_VERSION="${CMAKE_PROJECT_VERSION}"
+        PRIVATE SQLITE_CORE
+        PRIVATE SQLITE_ENABLE_UNDO)
 target_link_libraries(plang
         PRIVATE Threads::Threads
         PRIVATE antlr4::antlr4_static
@@ -111,13 +112,15 @@ target_link_libraries(plang
 
 add_executable(test_plang
         test/src/corpus/root/path.cpp
-        test/src/corpus/plot/symbol_class.cpp)
+        test/src/corpus/plot/symbol_class.cpp
+        test/src/corpus/plot/symbol.cpp)
 target_include_directories(test_plang
         PUBLIC ${CMAKE_HOME_DIRECTORY}/include
         PRIVATE ${CMAKE_CURRENT_HOME_DIRECTORY}/test/include
         PRIVATE ${CMAKE_HOME_DIRECTORY}/deps/antlr4/runtime/Cpp/runtime/src)
-# target_compile_definitions(test_plang
-#         PRIVATE PLANG_TEST_DB="catch.plangdb")
+target_compile_definitions(test_plang
+#       PRIVATE PLANG_TEST_DB="catch.plangdb"
+        PRIVATE PLANG_TEST_FAIL_NOT_IMPLEMENTED)
 target_link_libraries(test_plang
         PUBLIC plang::libplang
         PRIVATE antlr4::antlr4_static

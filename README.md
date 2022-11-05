@@ -9,9 +9,9 @@ A formal language to plan and analyse prose, screenplays, games, etc.
 ![](https://img.shields.io/badge/platform-linux_x64_|_win_x64-informational?style=flat)
 ![](https://img.shields.io/badge/license-AGPL_v3-informational?style=flat)
 ![](https://img.shields.io/badge/version-v0.0.1-important?style=flat)<br/>
-![](https://img.shields.io/badge/tests-155_passed,_11_failed-critical?style=flat)
-![](https://img.shields.io/badge/line_coverage-75%25-critical?style=flat)
-![](https://img.shields.io/badge/branch_coverage-16%25-critical?style=flat)
+![](https://img.shields.io/badge/tests-234_passed,_18_failed-critical?style=flat)
+![](https://img.shields.io/badge/line_coverage-80%25-critical?style=flat)
+![](https://img.shields.io/badge/branch_coverage-21%25-critical?style=flat)
 </div>
 
 ---

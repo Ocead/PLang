@@ -396,6 +396,32 @@ namespace plang {
             /// \return Same format for use in nested printing
             static format _make_inner_format(format format);
 
+            template<template<typename ...> typename V, typename T>
+            static string_t vector_to_json(V<T> const& vec) {
+                return vector_to_json(vec.cbegin(), vec.cend());
+            }
+
+            template<typename I>
+            static string_t vector_to_json(I from, I to) {
+                using T = typename I::value_type;
+                if (from >= to) {
+                    return "[]";
+                } else {
+                    sstream_t ss{};
+                    ss << "[";
+                    for (auto it = from; it < to; ++it) {
+                        if constexpr (std::is_same_v<std::decay_t<T>, string_t>) {
+                            ss << std::quoted(*it) << ",";
+                        } else {
+                            ss << *it << ",";
+                        }
+                    }
+                    ss.seekp(-1, std::ios_base::end);
+                    ss << "]";
+                    return ss.str();
+                }
+            }
+
             /// \brief Default constructor
             corpus();
 

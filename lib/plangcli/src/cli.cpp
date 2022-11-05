@@ -458,7 +458,16 @@ int_t cli::_option(class corpus *, std::vector<string_t> const &args) {
             break;
         }
         default: {
-            return 1;
+            std::cout << "output=" << invert(output_option_map)[options.format.get_output()] << '\n';
+            std::cout << "enrich=" << invert(enrich_option_map)[options.format.get_enrich()] << '\n';
+            std::cout << "detail=" << invert(detail_option_map)[options.format.get_detail()] << '\n';
+            std::cout << "qualification=" << invert(qualification_option_map)[options.format.get_qualification()]
+                      << '\n';
+            std::cout << "indent=" << invert(indent_option_map)[options.format.get_indent()] << '\n';
+            std::cout << "prompt=" << invert(prompt_option_map)[options.prompt] << '\n';
+            std::cout << "implicit=" << (options.implicit ? "true" : "false") << '\n';
+            std::cout << "strict=" << (options.strict ? "true" : "false") << '\n';
+            break;
         }
     }
 
@@ -767,8 +776,10 @@ int_t cli::handle_plang(string_view_t const &view) {
     try {
         report = corpus->execute(string_t(view), *scope);
     } catch (plang::exception::lang_error const &e) {
-
-    } catch (std::runtime_error const &e) {}
+        std::cerr << e.what() << std::endl;
+    } catch (std::runtime_error const &e) { std::cerr << e.what() << std::endl; } catch (std::logic_error const &e) {
+        std::cerr << e.what() << std::endl;
+    }
 
     if (report.diff_size() > 0) { unsaved = true; }
 
@@ -858,7 +869,7 @@ cli::cli()
     current_instance                 = this;
     old_rl_acf                       = rl_attempted_completion_function;
     old_w_br_chars                   = rl_basic_word_break_characters;
-    rl_basic_word_break_characters   = " \t\n'\"\\@$=.,;|&([{{<>}])";
+    rl_basic_word_break_characters   = " \t\n'\"\\@$=.,;!|&([{{<>}])";
     rl_attempted_completion_function = &cli::completion_function;
 
     register_command(
@@ -973,6 +984,8 @@ bool_t cli::unregister_command(plang::column_types::string_t command) {
 }
 
 int_t cli::prompt() {
+    static const string_t name{"PLang"};
+
     string_t prompt;
 
     if (options.prompt == prompt::POWERLINE) {
@@ -983,9 +996,7 @@ int_t cli::prompt() {
 
         auto prompt_format = get_prompt_format();
 
-        static const string_t name{"PLang"};
-
-        prompt = prompt_format(" " + name + " ", file_style);
+        prompt = prompt_format(" " + (file.has_value() ? file->filename().string() : name) + " ", file_style);
 
         if (scope.has_value()) {
             file_arrow_style.background = format::style::color::BLUE;
@@ -1018,9 +1029,8 @@ int_t cli::prompt() {
     } else if (options.prompt == prompt::UNICODE) {
         format::style file_style{.text = format::style::color::MAGENTA, .font = format::style::font::BOLD};
         auto prompt_format = get_prompt_format();
-        static const string_t name{"PLang"};
 
-        prompt = prompt_format(name, file_style);
+        prompt = prompt_format((file.has_value() ? file->filename().string() : name), file_style);
 
         if (scope.has_value()) {
             format::style path_style{.text = format::style::color::BRIGHT_BLUE, .font = format::style::font::BOLD};

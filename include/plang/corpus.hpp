@@ -79,7 +79,7 @@ namespace plang {
         struct template_transform<T<Args...>> {
 
             /// \brief Applies a template to a classes' type parameters
-            /// \tparam Template to apply
+            /// \tparam M Template to apply
             template<template<typename> typename M>
             using type = T<M<Args>...>;
         };
@@ -88,6 +88,7 @@ namespace plang {
         /// \tparam Tps Distributed overloading types
         /// \extends plang::detail::path_manager
         /// \extends plang::detail::symbol_class_manager
+        /// \extends plang::detail::symbol_manager
         template<typename... Tps>
         struct mixin_base : virtual public Tps... {
         public:
@@ -102,8 +103,9 @@ namespace plang {
         };
 
         /// \brief Base class for the corpus
-        struct corpus_mixins
-            : virtual public mixin_base<plang::detail::path_manager, plang::detail::symbol_class_manager> {};
+        struct corpus_mixins : virtual public mixin_base<plang::detail::path_manager,
+                                                         plang::detail::symbol_class_manager,
+                                                         plang::detail::symbol_manager> {};
 
     }// namespace detail
 

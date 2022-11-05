@@ -77,9 +77,23 @@ namespace plang::plot {
             col<compound, int_t> distance;
         };
 
+    private:
+        symbol();
+
     protected:
         col<symbol, string_t> name;
         col<symbol, pkey<clazz>> class_id;
+
+    public:
+        symbol(string_t name, symbol::clazz const &clazz);
+
+        string_t const &get_name() const;
+
+        void set_name(string_t &&name);
+
+        pkey<symbol::clazz> get_class_id() const;
+
+        void set_class(symbol::clazz const &clazz);
 
         friend class plang::detail::symbol_manager;
     };

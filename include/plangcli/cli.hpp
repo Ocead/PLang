@@ -274,7 +274,9 @@ Quits the application.
 
 [TOC]
 
-## output
+## Formatting options
+
+### output
 
 Sets the assumed frontend connected to stdout
 
@@ -302,7 +304,7 @@ Sets the assumed frontend connected to stdout
 </dd>
 </dl>
 
-## enrich
+### enrich
 
 Sets formatting to apply
 
@@ -330,7 +332,7 @@ Sets formatting to apply
 </dd>
 </dl>
 
-## detail
+### detail
 
 Sets how PLang entries should be displayed in output
 
@@ -358,7 +360,7 @@ Sets how PLang entries should be displayed in output
 </dd>
 </dl>
 
-## qualification
+### qualification
 
 Sets how paths are output
 
@@ -378,7 +380,7 @@ Sets how paths are output
 </dd>
 </dl>
 
-## indent
+### indent
 
 Sets how PLang markup is indented
 
@@ -406,7 +408,9 @@ Sets how PLang markup is indented
 </dd>
 </dl>
 
-## implicit
+## Parser options
+
+### implicit
 
 Whether entries may be declared implicitly
 
@@ -426,7 +430,7 @@ Whether entries may be declared implicitly
 </dd>
 </dl>
 
-## strict
+### strict
 
 Whether hints in class declarations are binding
 
@@ -446,7 +450,7 @@ Whether hints in class declarations are binding
 </dd>
 </dl>
 
-## topology
+### topology
 
 Sets the order for plot points.
 

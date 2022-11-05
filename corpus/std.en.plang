@@ -503,7 +503,7 @@
 (.character[]) .world.biology.fauna.sensation.external.taste what;                     //point_class
 (.character[]) .world.biology.fauna.sensation.external.smell what;                     //point_class
 .world.biology.fauna.sensation.internal;                                               // TODO: expand
-(.character[]) .world.biology.fauna.sensation.internal.balance _;                       //point_class TODO: object class
+(.character[]) .world.biology.fauna.sensation.internal.balance _;                      //point_class TODO: object class
 (.character[]) .world.biology.fauna.sensation.internal.propriocept what ?where;        //point_class
 (.character[], .world.biology.fauna.anatomy[]...)
     .world.biology.fauna.sensation.internal.hurt type ?intensity;                      //point_class

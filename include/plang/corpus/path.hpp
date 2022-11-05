@@ -5,6 +5,8 @@
 /**
  * \page lang_base_path Paths
  *
+ * [TOC]
+ *
  * PLang utilizes a path tree to organize a corpus' contents at the lowest level.
  * Subsequent types of entries all have a path they are located under and paths may be part of their declaration.
  * Nodes within a path are delimited with a <code>.</code> operator.
@@ -46,6 +48,9 @@
  * The arguments of the decoration may be omitted.
  *
  * ## Reference
+ *
+ * Paths are referenced as they are declared (without the closing `;`).
+ * A reference to a path is part of most other declarations.
  */
 
 #ifndef PLANG_PATH_HPP
@@ -83,13 +88,6 @@ namespace plang::detail {
 
         std::vector<pkey<path>> get_children(pkey<path> id) const;
 
-        /// \brief Checks, whether a path node is parent of another
-        /// \param parent_id Supposed parent node id
-        /// \param child_id Supposed child node id
-        /// \return <code>true</code>, if the path node with id \p parent_id
-        /// is parent of the parent node with id \p child_id
-        bool_t is_parent_of(pkey<path> parent_id, pkey<path> child_id) const;
-
         /// Returns the passed node id, if it's persisted and the root node id otherwise
         /// \param id Node id
         /// \return The passed node id, if it's persisted and the root node id otherwise
@@ -102,6 +100,13 @@ namespace plang::detail {
         ostream_t &print_helper(ostream_t &os, pkey<path> id, format format) const;
 
     protected:
+        /// \brief Checks, whether a path node is parent of another
+        /// \param parent_id Supposed parent node id
+        /// \param child_id Supposed child node id
+        /// \return <code>true</code>, if the path node with id \p parent_id
+        /// is parent of the parent node with id \p child_id
+        bool_t is_parent_of(pkey<path> parent_id, pkey<path> child_id) const;
+
         ostream_t &print_decoration(ostream_t &os, pkey<path> id, format format) const;
 
     public:

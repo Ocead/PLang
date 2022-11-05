@@ -145,7 +145,7 @@ std::vector<symbol::clazz> symbol_class_manager::fetch_n(const std::vector<pkey<
     //language=sqlite
     static const string_t query{R"__SQL__(
 SELECT id, path_id, source_id FROM plot_symbol_class
-WHERE id in (SELECT key
+WHERE id in (SELECT value
              FROM json_each(?1, '$'));
 )__SQL__"};
 
@@ -154,18 +154,7 @@ WHERE id in (SELECT key
     std::vector<symbol::clazz> result;
     result.reserve(ids.size());
 
-    string_t json_array{[&ids] {
-        if (ids.empty()) {
-            return string_t("[]");
-        } else {
-            sstream_t ss{};
-            ss << "[";
-            for (auto &n : ids) ss << std::to_string(n) << ",";
-            ss.seekp(-1, std::ios_base::end);
-            ss << "]";
-            return ss.str();
-        }
-    }()};
+    string_t json_array = vector_to_json(ids);
 
     _reuse(stmt, query, [&] {
         sqlite3_bind_text(&*stmt, 1, json_array.c_str(), json_array.size(), nullptr);
@@ -231,7 +220,7 @@ resolve_result<plot::symbol::clazz> symbol_class_manager::resolve(const std::vec
 
 resolve_result<plot::symbol::clazz> symbol_class_manager::resolve(const std::vector<string_t> &path,
                                                                   const class path &ctx,
-                                                                  plang::column_types::bool_t dynamic,
+                                                                  bool_t dynamic,
                                                                   corpus::tag<plot::symbol::clazz> tag) const {
     return const_cast<symbol_class_manager *>(this)->resolve(path, ctx, false, dynamic, tag);
 }
@@ -264,7 +253,7 @@ WHERE path_id = ?;
         });
 
         if (result.has_value()) {
-            ent = result.value();
+            ent = std::move(result.value());
 
             if (dynamic) { ent.hints = _fetch_hints(ent.id); }
 
