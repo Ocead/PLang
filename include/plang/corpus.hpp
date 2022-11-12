@@ -6,6 +6,7 @@
 #define PLANG_CORPUS_HPP
 
 #include <any>
+#include <chrono>
 #include <filesystem>
 #include <istream>
 #include <variant>
@@ -89,6 +90,8 @@ namespace plang {
         /// \extends plang::detail::path_manager
         /// \extends plang::detail::symbol_class_manager
         /// \extends plang::detail::symbol_manager
+        /// \extends plang::detail::point_class_manager
+        /// \extends plang::detail::object_class_manager
         template<typename... Tps>
         struct mixin_base : virtual public Tps... {
         public:
@@ -105,7 +108,9 @@ namespace plang {
         /// \brief Base class for the corpus
         struct corpus_mixins : virtual public mixin_base<plang::detail::path_manager,
                                                          plang::detail::symbol_class_manager,
-                                                         plang::detail::symbol_manager> {};
+                                                         plang::detail::symbol_manager,
+                                                         plang::detail::point_class_manager,
+                                                         plang::detail::object_class_manager> {};
 
     }// namespace detail
 
@@ -211,6 +216,14 @@ namespace plang {
             using key = std::tuple<entry_type, pkey<void>>;
 
         private:
+            using clock_t = std::chrono::high_resolution_clock;
+
+            clock_t::time_point _start;
+            clock_t::time_point _post_lex;
+            clock_t::time_point _post_parse;
+            clock_t::time_point _post_visit;
+            clock_t::time_point _post_commit;
+
             std::unordered_map<key, entry> _mentioned;                    ///< \brief Mentioned entries
             std::unordered_map<key, entry> _inserted;                     ///< \brief Inserted entries
             std::unordered_map<key, entry> _updated;                      ///< \brief Updated entries
@@ -254,6 +267,16 @@ namespace plang {
             /// \param repr Representation of the entry
             /// \param candidates Candidates for the entry
             void fail(string_t &&repr, std::vector<entry> &&candidates);
+
+            decltype(_start) const &start() const;
+
+            decltype(_post_lex) const &post_lex() const;
+
+            decltype(_post_parse) const &post_parse() const;
+
+            decltype(_post_visit) const &post_visit() const;
+
+            decltype(_post_commit) const &post_commit() const;
 
             /// \brief Returns the mentioned entries
             /// \return The mentioned entries

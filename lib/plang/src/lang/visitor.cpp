@@ -86,19 +86,27 @@ visitor::visitor(class corpus &corpus, const plang::root::path &scope, bool_t st
       implicit(implicit) {}
 
 std::any visitor::visitDeclSVO(generated::PlangParser::DeclSVOContext *ctx) {
-    auto result = PlangBaseVisitor::visitDeclSVO(ctx);
+    try {
+        auto result = PlangBaseVisitor::visitDeclSVO(ctx);
 
-    if (result.type() == typeid(resolve_entry_result)) {
-        sort_result(ctx->getText(), *std::any_cast<resolve_entry_result>(&result));
-    } else if (result.type() == typeid(any_vector)) {
-        for (auto &r : *std::any_cast<any_vector>(&result)) {
-            if (r.type() == typeid(resolve_entry_result)) {
-                sort_result(ctx->getText(), *std::any_cast<resolve_entry_result>(&r));
+        if (result.type() == typeid(resolve_entry_result)) {
+            sort_result(ctx->getText(), *std::any_cast<resolve_entry_result>(&result));
+        } else if (result.type() == typeid(any_vector)) {
+            for (auto &r : *std::any_cast<any_vector>(&result)) {
+                if (r.type() == typeid(resolve_entry_result)) {
+                    sort_result(ctx->getText(), *std::any_cast<resolve_entry_result>(&r));
+                }
             }
         }
-    }
 
-    return result;
+        return result;
+    } catch (std::exception const &e) {
+        auto s = format::style{.text = format::style::color::BRIGHT_RED, .font = format::style::font::BOLD};
+        std::cerr << corpus->get_format()("ERROR", s) << " in line " << ctx->getStart()->getLine() << ':'
+                  << ctx->getStart()->getCharPositionInLine() << '\n';
+
+        throw e;
+    }
 }
 
 std::any visitor::visitRef(generated::PlangParser::RefContext *ctx) {
@@ -160,6 +168,45 @@ namespace plang::lang {
 
         std::any visitHintMatchLiteral(PlangParser::HintMatchLiteralContext *ctx) override {
             return literal_form{ctx->MSTRING(), 'm'};
+        }
+
+        std::any visitHintLiteral(PlangParser::HintLiteralContext *ctx) override {
+            if (ctx->hintCommentLiteral()) {
+                return visitHintCommentLiteral(ctx->hintCommentLiteral());
+            } else if (ctx->hintLikeLiteral()) {
+                return visitHintLikeLiteral(ctx->hintLikeLiteral());
+            } else if (ctx->hintGlobLiteral()) {
+                return visitHintGlobLiteral(ctx->hintGlobLiteral());
+            } else if (ctx->hintRegexpLiteral()) {
+                return visitHintRegexpLiteral(ctx->hintRegexpLiteral());
+            } else {
+                return visitHintMatchLiteral(ctx->hintMatchLiteral());
+            }
+        }
+
+        std::any visitHintSymbolClass(PlangParser::HintSymbolClassContext *ctx) override {
+            return visitSymbolClass(ctx->symbolClass());
+        }
+
+        std::any visitHintPointClass(PlangParser::HintPointClassContext *ctx) override {
+            return visitPointClass(ctx->pointClass());
+        }
+
+        std::any visitHint(PlangParser::HintContext *ctx) override {
+            if (ctx->hintLiteral()) {
+                return visitHintLiteral(ctx->hintLiteral());
+            } else if (ctx->hintSymbolClass()) {
+                return visitHintSymbolClass(ctx->hintSymbolClass());
+            } else {
+                return visitHintPointClass(ctx->hintPointClass());
+            }
+        }
+
+        std::any visitHintList(PlangParser::HintListContext *ctx) override {
+            any_vector result;
+            for (auto const &e : ctx->hint()) { result.emplace_back(visitHint(e)); }
+
+            return result;
         }
 
     public:
@@ -466,9 +513,224 @@ namespace plang::lang {
         }
     };
 
+    class object_visitor : public virtual visitor {
+        std::any visitObjectClassName(PlangParser::ObjectClassNameContext *ctx) override {
+            object_class_form form;
+            form.name  = ctx->IDENTIFIER();
+            form.local = false;
+            return form;
+        }
+
+        std::any visitObjectLocalClassName(PlangParser::ObjectLocalClassNameContext *ctx) override {
+            object_class_form form;
+            form.name  = ctx->STRING();
+            form.local = true;
+            return form;
+        }
+
+        std::any visitObjectClassInlineRef(PlangParser::ObjectClassInlineRefContext *ctx) override {
+            if (ctx->objectClassName()) {
+                return visitObjectClassName(ctx->objectClassName());
+            } else {
+                return visitObjectLocalClassName(ctx->objectLocalClassName());
+            }
+        }
+
+        std::any visitObjectDefaultClass(PlangParser::ObjectDefaultClassContext *ctx) override {
+            object_class_form form = std::any_cast<object_class_form>(visitObjectClassName(ctx->objectClassName()));
+            form._default          = true;
+
+            return form;
+        }
+
+        std::any visitObjectInlineClass(PlangParser::ObjectInlineClassContext *ctx) override {
+            object_class_form form = std::any_cast<object_class_form>(
+                    visitObjectClassInlineRef(ctx->objectClassInlineRef()));
+            form._default = false;
+
+            return form;
+        }
+
+        std::any visitObjectClassDef(PlangParser::ObjectClassDefContext *ctx) override {
+            if (ctx->hintList()) {
+                return visitHintList(ctx->hintList());
+            } else {
+                return any_vector();
+            }
+        }
+
+        std::any visitObjectDefaultClassDecl(PlangParser::ObjectDefaultClassDeclContext *ctx) override {
+            object_class_form form = std::any_cast<object_class_form>(
+                    visitObjectDefaultClass(ctx->objectDefaultClass()));
+
+            form.singleton = ctx->objectSingleton();
+            if (ctx->objectClassDef()) {
+                form.hints = std::any_cast<any_vector>(visitObjectClassDef(ctx->objectClassDef()));
+            }
+
+            return form;
+        }
+
+        std::any visitObjectInlineClassDecl(PlangParser::ObjectInlineClassDeclContext *ctx) override {
+            object_class_form form = std::any_cast<object_class_form>(visitObjectInlineClass(ctx->objectInlineClass()));
+
+            form.singleton = ctx->objectSingleton();
+            if (ctx->objectClassDef()) {
+                form.hints = std::any_cast<any_vector>(visitObjectClassDef(ctx->objectClassDef()));
+            }
+
+            return form;
+        }
+    };
+
+    class point_visitor : public virtual visitor {
+        std::any visitPointClassName(PlangParser::PointClassNameContext *ctx) override {
+            point_class_form form;
+            form.path = std::any_cast<struct path_form>(visitPath(ctx->path()));
+
+            return form;
+        }
+
+        std::any visitPointClassSVODecl(PlangParser::PointClassSVODeclContext *ctx) override {
+            auto form = std::any_cast<struct point_class_form>(visitPointClassName(ctx->pointClassName()));
+            if (ctx->pointSingleton()) { form.singleton = true; }
+            if (ctx->decoration()) {
+                form.path.decoration = std::any_cast<decoration_form>(visitDecoration(ctx->decoration()));
+            }
+            if (ctx->objectDefaultClassDecl()) {
+                form.object_classes.emplace_back(visitObjectDefaultClassDecl(ctx->objectDefaultClassDecl()));
+            }
+            for (auto const &e : ctx->objectInlineClassDecl()) {
+                form.object_classes.emplace_back(visitObjectInlineClassDecl(e));
+            }
+
+            //TODO: handle requirements
+            //TODO: handle implications
+
+            auto path = form_to_path(*corpus, *scope, form.path);
+            if (!path.has_result()) { return path; }
+            auto result = corpus->resolve({}, detail::corpus::tag<point::clazz>(), path.entry(), true);
+            auto &clazz = std::get<point::clazz>(result.entry());
+            clazz.set_singleton(form.singleton);
+
+            if (ctx->hintSymbolClassList()) {
+                form.hints = std::any_cast<any_vector>(visitHintSymbolClassList(ctx->hintSymbolClassList()));
+                std::vector<point::clazz::hint> hints;
+                any_vector hint_classes;
+
+                for (auto const &e : form.hints) {
+                    auto hint_form = std::any_cast<symbol_class_form>(e);
+                    auto p         = form_to_path(*corpus, *scope, hint_form.path);
+                    if (!p.has_result()) { return p; }
+                    auto result2 = corpus->resolve({},
+                                                   detail::corpus::tag<symbol::clazz>(),
+                                                   std::get<class path>(p.entry()),
+                                                   implicit);
+
+                    hint_classes.push_back(result2);
+
+                    if (result2.action() == action::FAIL) {
+                        //TODO: Throw runtime error
+                    } else {
+                        point::clazz::hint h{std::get<symbol::clazz>(result2.entry())};
+                        h.set_recursive(hint_form.recursive);
+
+                        hints.push_back(h);
+
+                        for (auto const &e2 : hint_form.list) {
+                            *hint_form.path.nodes.rbegin() = e2;
+                            auto p2                        = form_to_path(*corpus, *scope, hint_form.path);
+                            if (!p2.has_result()) { return p2; }
+                            auto r2 = corpus->resolve({}, detail::corpus::tag<symbol::clazz>(), p2.entry(), implicit);
+                            point::clazz::hint h2{std::get<symbol::clazz>(r2.entry())};
+                            h2.set_recursive(hint_form.recursive);
+
+                            hints.push_back(h2);
+                            hint_classes.push_back(r2);
+                        }
+                    }
+                }
+
+                clazz.get_hints() = hints;
+            }
+            corpus->update(clazz, true);
+
+            auto object_classes = corpus->resolve<plot::object::clazz>({}, clazz).candidates();
+            std::set<pkey<object::clazz>> reused;
+
+            for (auto const &c : form.object_classes) {
+                auto oc_form = std::any_cast<object_class_form>(c);
+                auto it      = std::find_if(object_classes.begin(), object_classes.end(), [&oc_form](auto const &c) {
+                    return c.get_name() == oc_form.name->toString();
+                });
+
+                if (it != object_classes.end()) { reused.insert(it->get_id()); }
+
+                auto o_class = (it != object_classes.end()) ? *it
+                                                            : plot::object::clazz(clazz, oc_form.name->toString());
+
+                o_class.set_default(oc_form._default);
+                o_class.set_singleton(oc_form.singleton);
+                auto &hints = o_class.get_hints();
+                hints.clear();
+
+                for (auto const &h : oc_form.hints) {
+                    auto const &type = h.type();
+
+                    if (type == typeid(literal_form)) {
+                        static const std::map<char_t, object::clazz::hint::lit::type> map{
+                                {'\0', object::clazz::hint::lit::type::COMMENT},
+                                {'l',  object::clazz::hint::lit::type::LIKE   },
+                                {'g',  object::clazz::hint::lit::type::GLOB   },
+                                {'r',  object::clazz::hint::lit::type::REGEX  },
+                                {'m',  object::clazz::hint::lit::type::MATCH  }
+                        };
+
+                        auto l_form = std::any_cast<literal_form>(h);
+
+                        object::clazz::hint::lit hint{l_form.string->toString(), map.at(l_form.modifier)};
+                        hints.emplace_back(std::move(hint));
+                    } else if (type == typeid(symbol_class_form)) {
+                        auto sc_form = std::any_cast<symbol_class_form>(h);
+                        auto hinted  = corpus->resolve<symbol::clazz>(form_to_vector(sc_form.path), *scope, implicit);
+                        if (!hinted.has_result()) {
+                            // TODO: Throw exception
+                        }
+
+                        object::clazz::hint::sym hint{hinted.entry(), sc_form.recursive};
+                        hints.emplace_back(std::move(hint));
+                    } else if (type == typeid(point_class_form)) {
+                        auto pc_form = std::any_cast<point_class_form>(h);
+                        auto hinted  = corpus->resolve<point::clazz>(form_to_vector(pc_form.path), *scope, implicit);
+                        if (!hinted.has_result()) {
+                            // TODO: Throw exception
+                        }
+
+                        object::clazz::hint::pnt hint{hinted.entry(), pc_form.recursive};
+                        hints.emplace_back(std::move(hint));
+                    }
+                }
+
+                if (it != object_classes.end()) {
+                    auto a = corpus->update(o_class, true);
+                } else {
+                    auto a = corpus->insert(o_class);
+                }
+            }
+
+            for (auto &c : object_classes) {
+                if (reused.find(c.get_id()) == reused.end()) { corpus->remove(c); }
+            }
+
+            return result;
+        }
+    };
+
     class visitor_impl : public virtual visitor,
                          public path_visitor,
                          public symbol_visitor,
+                         public object_visitor,
+                         public point_visitor,
                          public context_visitor,
                          public hint_visitor {
 

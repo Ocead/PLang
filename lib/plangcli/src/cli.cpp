@@ -2,6 +2,8 @@
 // Created by Johannes on 11.09.2022.
 //
 
+#include <chrono>
+#include <fstream>
 #include <iostream>
 #include <map>
 #include <regex>
@@ -668,8 +670,34 @@ int_t cli::_close(class corpus *, string_view_t const &) {
     return 0;
 }
 
-int_t cli::_run(class corpus *, string_view_t const &) {
-    return 0;
+int_t cli::_run(class corpus *, string_view_t const &args) {
+    using namespace std::chrono;
+
+    std::filesystem::path path(args);
+
+    if (path.has_filename()) {
+        std::ifstream ifs{path};
+
+        auto report = corpus->execute(ifs, *scope);
+
+        if (report.diff_size() > 0) { unsaved = true; }
+
+        std::cout << "Executed file \"" << path.string() << "\"\n"
+                  << "Lexing time    : "
+                  << duration_cast<std::chrono::milliseconds>(report.post_lex() - report.start()).count() << "ms\n"
+                  << "Parsing time   : "
+                  << duration_cast<std::chrono::milliseconds>(report.post_parse() - report.post_lex()).count() << "ms\n"
+                  << "Visiting time  : "
+                  << duration_cast<std::chrono::milliseconds>(report.post_visit() - report.post_parse()).count()
+                  << "ms\n"
+                  << "Persisting time: "
+                  << duration_cast<std::chrono::milliseconds>(report.post_commit() - report.post_visit()).count()
+                  << "ms\n";
+
+        return 0;
+    } else {
+        return 2;
+    }
 }
 
 int_t cli::_export(class corpus *, string_view_t const &) {

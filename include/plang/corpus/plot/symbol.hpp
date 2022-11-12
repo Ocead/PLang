@@ -148,6 +148,9 @@ namespace plang::detail {
 
         std::vector<plot::symbol> _all_symbols_for_subject(pkey<plot::symbol> id, bool_t dynamic);
 
+        std::vector<std::tuple<pkey<path>, pkey<plot::symbol::clazz>, uint_t>>
+        partially_resolve(const std::vector<string_t> &path, bool_t fully) const;
+
     protected:
         ostream_t &print_helper(ostream_t &os, pkey<plot::symbol::clazz> id, format format) const;
 

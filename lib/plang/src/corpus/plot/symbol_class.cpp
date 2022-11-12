@@ -10,6 +10,54 @@ using namespace plang::op;
 using namespace plang::plot;
 using namespace plang::detail;
 
+std::vector<std::tuple<pkey<path>, pkey<plot::symbol::clazz>, uint_t>>
+symbol_class_manager::partially_resolve(const std::vector<string_t> &path, bool_t fully) const {
+    //language=sqlite
+    static const string_t query{R"__SQL__(
+WITH RECURSIVE ar AS (SELECT ?1 as ray),
+               cte(head_id, leaf_id,
+                   class_id, depth) AS (SELECT p.parent_id, p.id, c.id, iif(not ?2, 0, -1)
+                                        FROM path p,
+                                             ar
+                                                 LEFT JOIN plot_symbol_class c on p.id = c.path_id
+                                        WHERE iif(not ?2,
+                                                  p.name == json_extract(ar.ray, '$[' || 0 || ']'),
+                                                  p.id = p.parent_id)
+                                          and c.id is not null
+                                        UNION ALL
+                                        SELECT c.id, c.parent_id, cte.class_id, depth + 1
+                                        FROM cte,
+                                             ar
+                                                 LEFT JOIN path c on cte.head_id = c.id
+                                        WHERE depth < json_array_length(ar.ray)
+                                          and c.name == json_extract(ar.ray, '$[' || (cte.depth + 1) || ']')),
+               max as (SELECT head_id, max(depth) as depth
+                       FROM cte
+                       GROUP BY head_id)
+SELECT cte.head_id, cte.leaf_id, cte.class_id, cte.depth + 1 as depth
+FROM max
+         LEFT JOIN cte on max.head_id = cte.head_id and max.depth = cte.depth;
+)__SQL__"};
+
+    /*static thread_local*/ stmt stmt;
+
+    auto json = vector_to_json(path.crbegin(), path.crend());
+
+    std::vector<std::tuple<pkey<class path>, pkey<plot::symbol::clazz>, uint_t>> result;
+
+    _reuse(stmt, query, [&] {
+        sqlite3_bind_text(&*stmt, 1, json.c_str(), json.size(), nullptr);
+        sqlite3_bind_int(&*stmt, 2, fully ? 1 : 0);
+        while (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
+            result.emplace_back(sqlite3_column_int64(&*stmt, 1),
+                                sqlite3_column_int64(&*stmt, 2),
+                                sqlite3_column_int(&*stmt, 3));
+        }
+    });
+
+    return result;
+}
+
 ostream_t &symbol_class_manager::print_helper(ostream_t &os, pkey<plot::symbol::clazz> id, format format) const {
     auto inner_format = format;
     inner_format.set_detail(format::detail::EXPLICIT_REF);
@@ -230,6 +278,7 @@ resolve_ref_result<plot::symbol::clazz> symbol_class_manager::resolve(const std:
                                                                       const class path &ctx,
                                                                       bool_t insert,
                                                                       bool_t dynamic) {
+    if (path.size() == 1 && path[0] == "position") { (void) nullptr; }
     if (path.empty()) {
         //language=sqlite
         static const string_t query{R"__SQL__(
@@ -266,11 +315,62 @@ WHERE path_id = ?;
             return {ent, {}, action::FAIL};
         }
     } else {
-        auto path_result = path_manager::resolve(path, ctx, insert, dynamic);
-        if (path_result.has_result()) {
-            return resolve({}, ent, path_result.entry(), insert, dynamic);
-        } else {
-            return {ent, {}, action::FAIL};
+        auto result = partially_resolve(path, false);
+
+        if (result.size() == 1) {//Case: overall single candidate
+            ent = fetch(std::get<pkey<symbol::clazz>>(result[0]), dynamic).value();
+            return {ent, {}, action::NONE};
+        } else {//Case: none or multiple candidates
+            decltype(result) related;
+            for (auto const &e : result) {
+                if (is_parent_of(ctx.get_id(), std::get<pkey<class path>>(e)) or
+                    is_parent_of(std::get<pkey<class path>>(e), ctx.get_id())) {
+                    related.push_back(e);
+                }
+            }
+
+            if (related.size() == 1) {//Case: single candidate along current path
+                if (std::get<uint_t>(related[0]) == path.size()) {
+                    ent = fetch(std::get<pkey<symbol::clazz>>(related[0]), dynamic).value();
+                    return {ent, {}, action::NONE};
+                } else {
+                    return {ent, {fetch(std::get<pkey<symbol::clazz>>(result[0]), dynamic).value()}, action::FAIL};
+                }
+            } else if (related.size() > 0) {//Case: multiple candidates along current path
+                std::vector<pkey<symbol::clazz>> ids;
+                ids.reserve(result.size());
+                uint_t min = 0;
+                uint_t max = 0;
+                if (result.size() > 0) {
+                    auto [mit, xit] = std::minmax_element(result.begin(),
+                                                          result.end(),
+                                                          [](auto const &rhs, auto const &lhs) {
+                                                              return std::get<uint_t>(rhs) < std::get<uint_t>(lhs);
+                                                          });
+                    min             = std::get<uint_t>(*mit);
+                    max             = std::get<uint_t>(*xit);
+                }
+
+                for (auto const &e : result) {
+                    if (std::get<uint_t>(e) >= (max != 1 ? max : min)) {
+                        ids.push_back(std::get<pkey<symbol::clazz>>(e));
+                    }
+                }
+                if (ids.size() == 1) {//Case: single most viable candidate along path
+                    ent = fetch(ids[0]).value();
+                    return {ent, {}, action::NONE};
+                } else {//Case: none or most viable candidates along path
+                    auto candidates = fetch_n(ids, dynamic);
+                    return {ent, std::move(candidates), action::FAIL};
+                }
+            } else {//Case: no candidates alon the current path
+                auto path_result = path_manager::resolve(path, ctx, insert, dynamic);
+                if (path_result.has_result()) {
+                    return resolve({}, ent, path_result.entry(), insert, dynamic);
+                } else {
+                    return {ent, {}, action::FAIL};
+                }
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace plang::lang {
     };
 
     struct literal_form {
-        std::any string;
+        antlr4::tree::TerminalNode * string;
         char_t modifier;
     };
 
@@ -45,18 +45,22 @@ namespace plang::lang {
         any_vector list;
     };
 
-    struct object_class_form {
-        std::any name;
-        bool_t _default;
-        bool_t singleton;
-    };
-
     struct point_class_form {
-        any_vector path;
+        path_form path;
         bool_t singleton;
         bool_t recursive;
+
         any_vector hints;
         any_vector object_classes;
+    };
+
+    struct object_class_form {
+        antlr4::tree::TerminalNode *name;
+        bool_t _default;
+        bool_t singleton;
+        bool_t local;
+
+       any_vector hints;
     };
 
     /// \brief Helper struct for casting into variants

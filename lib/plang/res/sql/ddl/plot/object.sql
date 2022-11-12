@@ -12,8 +12,9 @@ CREATE TABLE IF NOT EXISTS plot_object_class
             ON DELETE CASCADE
             DEFERRABLE initially deferred,
     "default"      boolean not null,
-    ordinal        integer,
     singleton      boolean DEFAULT false not null,
+    ordinal        integer,
+    description    text,
     source_id      integer
         CONSTRAINT plot_object_class_source_id_fk
             REFERENCES source

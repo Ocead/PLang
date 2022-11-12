@@ -549,8 +549,8 @@
                                               violent_storm (11),
                                               hurricane (12)];                         //symbol
 .world.geography.natural.climate.weather.wind is : (wind[]);                           //mixed_class
-.world.geography.natural.climate.weather.wind.storm;                                   //symbol_class
-.world.geography.natural.climate.weather.wind.hurricane;                               //symbol_class
+.world.geography.natural.climate.weather.wind.storm[];                                 //symbol_class
+.world.geography.natural.climate.weather.wind.hurricane[];                             //symbol_class
 .world.geography.natural.climate.weather.precipitation[none,
                                                        rain,
                                                        hail,
@@ -571,7 +571,7 @@
                                                snowstorm,
                                                lightning,
                                                thunder];                               //symbol
-.world.geography.natural.climate.weather.storm what : (storm[]);                       //mixed_class
+.world.geography.natural.climate.weather.storm what : (weather.storm[]);               //mixed_class
 .world.geography.natural.climate.weather.storm.tornado[];                              //symbol_class
 .world.geography.natural.climate.weather.storm.cyclone[];                              //symbol_class
 .world.geography.natural.climate.weather.storm.typhoon[];                              //symbol_class
@@ -602,7 +602,7 @@
                                                  humid (5),
                                                  perhumid (6),
                                                  superhumid (7)];                      //symbol
-! .world.geography.natural.climate.region.humidity is : (humidity[]);                  //mixed_class
+! .world.geography.natural.climate.region.humidity is : (region.humidity[]);                  //mixed_class
 .world.geography.natural.climate.region.temperature[polar (0),
                                                     subpolar (1),
                                                     boreal (2),
@@ -610,7 +610,7 @@
                                                     warm_temperate (4),
                                                     subtropical (5),
                                                     tropical (6)];                     //symbol
-! .world.geography.natural.climate.region.temperature is : (temperature[]);            //mixed_class
+! .world.geography.natural.climate.region.temperature is : (region.temperature[]);     //mixed_class
 .world.geography.natural.land[];                                                       //symbol_class
 .world.geography.natural.land.coastal[];                                               //symbol_class
 .world.geography.natural.land.coastal.beach[];                                         //symbol_class
@@ -838,32 +838,34 @@
 .object ("Generic description of objects");                                            // TODO: expand (especially composition)
 .object.consist of;                                                                    //point_class
 .object.material[];                                                                    //point_class
-(material[]...) .object.material.boiling_point is;                                     //point_class
-(material[]...) .object.material.brittleness is;                                       //point_class
-(material[]...) .object.material.density is;                                           //point_class
-(material[]...) .object.material.elasticity is;                                        //point_class
-(material[]...) .object.material.hardness is;                                          //point_class
-(material[]...) .object.material.malleability is;                                      //point_class
-(material[]...) .object.material.melting_point is;                                     //point_class
-(material[]...) .object.material.solubility is;                                        //point_class
-(material[]...) .object.material.stiffness is;                                         //point_class
-(material[]...) .object.material.viscosity is;                                         //point_class
+(object.material[]...) .object.material.boiling_point is;                              //point_class
+(object.material[]...) .object.material.brittleness is;                                //point_class
+(object.material[]...) .object.material.density is;                                    //point_class
+(object.material[]...) .object.material.elasticity is;                                 //point_class
+(object.material[]...) .object.material.hardness is;                                   //point_class
+(object.material[]...) .object.material.malleability is;                               //point_class
+(object.material[]...) .object.material.melting_point is;                              //point_class
+(object.material[]...) .object.material.solubility is;                                 //point_class
+(object.material[]...) .object.material.stiffness is;                                  //point_class
+(object.material[]...) .object.material.viscosity is;                                  //point_class
 .object.material.metal[];                                                              //symbol_class TODO: expand
 .object.material.metal.alloy[];                                                        //symbol_class TODO: expand
 .object.material.polymer[];                                                            //symbol_class TODO: expand
 .object.material.mineral[];                                                            //symbol_class TODO: expand
 .object.material.inorganic[];                                                          //symbol_class TODO: expand
 .object.material.organic[];                                                            //symbol_class TODO: expand
-.object.material.made_of what : (material[]...);                                       //point_class
+.object.material.made_of what : (object.material[]...);                                //point_class
 .object.dimension is;                                                                  //point_class
 .object.dimension.height is;                                                           //point_class
 .object.dimension.width is;                                                            //point_class
 .object.dimension.depth is;                                                            //point_class
 .object.dimension.area is;                                                             //point_class
 .object.dimension.volume is;                                                           //point_class
+.object.location[];                                                                    //symbol_class
 .object.location is : (location[]) ?what;                                              //point_class
 .object.haptic is;                                                                     //point_class
 .object.haptic.texture is;                                                             //point_class
+.object.color[];                                                                       //symbol_class
 (color[]...) .object.optical.color.basic[red,
                                          orange,
                                          yellow,
@@ -885,14 +887,14 @@
                                 bright,
                                 light,
                                 dark];                                                 //symbol_class
-.object.optical.color is : (color[]);                                                  //point_class
+.object.optical.color is : (object.color[]);                                           //point_class
 .object.optical.luminescence is;                                                       //point_class
 .object.optical.opacity is;                                                            //point_class
 .object.temperature is;                                                                //point_class
 .object.velocity is;                                                                   //point_class
 .object.weight is;                                                                     //point_class
 
-.abstract;
+.abstract ("Abstract mathematical and logical information for analytic purposes");
 .abstract.composition.contains _;                                                      //point_class
 .abstract.number[];                                                                    //symbol_class
 .abstract.number.cardinal[zero (0),
@@ -931,6 +933,7 @@
                         smaller (-2),
                         small (-1),
                         big (1),
+                        same (0),
                         bigger (2),
                         biggest (3)];                                                  //symbol
 .abstract.time.relative[earliest (-3),
@@ -944,11 +947,16 @@
 .story ("Story");
 
 .outline ("Outline");
-.outline.book (0);                                                                     //outline_class
-.outline.story (1);                                                                    //outline_class
-.outline.part (2);                                                                     //outline_class
-.outline.chapter (3);                                                                  //outline_class
-.outline.section (4);                                                                  //outline_class
-.outline.scene (5);                                                                    //outline_class
-.outline.paragraph (6);                                                                //outline_class
-.outline.sentence (7);                                                                 //outline_class
+.outline.literature;
+.outline.literature.book (0);                                                          //outline_class
+.outline.literature.story (1);                                                         //outline_class
+.outline.literature.part (2);                                                          //outline_class
+.outline.literature.chapter (3);                                                       //outline_class
+.outline.literature.section (4);                                                       //outline_class
+.outline.literature.scene (5);                                                         //outline_class
+.outline.literature.paragraph (6);                                                     //outline_class
+.outline.literature.sentence (7);                                                      //outline_class
+.outline.game;
+.outline.game.campaign;                                                                //outline_class
+.outline.game.session;                                                                 //outline_class
+.outline.game.turn;                                                                    //outline_class

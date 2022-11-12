@@ -627,6 +627,11 @@ RETURNING id;
 
     /*static thread_local*/ stmt stmt;
 
+    auto tm = source::clock_t::to_time_t(source.get_start());
+    sstream_t sst;
+    sst << std::put_time(std::gmtime(&tm), "%Y-%m-%d %H:%M:%S");
+    auto start_time = sst.str();
+
     source.id = _reuse(stmt, query, [&] {
         if (auto const &name = source.get_url()) {
             sqlite3_bind_text(&*stmt, 1, name->c_str(), name->length(), nullptr);
@@ -635,7 +640,7 @@ RETURNING id;
             sqlite3_bind_text(&*stmt, 2, version->c_str(), version->length(), nullptr);
         }
         if (auto const &url = source.get_url()) { sqlite3_bind_text(&*stmt, 3, url->c_str(), url->length(), nullptr); }
-        sqlite3_bind_int64(&*stmt, 4, source.get_start().time_since_epoch().count());
+        sqlite3_bind_text(&*stmt, 4, start_time.c_str(), start_time.length(), nullptr);
 
         if (_check(sqlite3_step(&*stmt))) {
             return sqlite3_column_int(&*stmt, 0);

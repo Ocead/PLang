@@ -17,6 +17,13 @@ namespace plang::detail {
     struct is_resolve_defined<T<Args...>,
                               std::void_t<decltype(std::declval<plang::corpus>().detail::corpus_mixins::resolve(
                                       std::declval<Args>()...))>> : std::true_type {};
+
+    template<typename T, typename = void>
+    struct has_manager : public std::disjunction<std::is_same<path, T>,
+                                                 std::is_same<plot::symbol::clazz, T>,
+                                                 std::is_same<plot::symbol, T>,
+                                                 std::is_same<plot::point::clazz, T>,
+                                                 std::is_same<plot::object::clazz, T>> {};
 }// namespace plang::detail
 
 using namespace plang;
@@ -94,6 +101,26 @@ void corpus::report::fail(string_t &&repr, std::vector<entry> &&candidates) {
     _failed.emplace(std::move(repr), std::move(candidates));
 }
 
+const decltype(corpus::report::_start) &corpus::report::start() const {
+    return _start;
+}
+
+const decltype(corpus::report::_post_lex) &corpus::report::post_lex() const {
+    return _post_lex;
+}
+
+const decltype(corpus::report::_post_parse) &corpus::report::post_parse() const {
+    return _post_parse;
+}
+
+const decltype(corpus::report::_post_visit) &corpus::report::post_visit() const {
+    return _post_visit;
+}
+
+const decltype(corpus::report::_post_commit) &corpus::report::post_commit() const {
+    return _post_commit;
+}
+
 decltype(corpus::report::_mentioned) const &corpus::report::mentioned() const {
     return _mentioned;
 }
@@ -147,24 +174,36 @@ corpus::corpus(const std::filesystem::path &file)
 corpus::report corpus::execute(istream_t &stream, path const &scope) {
     using namespace antlr4;
     using namespace lang::generated;
+    using namespace std::chrono;
 
+    auto start = report::clock_t::now();
     ANTLRInputStream input(stream);
     PlangLexer lexer(&input);
     CommonTokenStream tokens(&lexer);
+    auto post_lex = report::clock_t::now();
     PlangParser parser(&tokens);
     parser.setBuildParseTree(true);
     PlangParser::StartSVOContext *tree = parser.startSVO();
+    auto post_parse = report::clock_t::now();
 
     if (parser.getNumberOfSyntaxErrors() == 0) {
         detail::corpus::_begin();
 
         auto visitor = lang::make_visitor(*this, scope);
         auto result  = visitor->visitStartSVO(tree);
+        auto post_visit = report::clock_t::now();
 
         auto report = visitor->get_report();
 
         if (report.failed().empty()) {
             detail::corpus::_commit();
+            auto post_commit = report::clock_t::now();
+
+            report._start = start;
+            report._post_lex = post_lex;
+            report._post_parse = post_parse;
+            report._post_visit = post_visit;
+            report._post_commit = post_commit;
         } else {
             report._mentioned.clear();
             report._inserted.clear();
@@ -188,23 +227,34 @@ corpus::report corpus::decl(istream_t &stream, path const &scope) {
     using namespace antlr4;
     using namespace lang::generated;
 
+    auto start = report::clock_t::now();
     ANTLRInputStream input(stream);
     PlangLexer lexer(&input);
     CommonTokenStream tokens(&lexer);
+    auto post_lex = report::clock_t::now();
     PlangParser parser(&tokens);
     parser.setBuildParseTree(true);
     PlangParser::DeclSVOContext *tree = parser.declSVO();
+    auto post_parse = report::clock_t::now();
 
     if (parser.getNumberOfSyntaxErrors() == 0) {
         detail::corpus::_begin();
 
         auto visitor = lang::make_visitor(*this, scope);
         auto result  = visitor->visitDeclSVO(tree);
+        auto post_visit = report::clock_t::now();
 
         auto report = visitor->get_report();
 
         if (report.failed().empty()) {
             detail::corpus::_commit();
+            auto post_commit = report::clock_t::now();
+
+            report._start = start;
+            report._post_lex = post_lex;
+            report._post_parse = post_parse;
+            report._post_visit = post_visit;
+            report._post_commit = post_commit;
         } else {
             report._mentioned.clear();
             report._inserted.clear();
@@ -256,7 +306,7 @@ plang::entry corpus::fetch(entry_type type, pkey<void> id, bool_t dynamic) const
                 using TI = std::remove_reference_t<std::remove_const_t<decltype(type)>>;
                 using T  = typename TI::type;
 
-                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
+                if constexpr (detail::has_manager<T>::value) {
                     auto result = detail::corpus_mixins::fetch(pkey<T>(int_t(id)), dynamic, type);
                     if (result.has_value()) {
                         return {result.value()};
@@ -276,7 +326,7 @@ std::vector<plang::entry> corpus::fetch_n(entry_type type, std::vector<pkey<void
                 using TI = std::remove_reference_t<std::remove_const_t<decltype(type)>>;
                 using T  = typename TI::type;
 
-                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
+                if constexpr (detail::has_manager<T>::value) {
                     std::vector<pkey<T>> typed_ids;
                     std::transform(ids.begin(), ids.end(), std::back_inserter(typed_ids), [](auto const &i) {
                         return int_t(i);
@@ -306,7 +356,7 @@ std::vector<plang::entry> corpus::fetch_all(entry_type type, bool_t dynamic, int
                 using TI = std::remove_reference_t<std::remove_const_t<decltype(type)>>;
                 using T  = typename TI::type;
 
-                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T>) {
+                if constexpr (detail::has_manager<T>::value) {
                     auto vec = detail::corpus_mixins::fetch_all(dynamic, limit, offset, type);
                     if (!vec.empty()) {
                         std::vector<plang::entry> ent_vec{};
@@ -433,8 +483,7 @@ action corpus::insert(plang::entry &entry, bool_t replace) {
             [&](auto const &entry) -> action {
                 using T = std::remove_reference_t<std::remove_const_t<decltype(entry)>>;
 
-                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T> ||
-                              std::is_same_v<plot::symbol, T>) {
+                if constexpr (detail::has_manager<T>::value) {
                     return detail::corpus_mixins::insert(entry, replace, corpus::tag<T>());
                 } else {
                     throw new std::logic_error(string_t("Insert for ") + typeid(T).name() + " is not implemented.");
@@ -448,8 +497,7 @@ action corpus::update(plang::entry &entry, bool_t dynamic) {
             [&](auto const &entry) -> action {
                 using T = std::remove_reference_t<std::remove_const_t<decltype(entry)>>;
 
-                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T> ||
-                              std::is_same_v<plot::symbol, T>) {
+                if constexpr (detail::has_manager<T>::value) {
                     return detail::corpus_mixins::insert(entry, dynamic, corpus::tag<T>());
                 } else {
                     throw new std::logic_error(string_t("Update for ") + typeid(T).name() + " is not implemented.");
@@ -463,8 +511,7 @@ detail::stream_helper corpus::print(plang::entry const &entry, format format) co
             [this, format](auto const &entry) -> detail::stream_helper {
                 using T = std::decay_t<decltype(entry)>;
 
-                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T> ||
-                              std::is_same_v<plot::symbol, T>) {
+                if constexpr (detail::has_manager<T>::value) {
                     return detail::corpus_mixins::print(entry.get_id(), format, corpus::tag<T>());
                 } else {
                     throw std::logic_error(string_t("Print for ") + typeid(T).name() + " is not implemented.");
@@ -478,8 +525,7 @@ std::tuple<string_t, action> corpus::remove(plang::entry &entry, bool_t cascade)
             [&](auto &entry) -> std::tuple<string_t, action> {
                 using T = std::decay_t<decltype(entry)>;
 
-                if constexpr (std::is_same_v<path, T> || std::is_same_v<plot::symbol::clazz, T> ||
-                              std::is_same_v<plot::symbol, T>) {
+                if constexpr (detail::has_manager<T>::value) {
                     return detail::corpus_mixins::remove(entry, cascade, corpus::tag<T>());
                 } else {
                     throw new std::logic_error(string_t("Remove for ") + typeid(T).name() + " is not implemented.");
