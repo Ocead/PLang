@@ -1,6 +1,7 @@
 var classplang_1_1resolve__entry__result =
 [
     [ "Base", "classplang_1_1resolve__entry__result.html#abddb709509c11bd56a913bf23cc310ec", null ],
+    [ "resolve_entry_result", "classplang_1_1resolve__entry__result.html#a5f82b423a7feb0076cd9d74806e3bf0e", null ],
     [ "resolve_entry_result", "classplang_1_1resolve__entry__result.html#aac651bf0b7de11a665e5fef5d4965589", null ],
     [ "~resolve_entry_result", "classplang_1_1resolve__entry__result.html#a22befa3efea4d948b5de11f0fac8bc38", null ],
     [ "has_result", "classplang_1_1resolve__entry__result.html#a3b7910691040b3ed4b8fe8a7ef41b2fa", null ],

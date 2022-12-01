@@ -4,6 +4,7 @@ var classplang_1_1detail_1_1symbol__class__manager =
     [ "_all_symbols_for_path", "classplang_1_1detail_1_1symbol__class__manager.html#aafc3adab3cedb8fa0eec8d9360de894c", null ],
     [ "_all_symbols_for_compound", "classplang_1_1detail_1_1symbol__class__manager.html#a422d905c74343fc88133423d0fd25baf", null ],
     [ "_all_symbols_for_subject", "classplang_1_1detail_1_1symbol__class__manager.html#a864acd0b5676ffb59eb37d35e0b7f127", null ],
+    [ "partially_resolve", "classplang_1_1detail_1_1symbol__class__manager.html#a826be4d5572a340c34a7c4c3aaca3f6c", null ],
     [ "print_helper", "classplang_1_1detail_1_1symbol__class__manager.html#a736dbd371c8039202c1f25cf48aca48f", null ],
     [ "_fetch_hints", "classplang_1_1detail_1_1symbol__class__manager.html#a04365ef7905bb32afdde648411a52a2e", null ],
     [ "_update_hints", "classplang_1_1detail_1_1symbol__class__manager.html#a2d917fdd9ad56af60f8ea0f91f521d56", null ],

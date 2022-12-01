@@ -1,13 +1,15 @@
 <map id="include/plang/base.hpp" name="include/plang/base.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="396,5,551,32"/>
-<area shape="rect" id="node2" href="$corpus_8hpp.html" title=" " alt="" coords="251,437,418,464"/>
-<area shape="rect" id="node4" href="$detail_8hpp.html" title=" " alt="" coords="5,80,147,121"/>
-<area shape="rect" id="node5" href="$path_8hpp.html" title=" " alt="" coords="99,169,240,211"/>
-<area shape="rect" id="node6" href="$symbol_8hpp.html" title=" " alt="" coords="207,259,348,300"/>
-<area shape="rect" id="node8" href="$plang_2error_8hpp.html" title=" " alt="" coords="590,87,743,114"/>
-<area shape="rect" id="node9" href="$plot_8hpp.html" title=" " alt="" coords="315,177,463,203"/>
-<area shape="rect" id="node10" href="$plangcli_2error_8hpp.html" title=" " alt="" coords="767,87,934,114"/>
-<area shape="rect" id="node11" href="$intl_8hpp.html" title=" " alt="" coords="539,266,696,293"/>
-<area shape="rect" id="node3" href="$cli_8hpp.html" title=" " alt="" coords="339,512,493,539"/>
-<area shape="rect" id="node7" href="$corpus_2plot_8hpp.html" title=" " alt="" coords="208,348,349,389"/>
+<area shape="rect" id="node1" title=" " alt="" coords="413,5,568,32"/>
+<area shape="rect" id="node2" href="$corpus_8hpp.html" title=" " alt="" coords="443,616,610,643"/>
+<area shape="rect" id="node4" href="$detail_8hpp.html" title=" " alt="" coords="236,80,377,121"/>
+<area shape="rect" id="node5" href="$path_8hpp.html" title=" " alt="" coords="128,169,269,211"/>
+<area shape="rect" id="node6" href="$object_8hpp.html" title=" " alt="" coords="404,348,545,389"/>
+<area shape="rect" id="node8" href="$point_8hpp.html" title=" " alt="" coords="188,437,329,479"/>
+<area shape="rect" id="node9" href="$symbol_8hpp.html" title=" " alt="" coords="296,259,437,300"/>
+<area shape="rect" id="node10" href="$plang_2error_8hpp.html" title=" " alt="" coords="554,87,707,114"/>
+<area shape="rect" id="node11" href="$plot_8hpp.html" title=" " alt="" coords="557,177,705,203"/>
+<area shape="rect" id="node12" href="$plangcli_2error_8hpp.html" title=" " alt="" coords="783,87,950,114"/>
+<area shape="rect" id="node13" href="$intl_8hpp.html" title=" " alt="" coords="847,266,1004,293"/>
+<area shape="rect" id="node3" href="$cli_8hpp.html" title=" " alt="" coords="510,691,663,717"/>
+<area shape="rect" id="node7" href="$corpus_2plot_8hpp.html" title=" " alt="" coords="336,527,477,568"/>
 </map>

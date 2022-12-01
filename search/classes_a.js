@@ -16,5 +16,6 @@ var searchData=
   ['persisted_3c_20symbol_20_3e_13',['persisted&lt; symbol &gt;',['../classplang_1_1detail_1_1base__types_1_1persisted.html',1,'plang::detail::base_types']]],
   ['pkey_14',['pkey',['../structplang_1_1detail_1_1base__types_1_1pkey.html',1,'plang::detail::base_types']]],
   ['pnt_15',['pnt',['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1pnt.html',1,'plang::plot::object::clazz::hint::pnt'],['../classplang_1_1plot_1_1object_1_1pnt.html',1,'plang::plot::object::pnt']]],
-  ['point_16',['point',['../classplang_1_1plot_1_1point.html',1,'plang::plot']]]
+  ['point_16',['point',['../classplang_1_1plot_1_1point.html',1,'plang::plot']]],
+  ['point_5fclass_5fmanager_17',['point_class_manager',['../classplang_1_1detail_1_1point__class__manager.html',1,'plang::detail']]]
 ];

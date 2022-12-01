@@ -2,7 +2,7 @@ var searchData=
 [
   ['background_0',['background',['../structplang_1_1format_1_1style.html#aaedef533a31b6d917ba078d7f2c05c12',1,'plang::format::style']]],
   ['backup_1',['backup',['../classplang_1_1corpus.html#a50eed9009ee03dddc5c31b1ecb7e88c0',1,'plang::corpus::backup()'],['../classplang_1_1detail_1_1corpus.html#a6f180e3fd63ba97888ea19e105d0f50e',1,'plang::detail::corpus::backup()']]],
-  ['base_2',['Base',['../classplang_1_1resolve__entry__result.html#abddb709509c11bd56a913bf23cc310ec',1,'plang::resolve_entry_result::Base()'],['../classplang_1_1resolve__result.html#a3f8513d803dbf28da4f7516e61ed28fb',1,'plang::resolve_result::Base()']]],
+  ['base_2',['Base',['../classplang_1_1resolve__entry__result.html#abddb709509c11bd56a913bf23cc310ec',1,'plang::resolve_entry_result::Base()'],['../classplang_1_1resolve__result.html#a3f8513d803dbf28da4f7516e61ed28fb',1,'plang::resolve_result::Base()'],['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1variant.html#a1b10d6a491d1c2ef5b0c442149ab90fe',1,'plang::plot::object::clazz::hint::variant::Base()']]],
   ['base_2ehpp_3',['base.hpp',['../base_8hpp.html',1,'']]],
   ['base_5ftype_4',['base_type',['../classplang_1_1detail_1_1stmt.html#a3ba26636a1ea5baa1f393cf933435ec9',1,'plang::detail::stmt']]],
   ['black_5',['BLACK',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74a08d0012388564e95c3b4a7407cf04965',1,'plang::format::style']]],

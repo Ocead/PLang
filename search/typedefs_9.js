@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ostream_5ft_0',['ostream_t',['../namespaceplang_1_1column__types.html#a46fd474d8a231666711468da206a4af5',1,'plang::column_types']]]
+  ['map_0',['map',['../classplang_1_1corpus_1_1report.html#aa3fba478a7a577e7d6f9c78fb62499b0',1,'plang::corpus::report']]]
 ];

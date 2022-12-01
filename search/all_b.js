@@ -14,6 +14,6 @@ var searchData=
   ['light_5fgray_11',['LIGHT_GRAY',['../structplang_1_1format_1_1style.html#a3924c99820c0bd6c3cc2a62457269e74ac09e4a151f766014faf9f6cf2683213a',1,'plang::format::style']]],
   ['like_12',['LIKE',['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit.html#a0b10656673728fa7436e45d8d48c6d66aa7598964efa10e649f92662b79e8d4d3',1,'plang::plot::object::clazz::hint::lit']]],
   ['list_13',['LIST',['../namespaceplang_1_1lang.html#ad153f803c229f0412791a34522b1aec6a298cb25408234de02baf2085803a464a',1,'plang::lang']]],
-  ['lit_14',['lit',['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit.html',1,'plang::plot::object::clazz::hint::lit'],['../classplang_1_1plot_1_1object_1_1lit.html',1,'plang::plot::object::lit']]],
+  ['lit_14',['lit',['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit.html#a653982166c6fdb0c7945790c2ff71b06',1,'plang::plot::object::clazz::hint::lit::lit()'],['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit.html',1,'plang::plot::object::clazz::hint::lit'],['../classplang_1_1plot_1_1object_1_1lit.html',1,'plang::plot::object::lit']]],
   ['long_5ft_15',['long_t',['../namespaceplang_1_1column__types.html#a7e3af6487dcf94661a5376defd40d95b',1,'plang::column_types']]]
 ];

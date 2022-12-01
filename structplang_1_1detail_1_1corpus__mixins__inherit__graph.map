@@ -1,10 +1,12 @@
 <map id="plang::detail::corpus_mixins" name="plang::detail::corpus_mixins">
-<area shape="rect" id="node1" title="Base class for the corpus." alt="" coords="952,85,1091,127"/>
-<area shape="rect" id="node8" href="$classplang_1_1corpus.html" title="The main interface for interacting with a corpus." alt="" coords="1139,93,1239,119"/>
-<area shape="rect" id="node2" href="$structplang_1_1detail_1_1mixin__base.html" title=" " alt="" coords="747,56,904,156"/>
-<area shape="rect" id="node3" href="$classplang_1_1detail_1_1path__manager.html" title="Handles database actions for paths." alt="" coords="192,5,317,47"/>
-<area shape="rect" id="node5" href="$classplang_1_1detail_1_1symbol__class__manager.html" title=" " alt="" coords="365,60,508,101"/>
-<area shape="rect" id="node4" href="$classplang_1_1detail_1_1corpus.html" title="Provides a basic interface to a database." alt="" coords="5,71,144,98"/>
-<area shape="rect" id="node6" href="$classplang_1_1detail_1_1symbol__manager.html" title=" " alt="" coords="556,115,699,156"/>
-<area shape="rect" id="node7" title=" " alt="" coords="605,181,649,207"/>
+<area shape="rect" id="node1" title="Base class for the corpus." alt="" coords="1159,140,1297,181"/>
+<area shape="rect" id="node10" href="$classplang_1_1corpus.html" title="The main interface for interacting with a corpus." alt="" coords="1345,147,1445,174"/>
+<area shape="rect" id="node2" href="$structplang_1_1detail_1_1mixin__base.html" title=" " alt="" coords="923,89,1111,233"/>
+<area shape="rect" id="node3" href="$classplang_1_1detail_1_1path__manager.html" title="Handles database actions for paths." alt="" coords="192,144,317,185"/>
+<area shape="rect" id="node5" href="$classplang_1_1detail_1_1symbol__class__manager.html" title=" " alt="" coords="365,64,508,105"/>
+<area shape="rect" id="node7" href="$classplang_1_1detail_1_1point__class__manager.html" title=" " alt="" coords="747,224,875,265"/>
+<area shape="rect" id="node8" href="$classplang_1_1detail_1_1object__class__manager.html" title=" " alt="" coords="560,224,695,265"/>
+<area shape="rect" id="node4" href="$classplang_1_1detail_1_1corpus.html" title="Provides a basic interface to a database." alt="" coords="5,151,144,178"/>
+<area shape="rect" id="node6" href="$classplang_1_1detail_1_1symbol__manager.html" title=" " alt="" coords="556,5,699,47"/>
+<area shape="rect" id="node9" title=" " alt="" coords="789,290,833,317"/>
 </map>

@@ -47,6 +47,8 @@ var classplang_1_1format =
     [ "set_qualification", "classplang_1_1format.html#ac6d9314ef2f6a73835ce4cbe9a94f043", null ],
     [ "get_indent", "classplang_1_1format.html#ab55872944e86284a95c6c82b891a984c", null ],
     [ "set_indent", "classplang_1_1format.html#a587c0a33679f14b23d15994f3521f7d2", null ],
+    [ "get_internal", "classplang_1_1format.html#a8cf5a6995cd09eefd5d0857b3f5703bb", null ],
+    [ "set_internal", "classplang_1_1format.html#aba771fd5c5f314445df61b08b3058bad", null ],
     [ "operator&", "classplang_1_1format.html#a8a47a9c3686edcd0eb5daf2868fdf255", null ],
     [ "operator|", "classplang_1_1format.html#ab14b525ef3c171cdef6bbf29cd68b6dc", null ],
     [ "operator()", "classplang_1_1format.html#a435a3c0629aaa8ad441a0e4e58233fff", null ],
@@ -57,5 +59,6 @@ var classplang_1_1format =
     [ "DETAIL_MASK", "classplang_1_1format.html#afbb6e7e05189ddb5e75319fd97230869", null ],
     [ "QUALIFICATION_MASK", "classplang_1_1format.html#a353a619f2079b8e58c24a75128df0838", null ],
     [ "INDENT_MASK", "classplang_1_1format.html#aea63d1e9ec7da5e7c06c3c68c1038147", null ],
+    [ "INTERNAL_MASK", "classplang_1_1format.html#a269db8ff04aef798151cef30dfa373d3", null ],
     [ "PLAIN", "classplang_1_1format.html#a971a364b060060390c3eeadf6a4741f6", null ]
 ];

@@ -101,6 +101,7 @@ $(document).ready(function(){initNavTree('classplang_1_1corpus_1_1report.html','
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
 <a href="#pri-static-methods">Static Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
@@ -120,6 +121,8 @@ $(document).ready(function(){initNavTree('classplang_1_1corpus_1_1report.html','
 Public Types</h2></td></tr>
 <tr class="memitem:a9c62e7ab5fc7039c02e2c21856961718"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a9c62e7ab5fc7039c02e2c21856961718">key</a> = std::tuple&lt; <a class="el" href="namespaceplang.html#afc56a754a27f7c532f6c26276807639c">entry_type</a>, <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt; void &gt; &gt;</td></tr>
 <tr class="separator:a9c62e7ab5fc7039c02e2c21856961718"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3fba478a7a577e7d6f9c78fb62499b0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#aa3fba478a7a577e7d6f9c78fb62499b0">map</a> = std::unordered_map&lt; <a class="el" href="classplang_1_1corpus_1_1report.html#a9c62e7ab5fc7039c02e2c21856961718">key</a>, <a class="el" href="namespaceplang.html#a6330287f0bb6f6579aef241e24b0b1fb">entry</a> &gt;</td></tr>
+<tr class="separator:aa3fba478a7a577e7d6f9c78fb62499b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -141,13 +144,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a89f8dfcda2b6d4d4b817c94a9cca5b8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a89f8dfcda2b6d4d4b817c94a9cca5b8a">fail</a> (<a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &amp;&amp;repr, std::vector&lt; <a class="el" href="namespaceplang.html#a6330287f0bb6f6579aef241e24b0b1fb">entry</a> &gt; &amp;&amp;candidates)</td></tr>
 <tr class="memdesc:a89f8dfcda2b6d4d4b817c94a9cca5b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Report an entry as failed.  <a href="classplang_1_1corpus_1_1report.html#a89f8dfcda2b6d4d4b817c94a9cca5b8a">More...</a><br /></td></tr>
 <tr class="separator:a89f8dfcda2b6d4d4b817c94a9cca5b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93a8e1ac3ff71360c602583092bc928d"><td class="memItemLeft" align="right" valign="top">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a18edfa250506ae87ce4d3aa10df68061">_mentioned</a>) const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a93a8e1ac3ff71360c602583092bc928d">mentioned</a> () const</td></tr>
+<tr class="memitem:aa67e5c61f558716574044e4e7fcd5fbb"><td class="memItemLeft" align="right" valign="top">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a83aecbf763b7973ce49e4b110a554758">_start</a>) const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#aa67e5c61f558716574044e4e7fcd5fbb">start</a> () const</td></tr>
+<tr class="separator:aa67e5c61f558716574044e4e7fcd5fbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71b99186c2a5361852b7142a0f5cf197"><td class="memItemLeft" align="right" valign="top">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a68f451f19a5847a53e53e116917987ed">_post_lex</a>) const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a71b99186c2a5361852b7142a0f5cf197">post_lex</a> () const</td></tr>
+<tr class="separator:a71b99186c2a5361852b7142a0f5cf197"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae30cdc1b31e07df3d2350be07bc15197"><td class="memItemLeft" align="right" valign="top">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#accfe3bcd0efc0a9a946ccae35530c1a7">_post_parse</a>) const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#ae30cdc1b31e07df3d2350be07bc15197">post_parse</a> () const</td></tr>
+<tr class="separator:ae30cdc1b31e07df3d2350be07bc15197"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a657b22ad0d6331fa58d5aac1277f8f07"><td class="memItemLeft" align="right" valign="top">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#ae107dc41f4af5d5f63d29250878e6462">_post_visit</a>) const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a657b22ad0d6331fa58d5aac1277f8f07">post_visit</a> () const</td></tr>
+<tr class="separator:a657b22ad0d6331fa58d5aac1277f8f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a3a710d6cfcbd8c2740b91a644fff31"><td class="memItemLeft" align="right" valign="top">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a7546e7698752499c4abe08d8cf6268bd">_post_commit</a>) const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a1a3a710d6cfcbd8c2740b91a644fff31">post_commit</a> () const</td></tr>
+<tr class="separator:a1a3a710d6cfcbd8c2740b91a644fff31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93a8e1ac3ff71360c602583092bc928d"><td class="memItemLeft" align="right" valign="top">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a838cbeaa0706eb2a718132281a23ecf4">_mentioned</a>) const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a93a8e1ac3ff71360c602583092bc928d">mentioned</a> () const</td></tr>
 <tr class="memdesc:a93a8e1ac3ff71360c602583092bc928d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the mentioned entries.  <a href="classplang_1_1corpus_1_1report.html#a93a8e1ac3ff71360c602583092bc928d">More...</a><br /></td></tr>
 <tr class="separator:a93a8e1ac3ff71360c602583092bc928d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46a1fb4c144299fe4c943473725f6208"><td class="memItemLeft" align="right" valign="top">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a7d636b994e75f5ad172cb7065b3207e6">_inserted</a>) const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a46a1fb4c144299fe4c943473725f6208">inserted</a> () const</td></tr>
+<tr class="memitem:a46a1fb4c144299fe4c943473725f6208"><td class="memItemLeft" align="right" valign="top">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a38137390980cc7e8fc7ca488409bc885">_inserted</a>) const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a46a1fb4c144299fe4c943473725f6208">inserted</a> () const</td></tr>
 <tr class="memdesc:a46a1fb4c144299fe4c943473725f6208"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the inserted entries.  <a href="classplang_1_1corpus_1_1report.html#a46a1fb4c144299fe4c943473725f6208">More...</a><br /></td></tr>
 <tr class="separator:a46a1fb4c144299fe4c943473725f6208"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2f1cfadb81f541cffe1ce08a1d4e00a"><td class="memItemLeft" align="right" valign="top">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a0e90bf8fb602012c03289ce58c5051fd">_updated</a>) const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#aa2f1cfadb81f541cffe1ce08a1d4e00a">updated</a> () const</td></tr>
+<tr class="memitem:aa2f1cfadb81f541cffe1ce08a1d4e00a"><td class="memItemLeft" align="right" valign="top">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a1f66ba7a9b957ac0662c1b8fd38a9bf5">_updated</a>) const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#aa2f1cfadb81f541cffe1ce08a1d4e00a">updated</a> () const</td></tr>
 <tr class="memdesc:aa2f1cfadb81f541cffe1ce08a1d4e00a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the updated entries.  <a href="classplang_1_1corpus_1_1report.html#aa2f1cfadb81f541cffe1ce08a1d4e00a">More...</a><br /></td></tr>
 <tr class="separator:aa2f1cfadb81f541cffe1ce08a1d4e00a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a078efa845a5e365fd99803ce0097cae7"><td class="memItemLeft" align="right" valign="top">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#ae4948c496b8ab19f3da5956d96689ec0">_removed</a>) const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a078efa845a5e365fd99803ce0097cae7">removed</a> () const</td></tr>
@@ -168,6 +181,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a7ac8d772929bf999184c163d6745fdbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <a href="classplang_1_1corpus_1_1report.html#a7ac8d772929bf999184c163d6745fdbd">More...</a><br /></td></tr>
 <tr class="separator:a7ac8d772929bf999184c163d6745fdbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-types" name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:a2b3464e29ceadb829c5696fc8fbbdd3b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a2b3464e29ceadb829c5696fc8fbbdd3b">clock_t</a> = std::chrono::high_resolution_clock</td></tr>
+<tr class="separator:a2b3464e29ceadb829c5696fc8fbbdd3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
 Static Private Member Functions</h2></td></tr>
 <tr class="memitem:ade048848f385c3b5217847d3bf6dd936"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classplang_1_1corpus_1_1report.html#a9c62e7ab5fc7039c02e2c21856961718">key</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#ade048848f385c3b5217847d3bf6dd936">get_key</a> (<a class="el" href="namespaceplang.html#a6330287f0bb6f6579aef241e24b0b1fb">entry</a> const &amp;<a class="el" href="namespaceplang.html#a6330287f0bb6f6579aef241e24b0b1fb">entry</a>)</td></tr>
@@ -177,15 +195,25 @@ Static Private Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a18edfa250506ae87ce4d3aa10df68061"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classplang_1_1corpus_1_1report.html#a9c62e7ab5fc7039c02e2c21856961718">key</a>, <a class="el" href="namespaceplang.html#a6330287f0bb6f6579aef241e24b0b1fb">entry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a18edfa250506ae87ce4d3aa10df68061">_mentioned</a></td></tr>
-<tr class="memdesc:a18edfa250506ae87ce4d3aa10df68061"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mentioned entries.  <a href="classplang_1_1corpus_1_1report.html#a18edfa250506ae87ce4d3aa10df68061">More...</a><br /></td></tr>
-<tr class="separator:a18edfa250506ae87ce4d3aa10df68061"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d636b994e75f5ad172cb7065b3207e6"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classplang_1_1corpus_1_1report.html#a9c62e7ab5fc7039c02e2c21856961718">key</a>, <a class="el" href="namespaceplang.html#a6330287f0bb6f6579aef241e24b0b1fb">entry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a7d636b994e75f5ad172cb7065b3207e6">_inserted</a></td></tr>
-<tr class="memdesc:a7d636b994e75f5ad172cb7065b3207e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserted entries.  <a href="classplang_1_1corpus_1_1report.html#a7d636b994e75f5ad172cb7065b3207e6">More...</a><br /></td></tr>
-<tr class="separator:a7d636b994e75f5ad172cb7065b3207e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e90bf8fb602012c03289ce58c5051fd"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classplang_1_1corpus_1_1report.html#a9c62e7ab5fc7039c02e2c21856961718">key</a>, <a class="el" href="namespaceplang.html#a6330287f0bb6f6579aef241e24b0b1fb">entry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a0e90bf8fb602012c03289ce58c5051fd">_updated</a></td></tr>
-<tr class="memdesc:a0e90bf8fb602012c03289ce58c5051fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updated entries.  <a href="classplang_1_1corpus_1_1report.html#a0e90bf8fb602012c03289ce58c5051fd">More...</a><br /></td></tr>
-<tr class="separator:a0e90bf8fb602012c03289ce58c5051fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83aecbf763b7973ce49e4b110a554758"><td class="memItemLeft" align="right" valign="top">clock_t::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a83aecbf763b7973ce49e4b110a554758">_start</a></td></tr>
+<tr class="separator:a83aecbf763b7973ce49e4b110a554758"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68f451f19a5847a53e53e116917987ed"><td class="memItemLeft" align="right" valign="top">clock_t::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a68f451f19a5847a53e53e116917987ed">_post_lex</a></td></tr>
+<tr class="separator:a68f451f19a5847a53e53e116917987ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accfe3bcd0efc0a9a946ccae35530c1a7"><td class="memItemLeft" align="right" valign="top">clock_t::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#accfe3bcd0efc0a9a946ccae35530c1a7">_post_parse</a></td></tr>
+<tr class="separator:accfe3bcd0efc0a9a946ccae35530c1a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae107dc41f4af5d5f63d29250878e6462"><td class="memItemLeft" align="right" valign="top">clock_t::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#ae107dc41f4af5d5f63d29250878e6462">_post_visit</a></td></tr>
+<tr class="separator:ae107dc41f4af5d5f63d29250878e6462"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7546e7698752499c4abe08d8cf6268bd"><td class="memItemLeft" align="right" valign="top">clock_t::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a7546e7698752499c4abe08d8cf6268bd">_post_commit</a></td></tr>
+<tr class="separator:a7546e7698752499c4abe08d8cf6268bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a838cbeaa0706eb2a718132281a23ecf4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1corpus_1_1report.html#aa3fba478a7a577e7d6f9c78fb62499b0">map</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a838cbeaa0706eb2a718132281a23ecf4">_mentioned</a></td></tr>
+<tr class="memdesc:a838cbeaa0706eb2a718132281a23ecf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mentioned entries.  <a href="classplang_1_1corpus_1_1report.html#a838cbeaa0706eb2a718132281a23ecf4">More...</a><br /></td></tr>
+<tr class="separator:a838cbeaa0706eb2a718132281a23ecf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38137390980cc7e8fc7ca488409bc885"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1corpus_1_1report.html#aa3fba478a7a577e7d6f9c78fb62499b0">map</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a38137390980cc7e8fc7ca488409bc885">_inserted</a></td></tr>
+<tr class="memdesc:a38137390980cc7e8fc7ca488409bc885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserted entries.  <a href="classplang_1_1corpus_1_1report.html#a38137390980cc7e8fc7ca488409bc885">More...</a><br /></td></tr>
+<tr class="separator:a38137390980cc7e8fc7ca488409bc885"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f66ba7a9b957ac0662c1b8fd38a9bf5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classplang_1_1corpus_1_1report.html#aa3fba478a7a577e7d6f9c78fb62499b0">map</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#a1f66ba7a9b957ac0662c1b8fd38a9bf5">_updated</a></td></tr>
+<tr class="memdesc:a1f66ba7a9b957ac0662c1b8fd38a9bf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updated entries.  <a href="classplang_1_1corpus_1_1report.html#a1f66ba7a9b957ac0662c1b8fd38a9bf5">More...</a><br /></td></tr>
+<tr class="separator:a1f66ba7a9b957ac0662c1b8fd38a9bf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4948c496b8ab19f3da5956d96689ec0"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classplang_1_1corpus_1_1report.html#a9c62e7ab5fc7039c02e2c21856961718">key</a>, <a class="el" href="namespaceplang_1_1column__types.html#a1507dff6c26c9f4c164a88172e810ed6">string_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1corpus_1_1report.html#ae4948c496b8ab19f3da5956d96689ec0">_removed</a></td></tr>
 <tr class="memdesc:ae4948c496b8ab19f3da5956d96689ec0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removed entries.  <a href="classplang_1_1corpus_1_1report.html#ae4948c496b8ab19f3da5956d96689ec0">More...</a><br /></td></tr>
 <tr class="separator:ae4948c496b8ab19f3da5956d96689ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -211,6 +239,42 @@ Friends</h2></td></tr>
           <td class="memname">using <a class="el" href="classplang_1_1corpus_1_1report.html#a9c62e7ab5fc7039c02e2c21856961718">plang::corpus::report::key</a> =  std::tuple&lt;<a class="el" href="namespaceplang.html#afc56a754a27f7c532f6c26276807639c">entry_type</a>, <a class="el" href="structplang_1_1detail_1_1base__types_1_1pkey.html">pkey</a>&lt;void&gt; &gt;</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa3fba478a7a577e7d6f9c78fb62499b0" name="aa3fba478a7a577e7d6f9c78fb62499b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3fba478a7a577e7d6f9c78fb62499b0">&#9670;&nbsp;</a></span>map</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classplang_1_1corpus_1_1report.html#aa3fba478a7a577e7d6f9c78fb62499b0">plang::corpus::report::map</a> =  std::unordered_map&lt;<a class="el" href="classplang_1_1corpus_1_1report.html#a9c62e7ab5fc7039c02e2c21856961718">key</a>, <a class="el" href="namespaceplang.html#a6330287f0bb6f6579aef241e24b0b1fb">entry</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2b3464e29ceadb829c5696fc8fbbdd3b" name="a2b3464e29ceadb829c5696fc8fbbdd3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b3464e29ceadb829c5696fc8fbbdd3b">&#9670;&nbsp;</a></span>clock_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classplang_1_1corpus_1_1report.html#a2b3464e29ceadb829c5696fc8fbbdd3b">plang::corpus::report::clock_t</a> =  std::chrono::high_resolution_clock</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -338,7 +402,7 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Calling this function with an entry already contained in <a class="el" href="classplang_1_1corpus_1_1report.html#a7d636b994e75f5ad172cb7065b3207e6">_inserted</a> or <a class="el" href="classplang_1_1corpus_1_1report.html#a0e90bf8fb602012c03289ce58c5051fd">_updated</a> is a no-op. </p>
+<p>Calling this function with an entry already contained in <a class="el" href="classplang_1_1corpus_1_1report.html#a38137390980cc7e8fc7ca488409bc885">_inserted</a> or <a class="el" href="classplang_1_1corpus_1_1report.html#a1f66ba7a9b957ac0662c1b8fd38a9bf5">_updated</a> is a no-op. </p>
 
 </div>
 </div>
@@ -365,7 +429,7 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Calling this function with an entry already contained in <a class="el" href="classplang_1_1corpus_1_1report.html#a0e90bf8fb602012c03289ce58c5051fd">_updated</a> is a no-op. </p>
+<p>Calling this function with an entry already contained in <a class="el" href="classplang_1_1corpus_1_1report.html#a1f66ba7a9b957ac0662c1b8fd38a9bf5">_updated</a> is a no-op. </p>
 
 </div>
 </div>
@@ -392,7 +456,7 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Calling this function with an entry already contained in <a class="el" href="classplang_1_1corpus_1_1report.html#a7d636b994e75f5ad172cb7065b3207e6">_inserted</a> is a no-op. </p>
+<p>Calling this function with an entry already contained in <a class="el" href="classplang_1_1corpus_1_1report.html#a38137390980cc7e8fc7ca488409bc885">_inserted</a> is a no-op. </p>
 
 </div>
 </div>
@@ -470,6 +534,91 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="aa67e5c61f558716574044e4e7fcd5fbb" name="aa67e5c61f558716574044e4e7fcd5fbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa67e5c61f558716574044e4e7fcd5fbb">&#9670;&nbsp;</a></span>start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a83aecbf763b7973ce49e4b110a554758">_start</a>) const  &amp; plang::corpus::report::start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a71b99186c2a5361852b7142a0f5cf197" name="a71b99186c2a5361852b7142a0f5cf197"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71b99186c2a5361852b7142a0f5cf197">&#9670;&nbsp;</a></span>post_lex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a68f451f19a5847a53e53e116917987ed">_post_lex</a>) const  &amp; plang::corpus::report::post_lex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae30cdc1b31e07df3d2350be07bc15197" name="ae30cdc1b31e07df3d2350be07bc15197"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae30cdc1b31e07df3d2350be07bc15197">&#9670;&nbsp;</a></span>post_parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#accfe3bcd0efc0a9a946ccae35530c1a7">_post_parse</a>) const  &amp; plang::corpus::report::post_parse </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a657b22ad0d6331fa58d5aac1277f8f07" name="a657b22ad0d6331fa58d5aac1277f8f07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a657b22ad0d6331fa58d5aac1277f8f07">&#9670;&nbsp;</a></span>post_visit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#ae107dc41f4af5d5f63d29250878e6462">_post_visit</a>) const  &amp; plang::corpus::report::post_visit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1a3a710d6cfcbd8c2740b91a644fff31" name="a1a3a710d6cfcbd8c2740b91a644fff31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a3a710d6cfcbd8c2740b91a644fff31">&#9670;&nbsp;</a></span>post_commit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a7546e7698752499c4abe08d8cf6268bd">_post_commit</a>) const  &amp; plang::corpus::report::post_commit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a93a8e1ac3ff71360c602583092bc928d" name="a93a8e1ac3ff71360c602583092bc928d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a93a8e1ac3ff71360c602583092bc928d">&#9670;&nbsp;</a></span>mentioned()</h2>
 
@@ -477,7 +626,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a18edfa250506ae87ce4d3aa10df68061">_mentioned</a>) const  &amp; plang::corpus::report::mentioned </td>
+          <td class="memname">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a838cbeaa0706eb2a718132281a23ecf4">_mentioned</a>) const  &amp; plang::corpus::report::mentioned </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -497,7 +646,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a7d636b994e75f5ad172cb7065b3207e6">_inserted</a>) const  &amp; plang::corpus::report::inserted </td>
+          <td class="memname">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a38137390980cc7e8fc7ca488409bc885">_inserted</a>) const  &amp; plang::corpus::report::inserted </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -517,7 +666,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a0e90bf8fb602012c03289ce58c5051fd">_updated</a>) const  &amp; plang::corpus::report::updated </td>
+          <td class="memname">decltype(<a class="el" href="classplang_1_1corpus_1_1report.html#a1f66ba7a9b957ac0662c1b8fd38a9bf5">_updated</a>) const  &amp; plang::corpus::report::updated </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -651,8 +800,8 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a18edfa250506ae87ce4d3aa10df68061" name="a18edfa250506ae87ce4d3aa10df68061"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18edfa250506ae87ce4d3aa10df68061">&#9670;&nbsp;</a></span>_mentioned</h2>
+<a id="a83aecbf763b7973ce49e4b110a554758" name="a83aecbf763b7973ce49e4b110a554758"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83aecbf763b7973ce49e4b110a554758">&#9670;&nbsp;</a></span>_start</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -661,7 +810,117 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;<a class="el" href="classplang_1_1corpus_1_1report.html#a9c62e7ab5fc7039c02e2c21856961718">key</a>, <a class="el" href="namespaceplang.html#a6330287f0bb6f6579aef241e24b0b1fb">entry</a>&gt; plang::corpus::report::_mentioned</td>
+          <td class="memname">clock_t::time_point plang::corpus::report::_start</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a68f451f19a5847a53e53e116917987ed" name="a68f451f19a5847a53e53e116917987ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68f451f19a5847a53e53e116917987ed">&#9670;&nbsp;</a></span>_post_lex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">clock_t::time_point plang::corpus::report::_post_lex</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="accfe3bcd0efc0a9a946ccae35530c1a7" name="accfe3bcd0efc0a9a946ccae35530c1a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accfe3bcd0efc0a9a946ccae35530c1a7">&#9670;&nbsp;</a></span>_post_parse</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">clock_t::time_point plang::corpus::report::_post_parse</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae107dc41f4af5d5f63d29250878e6462" name="ae107dc41f4af5d5f63d29250878e6462"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae107dc41f4af5d5f63d29250878e6462">&#9670;&nbsp;</a></span>_post_visit</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">clock_t::time_point plang::corpus::report::_post_visit</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7546e7698752499c4abe08d8cf6268bd" name="a7546e7698752499c4abe08d8cf6268bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7546e7698752499c4abe08d8cf6268bd">&#9670;&nbsp;</a></span>_post_commit</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">clock_t::time_point plang::corpus::report::_post_commit</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a838cbeaa0706eb2a718132281a23ecf4" name="a838cbeaa0706eb2a718132281a23ecf4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a838cbeaa0706eb2a718132281a23ecf4">&#9670;&nbsp;</a></span>_mentioned</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classplang_1_1corpus_1_1report.html#aa3fba478a7a577e7d6f9c78fb62499b0">map</a> plang::corpus::report::_mentioned</td>
         </tr>
       </table>
   </td>
@@ -675,8 +934,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a7d636b994e75f5ad172cb7065b3207e6" name="a7d636b994e75f5ad172cb7065b3207e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d636b994e75f5ad172cb7065b3207e6">&#9670;&nbsp;</a></span>_inserted</h2>
+<a id="a38137390980cc7e8fc7ca488409bc885" name="a38137390980cc7e8fc7ca488409bc885"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38137390980cc7e8fc7ca488409bc885">&#9670;&nbsp;</a></span>_inserted</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -685,7 +944,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;<a class="el" href="classplang_1_1corpus_1_1report.html#a9c62e7ab5fc7039c02e2c21856961718">key</a>, <a class="el" href="namespaceplang.html#a6330287f0bb6f6579aef241e24b0b1fb">entry</a>&gt; plang::corpus::report::_inserted</td>
+          <td class="memname"><a class="el" href="classplang_1_1corpus_1_1report.html#aa3fba478a7a577e7d6f9c78fb62499b0">map</a> plang::corpus::report::_inserted</td>
         </tr>
       </table>
   </td>
@@ -699,8 +958,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a0e90bf8fb602012c03289ce58c5051fd" name="a0e90bf8fb602012c03289ce58c5051fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e90bf8fb602012c03289ce58c5051fd">&#9670;&nbsp;</a></span>_updated</h2>
+<a id="a1f66ba7a9b957ac0662c1b8fd38a9bf5" name="a1f66ba7a9b957ac0662c1b8fd38a9bf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f66ba7a9b957ac0662c1b8fd38a9bf5">&#9670;&nbsp;</a></span>_updated</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -709,7 +968,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;<a class="el" href="classplang_1_1corpus_1_1report.html#a9c62e7ab5fc7039c02e2c21856961718">key</a>, <a class="el" href="namespaceplang.html#a6330287f0bb6f6579aef241e24b0b1fb">entry</a>&gt; plang::corpus::report::_updated</td>
+          <td class="memname"><a class="el" href="classplang_1_1corpus_1_1report.html#aa3fba478a7a577e7d6f9c78fb62499b0">map</a> plang::corpus::report::_updated</td>
         </tr>
       </table>
   </td>

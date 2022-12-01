@@ -1,4 +1,5 @@
 <map id="plang::plot::object::clazz::hint::lit" name="plang::plot::object::clazz::hint::lit">
-<area shape="rect" id="node1" title=" " alt="" coords="21,95,146,136"/>
+<area shape="rect" id="node1" title=" " alt="" coords="103,95,229,136"/>
 <area shape="rect" id="node2" href="$classplang_1_1detail_1_1base__types_1_1persisted.html" title=" " alt="" coords="5,5,161,47"/>
+<area shape="rect" id="node3" href="$classplang_1_1detail_1_1base__types_1_1sourced.html" title="Base type for traceable classes." alt="" coords="186,5,314,47"/>
 </map>

@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classplang_1_1plot_1_1object.html" title=" " alt="" coords="5,5,131,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,42,81,69"/>
+<area shape="rect" id="node2" href="$classplang_1_1resolve__entry__result.html" title="Result type of variant&#45;typed resolve methods." alt="" coords="147,5,285,47"/>
+<area shape="rect" id="node3" href="$classplang_1_1resolve__result.html" title="Result type of direct resolve methods." alt="" coords="129,71,303,98"/>
 </map>

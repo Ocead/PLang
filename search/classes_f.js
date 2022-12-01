@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['unknown_5fcommand_5ferror_0',['unknown_command_error',['../classplang_1_1exception_1_1unknown__command__error.html',1,'plang::exception']]]
+  ['variant_0',['variant',['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1variant.html',1,'plang::plot::object::clazz::hint']]]
 ];

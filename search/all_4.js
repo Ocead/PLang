@@ -19,5 +19,6 @@ var searchData=
   ['doxygen_16',['DOXYGEN',['../classplang_1_1format.html#a0b61b048a7b60ed35e214361f87c06dea960fc6445fad0abaa319f7cacaa53311',1,'plang::format']]],
   ['duplicate_5fobject_5fclass_5ferror_17',['duplicate_object_class_error',['../classplang_1_1exception_1_1duplicate__object__class__error.html',1,'plang::exception']]],
   ['duplicate_5fpath_5ferror_18',['duplicate_path_error',['../classplang_1_1exception_1_1duplicate__path__error.html',1,'plang::exception']]],
-  ['duplicate_5fsymbol_5ferror_19',['duplicate_symbol_error',['../classplang_1_1exception_1_1duplicate__symbol__error.html',1,'plang::exception']]]
+  ['duplicate_5fsymbol_5ferror_19',['duplicate_symbol_error',['../classplang_1_1exception_1_1duplicate__symbol__error.html',1,'plang::exception']]],
+  ['object_5fclass_5fmanager_20',['object_class_manager',['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1pnt.html#aa28bb67201c5950cbe08662946975969',1,'plang::plot::object::clazz::hint::pnt::object_class_manager()'],['../classplang_1_1plot_1_1object_1_1clazz.html#aa28bb67201c5950cbe08662946975969',1,'plang::plot::object::clazz::object_class_manager()'],['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1sym.html#aa28bb67201c5950cbe08662946975969',1,'plang::plot::object::clazz::hint::sym::object_class_manager()'],['../classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit.html#aa28bb67201c5950cbe08662946975969',1,'plang::plot::object::clazz::hint::lit::object_class_manager()']]]
 ];

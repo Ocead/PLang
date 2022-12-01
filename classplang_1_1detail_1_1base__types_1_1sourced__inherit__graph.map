@@ -1,7 +1,14 @@
 <map id="plang::detail::base_types::sourced" name="plang::detail::base_types::sourced">
-<area shape="rect" id="node1" title="Base type for traceable classes." alt="" coords="5,90,133,131"/>
-<area shape="rect" id="node2" href="$classplang_1_1plot_1_1symbol.html" title=" " alt="" coords="181,5,313,32"/>
-<area shape="rect" id="node3" href="$classplang_1_1plot_1_1symbol_1_1clazz.html" title=" " alt="" coords="181,57,313,98"/>
-<area shape="rect" id="node4" href="$classplang_1_1plot_1_1symbol_1_1clazz_1_1hint.html" title=" " alt="" coords="181,122,313,163"/>
-<area shape="rect" id="node5" href="$classplang_1_1root_1_1path.html" title="A node in the corpus&#39; path tree." alt="" coords="189,188,305,215"/>
+<area shape="rect" id="node1" title="Base type for traceable classes." alt="" coords="5,319,133,360"/>
+<area shape="rect" id="node2" href="$classplang_1_1plot_1_1object_1_1clazz.html" title=" " alt="" coords="185,5,310,47"/>
+<area shape="rect" id="node3" href="$classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit.html" title=" " alt="" coords="185,71,310,112"/>
+<area shape="rect" id="node4" href="$classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1pnt.html" title=" " alt="" coords="185,136,310,177"/>
+<area shape="rect" id="node5" href="$classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1sym.html" title=" " alt="" coords="185,201,310,243"/>
+<area shape="rect" id="node6" href="$classplang_1_1plot_1_1point.html" title=" " alt="" coords="188,267,307,294"/>
+<area shape="rect" id="node7" href="$classplang_1_1plot_1_1point_1_1clazz.html" title=" " alt="" coords="188,319,307,360"/>
+<area shape="rect" id="node8" href="$classplang_1_1plot_1_1point_1_1clazz_1_1hint.html" title=" " alt="" coords="188,384,307,425"/>
+<area shape="rect" id="node9" href="$classplang_1_1plot_1_1symbol.html" title=" " alt="" coords="181,450,313,477"/>
+<area shape="rect" id="node10" href="$classplang_1_1plot_1_1symbol_1_1clazz.html" title=" " alt="" coords="181,501,313,543"/>
+<area shape="rect" id="node11" href="$classplang_1_1plot_1_1symbol_1_1clazz_1_1hint.html" title=" " alt="" coords="181,567,313,608"/>
+<area shape="rect" id="node12" href="$classplang_1_1root_1_1path.html" title="A node in the corpus&#39; path tree." alt="" coords="189,633,305,659"/>
 </map>

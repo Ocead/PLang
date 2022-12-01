@@ -4,5 +4,6 @@ var searchData=
   ['implicit_1',['implicit',['../classplang_1_1cli.html#a340e126e61af48da0b9696f3686a5e19',1,'plang::cli']]],
   ['indent_5fmask_2',['INDENT_MASK',['../classplang_1_1format.html#aea63d1e9ec7da5e7c06c3c68c1038147',1,'plang::format']]],
   ['indent_5foption_5fmap_3',['indent_option_map',['../classplang_1_1cli.html#a89bcfa4f2679b108bced07d73471cfac',1,'plang::cli']]],
-  ['inner_5fformat_4',['inner_format',['../classplang_1_1detail_1_1corpus.html#ae62dceaeb4603d4e355cfbba0d9a8239',1,'plang::detail::corpus']]]
+  ['inner_5fformat_4',['inner_format',['../classplang_1_1detail_1_1corpus.html#ae62dceaeb4603d4e355cfbba0d9a8239',1,'plang::detail::corpus']]],
+  ['internal_5fmask_5',['INTERNAL_MASK',['../classplang_1_1format.html#a269db8ff04aef798151cef30dfa373d3',1,'plang::format']]]
 ];

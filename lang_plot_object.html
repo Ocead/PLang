@@ -101,7 +101,73 @@ $(document).ready(function(){initNavTree('lang_plot_object.html',''); initResiza
   <div class="headertitle"><div class="title">Objects </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="#autotoc_md2">Object classes</a><ul><li class="level2"><a href="#autotoc_md3">Declaration</a></li>
+<li class="level2"><a href="#autotoc_md4">Reference</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md2"></a>
+Object classes</h1>
+<p >Object classes structure the meaning of objects in points (sentences). Each point class possesses its own set of object classes. While most point classes in the standard corpus get by with a single or even no required object, some statements are more complex than that, for example:</p>
+<div class="fragment"><div class="line">(.character[]) .character.behaviour.speech</div>
+<div class="line">          what</div>
+<div class="line">          ?to : (.character[]);</div>
+</div><!-- fragment --><p >This point class may be used for for a line of verbal dialogue. Its object classes are what is said (<code>what</code>) and to whom (<code>?to</code>).</p>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Declaration</h2>
+<p >Object classes are declared together with point classes. Their declaration follows the path and optional decoration of the point class.</p>
+<p >The simplest form of declaring object classes is simply stating their names in sequence:</p>
+<div class="fragment"><div class="line">.character.behaviour.speech ?what ?to;</div>
+</div><!-- fragment --><p >Each object class begins with a question mark (<code>?</code>) followed by a name unique to the scope of the point class, meaning multiple point classes may have an object class named <code>?what</code>. Even if there are multiple object classes, they are not connected with commas (<code>,</code>) in this case. This is done to mimic the appearance of a sentence in natural language.</p>
+<p >The first object class in the declaration may be marked as the point classes default object class by omitting the leading question mark (<code>?</code>), like so:</p>
+<div class="fragment"><div class="line">.character.behaviour.speech what ?to;</div>
+</div><!-- fragment --><p >The name of the default object class may be omitted in point declarations, again mimicking natural language as well as shortening the syntax.</p>
+<p >Each object class may also be appended with a definition. These can be used to either explain the usage of the object class, or to hint to the kinds of entries that should be used with it.</p>
+<p >To define an object class, append it with a colon (<code>:</code>) followed by any of the following in parentheses (<code>()</code>):</p>
+<ul>
+<li>
+a string literal (e.g.: <code>"This is a comment"</code>)<br  />
+ This acts like a comment without any impact on the parser logic  </li>
+<li>
+a like hint (e.g.: <code>l""</code>)<br  />
+ Meaning a text matching the hint as in an SQLite <code>LIKE</code> expression should be used as object.<br  />
+ See <a href="https://www.w3schools.com/sql/sql_like.asp">this link</a> for further instructions.  </li>
+<li>
+a glob hint (e.g.: <code>g""</code>)<br  />
+ Meaning a text matching the hint as a glob pattern should be used as object.<br  />
+ See <a href="https://man7.org/linux/man-pages/man7/glob.7.html">this link</a> for further instructions.  </li>
+<li>
+a regex hint (e.g.: <code>r"^(yes|no)$"</code>)<br  />
+ Meaning a text matching the hint as a regular expression should be used as object  </li>
+<li>
+a match hint (e.g.: <code>m"yes OR no"</code>)<br  />
+ Meaning a text matching the hint as aSQLite FTS match filter should be used as object  </li>
+<li>
+a symbol class reference (e.g.: <code>.symbol.class[]</code>)<br  />
+ Meaning a symbol of this class or the class itself should be used as object  </li>
+<li>
+a recursive symbol class reference (e.g.: <code>.symbol.class[]...</code>)<br  />
+ Meaning a symbol of this class or its children or the classes themselves should be used as object  </li>
+<li>
+a point class reference (e.g.: <code>.point.class?:</code>)<br  />
+ Meaning a point of this class should be used as object  </li>
+<li>
+a recursive point class reference (e.g.: <code>.point.class?:...</code>)<br  />
+ Meaning a point of this class or its children should be used as object  </li>
+</ul>
+<p >Multiple literals and references may be concatenated with the comma (<code>,</code>) operator. An object only has to satisfy one of the definitions (comments excluded).</p>
+<p >Normally, a point can have multiple entries as one of its objects simultaneously, like addressing two characters in <code>.character.behaviour.speech</code>. To enforce that only a single entry may be the object, object classes can be to marked as singleton be prepending them with an exclamation mark (<code>!</code>), like so:</p>
+<div class="fragment"><div class="line">(.character[]) ! .character.identity.birthday ! is;</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
+Reference</h2>
+<p >An object class may be referenced by its point classes path followed by a question mark (<code>?</code>) and the name of the object class. The same rules for abbreviation as with symbol classes apply.</p>
+<div class="fragment"><div class="line">.object.optical.color?is</div>
+<div class="line"><span class="keywordtype">object</span>.optical.color?is</div>
+<div class="line">optical.color?is</div>
+<div class="line">color?is</div>
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

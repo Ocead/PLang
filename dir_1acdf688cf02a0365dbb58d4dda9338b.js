@@ -35,11 +35,13 @@ var dir_1acdf688cf02a0365dbb58d4dda9338b =
       [ "plang::plot::object::clazz::hint", "classplang_1_1plot_1_1object_1_1clazz_1_1hint.html", [
         [ "lit", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit.html", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit" ],
         [ "pnt", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1pnt.html", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1pnt" ],
-        [ "sym", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1sym.html", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1sym" ]
+        [ "sym", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1sym.html", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1sym" ],
+        [ "variant", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1variant.html", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1variant" ]
       ] ],
       [ "plang::plot::object::clazz::hint::lit", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit.html", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit" ],
       [ "plang::plot::object::clazz::hint::sym", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1sym.html", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1sym" ],
       [ "plang::plot::object::clazz::hint::pnt", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1pnt.html", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1pnt" ],
+      [ "plang::plot::object::clazz::hint::variant", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1variant.html", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1variant" ],
       [ "plang::plot::object::lit", "classplang_1_1plot_1_1object_1_1lit.html", "classplang_1_1plot_1_1object_1_1lit" ],
       [ "plang::plot::object::sym", "classplang_1_1plot_1_1object_1_1sym.html", "classplang_1_1plot_1_1object_1_1sym" ],
       [ "plang::plot::object::cls", "classplang_1_1plot_1_1object_1_1cls.html", "classplang_1_1plot_1_1object_1_1cls" ],

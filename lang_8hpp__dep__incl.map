@@ -1,9 +1,11 @@
 <map id="include/plang/lang.hpp" name="include/plang/lang.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="43,5,193,32"/>
-<area shape="rect" id="node2" href="$detail_8hpp.html" title=" " alt="" coords="47,80,189,121"/>
-<area shape="rect" id="node3" href="$corpus_8hpp.html" title=" " alt="" coords="5,437,172,464"/>
-<area shape="rect" id="node5" href="$path_8hpp.html" title=" " alt="" coords="47,169,189,211"/>
-<area shape="rect" id="node6" href="$symbol_8hpp.html" title=" " alt="" coords="126,259,267,300"/>
-<area shape="rect" id="node4" href="$cli_8hpp.html" title=" " alt="" coords="12,512,165,539"/>
-<area shape="rect" id="node7" href="$corpus_2plot_8hpp.html" title=" " alt="" coords="126,348,267,389"/>
+<area shape="rect" id="node1" title=" " alt="" coords="63,5,214,32"/>
+<area shape="rect" id="node2" href="$detail_8hpp.html" title=" " alt="" coords="68,80,209,121"/>
+<area shape="rect" id="node3" href="$corpus_8hpp.html" title=" " alt="" coords="138,616,305,643"/>
+<area shape="rect" id="node5" href="$path_8hpp.html" title=" " alt="" coords="176,169,317,211"/>
+<area shape="rect" id="node6" href="$object_8hpp.html" title=" " alt="" coords="259,348,400,389"/>
+<area shape="rect" id="node8" href="$point_8hpp.html" title=" " alt="" coords="43,437,184,479"/>
+<area shape="rect" id="node9" href="$symbol_8hpp.html" title=" " alt="" coords="151,259,292,300"/>
+<area shape="rect" id="node4" href="$cli_8hpp.html" title=" " alt="" coords="145,691,298,717"/>
+<area shape="rect" id="node7" href="$corpus_2plot_8hpp.html" title=" " alt="" coords="151,527,292,568"/>
 </map>

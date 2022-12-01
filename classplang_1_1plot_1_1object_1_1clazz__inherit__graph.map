@@ -1,5 +1,6 @@
 <map id="plang::plot::object::clazz" name="plang::plot::object::clazz">
-<area shape="rect" id="node1" title=" " alt="" coords="231,39,356,80"/>
+<area shape="rect" id="node1" title=" " alt="" coords="231,71,356,112"/>
 <area shape="rect" id="node2" href="$classplang_1_1detail_1_1base__types_1_1persisted.html" title=" " alt="" coords="5,5,183,47"/>
-<area shape="rect" id="node3" href="$classplang_1_1detail_1_1base__types_1_1decorated.html" title="Base type for decorated classes." alt="" coords="30,71,158,112"/>
+<area shape="rect" id="node3" href="$classplang_1_1detail_1_1base__types_1_1sourced.html" title="Base type for traceable classes." alt="" coords="30,71,158,112"/>
+<area shape="rect" id="node4" href="$classplang_1_1detail_1_1base__types_1_1decorated.html" title="Base type for decorated classes." alt="" coords="30,136,158,177"/>
 </map>

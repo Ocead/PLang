@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="textblock"><h1><img src="ocead.svg" alt="" style="pointer-events: none;" class="inline"/> <u>PLang</u> - Interactive markup language for narrative works</h1>
 <p >A formal language to plan and analyse prose, screenplays, games, etc.</p>
 <div style="text-align: center;"></div><div style="text-align: center;"><img src="https://img.shields.io/badge/C++-%2300599C.svg?style=flat&amp;logo=c%2B%2B&amp;logoColor=white" alt="" style="pointer-events: none;" class="inline"/> <img src="https://img.shields.io/badge/build-passing-success?style=flat" alt="" class="inline"/> <img src="https://img.shields.io/badge/platform-linux_x64_|_win_x64-informational?style=flat" alt="" class="inline"/> <img src="https://img.shields.io/badge/license-AGPL_v3-informational?style=flat" alt="" class="inline"/> <img src="https://img.shields.io/badge/version-v0.0.1-important?style=flat" alt="" class="inline"/><br  />
- <img src="https://img.shields.io/badge/tests-234_passed,_18_failed-critical?style=flat" alt="" class="inline"/> <img src="https://img.shields.io/badge/line_coverage-80%25-critical?style=flat" alt="" class="inline"/> <img src="https://img.shields.io/badge/branch_coverage-21%25-critical?style=flat" alt="" class="inline"/> </div><hr  />
+ <img src="https://img.shields.io/badge/tests-382_passed,_45_failed-critical?style=flat" alt="" class="inline"/> <img src="https://img.shields.io/badge/line_coverage-86%25-critical?style=flat" alt="" class="inline"/> <img src="https://img.shields.io/badge/branch_coverage-27%25-critical?style=flat" alt="" class="inline"/> </div><hr  />
 <p >This project aims to help:</p>
 <ul>
 <li><code>🔗</code> maintaining logical consistence and keeping track of consequences</li>
@@ -110,16 +110,16 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <li><code>📖</code> cataloguing the content and monitoring its visibility</li>
 </ul>
 <p >in narrative works, regardless of form or topic.</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 Usage</h2>
-<h3><a class="anchor" id="autotoc_md10"></a>
+<h3><a class="anchor" id="autotoc_md16"></a>
 Requirements</h3>
 <ul>
 <li><a href="https://www.sqlite.org/index.html">SQLite3</a> 3.36.0 or higher</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md11"></a>
+<h2><a class="anchor" id="autotoc_md17"></a>
 Building</h2>
-<h3><a class="anchor" id="autotoc_md12"></a>
+<h3><a class="anchor" id="autotoc_md18"></a>
 Requirements</h3>
 <ul>
 <li>A C++17-compatible toolchain (currently tested on <a href="https://gcc.gnu.org/">GCC</a> and <a href="https://clang.llvm.org/">Clang</a>)</li>
@@ -128,23 +128,23 @@ Requirements</h3>
 <li><a href="https://www.sqlite.org/index.html">SQLite3</a> 3.36.0 or higher</li>
 <li><a href="https://github.com/antlr/antlr4">antlr4</a> (included as submodule)</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md13"></a>
+<h4><a class="anchor" id="autotoc_md19"></a>
 Additionally required for building the command line:</h4>
 <ul>
 <li><a href="https://tiswww.case.edu/php/chet/readline/rltop.html">GNU Readline</a></li>
 </ul>
-<h4><a class="anchor" id="autotoc_md14"></a>
+<h4><a class="anchor" id="autotoc_md20"></a>
 Additionally required for testing:</h4>
 <ul>
 <li><a href="https://github.com/catchorg/Catch2">Catch2</a> (included as submodule)</li>
 </ul>
-<h4><a class="anchor" id="autotoc_md15"></a>
+<h4><a class="anchor" id="autotoc_md21"></a>
 Additionally required for building the documentation:</h4>
 <ul>
 <li><a href="https://doxygen.nl/">Doxygen</a> 1.9.1 or higher</li>
 <li><a href="https://github.com/jothepro/doxygen-awesome-css">doxygen-awesome-css</a> (included as submodule)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md16"></a>
+<h3><a class="anchor" id="autotoc_md22"></a>
 Targets</h3>
 <p >This repository provides the following build targets:</p>
 <table class="markdownTable">
@@ -157,9 +157,9 @@ Targets</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>plang__doc</code>   </td><td class="markdownTableBodyNone">Builds the documentation   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md23"></a>
 Design</h2>
-<h3><a class="anchor" id="autotoc_md18"></a>
+<h3><a class="anchor" id="autotoc_md24"></a>
 Syntax</h3>
 <p >The markup language is agnostic of natural languages. It does not contain keywords, only symbolic operators. While the herein included standard corpus is in English, it may be translated into a different language.</p>
 <p >The statement syntax is derived from natural languages and follows a subject→verb→object order. (Additional word orders will be added in later versions.) Namespaces that catalogue the symbols in the corpus may be omitted as long as the statement remains unambiguous.</p>
@@ -186,7 +186,7 @@ Syntax</h3>
 <div class="line">because he was hungry.</div>
 <div class="line">(And now he<span class="stringliteral">&#39;s sated.)</span></div>
 </div><!-- fragment --><p >Because specifying these reasons and implications like so would be tedious, the template <a href="corpus/std.en.plang"><em>corpus</em></a> already includes some obvious ones, so in this case, both causals would be implied.</p>
-<h3><a class="anchor" id="autotoc_md19"></a>
+<h3><a class="anchor" id="autotoc_md25"></a>
 Structure</h3>
 <p >This language differentiates between four contexts, each for a specific purpose.</p>
 <ul>
@@ -195,7 +195,7 @@ Structure</h3>
 <li><b>Outline</b>: Maps the story threads onto a presentative outline</li>
 <li><b>Text</b>: Maps the outline onto the actual work and contextualizes stylistic devices</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md20"></a>
+<h3><a class="anchor" id="autotoc_md26"></a>
 Files</h3>
 <p >The interpreter mainly works with two types of files:</p>
 <ul>
@@ -245,7 +245,7 @@ Files</h3>
  File extension: <code>.txt</code><br  />
  Referencing to: lines, columns</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md21"></a>
+<h2><a class="anchor" id="autotoc_md27"></a>
 License</h2>
 <table style="border: none; border-collapse: collapse;">
 <tr>

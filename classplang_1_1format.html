@@ -218,6 +218,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a587c0a33679f14b23d15994f3521f7d2"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1format.html#a587c0a33679f14b23d15994f3521f7d2">set_indent</a> (<a class="el" href="classplang_1_1format.html#aad88393584872bbce2e74ef171e8fb92">indent</a> <a class="el" href="classplang_1_1format.html#aad88393584872bbce2e74ef171e8fb92">indent</a>)</td></tr>
 <tr class="memdesc:a587c0a33679f14b23d15994f3521f7d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the line break rule.  <a href="classplang_1_1format.html#a587c0a33679f14b23d15994f3521f7d2">More...</a><br /></td></tr>
 <tr class="separator:a587c0a33679f14b23d15994f3521f7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cf5a6995cd09eefd5d0857b3f5703bb"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1format.html#a8cf5a6995cd09eefd5d0857b3f5703bb">get_internal</a> () const</td></tr>
+<tr class="separator:a8cf5a6995cd09eefd5d0857b3f5703bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba771fd5c5f314445df61b08b3058bad"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1format.html#aba771fd5c5f314445df61b08b3058bad">set_internal</a> (<a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> internal)</td></tr>
+<tr class="separator:aba771fd5c5f314445df61b08b3058bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a47a9c3686edcd0eb5daf2868fdf255"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a8a47a9c3686edcd0eb5daf2868fdf255"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classplang_1_1format.html#a8a47a9c3686edcd0eb5daf2868fdf255">operator&amp;</a> (T rhs) const</td></tr>
 <tr class="separator:a8a47a9c3686edcd0eb5daf2868fdf255"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -272,6 +276,8 @@ Static Private Attributes</h2></td></tr>
 <tr class="separator:a353a619f2079b8e58c24a75128df0838"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea63d1e9ec7da5e7c06c3c68c1038147"><td class="memItemLeft" align="right" valign="top">static const decltype(<a class="el" href="classplang_1_1format.html#ae0c17ce5d09d9aababbd75c5bbd4597d">value</a>)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1format.html#aea63d1e9ec7da5e7c06c3c68c1038147">INDENT_MASK</a></td></tr>
 <tr class="separator:aea63d1e9ec7da5e7c06c3c68c1038147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a269db8ff04aef798151cef30dfa373d3"><td class="memItemLeft" align="right" valign="top">static const decltype(<a class="el" href="classplang_1_1format.html#ae0c17ce5d09d9aababbd75c5bbd4597d">value</a>)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classplang_1_1format.html#a269db8ff04aef798151cef30dfa373d3">INTERNAL_MASK</a></td></tr>
+<tr class="separator:a269db8ff04aef798151cef30dfa373d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a0b61b048a7b60ed35e214361f87c06de" name="a0b61b048a7b60ed35e214361f87c06de"></a>
@@ -1036,6 +1042,57 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a8cf5a6995cd09eefd5d0857b3f5703bb" name="a8cf5a6995cd09eefd5d0857b3f5703bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cf5a6995cd09eefd5d0857b3f5703bb">&#9670;&nbsp;</a></span>get_internal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a> plang::format::get_internal </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba771fd5c5f314445df61b08b3058bad" name="aba771fd5c5f314445df61b08b3058bad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba771fd5c5f314445df61b08b3058bad">&#9670;&nbsp;</a></span>set_internal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr void plang::format::set_internal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceplang_1_1column__types.html#a66cac8ac77fb5e9dc8ef152a9c898146">bool_t</a>&#160;</td>
+          <td class="paramname"><em>internal</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8a47a9c3686edcd0eb5daf2868fdf255" name="a8a47a9c3686edcd0eb5daf2868fdf255"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8a47a9c3686edcd0eb5daf2868fdf255">&#9670;&nbsp;</a></span>operator&amp;()</h2>
 
@@ -1286,6 +1343,28 @@ template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">const decltype(<a class="el" href="classplang_1_1format.html#ae0c17ce5d09d9aababbd75c5bbd4597d">value</a>) plang::format::INDENT_MASK</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a269db8ff04aef798151cef30dfa373d3" name="a269db8ff04aef798151cef30dfa373d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a269db8ff04aef798151cef30dfa373d3">&#9670;&nbsp;</a></span>INTERNAL_MASK</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const decltype(<a class="el" href="classplang_1_1format.html#ae0c17ce5d09d9aababbd75c5bbd4597d">value</a>) plang::format::INTERNAL_MASK</td>
         </tr>
       </table>
   </td>

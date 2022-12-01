@@ -101,7 +101,46 @@ $(document).ready(function(){initNavTree('lang_plot_point.html',''); initResizab
   <div class="headertitle"><div class="title">Points </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="#autotoc_md5">Point classes</a><ul><li class="level2"><a href="#autotoc_md6">Declaration</a></li>
+<li class="level2"><a href="#autotoc_md7">Reference</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md5"></a>
+Point classes</h1>
+<p >Point classes structure the kinds of statements you can make about symbols. The work as tags on or relations between points. For example</p>
+<ul>
+<li>the point classes under <code>.character.relationship?:...</code> contain the kinds of relationships character may have</li>
+<li>the point class <code>.world.geography.leads?:</code> may be used for building maps by making nets between adjacent places</li>
+<li>the point class <code>.object.optical.color?:</code> defines the color of an object</li>
+</ul>
+<p >As with symbol classes, each point class has a unique path and always denote the same kind or statement.</p>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Declaration</h2>
+<p >Within declarations, point class dont have an identifying operator. Rather they already mimic the structure of sentences that can be formed with them. In the default configuration point classes (and later points) are declared in a subject-verb-object order. Point classes dont have concrete subjects, so the shortest possible point class declarations like this:</p>
+<div class="fragment"><div class="line">.character.lives _;</div>
+</div><!-- fragment --><p >Here <code>.character.lives</code> is the unique path of the point class and the following <code>_</code> is it's default object class. This point class may be used to form statements about which characters are alive. This statement does not require additional objects. This syntax, using <code>_</code> as the name for a points class obsolete default object class, is convention used in the standard corpus.</p>
+<p >Decorations may be applied to point classes like with symbol classes:</p>
+<div class="fragment"><div class="line">.character.lives (-4, <span class="stringliteral">&quot;Denotes that a character lives&quot;</span>) _;</div>
+</div><!-- fragment --><p >To specify which symbols may be the subject of a point of a point class, hints may be applied to the declaration:</p>
+<div class="fragment"><div class="line">(.character[]) .character.lives _;</div>
+</div><!-- fragment --><p >If a point class is hinted, the parser will favor symbols of matching classes when looking up matching candidates in point declarations. Thus, the class path of the subject symbol may be shortened or omitted. Multiple subject hints may be concatenated with the comma (<code>,</code>) operator. Recursive hints are denoted with an ellipsis (<code>...</code>).</p>
+<p >Point classes may be marked as singletons. This means, that at any time, only one point of this class may exist for each symbol. This is done by adding an exclamation mark (<code>!</code>) before the point classes path:</p>
+<div class="fragment"><div class="line">(.character[]) ! .character.lives _;</div>
+</div><!-- fragment --><p >Within the story context, declaring a new singleton point will override earlier points instead of adding to them.</p>
+<p >A point declaration also includes declarations for a points object classes. Their syntax is explained <a class="el" href="lang_plot_object.html">here</a>.</p>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Reference</h2>
+<p >Referencing a point class on its own is done by appending the path of the point class with a question mark and a colon (<code>?:</code>). The same rules for abbreviation as with symbol classes apply.</p>
+<div class="fragment"><div class="line">.world.geography.natural.climate.weather?:</div>
+<div class="line">world.geography.natural.climate.weather?:</div>
+<div class="line">geography.natural.climate.weather?:</div>
+<div class="line">natural.climate.weather?:</div>
+<div class="line">climate.weather?:</div>
+<div class="line">weather?:</div>
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

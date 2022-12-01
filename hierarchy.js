@@ -6,22 +6,35 @@ var hierarchy =
     ] ],
     [ "plang::detail::corpus", "classplang_1_1detail_1_1corpus.html", [
       [ "plang::corpus", "classplang_1_1corpus.html", null ],
-      [ "plang::detail::path_manager", "classplang_1_1detail_1_1path__manager.html", [
-        [ "plang::detail::mixin_base< plang::detail::path_manager, plang::detail::symbol_class_manager, plang::detail::symbol_manager >", "structplang_1_1detail_1_1mixin__base.html", [
+      [ "plang::detail::object_class_manager", "classplang_1_1detail_1_1object__class__manager.html", [
+        [ "plang::detail::mixin_base< plang::detail::path_manager, plang::detail::symbol_class_manager, plang::detail::symbol_manager, plang::detail::point_class_manager, plang::detail::object_class_manager >", "structplang_1_1detail_1_1mixin__base.html", [
           [ "plang::detail::corpus_mixins", "structplang_1_1detail_1_1corpus__mixins.html", [
             [ "plang::corpus", "classplang_1_1corpus.html", null ]
           ] ]
         ] ],
         [ "plang::detail::mixin_base< Tps >", "structplang_1_1detail_1_1mixin__base.html", null ],
+        [ "plang::detail::point_class_manager", "classplang_1_1detail_1_1point__class__manager.html", [
+          [ "plang::detail::mixin_base< plang::detail::path_manager, plang::detail::symbol_class_manager, plang::detail::symbol_manager, plang::detail::point_class_manager, plang::detail::object_class_manager >", "structplang_1_1detail_1_1mixin__base.html", null ],
+          [ "plang::detail::mixin_base< Tps >", "structplang_1_1detail_1_1mixin__base.html", null ]
+        ] ]
+      ] ],
+      [ "plang::detail::path_manager", "classplang_1_1detail_1_1path__manager.html", [
+        [ "plang::detail::mixin_base< plang::detail::path_manager, plang::detail::symbol_class_manager, plang::detail::symbol_manager, plang::detail::point_class_manager, plang::detail::object_class_manager >", "structplang_1_1detail_1_1mixin__base.html", null ],
+        [ "plang::detail::mixin_base< Tps >", "structplang_1_1detail_1_1mixin__base.html", null ],
+        [ "plang::detail::object_class_manager", "classplang_1_1detail_1_1object__class__manager.html", null ],
+        [ "plang::detail::point_class_manager", "classplang_1_1detail_1_1point__class__manager.html", null ],
         [ "plang::detail::symbol_class_manager", "classplang_1_1detail_1_1symbol__class__manager.html", [
-          [ "plang::detail::mixin_base< plang::detail::path_manager, plang::detail::symbol_class_manager, plang::detail::symbol_manager >", "structplang_1_1detail_1_1mixin__base.html", null ],
+          [ "plang::detail::mixin_base< plang::detail::path_manager, plang::detail::symbol_class_manager, plang::detail::symbol_manager, plang::detail::point_class_manager, plang::detail::object_class_manager >", "structplang_1_1detail_1_1mixin__base.html", null ],
           [ "plang::detail::mixin_base< Tps >", "structplang_1_1detail_1_1mixin__base.html", null ],
+          [ "plang::detail::object_class_manager", "classplang_1_1detail_1_1object__class__manager.html", null ],
+          [ "plang::detail::point_class_manager", "classplang_1_1detail_1_1point__class__manager.html", null ],
           [ "plang::detail::symbol_manager", "classplang_1_1detail_1_1symbol__manager.html", [
-            [ "plang::detail::mixin_base< plang::detail::path_manager, plang::detail::symbol_class_manager, plang::detail::symbol_manager >", "structplang_1_1detail_1_1mixin__base.html", null ],
+            [ "plang::detail::mixin_base< plang::detail::path_manager, plang::detail::symbol_class_manager, plang::detail::symbol_manager, plang::detail::point_class_manager, plang::detail::object_class_manager >", "structplang_1_1detail_1_1mixin__base.html", null ],
             [ "plang::detail::mixin_base< Tps >", "structplang_1_1detail_1_1mixin__base.html", null ]
           ] ]
         ] ]
       ] ],
+      [ "plang::detail::point_class_manager", "classplang_1_1detail_1_1point__class__manager.html", null ],
       [ "plang::detail::symbol_class_manager", "classplang_1_1detail_1_1symbol__class__manager.html", null ],
       [ "plang::detail::symbol_manager", "classplang_1_1detail_1_1symbol__manager.html", null ]
     ] ],
@@ -108,6 +121,13 @@ var hierarchy =
       ] ]
     ] ],
     [ "plang::detail::base_types::sourced", "classplang_1_1detail_1_1base__types_1_1sourced.html", [
+      [ "plang::plot::object::clazz", "classplang_1_1plot_1_1object_1_1clazz.html", null ],
+      [ "plang::plot::object::clazz::hint::lit", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1lit.html", null ],
+      [ "plang::plot::object::clazz::hint::pnt", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1pnt.html", null ],
+      [ "plang::plot::object::clazz::hint::sym", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1sym.html", null ],
+      [ "plang::plot::point", "classplang_1_1plot_1_1point.html", null ],
+      [ "plang::plot::point::clazz", "classplang_1_1plot_1_1point_1_1clazz.html", null ],
+      [ "plang::plot::point::clazz::hint", "classplang_1_1plot_1_1point_1_1clazz_1_1hint.html", null ],
       [ "plang::plot::symbol", "classplang_1_1plot_1_1symbol.html", null ],
       [ "plang::plot::symbol::clazz", "classplang_1_1plot_1_1symbol_1_1clazz.html", null ],
       [ "plang::plot::symbol::clazz::hint", "classplang_1_1plot_1_1symbol_1_1clazz_1_1hint.html", null ],
@@ -121,7 +141,7 @@ var hierarchy =
     [ "plang::detail::template_transform< T >", "structplang_1_1detail_1_1template__transform.html", null ],
     [ "plang::detail::template_transform< T< Args... > >", "structplang_1_1detail_1_1template__transform_3_01_t_3_01_args_8_8_8_01_4_01_4.html", null ],
     [ "Tps", null, [
-      [ "plang::detail::mixin_base< plang::detail::path_manager, plang::detail::symbol_class_manager, plang::detail::symbol_manager >", "structplang_1_1detail_1_1mixin__base.html", null ],
+      [ "plang::detail::mixin_base< plang::detail::path_manager, plang::detail::symbol_class_manager, plang::detail::symbol_manager, plang::detail::point_class_manager, plang::detail::object_class_manager >", "structplang_1_1detail_1_1mixin__base.html", null ],
       [ "plang::detail::mixin_base< Tps >", "structplang_1_1detail_1_1mixin__base.html", null ]
     ] ],
     [ "std::tuple", null, [
@@ -136,5 +156,8 @@ var hierarchy =
     [ "std::tuple_element< 2, plang::resolve_result< T > >", "structstd_1_1tuple__element_3_012_00_01plang_1_1resolve__result_3_01_t_01_4_01_4.html", null ],
     [ "std::unique_ptr", null, [
       [ "plang::detail::stmt", "classplang_1_1detail_1_1stmt.html", null ]
+    ] ],
+    [ "std::variant", null, [
+      [ "plang::plot::object::clazz::hint::variant", "classplang_1_1plot_1_1object_1_1clazz_1_1hint_1_1variant.html", null ]
     ] ]
 ];
