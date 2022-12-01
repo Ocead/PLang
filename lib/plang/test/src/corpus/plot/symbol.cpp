@@ -593,7 +593,7 @@ TEST_CASE("2.2.2. Symbol Parser", "[parser]") {
     auto &corpus = make_corpus();
     auto scope   = corpus.fetch<path>(0).value();
 
-    SECTION("Declaration") {
+    SECTION("Declarations") {
         SECTION("Undecorated local symbol") {
             auto report = corpus.execute(R"([symbol];)", scope);
 
@@ -789,7 +789,7 @@ TEST_CASE("2.2.2. Symbol Parser", "[parser]") {
         }
     }
 
-    SECTION("Reference") {
+    SECTION("References") {
         SECTION("Valid") {
             auto a1 = corpus.resolve<symbol>({"a", "b", "c", "d"}, scope, true).action();
             auto a2 = corpus.resolve<symbol>({"d", "e", "c", "d"}, scope, true).action();

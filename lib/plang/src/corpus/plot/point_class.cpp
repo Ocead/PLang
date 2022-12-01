@@ -10,35 +10,103 @@ using namespace plang::op;
 using namespace plang::plot;
 using namespace plang::detail;
 
+std::vector<std::tuple<pkey<path>, pkey<plot::point::clazz>, uint_t>>
+point_class_manager::partially_resolve(const std::vector<string_t> &path, bool_t fully) const {
+    //language=sqlite
+    static const string_t query{R"__SQL__(
+WITH RECURSIVE ar AS (SELECT ?1 as ray),
+               cte(head_id, leaf_id,
+                   class_id, depth) AS (SELECT p.parent_id, p.id, c.id, iif(not ?2, 0, -1)
+                                        FROM path p,
+                                             ar
+                                                 LEFT JOIN plot_point_class c on p.id = c.path_id
+                                        WHERE iif(not ?2,
+                                                  p.name == json_extract(ar.ray, '$[' || 0 || ']'),
+                                                  p.id = p.parent_id)
+                                          and c.id is not null
+                                        UNION ALL
+                                        SELECT c.id, c.parent_id, cte.class_id, depth + 1
+                                        FROM cte,
+                                             ar
+                                                 LEFT JOIN path c on cte.head_id = c.id
+                                        WHERE depth < json_array_length(ar.ray)
+                                          and c.name == json_extract(ar.ray, '$[' || (cte.depth + 1) || ']')),
+               max as (SELECT head_id, max(depth) as depth
+                       FROM cte
+                       GROUP BY head_id)
+SELECT cte.head_id, cte.leaf_id, cte.class_id, cte.depth + 1 as depth
+FROM max
+         LEFT JOIN cte on max.head_id = cte.head_id and max.depth = cte.depth;
+)__SQL__"};
+
+    /*static thread_local*/ stmt stmt;
+
+    auto json = vector_to_json(path.crbegin(), path.crend());
+
+    std::vector<std::tuple<pkey<class path>, pkey<plot::point::clazz>, uint_t>> result;
+
+    _reuse(stmt, query, [&] {
+        sqlite3_bind_text(&*stmt, 1, json.c_str(), json.size(), nullptr);
+        sqlite3_bind_int(&*stmt, 2, fully ? 1 : 0);
+        while (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
+            result.emplace_back(sqlite3_column_int64(&*stmt, 1),
+                                sqlite3_column_int64(&*stmt, 2),
+                                sqlite3_column_int(&*stmt, 3));
+        }
+    });
+
+    return result;
+}
+
 ostream_t &point_class_manager::print_helper(plang::column_types::ostream_t &os,
                                              pkey<plot::point::clazz> id,
                                              plang::format format) const {
-    auto inner_format = format;
-    inner_format.set_detail(format::detail::EXPLICIT_REF);
+    auto inner_format = _make_inner_format(format);
     auto clazz = fetch(id, format.get_detail() >= format::detail::DEFINITION).value();
 
-    if (!clazz.hints.empty()) {
-        os << format("(", format::style::for_op(lang::op::HINT_L));
-        for (size_t i = 0; i < clazz.hints.size(); ++i) {
-            auto const &h = clazz.hints[i];
-            symbol_class_manager::print_helper(os, h.get_hint_id(), inner_format);
-            if (h.recursive) { os << format("...", format::style::for_op(lang::op::RECUR)); }
-            if (i != clazz.hints.size() - 1) { os << format(",", format::style::for_op(lang::op::LIST)) << ' '; }
+    if (format.get_detail() == format::detail::DEFINITION) {
+        if (!clazz.hints.empty()) {
+            os << format('(', format::style::for_op(lang::op::HINT_L));
+            for (size_t i = 0; i < clazz.hints.size(); ++i) {
+                auto const &h = clazz.hints[i];
+                symbol_class_manager::print_helper(os, h.get_hint_id(), inner_format);
+                if (h.recursive) { os << format("...", format::style::for_op(lang::op::RECUR)); }
+                if (i != clazz.hints.size() - 1) { os << format(",", format::style::for_op(lang::op::LIST)) << ' '; }
+            }
+            os << format(')', format::style::for_op(lang::op::HINT_R)) << ' ';
         }
-        os << format(")", format::style::for_op(lang::op::HINT_R)) << ' ';
+
+        if (clazz.get_singleton()) {
+            os << format('!', format::style::for_op(lang::op::SINGLE)) << ' ';
+        }
     }
+
+    os << path_manager::print(clazz.get_path_id(), inner_format);
 
     switch (format.get_detail()) {
 
         case format::detail::ID_REF:
         case format::detail::EXPLICIT_REF:
-            os << path_manager::print(clazz.get_path_id(), inner_format)
-               << format("?:", format::style::for_op(lang::op::OBJ_NAME));
+            os  << format("?:", format::style::for_op(lang::op::OBJ_NAME));
             break;
-        case format::detail::DEFINITION:
-        case format::detail::FULL:
+        case format::detail::DEFINITION: {
             path_manager::print_decoration(os, clazz.get_path_id(), format);
+
+            auto object_classes = object_class_manager::resolve({}, clazz, false).candidates();
+            auto object_format = format;
+            object_format.set_internal(true);
+            for (auto const &o : object_classes) {
+                os << ' ' << object_class_manager::print(o.get_id(), object_format);
+            }
+
+            if (object_classes.empty()) {
+                os  << format("?:", format::style::for_op(lang::op::OBJ_NAME));
+            }
+
             os << format(";", format::style::for_op(lang::op::DECL));
+            break;
+        }
+        case format::detail::FULL:
             break;
     }
 
@@ -61,10 +129,10 @@ WHERE class_id = ?;
 
         while (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
             point::clazz::hint hint;
-            hint.id        = sqlite3_column_int(&*stmt, 1);
-            hint.hint_id   = sqlite3_column_int(&*stmt, 2);
-            hint.recursive = sqlite3_column_int(&*stmt, 3);
-            hint.source_id = sqlite3_column_int(&*stmt, 4);
+            hint.id        = sqlite3_column_int(&*stmt, 0);
+            hint.hint_id   = sqlite3_column_int(&*stmt, 1);
+            hint.recursive = sqlite3_column_int(&*stmt, 2);
+            hint.source_id = sqlite3_column_int(&*stmt, 3);
 
             hints.push_back(hint);
         }
@@ -190,6 +258,8 @@ LIMIT ?1 OFFSET ?1 * ?2;
     std::vector<point::clazz> result;
 
     _reuse(stmt, query, [&]() {
+        sqlite3_bind_int(&*stmt, 1, limit);
+        sqlite3_bind_int(&*stmt, 2, offset);
         while (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
             point::clazz clazz;
             clazz.id        = sqlite3_column_int(&*stmt, 0);
@@ -270,6 +340,59 @@ WHERE path_id = ?1;
             return {ent, {}, action::FAIL};
         }
     } else {
+        auto result = point_class_manager::partially_resolve(path, path[0].empty());
+
+        if (result.size() == 1) {//Case: overall single candidate
+            if (std::get<uint_t>(result[0]) == path.size()) {
+                ent = fetch(std::get<pkey<point::clazz>>(result[0]), dynamic).value();
+                return {ent, {}, action::NONE};
+            }
+        } else {//Case: none or multiple candidates
+            decltype(result) related;
+            for (auto const &e : result) {
+                if (is_parent_of(ctx.get_id(), std::get<pkey<class path>>(e)) or
+                    is_parent_of(std::get<pkey<class path>>(e), ctx.get_id())) {
+                    related.push_back(e);
+                }
+            }
+
+            if (related.size() == 1) {//Case: single candidate along current path
+                if (std::get<uint_t>(related[0]) == path.size()) {
+                    ent = fetch(std::get<pkey<point::clazz>>(related[0]), dynamic).value();
+                    return {ent, {}, action::NONE};
+                } else {
+                    return {ent, {fetch(std::get<pkey<point::clazz>>(result[0]), dynamic).value()}, action::FAIL};
+                }
+            } else if (related.size() > 0) {//Case: multiple candidates along current path
+                std::vector<pkey<point::clazz>> ids;
+                ids.reserve(result.size());
+                uint_t min = 0;
+                uint_t max = 0;
+                if (result.size() > 0) {
+                    auto [mit, xit] = std::minmax_element(result.begin(),
+                                                          result.end(),
+                                                          [](auto const &rhs, auto const &lhs) {
+                                                              return std::get<uint_t>(rhs) < std::get<uint_t>(lhs);
+                                                          });
+                    min             = std::get<uint_t>(*mit);
+                    max             = std::get<uint_t>(*xit);
+                }
+
+                for (auto const &e : result) {
+                    if (std::get<uint_t>(e) >= (max != 1 ? max : min)) {
+                        ids.push_back(std::get<pkey<point::clazz>>(e));
+                    }
+                }
+                if (ids.size() == 1) {//Case: single most viable candidate along path
+                    ent = fetch(ids[0]).value();
+                    return {ent, {}, action::NONE};
+                } else if (!insert && ids.size() > 1) {//Case: none or most viable candidates along path
+                    auto candidates = fetch_n(ids, dynamic);
+                    return {ent, std::move(candidates), action::FAIL};
+                }
+            }
+        }//Case: no candidates along the current path
+
         auto path_result = path_manager::resolve(path, ctx, insert, dynamic);
         if (path_result.has_result()) {
             return resolve({}, ent, path_result.entry(), insert, dynamic);
@@ -348,6 +471,8 @@ RETURNING plot_point_class.id;
     /*static thread_local*/ stmt stmt;
 
     action action = action::FAIL;
+
+    if (!clazz.is_persisted()) { return action::FAIL; }
 
     _reuse(stmt, query, [&]() -> plot::point::clazz & {
         sqlite3_bind_int64(&*stmt, 1, clazz.get_id());

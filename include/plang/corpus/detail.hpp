@@ -33,6 +33,7 @@ namespace plang {
         static const decltype(value) DETAIL_MASK;
         static const decltype(value) QUALIFICATION_MASK;
         static const decltype(value) INDENT_MASK;
+        static const decltype(value) INTERNAL_MASK;
 
     public:
         static const format PLAIN;
@@ -234,6 +235,14 @@ namespace plang {
             value = (value & ~INDENT_MASK) | static_cast<decltype(value)>(indent);
         }
 
+        inline constexpr bool_t get_internal() const {
+            return static_cast<bool_t>(value & INTERNAL_MASK);
+        }
+
+        inline constexpr void set_internal(bool_t internal) {
+            value = (value & ~INTERNAL_MASK) | static_cast<decltype(value)>((internal ? 1 : 0) * INTERNAL_MASK);
+        }
+
         template<typename T>
         inline constexpr bool_t operator&(T rhs) const {
             return value & static_cast<decltype(value)>(rhs);
@@ -396,8 +405,8 @@ namespace plang {
             /// \return Same format for use in nested printing
             static format _make_inner_format(format format);
 
-            template<template<typename ...> typename V, typename T>
-            static string_t vector_to_json(V<T> const& vec) {
+            template<template<typename...> typename V, typename T>
+            static string_t vector_to_json(V<T> const &vec) {
                 return vector_to_json(vec.cbegin(), vec.cend());
             }
 

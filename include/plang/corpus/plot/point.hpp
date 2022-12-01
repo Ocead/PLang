@@ -14,13 +14,19 @@
 #include <plang/corpus/detail.hpp>
 #include <plang/corpus/path.hpp>
 #include <plang/corpus/plot/symbol.hpp>
+#include <plang/corpus/plot/object.hpp>
 #include <plang/plot.hpp>
 
 namespace plang::detail {
 
     class point_class_manager : virtual protected plang::detail::corpus,
                                 virtual protected plang::detail::path_manager,
-                                virtual protected plang::detail::symbol_class_manager {
+                                virtual protected plang::detail::symbol_class_manager,
+                                virtual protected plang::detail::object_class_manager {
+    private:
+        std::vector<std::tuple<pkey<path>, pkey<plot::point::clazz>, uint_t>>
+        partially_resolve(const std::vector<string_t> &path, bool_t fully) const;
+
     protected:
         ostream_t &print_helper(ostream_t &os, pkey<plot::point::clazz> id, format format) const;
 

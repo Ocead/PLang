@@ -3,9 +3,24 @@
 //
 
 /** \page lang The PLang Language
-
-- \subpage lang_base_path
-- \subpage lang_plot
+ *
+ * PLang is a markup language and file format for storing and normalizing the content of narrative works in a human and
+ * machine readable way with a focus on natural syntax.
+ *
+ * - \subpage lang_base_path "Paths"
+ *
+ * PLang has four levels of abstraction,
+ * which can be incrementally used to connect the information with the finished work.
+ * The levels are:
+ *
+ * - \subpage lang_plot "Plot" <br/>
+ *   Stores the actual qualitative information and links it causally
+ * - \subpage lang_story "Story" <br/>
+ *   Orders the plot chronologically
+ * - \subpage lang_outline "Outline" <br/>
+ *   Maps the parts of the story to an outline
+ * - \subpage lang_text "Text" <br/>
+ *   Maps the outline to the actual work
  */
 
 #ifndef PLANG_LANG_HPP

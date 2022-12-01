@@ -162,8 +162,19 @@ namespace plang {
         using Base::Base;
 
         template<typename T>
+        resolve_entry_result(resolve_result<T> const &result)
+            : Base(result.has_result() ? plang::entry(result.entry()) : plang::entry(), {}, result.action()) {
+            auto &can = candidates();
+            can.reserve(result.candidates().size());
+            std::transform(result.candidates().begin(),
+                           result.candidates().end(),
+                           std::make_move_iterator(can.begin()),
+                           [](T const &r) -> plang::entry { return r; });
+        }
+
+        template<typename T>
         resolve_entry_result(resolve_result<T> &&result)
-            : Base(result.has_result() ? entry(result.entry()) : entry(), {}, result.action()) {
+            : Base(result.has_result() ? plang::entry(result.entry()) : plang::entry(), {}, result.action()) {
             auto &can = candidates();
             can.reserve(result.candidates().size());
             std::transform(result.candidates().begin(),
@@ -214,6 +225,7 @@ namespace plang {
         class report {
         public:
             using key = std::tuple<entry_type, pkey<void>>;
+            using map = std::unordered_map<key, entry>;
 
         private:
             using clock_t = std::chrono::high_resolution_clock;
@@ -224,9 +236,9 @@ namespace plang {
             clock_t::time_point _post_visit;
             clock_t::time_point _post_commit;
 
-            std::unordered_map<key, entry> _mentioned;                    ///< \brief Mentioned entries
-            std::unordered_map<key, entry> _inserted;                     ///< \brief Inserted entries
-            std::unordered_map<key, entry> _updated;                      ///< \brief Updated entries
+            map _mentioned;                                               ///< \brief Mentioned entries
+            map _inserted;                                                ///< \brief Inserted entries
+            map _updated;                                                 ///< \brief Updated entries
             std::unordered_map<key, string_t> _removed;                   ///< \brief Removed entries
             std::unordered_multimap<string_t, std::vector<entry>> _failed;///< \brief Failed entries
 
@@ -387,9 +399,9 @@ namespace plang {
         }
 
         /// \brief Returns multiple persisted entries
-        /// \param type Type to fetch
-        /// \param ids Ids of the entries
-        /// \param texts `true`, if texts should also be returned
+        /// \param [in] type Type to fetch
+        /// \param [in] ids Ids of the entries
+        /// \param [in] texts `true`, if texts should also be returned
         /// \return The persisted entries, if existent
         std::vector<entry> fetch_n(entry_type type, std::vector<pkey<void>> const &ids, bool_t dynamic = false) const;
 

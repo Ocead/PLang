@@ -505,8 +505,8 @@ TEST_CASE("2.1.2. Symbol Class Parser", "[parser]") {
 
         SECTION("Ambiguous") {
             SECTION("Ambiguous symbol class") {
-                corpus.resolve<symbol::clazz>({"path1", "ambiguous"}, root, true);
-                corpus.resolve<symbol::clazz>({"path2", "ambiguous"}, root, true);
+                auto r1 = corpus.resolve<symbol::clazz>({"path1", "ambiguous"}, root, true);
+                auto r2 = corpus.resolve<symbol::clazz>({"path2", "ambiguous"}, root, true);
 
                 auto ref = corpus.ref(R"(ambiguous[])", root);
 

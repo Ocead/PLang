@@ -548,9 +548,11 @@ namespace plang {
         /// \brief Callback type expecting an argument vector
         using argv_cmd_func_t = std::function<int_t(plang::corpus *, std::vector<string_t> const &)>;
 
+        using cmd_complete_result_t = std::variant<char *(*) (const char *, int), std::vector<string_t>>;
+
         /// \brief Callback type for autocompletion
         using cmd_complete_func_t =
-                std::function<std::vector<string_t>(plang::corpus *, string_view_t const &, uint_t start, uint_t end)>;
+                std::function<cmd_complete_result_t(plang::corpus *, string_view_t const &, uint_t start, uint_t end)>;
 
     private:
         static std::map<string_t, format::output> output_option_map;
@@ -561,7 +563,7 @@ namespace plang {
         static std::map<string_t, bool_t> bool_option_map;
         static std::map<string_t, prompt> prompt_option_map;
         static cli *current_instance;
-        static std::vector<string_t> autocomplete_candidates;
+        static cmd_complete_result_t autocomplete_candidates;
 
         std::optional<std::filesystem::path> file;                   ///< \brief Path to current file
         std::optional<corpus> corpus;                                ///< \brief Corpus for the command line
@@ -578,7 +580,8 @@ namespace plang {
         cli *old_instance;                           ///< \brief Old instance managing Readline
         const char *old_w_br_chars;                  ///< \brief Old word breaking characters
 
-        static std::tuple<std::vector<string_t>, std::size_t, std::size_t> string_to_args(string_view_t const &str, int_t cur = 0);
+        static std::tuple<std::vector<string_t>, std::size_t, std::size_t> string_to_args(string_view_t const &str,
+                                                                                          int_t cur = 0);
 
         /// \brief Global callback function for Readline autocomplete
         /// \param text
@@ -593,7 +596,7 @@ namespace plang {
         /// \return
         static char *candidate_generator(const char *text, int state);
 
-        static std::vector<string_t> complete_filename(string_view_t const &arg);
+        static cli::cmd_complete_result_t complete_filename(string_view_t const &arg);
 
         void check_corpus() const;
 
@@ -607,16 +610,16 @@ namespace plang {
 
         int_t _help(class corpus *, string_view_t const &);
         int_t _option(class corpus *, std::vector<string_t> const &);
-        std::vector<string_t> _option_complete(class corpus *, string_view_t const &, uint_t start, uint_t end);
+        cmd_complete_result_t _option_complete(class corpus *, string_view_t const &, uint_t start, uint_t end);
         int_t _info(class corpus *, string_view_t const &);
         int_t _quit(class corpus *, string_view_t const &);
         int_t _new(class corpus *, string_view_t const &);
         int_t _open(class corpus *, std::vector<string_t> const &);
-        std::vector<string_t> _open_complete(class corpus *, string_view_t const &, uint_t start, uint_t end);
+        cmd_complete_result_t _open_complete(class corpus *, string_view_t const &, uint_t start, uint_t end);
         int_t _save(class corpus *, string_view_t const &);
-        std::vector<string_t> _save_complete(class corpus *, string_view_t const &, uint_t start, uint_t end);
+        cmd_complete_result_t _save_complete(class corpus *, string_view_t const &, uint_t start, uint_t end);
         int_t _close(class corpus *, string_view_t const &);
-        int_t _run(class corpus *, string_view_t const &);
+        int_t _run(class corpus *, std::vector<string_t> const &);
         int_t _export(class corpus *, string_view_t const &);
         int_t _inspect(class corpus *, string_view_t const &);
         int_t _scope(class corpus *, string_view_t const &);

@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS plot_point_class
     path_id   integer not null
         CONSTRAINT plot_point_class_path_id_fk
             REFERENCES path
+            ON DELETE CASCADE
             DEFERRABLE initially deferred,
     singleton boolean DEFAULT false not null,
     source_id integer
@@ -19,7 +20,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS plot_point_class_uindex
     on plot_point_class (id);
 
 CREATE UNIQUE INDEX IF NOT EXISTS plot_point_class_path_id_uindex
-    on plot_point_class (id, path_id);
+    on plot_point_class (path_id);
 
 CREATE TABLE IF NOT EXISTS plot_point_class_hint
 (

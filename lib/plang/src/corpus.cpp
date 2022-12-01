@@ -28,11 +28,12 @@ namespace plang::detail {
 
 using namespace plang;
 
-const decltype(format::value) format::OUTPUT_MASK        = 0b000000011;
-const decltype(format::value) format::ENRICH_MASK        = 0b000001100;
-const decltype(format::value) format::DETAIL_MASK        = 0b000110000;
-const decltype(format::value) format::QUALIFICATION_MASK = 0b001000000;
-const decltype(format::value) format::INDENT_MASK        = 0b110000000;
+const decltype(format::value) format::OUTPUT_MASK        = 0b0000000011;
+const decltype(format::value) format::ENRICH_MASK        = 0b0000001100;
+const decltype(format::value) format::DETAIL_MASK        = 0b0000110000;
+const decltype(format::value) format::QUALIFICATION_MASK = 0b0001000000;
+const decltype(format::value) format::INDENT_MASK        = 0b0110000000;
+const decltype(format::value) format::INTERNAL_MASK      = 0b1000000000;
 
 const format format::PLAIN =
         format(output::ANSI, enrich::PLAIN, detail::DEFINITION, qualification::FULL, indent::CENTER);
@@ -184,13 +185,13 @@ corpus::report corpus::execute(istream_t &stream, path const &scope) {
     PlangParser parser(&tokens);
     parser.setBuildParseTree(true);
     PlangParser::StartSVOContext *tree = parser.startSVO();
-    auto post_parse = report::clock_t::now();
+    auto post_parse                    = report::clock_t::now();
 
     if (parser.getNumberOfSyntaxErrors() == 0) {
         detail::corpus::_begin();
 
-        auto visitor = lang::make_visitor(*this, scope);
-        auto result  = visitor->visitStartSVO(tree);
+        auto visitor    = lang::make_visitor(*this, scope);
+        auto result     = visitor->visitStartSVO(tree);
         auto post_visit = report::clock_t::now();
 
         auto report = visitor->get_report();
@@ -199,10 +200,10 @@ corpus::report corpus::execute(istream_t &stream, path const &scope) {
             detail::corpus::_commit();
             auto post_commit = report::clock_t::now();
 
-            report._start = start;
-            report._post_lex = post_lex;
-            report._post_parse = post_parse;
-            report._post_visit = post_visit;
+            report._start       = start;
+            report._post_lex    = post_lex;
+            report._post_parse  = post_parse;
+            report._post_visit  = post_visit;
             report._post_commit = post_commit;
         } else {
             report._mentioned.clear();
@@ -235,13 +236,13 @@ corpus::report corpus::decl(istream_t &stream, path const &scope) {
     PlangParser parser(&tokens);
     parser.setBuildParseTree(true);
     PlangParser::DeclSVOContext *tree = parser.declSVO();
-    auto post_parse = report::clock_t::now();
+    auto post_parse                   = report::clock_t::now();
 
     if (parser.getNumberOfSyntaxErrors() == 0) {
         detail::corpus::_begin();
 
-        auto visitor = lang::make_visitor(*this, scope);
-        auto result  = visitor->visitDeclSVO(tree);
+        auto visitor    = lang::make_visitor(*this, scope);
+        auto result     = visitor->visitDeclSVO(tree);
         auto post_visit = report::clock_t::now();
 
         auto report = visitor->get_report();
@@ -250,10 +251,10 @@ corpus::report corpus::decl(istream_t &stream, path const &scope) {
             detail::corpus::_commit();
             auto post_commit = report::clock_t::now();
 
-            report._start = start;
-            report._post_lex = post_lex;
-            report._post_parse = post_parse;
-            report._post_visit = post_visit;
+            report._start       = start;
+            report._post_lex    = post_lex;
+            report._post_parse  = post_parse;
+            report._post_visit  = post_visit;
             report._post_commit = post_commit;
         } else {
             report._mentioned.clear();

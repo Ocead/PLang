@@ -136,7 +136,7 @@ namespace plang::plot {
             clazz();
 
         public:
-            clazz(path const &path, bool_t singleton = false);
+            clazz(path const &path, bool_t singleton = false, std::vector<hint> &&hints = {});
 
             pkey<path> get_path_id() const;
 
@@ -229,7 +229,7 @@ namespace plang::plot {
 
                     void set_hint(symbol::clazz const &hint);
 
-                    bool_t get_recurisve() const;
+                    bool_t get_recursive() const;
 
                     void set_recursive(bool_t recursive);
 
@@ -250,14 +250,27 @@ namespace plang::plot {
 
                     void set_hint(point::clazz const &hint);
 
-                    bool_t get_recurisve() const;
+                    bool_t get_recursive() const;
 
                     void set_recursive(bool_t recursive);
 
                     friend class detail::object_class_manager;
                 };
 
-                using variant = std::variant<hint::lit, hint::sym, hint::pnt>;
+                class variant : public std::variant<hint::lit, hint::sym, hint::pnt> {
+                public:
+                    using Base = std::variant<hint::lit, hint::sym, hint::pnt>;
+
+                    using Base::Base;
+
+                    variant(string_t && string, lit::type type = lit::type::COMMENT);
+
+                    variant(symbol::clazz const & clazz, bool_t recursive = false);
+
+                    variant(point::clazz const & clazz, bool_t recursive = false);
+
+                    ~variant();
+                };
             };
 
         protected:
@@ -270,7 +283,7 @@ namespace plang::plot {
             clazz();
 
         public:
-            clazz(point::clazz const &clazz, string_t name, bool_t _default = false);
+            clazz(point::clazz const &clazz, string_t name, bool_t _default = false, bool_t singleton = false);
 
             pkey<point::clazz> get_point_class_id() const;
 

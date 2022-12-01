@@ -11,6 +11,13 @@
 
 #include <plang/corpus.hpp>
 
+CATCH_REGISTER_ENUM(plang::action,
+                    plang::action::NONE,
+                    plang::action::INSERT,
+                    plang::action::UPDATE,
+                    plang::action::REMOVE,
+                    plang::action::FAIL);
+
 namespace {
     std::optional<plang::corpus> corpus;
 }
@@ -18,11 +25,22 @@ namespace {
 inline plang::corpus &make_corpus() {
     using namespace plang;
 
-    ::corpus = plang::corpus{PLANG_TEST_DB};
+    ::corpus    = plang::corpus{PLANG_TEST_DB};
     auto format = format::PLAIN;
     format.set_detail(format::detail::EXPLICIT_REF);
     ::corpus->set_format(format);
     return *::corpus;
+}
+
+inline std::set<plang::string_t> print_to_set(plang::corpus const &_corpus, plang::corpus::report::map const &map) {
+    std::set<plang::string_t> result;
+
+    std::transform(map.begin(),
+                   map.end(),
+                   std::inserter(result, result.begin()),
+                   [&_corpus](auto const &e) -> plang::string_t { return _corpus.print(std::get<plang::entry>(e)); });
+
+    return result;
 }
 
 #ifdef PLANG_TEST_FAIL_NOT_IMPLEMENTED

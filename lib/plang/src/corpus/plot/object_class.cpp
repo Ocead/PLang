@@ -2,6 +2,7 @@
 // Created by Johannes on 06.11.2022.
 //
 
+#include <map>
 #include <sqlite3.h>
 #include <plang/corpus/plot/object.hpp>
 
@@ -72,25 +73,127 @@ FROM max
 }
 
 ostream_t &object_class_manager::print_helper(ostream_t &os, pkey<plot::object::clazz> id, plang::format format) const {
-    //TODO: Implement
+    //language=sqlite
+    static const string_t query_o{R"__SQL__(
+SELECT path_id FROM plot_object_class oc
+LEFT JOIN plot_point_class pc on oc.point_class_id = pc.id
+WHERE oc.id = ?;
+)__SQL__"};
+
+    //language=sqlite
+    static const string_t query_p{R"__SQL__(
+SELECT path_id FROM plot_point_class c
+WHERE c.id = ?;
+)__SQL__"};
+
+    /*static thread_local*/ stmt stmt_o;
+    /*static thread_local*/ stmt stmt_p;
+
+    auto clazz = fetch(id, format.get_detail() >= format::detail::DEFINITION).value();
+    auto inner = _make_inner_format(format);
+
+    if (!format.get_internal()) {
+        auto path_id = _reuse(stmt_o, query_o, [&]() -> pkey<path> {
+            sqlite3_bind_int64(&*stmt_o, 1, id);
+
+            if (_check(sqlite3_step(&*stmt_o)) == SQLITE_ROW) {
+                return sqlite3_column_int64(&*stmt_o, 0);
+            } else {
+                return -1;
+            }
+        });
+
+        os << path_manager::print(path_id, inner);
+    } else {
+        if (clazz.get_singleton()) { os << format('!', format::style::for_op(lang::op::SINGLE)) << ' '; }
+    }
+
+    if (!format.get_internal() || !clazz.get_default()) {
+        os << format('?', format::style::for_op(lang::op::OBJ_NAME));
+    }
+
+    os << clazz.get_name();
+
+    if (!clazz.get_hints().empty() && format.get_detail() == format::detail::DEFINITION) {
+        os << ' ' << format(':', format::style::for_op(lang::op::OBJ)) << ' '
+           << format('(', format::style::for_op(lang::op::HINT_L));
+
+        for (std::size_t i = 0; i < clazz.get_hints().size(); ++i) {
+            auto const &h = clazz.get_hints()[i];
+
+            std::visit(
+                    [&](auto const &hint) {
+                        if constexpr (std::is_same_v<std::decay_t<decltype(hint)>, plot::object::clazz::hint::lit>) {
+                            switch (hint.get_type()) {
+                                case plot::object::clazz::hint::lit::type::COMMENT:
+                                    break;
+                                case plot::object::clazz::hint::lit::type::LIKE:
+                                    os << format('l', format::style::for_op(lang::op::STR_DELIM_DOUBLE));
+                                    break;
+                                case plot::object::clazz::hint::lit::type::GLOB:
+                                    os << format('g', format::style::for_op(lang::op::STR_DELIM_DOUBLE));
+                                    break;
+                                case plot::object::clazz::hint::lit::type::REGEX:
+                                    os << format('r', format::style::for_op(lang::op::STR_DELIM_DOUBLE));
+                                    break;
+                                case plot::object::clazz::hint::lit::type::MATCH:
+                                    os << format('m', format::style::for_op(lang::op::STR_DELIM_DOUBLE));
+                                    break;
+                            }
+                            sstream_t ss;
+                            ss << std::quoted(hint.get_hint());
+                            os << format(ss.str(), format::style::for_op(lang::op::STR_DELIM_DOUBLE));
+                        } else if constexpr (std::is_same_v<std::decay_t<decltype(hint)>,
+                                                            plot::object::clazz::hint::sym>) {
+                            os << symbol_class_manager::print(hint.get_hint_id(), inner);
+                            if (hint.get_recursive()) { os << format("...", format::style::for_op(lang::op::RECUR)); }
+                        } else if constexpr (std::is_same_v<std::decay_t<decltype(hint)>,
+                                                            plot::object::clazz::hint::pnt>) {
+                            auto path_id = _reuse(stmt_p, query_p, [&]() -> pkey<path> {
+                                sqlite3_bind_int64(&*stmt_p, 1, hint.get_hint_id());
+
+                                if (_check(sqlite3_step(&*stmt_p)) == SQLITE_ROW) {
+                                    return sqlite3_column_int64(&*stmt_p, 0);
+                                } else {
+                                    return -1;
+                                }
+                            });
+
+                            os << path_manager::print(path_id, inner)
+                               << format('?', format::style::for_op(lang::op::OBJ_NAME))
+                               << format(':', format::style::for_op(lang::op::OBJ));
+                            if (hint.get_recursive()) { os << format("...", format::style::for_op(lang::op::RECUR)); }
+                        }
+                    },
+                    h);
+
+            if (i < clazz.get_hints().size() - 1) { os << format(',', format::style::for_op(lang::op::LIST)) << ' '; }
+        }
+
+        os << format(')', format::style::for_op(lang::op::HINT_R));
+
+        if (!format.get_internal()) { os << format(';', format::style::for_op(lang::op::DECL)); }
+    }
+
+    return os;
 }
 
 std::vector<plot::object::clazz::hint::variant> object_class_manager::_fetch_hints(pkey<plot::object::clazz> id) const {
     //language=sqlite
     static const string_t query_l{R"__SQL__(
-SELECT id, hint, type, source_id FROM plot_object_class_hint_lit
+SELECT id, hint, type, ordinal, source_id FROM plot_object_class_hint_lit
 WHERE class_id = ?1;
 )__SQL__"};
 
     //language=sqlite
     static const string_t query_s{R"__SQL__(
-SELECT id, hint_id, "recursive", source_id FROM plot_object_class_hint_sym
+SELECT id, hint_id, "recursive", ordinal, source_id FROM plot_object_class_hint_sym
 WHERE class_id = ?1;
 )__SQL__"};
 
     //language=sqlite
     static const string_t query_p{R"__SQL__(
-SELECT id, hint_id, "recursive", source_id FROM plot_object_class_hint_pnt
+SELECT id, hint_id, "recursive", ordinal, source_id FROM plot_object_class_hint_pnt
 WHERE class_id = ?1;
 )__SQL__"};
 
@@ -98,6 +201,7 @@ WHERE class_id = ?1;
     /*static thread_local*/ stmt stmt_s;
     /*static thread_local*/ stmt stmt_p;
 
+    std::map<float_t, plot::object::clazz::hint::variant> result_map;
     std::vector<plot::object::clazz::hint::variant> result;
 
     _reuse(stmt_l, query_l, [&]() {
@@ -107,9 +211,10 @@ WHERE class_id = ?1;
             plot::object::clazz::hint::lit hint{
                     string_t(reinterpret_cast<const char *>(sqlite3_column_text(&*stmt_l, 1))),
                     static_cast<plot::object::clazz::hint::lit::type>(sqlite3_column_int(&*stmt_l, 2))};
-            hint.id        = sqlite3_column_int64(&*stmt_l, 0);
-            hint.source_id = sqlite3_column_int64(&*stmt_l, 3);
-            result.emplace_back(std::move(hint));
+            hint.id         = sqlite3_column_int64(&*stmt_l, 0);
+            float_t ordinal = sqlite3_column_double(&*stmt_l, 3);
+            hint.source_id  = sqlite3_column_int64(&*stmt_l, 4);
+            result_map.emplace(ordinal, std::forward<plot::object::clazz::hint::lit>(hint));
         }
     });
 
@@ -118,11 +223,12 @@ WHERE class_id = ?1;
 
         while (_check(sqlite3_step(&*stmt_s)) == SQLITE_ROW) {
             plot::object::clazz::hint::sym hint;
-            hint.id        = sqlite3_column_int64(&*stmt_s, 0);
-            hint.hint_id   = sqlite3_column_int64(&*stmt_s, 1);
-            hint.recursive = sqlite3_column_int(&*stmt_s, 2);
-            hint.source_id = sqlite3_column_int64(&*stmt_s, 3);
-            result.emplace_back(std::move(hint));
+            hint.id         = sqlite3_column_int64(&*stmt_s, 0);
+            hint.hint_id    = sqlite3_column_int64(&*stmt_s, 1);
+            hint.recursive  = sqlite3_column_int(&*stmt_s, 2);
+            float_t ordinal = sqlite3_column_double(&*stmt_s, 3);
+            hint.source_id  = sqlite3_column_int64(&*stmt_s, 4);
+            result_map.emplace(ordinal, std::forward<plot::object::clazz::hint::sym>(hint));
         }
     });
 
@@ -131,14 +237,19 @@ WHERE class_id = ?1;
 
         while (_check(sqlite3_step(&*stmt_p)) == SQLITE_ROW) {
             plot::object::clazz::hint::pnt hint;
-            hint.id        = sqlite3_column_int64(&*stmt_p, 0);
-            hint.hint_id   = sqlite3_column_int64(&*stmt_p, 1);
-            hint.recursive = sqlite3_column_int(&*stmt_p, 2);
-            hint.source_id = sqlite3_column_int64(&*stmt_p, 3);
-            result.emplace_back(std::move(hint));
+            hint.id         = sqlite3_column_int64(&*stmt_p, 0);
+            hint.hint_id    = sqlite3_column_int64(&*stmt_p, 1);
+            hint.recursive  = sqlite3_column_int(&*stmt_p, 2);
+            float_t ordinal = sqlite3_column_double(&*stmt_p, 3);
+            hint.source_id  = sqlite3_column_int64(&*stmt_p, 4);
+            result_map.emplace(ordinal, std::forward<plot::object::clazz::hint::pnt>(hint));
         }
     });
 
+    std::transform(std::make_move_iterator(result_map.begin()),
+                   std::make_move_iterator(result_map.end()),
+                   std::back_inserter(result),
+                   [](auto &&e) { return std::get<plot::object::clazz::hint::variant>(e); });
     return result;
 }
 
@@ -146,30 +257,67 @@ void object_class_manager::_update_hints(pkey<plot::object::clazz> id,
                                          std::vector<plot::object::clazz::hint::variant> &hints) {
     //language=sqlite
     static const string_t query_l{R"__SQL__(
-INSERT INTO plot_object_class_hint_lit (id, class_id, hint, type, source_id)
-VALUES ((SELECT coalesce(max(id) + 1, 0) FROM plot_object_class_hint_lit), ?1, ?2, ?3, ?4)
+INSERT INTO plot_object_class_hint_lit (id, class_id, hint, type, ordinal, source_id)
+VALUES ((SELECT coalesce(max(id) + 1, 0) FROM plot_object_class_hint_lit), ?1, ?2, ?3, ?4, ?5)
 RETURNING plot_object_class_hint_lit.id;
 )__SQL__"};
 
     //language=sqlite
     static const string_t query_s{R"__SQL__(
-INSERT INTO plot_object_class_hint_sym (id, class_id, hint_id, "recursive", source_id)
-VALUES ((SELECT coalesce(max(id) + 1, 0) FROM plot_object_class_hint_sym), ?1, ?2, ?3, ?4)
+INSERT INTO plot_object_class_hint_sym (id, class_id, hint_id, "recursive", ordinal, source_id)
+VALUES ((SELECT coalesce(max(id) + 1, 0) FROM plot_object_class_hint_sym), ?1, ?2, ?3, ?4, ?5)
 RETURNING plot_object_class_hint_sym.id;
 )__SQL__"};
 
     //language=sqlite
     static const string_t query_p{R"__SQL__(
-INSERT INTO plot_object_class_hint_pnt (id, class_id, hint_id, "recursive", source_id)
-VALUES ((SELECT coalesce(max(id) + 1, 0) FROM plot_object_class_hint_pnt), ?1, ?2, ?3, ?4)
+INSERT INTO plot_object_class_hint_pnt (id, class_id, hint_id, "recursive", ordinal, source_id)
+VALUES ((SELECT coalesce(max(id) + 1, 0) FROM plot_object_class_hint_pnt), ?1, ?2, ?3, ?4, ?5)
 RETURNING plot_object_class_hint_pnt.id;
+)__SQL__"};
+
+    //language=sqlite
+    static const string_t query_r1{R"__SQL__(
+DELETE FROM plot_object_class_hint_lit
+WHERE class_id = ?;
+)__SQL__"};
+
+    //language=sqlite
+    static const string_t query_r2{R"__SQL__(
+DELETE FROM plot_object_class_hint_sym
+WHERE class_id = ?1;
+)__SQL__"};
+
+    //language=sqlite
+    static const string_t query_r3{R"__SQL__(
+DELETE FROM plot_object_class_hint_pnt
+WHERE class_id = ?1;
 )__SQL__"};
 
     /*static thread_local*/ stmt stmt_l;
     /*static thread_local*/ stmt stmt_s;
     /*static thread_local*/ stmt stmt_p;
+    /*static thread_local*/ stmt stmt_r1;
+    /*static thread_local*/ stmt stmt_r2;
+    /*static thread_local*/ stmt stmt_r3;
 
-    for (auto &v : hints) {
+    _reuse(stmt_r1, query_r1, [&]() {
+        sqlite3_bind_int(&*stmt_r1, 1, id);
+        _check(sqlite3_step(&*stmt_r1));
+    });
+
+    _reuse(stmt_r2, query_r2, [&]() {
+        sqlite3_bind_int(&*stmt_r2, 1, id);
+        _check(sqlite3_step(&*stmt_r2));
+    });
+
+    _reuse(stmt_r3, query_r3, [&]() {
+        sqlite3_bind_int(&*stmt_r3, 1, id);
+        _check(sqlite3_step(&*stmt_r3));
+    });
+
+    for (uint_t i = 0; i < hints.size(); ++i) {
+        auto &v = hints[i];
         std::visit(
                 [&](auto &h) {
                     using T = std::decay_t<decltype(h)>;
@@ -179,7 +327,8 @@ RETURNING plot_object_class_hint_pnt.id;
                             sqlite3_bind_int64(&*stmt_l, 1, id);
                             sqlite3_bind_text(&*stmt_l, 2, h.hint.c_str(), h.hint.length(), nullptr);
                             sqlite3_bind_int(&*stmt_l, 3, h._get_type());
-                            sqlite3_bind_int64(&*stmt_l, 4, _get_source_id());
+                            sqlite3_bind_int(&*stmt_l, 4, i);
+                            sqlite3_bind_int64(&*stmt_l, 5, _get_source_id());
 
                             if (_check(sqlite3_step(&*stmt_l)) == SQLITE_ROW) {
                                 return sqlite3_column_int64(&*stmt_l, 0);
@@ -192,7 +341,8 @@ RETURNING plot_object_class_hint_pnt.id;
                             sqlite3_bind_int64(&*stmt_s, 1, id);
                             sqlite3_bind_int64(&*stmt_s, 2, h.hint_id);
                             sqlite3_bind_int(&*stmt_s, 3, h.recursive ? 1 : 0);
-                            sqlite3_bind_int64(&*stmt_s, 4, _get_source_id());
+                            sqlite3_bind_int(&*stmt_s, 4, i);
+                            sqlite3_bind_int64(&*stmt_s, 5, _get_source_id());
 
                             if (_check(sqlite3_step(&*stmt_s)) == SQLITE_ROW) {
                                 return sqlite3_column_int64(&*stmt_s, 0);
@@ -205,7 +355,8 @@ RETURNING plot_object_class_hint_pnt.id;
                             sqlite3_bind_int64(&*stmt_p, 1, id);
                             sqlite3_bind_int64(&*stmt_p, 2, h.hint_id);
                             sqlite3_bind_int(&*stmt_p, 3, h.recursive ? 1 : 0);
-                            sqlite3_bind_int64(&*stmt_p, 4, _get_source_id());
+                            sqlite3_bind_int(&*stmt_p, 4, i);
+                            sqlite3_bind_int64(&*stmt_p, 5, _get_source_id());
 
                             if (_check(sqlite3_step(&*stmt_p)) == SQLITE_ROW) {
                                 return sqlite3_column_int64(&*stmt_p, 0);
@@ -329,18 +480,6 @@ resolve_ref_result<plot::object::clazz> object_class_manager::resolve(const std:
                                                                       bool_t dynamic) {
     if (path.empty()) { return {ent, {}, action::FAIL}; }
 
-    if (insert) {
-        std::vector<string_t> class_path = path;
-        class_path.pop_back();
-        auto clazz = point_class_manager::resolve(class_path, ctx, insert, dynamic);
-        if (clazz.has_result()) {
-            auto result = resolve({*path.rbegin()}, ent, clazz.entry(), insert, dynamic);
-            return result;
-        } else {
-            return {ent, {}, action::FAIL};
-        }
-    }
-
     auto result = partially_resolve(path, false);
 
     if (result.size() == 1) {//Case: overall single candidate
@@ -444,7 +583,13 @@ WHERE point_class_id = ?1;
         _reuse(stmt, query, [&]() {
             sqlite3_bind_int64(&*stmt, 1, ctx.get_id());
 
-            while (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) { result.push_back(select_object_class(stmt, dynamic)); }
+            while (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
+                auto clazz = select_object_class(stmt, dynamic);
+                if (dynamic) {
+                    clazz.hints = _fetch_hints(clazz.get_id());
+                }
+                result.push_back(clazz);
+            }
         });
 
         return {ent, std::move(result), action::FAIL};
@@ -459,6 +604,7 @@ WHERE point_class_id = ?1 and name = ?2;
 
         auto result = _reuse(stmt, query, [&]() -> std::optional<object::clazz> {
             sqlite3_bind_int64(&*stmt, 1, ctx.get_id());
+            sqlite3_bind_text(&*stmt, 2, path[0].c_str(), path[0].length(), nullptr);
             if (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
                 return select_object_class(stmt, dynamic);
             } else {
@@ -473,6 +619,7 @@ WHERE point_class_id = ?1 and name = ?2;
 
             return {ent, {}, action::NONE};
         } else if (insert) {
+            ent.set_name(*path.rbegin());
             ent.set_point_class(ctx);
             auto action = object_class_manager::insert(ent);
             return {ent, {}, action};
@@ -514,9 +661,18 @@ resolve_ref_result<plot::object::clazz> object_class_manager::resolve(const std:
 action object_class_manager::insert(plot::object::clazz &clazz, bool_t replace, corpus::tag<plot::object::clazz>) {
     //language=sqlite
     static const string_t query_r{R"__SQL__(
-INSERT OR REPLACE INTO plot_object_class (id, name, point_class_id, "default", singleton,
+INSERT INTO plot_object_class (id, name, point_class_id, "default", singleton,
                                           ordinal, description, source_id)
 VALUES ((SELECT coalesce(max(id) + 1, 0) FROM plot_object_class), ?1, ?2, ?3, ?4, ?5, ?6, ?7)
+ON CONFLICT DO UPDATE SET "default"   = excluded."default",
+                          singleton   = excluded.singleton,
+                          ordinal     = excluded.ordinal,
+                          description = excluded.description,
+                          source_id   = excluded.source_id
+WHERE name = excluded.name
+  and length(excluded.name) > 0
+  and point_class_id = excluded.point_class_id
+  and "default" != excluded."default"
 RETURNING plot_object_class.id;
 )__SQL__"};
 
@@ -536,6 +692,8 @@ RETURNING plot_object_class.id;
 
     action action = action::FAIL;
 
+    if (clazz.name.empty() || clazz.point_class_id < 0) { return action; }
+
     clazz.id = _reuse(stmt, query, [&]() -> pkey<plot::object::clazz> {
         sqlite3_bind_text(&*stmt, 1, clazz.name.c_str(), clazz.name.length(), nullptr);
         sqlite3_bind_int64(&*stmt, 2, clazz.point_class_id);
@@ -547,7 +705,7 @@ RETURNING plot_object_class.id;
         }
         sqlite3_bind_int64(&*stmt, 7, _get_source_id());
 
-        pkey<plot::object::clazz> id;
+        pkey<plot::object::clazz> id = -1;
         if (auto ret = sqlite3_step(&*stmt); ret == SQLITE_ROW) {
             clazz.id = id   = sqlite3_column_int64(&*stmt, 0);
             clazz.source_id = _get_source_id();
@@ -561,9 +719,7 @@ RETURNING plot_object_class.id;
         }
     });
 
-    if (action != action::FAIL) {
-        _update_hints(clazz.id, clazz.hints);
-    }
+    if (action != action::FAIL) { _update_hints(clazz.id, clazz.hints); }
 
     return action;
 }
@@ -618,18 +774,18 @@ RETURNING plot_object_class.id;
         }
         sqlite3_bind_int64(&*stmt, 8, _get_source_id());
 
-        if (_check(sqlite3_step(&*stmt)) == SQLITE_ROW) {
+        if (auto ret = sqlite3_step(&*stmt); ret == SQLITE_ROW) {
             action = action::UPDATE;
+        } else if (ret == SQLITE_CONSTRAINT) {
+            action = action::FAIL;
         } else {
-            action = action::NONE;
+            _check(ret);
         }
 
         return clazz;
     });
 
-    if (action != action::FAIL && dynamic) {
-        _update_hints(clazz.id, clazz.hints);
-    }
+    if (action != action::FAIL && dynamic) { _update_hints(clazz.id, clazz.hints); }
 
     return action;
 }

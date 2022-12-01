@@ -278,7 +278,6 @@ resolve_ref_result<plot::symbol::clazz> symbol_class_manager::resolve(const std:
                                                                       const class path &ctx,
                                                                       bool_t insert,
                                                                       bool_t dynamic) {
-    if (path.size() == 1 && path[0] == "position") { (void) nullptr; }
     if (path.empty()) {
         //language=sqlite
         static const string_t query{R"__SQL__(
@@ -315,11 +314,13 @@ WHERE path_id = ?;
             return {ent, {}, action::FAIL};
         }
     } else {
-        auto result = partially_resolve(path, false);
+        auto result = partially_resolve(path, path[0].empty());
 
         if (result.size() == 1) {//Case: overall single candidate
-            ent = fetch(std::get<pkey<symbol::clazz>>(result[0]), dynamic).value();
-            return {ent, {}, action::NONE};
+            if (std::get<uint_t>(result[0]) == path.size()) {
+                ent = fetch(std::get<pkey<symbol::clazz>>(result[0]), dynamic).value();
+                return {ent, {}, action::NONE};
+            }
         } else {//Case: none or multiple candidates
             decltype(result) related;
             for (auto const &e : result) {
@@ -359,18 +360,18 @@ WHERE path_id = ?;
                 if (ids.size() == 1) {//Case: single most viable candidate along path
                     ent = fetch(ids[0]).value();
                     return {ent, {}, action::NONE};
-                } else {//Case: none or most viable candidates along path
+                } else if (!insert && ids.size() > 1) {//Case: none or most viable candidates along path
                     auto candidates = fetch_n(ids, dynamic);
                     return {ent, std::move(candidates), action::FAIL};
                 }
-            } else {//Case: no candidates alon the current path
-                auto path_result = path_manager::resolve(path, ctx, insert, dynamic);
-                if (path_result.has_result()) {
-                    return resolve({}, ent, path_result.entry(), insert, dynamic);
-                } else {
-                    return {ent, {}, action::FAIL};
-                }
             }
+        }//Case: no candidates along the current path
+
+        auto path_result = path_manager::resolve(path, ctx, insert, dynamic);
+        if (path_result.has_result()) {
+            return resolve({}, ent, path_result.entry(), insert, dynamic);
+        } else {
+            return {ent, {}, action::FAIL};
         }
     }
 }

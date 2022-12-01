@@ -87,7 +87,7 @@ std::map<string_t, enum cli::prompt> cli::prompt_option_map {
 
 cli *cli::current_instance = nullptr;
 
-std::vector<string_t> cli::autocomplete_candidates{};
+cli::cmd_complete_result_t cli::autocomplete_candidates{};
 
 std::tuple<std::vector<string_t>, std::size_t, std::size_t> cli::string_to_args(string_view_t const &str, int_t cur) {
     //From https://www.unix.com/programming/126160-building-argc-argv-style-structure-string-char.html
@@ -276,13 +276,18 @@ char **cli::completion_function(const char *text, int start, int end) {
                                                            start - spos,
                                                            end - spos);
             } else {
-                cli::autocomplete_candidates.clear();
+                cli::autocomplete_candidates = std::vector<string_t>();
             }
         }
     } else {
-        cli::autocomplete_candidates.clear();
+        cli::autocomplete_candidates = std::vector<string_t>();
     }
-    return rl_completion_matches(text, cli::candidate_generator);
+
+    if (cli::autocomplete_candidates.index() == 0) {
+        return rl_completion_matches(text, std::get<0>(cli::autocomplete_candidates));
+    } else {
+        return rl_completion_matches(text, cli::candidate_generator);
+    }
 }
 
 char *cli::candidate_generator(const char *text, int state) {
@@ -294,36 +299,16 @@ char *cli::candidate_generator(const char *text, int state) {
         std::string textstr(text);
     }
 
-    if (match_index >= autocomplete_candidates.size()) {
+    auto const &candidates = std::get<1>(autocomplete_candidates);
+    if (match_index >= candidates.size()) {
         return nullptr;
     } else {
-        return strdup(autocomplete_candidates[match_index++].c_str());
+        return strdup(candidates[match_index++].c_str());
     }
 }
 
-std::vector<string_t> cli::complete_filename(string_view_t const &arg) {
-    std::filesystem::path path{arg};
-    std::vector<string_t> candidates;
-    auto filename     = path.filename();
-    auto filename_str = filename.string();
-    std::filesystem::path parent;
-    if (arg.empty()) {
-        parent = std::filesystem::current_path();
-    } else {
-        parent = (std::filesystem::is_directory(path) ? path : std::filesystem::absolute(path).parent_path());
-    }
-
-    for (auto const &e : std::filesystem::directory_iterator(parent)) {
-        if (e.is_regular_file()) {
-            auto relative = std::filesystem::relative(e.path(), parent);
-            auto str      = relative.string();
-            if (str.substr(0, std::min(str.size(), filename_str.size())) == filename_str) {
-                candidates.emplace_back(relative.string());
-            }
-        }
-    }
-
-    return candidates;
+cli::cmd_complete_result_t cli::complete_filename(string_view_t const &arg) {
+    return rl_filename_completion_function;
 }
 
 void cli::check_corpus() const {
@@ -476,7 +461,7 @@ int_t cli::_option(class corpus *, std::vector<string_t> const &args) {
     return 0;
 }
 
-std::vector<string_t> cli::_option_complete(class corpus *, const string_view_t &str, uint_t start, uint_t end) {
+cli::cmd_complete_result_t cli::_option_complete(class corpus *, const string_view_t &str, uint_t start, uint_t end) {
     auto [args, i, pos] = string_to_args(str, start);
 
     std::vector<string_t> values;
@@ -487,35 +472,35 @@ std::vector<string_t> cli::_option_complete(class corpus *, const string_view_t 
     } else if (i == 1) {
         switch (fnv1a_32(args[0].c_str(), args[0].size())) {
             case "output"_hash: {
-                for (auto const &p : output_option_map) { values.emplace_back(p.first); };
+                for (auto const &p : output_option_map) { values.emplace_back(p.first); }
                 break;
             }
             case "enrich"_hash: {
-                for (auto const &p : enrich_option_map) { values.emplace_back(p.first); };
+                for (auto const &p : enrich_option_map) { values.emplace_back(p.first); }
                 break;
             }
             case "detail"_hash: {
-                for (auto const &p : detail_option_map) { values.emplace_back(p.first); };
+                for (auto const &p : detail_option_map) { values.emplace_back(p.first); }
                 break;
             }
             case "qualification"_hash: {
-                for (auto const &p : qualification_option_map) { values.emplace_back(p.first); };
+                for (auto const &p : qualification_option_map) { values.emplace_back(p.first); }
                 break;
             }
             case "indent"_hash: {
-                for (auto const &p : indent_option_map) { values.emplace_back(p.first); };
+                for (auto const &p : indent_option_map) { values.emplace_back(p.first); }
                 break;
             }
             case "prompt"_hash: {
-                for (auto const &p : prompt_option_map) { values.emplace_back(p.first); };
+                for (auto const &p : prompt_option_map) { values.emplace_back(p.first); }
                 break;
             }
             case "implicit"_hash: {
-                for (auto const &p : bool_option_map) { values.emplace_back(p.first); };
+                for (auto const &p : bool_option_map) { values.emplace_back(p.first); }
                 break;
             }
             case "strict"_hash: {
-                for (auto const &p : bool_option_map) { values.emplace_back(p.first); };
+                for (auto const &p : bool_option_map) { values.emplace_back(p.first); }
                 break;
             }
             default:
@@ -600,8 +585,14 @@ int_t cli::_open(class corpus *_, std::vector<string_t> const &args) {
     return 1;//Could not close current db
 }
 
-std::vector<string_t> cli::_open_complete(class corpus *, const string_view_t &arg, uint_t start, uint_t end) {
-    return complete_filename(arg.substr(start, end));
+cli::cmd_complete_result_t cli::_open_complete(class corpus *, const string_view_t &arg, uint_t start, uint_t end) {
+    auto [args, i, pos] = string_to_args(arg, start);
+
+    if (i == 0) {
+        return complete_filename(arg.substr(start, end));
+    } else {
+        return std::vector<string_t>();
+    };
 }
 
 int_t cli::_save(class corpus *, string_view_t const &args) {
@@ -654,7 +645,7 @@ int_t cli::_save(class corpus *, string_view_t const &args) {
     return 1;
 }
 
-std::vector<string_t> cli::_save_complete(class corpus *, const string_view_t &arg, uint_t start, uint_t end) {
+cli::cmd_complete_result_t cli::_save_complete(class corpus *, const string_view_t &arg, uint_t start, uint_t end) {
     return complete_filename(arg.substr(start, end));
 }
 
@@ -666,14 +657,17 @@ int_t cli::_close(class corpus *, string_view_t const &) {
     corpus.reset();
     scope.reset();
     file.reset();
+    unsaved = false;
 
     return 0;
 }
 
-int_t cli::_run(class corpus *, string_view_t const &args) {
+int_t cli::_run(class corpus *, std::vector<string_t> const &args) {
     using namespace std::chrono;
 
-    std::filesystem::path path(args);
+    if (args.size() != 1) { return 1; }
+
+    std::filesystem::path path(args[0]);
 
     if (path.has_filename()) {
         std::ifstream ifs{path};
@@ -682,17 +676,23 @@ int_t cli::_run(class corpus *, string_view_t const &args) {
 
         if (report.diff_size() > 0) { unsaved = true; }
 
-        std::cout << "Executed file \"" << path.string() << "\"\n"
-                  << "Lexing time    : "
-                  << duration_cast<std::chrono::milliseconds>(report.post_lex() - report.start()).count() << "ms\n"
-                  << "Parsing time   : "
-                  << duration_cast<std::chrono::milliseconds>(report.post_parse() - report.post_lex()).count() << "ms\n"
-                  << "Visiting time  : "
+        std::cout << "Executed file \"" << path.string() << "\"\n\n"
+                  << "Lexing time       : " << std::setw(5)
+                  << duration_cast<std::chrono::milliseconds>(report.post_lex() - report.start()).count() << " ms\n"
+                  << "Parsing time      : " << std::setw(5)
+                  << duration_cast<std::chrono::milliseconds>(report.post_parse() - report.post_lex()).count()
+                  << " ms\n"
+                  << "Visiting time     : " << std::setw(5)
                   << duration_cast<std::chrono::milliseconds>(report.post_visit() - report.post_parse()).count()
-                  << "ms\n"
-                  << "Persisting time: "
+                  << " ms\n"
+                  << "Persisting time   : " << std::setw(5)
                   << duration_cast<std::chrono::milliseconds>(report.post_commit() - report.post_visit()).count()
-                  << "ms\n";
+                  << " ms\n\n"
+                  << "Mentioned entries : " << std::setw(5) << report.mentioned().size() << '\n'
+                  << "Inserted entries  : " << std::setw(5) << report.inserted().size() << '\n'
+                  << "Updated entries   : " << std::setw(5) << report.updated().size() << '\n'
+                  << "Removed entries   : " << std::setw(5) << report.removed().size() << '\n'
+                  << "Failed entries    : " << std::setw(5) << report.failed().size() << '\n';
 
         return 0;
     } else {
@@ -713,9 +713,12 @@ int_t cli::_inspect(class corpus *, string_view_t const &args) {
 
             return 0;
         } else {
+            auto format = corpus->get_format();
+            if (format.get_detail() != format::detail::ID_REF) { format.set_detail(format::detail::EXPLICIT_REF); }
+
             if (!result.candidates().empty()) {
                 std::cout << "Candidates:\n";
-                for (auto const &c : result.candidates()) { std::cout << corpus->print(c) << '\n'; }
+                for (auto const &c : result.candidates()) { std::cout << corpus->print(c, format) << '\n'; }
             } else {
                 std::cout << "No match found.\n";
             }
@@ -811,26 +814,23 @@ int_t cli::handle_plang(string_view_t const &view) {
 
     if (report.diff_size() > 0) { unsaved = true; }
 
+    auto format = corpus->get_format();
+    if (format.get_detail() != format::detail::ID_REF) { format.set_detail(format::detail::EXPLICIT_REF); }
+
     if (!report.mentioned().empty()) {
         std::cout << dict.get().at(texts::CLI_REPORT_MENTIONED) << ":\n";
 
-        for (auto &[id, e] : report.mentioned()) {
-            std::cout << "\t" << corpus->print(e, corpus->get_inner_format()) << "\n";
-        }
+        for (auto &[id, e] : report.mentioned()) { std::cout << "\t" << corpus->print(e, format) << "\n"; }
     }
     if (!report.inserted().empty()) {
         std::cout << dict.get().at(texts::CLI_REPORT_INSERTED) << ":\n";
 
-        for (auto &[id, e] : report.inserted()) {
-            std::cout << "\t" << corpus->print(e, corpus->get_inner_format()) << "\n";
-        }
+        for (auto &[id, e] : report.inserted()) { std::cout << "\t" << corpus->print(e, format) << "\n"; }
     }
     if (!report.updated().empty()) {
         std::cout << dict.get().at(texts::CLI_REPORT_UPDATED) << ":\n";
 
-        for (auto &[id, e] : report.updated()) {
-            std::cout << "\t" << corpus->print(e, corpus->get_inner_format()) << "\n";
-        }
+        for (auto &[id, e] : report.updated()) { std::cout << "\t" << corpus->print(e, format) << "\n"; }
     }
     if (!report.removed().empty()) {
         std::cout << dict.get().at(texts::CLI_REPORT_REMOVED) << ":\n";
@@ -903,7 +903,7 @@ cli::cli()
     register_command(
             "h",
             [this](plang::corpus *c, string_view_t const &a) { return _help(c, a); },
-            "Prints this list");
+            "Print this list");
     register_command(
             "p",
             [this](plang::corpus *c, std::vector<string_t> const &a) { return _option(c, a); },
@@ -937,16 +937,18 @@ cli::cli()
             "Close the current corpus");
     register_command(
             "r",
-            [this](plang::corpus *c, string_view_t const &a) { return _run(c, a); },
-            "Run a PLang file");
+            [this](plang::corpus *c, std::vector<string_t> const &a) { return _run(c, a); },
+            "Run a PLang file",
+            [this](auto... args) { return _open_complete(args...); });
     register_command(
             "e",
             [this](plang::corpus *c, string_view_t const &a) { return _export(c, a); },
-            "Export the current corpus");
+            "Export the current corpus",
+            [this](auto... args) { return _save_complete(args...); });
     register_command(
             "",
             [this](plang::corpus *c, string_view_t const &a) { return _inspect(c, a); },
-            "Prints an entry");
+            "Print an entry");
     register_command(
             "l",
             [this](plang::corpus *c, string_view_t const &a) { return _list(c, a); },

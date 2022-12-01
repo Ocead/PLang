@@ -490,6 +490,7 @@ format detail::corpus::_make_inner_format(format format) {
     class format result = format;
     result.set_detail(format::detail::EXPLICIT_REF);
     result.set_indent(format::indent::COMPACT);
+    result.set_internal(true);
     return result;
 }
 
@@ -505,7 +506,9 @@ detail::corpus::corpus()
                    format::detail::EXPLICIT_REF,
                    format::qualification::FULL,
                    format::indent::ONE_LINE),
-      db() {}
+      db() {
+    inner_format.set_internal(true);
+}
 
 void detail::corpus::regexp(sqlite3_context *ctx, int argc, sqlite3_value **argv) {
     std::regex re{reinterpret_cast<const char *>(sqlite3_value_text(argv[0]))};

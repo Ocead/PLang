@@ -13,14 +13,14 @@
 #include <plang/base.hpp>
 #include <plang/corpus/detail.hpp>
 #include <plang/corpus/path.hpp>
-#include <plang/corpus/plot/point.hpp>
+#include <plang/corpus/plot/symbol.hpp>
 #include <plang/plot.hpp>
 
 namespace plang::detail {
 
     class object_class_manager : virtual protected plang::detail::corpus,
                                  virtual protected plang::detail::path_manager,
-                                 virtual protected plang::detail::point_class_manager {
+                                 virtual protected plang::detail::symbol_class_manager {
     private:
         plot::object::clazz select_object_class(stmt &stmt, bool_t dynamic) const;
 

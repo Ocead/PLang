@@ -115,7 +115,9 @@ target_link_libraries(plang
 add_executable(test_plang
         test/src/corpus/root/path.cpp
         test/src/corpus/plot/symbol_class.cpp
-        test/src/corpus/plot/symbol.cpp)
+        test/src/corpus/plot/symbol.cpp
+        test/src/corpus/plot/point_class.cpp
+        test/src/corpus/plot/object_class.cpp)
 target_include_directories(test_plang
         PUBLIC ${CMAKE_HOME_DIRECTORY}/include
         PRIVATE ${CMAKE_CURRENT_HOME_DIRECTORY}/test/include

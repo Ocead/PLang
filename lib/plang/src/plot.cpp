@@ -121,9 +121,10 @@ void point::clazz::hint::set_recursive(bool_t _recursive) {
 
 point::clazz::clazz() = default;
 
-point::clazz::clazz(const plang::root::path &path, plang::column_types::bool_t singleton)
+point::clazz::clazz(const plang::root::path &path, plang::column_types::bool_t singleton, std::vector<hint> &&hints)
     : path_id(path.get_id()),
-      singleton(singleton) {
+      singleton(singleton),
+      hints(std::move(hints)) {
     if (!path.is_persisted()) {
         // TODO: Throw exception
     }
@@ -201,7 +202,7 @@ void object::clazz::hint::sym::set_hint(const symbol::clazz &hint) {
     }
 }
 
-bool_t object::clazz::hint::sym::get_recurisve() const {
+bool_t object::clazz::hint::sym::get_recursive() const {
     return recursive;
 }
 
@@ -233,7 +234,7 @@ void object::clazz::hint::pnt::set_hint(const point::clazz &hint) {
     }
 }
 
-bool_t object::clazz::hint::pnt::get_recurisve() const {
+bool_t object::clazz::hint::pnt::get_recursive() const {
     return recursive;
 }
 
@@ -241,12 +242,24 @@ void object::clazz::hint::pnt::set_recursive(bool_t _recursive) {
     recursive = _recursive;
 }
 
+object::clazz::hint::variant::variant(string_t &&string, lit::type type)
+    : Base(lit(std::forward<string_t>(string), type)) {}
+
+object::clazz::hint::variant::variant(const symbol::clazz &clazz, plang::column_types::bool_t recursive)
+    : Base(sym(clazz, recursive)) {}
+
+object::clazz::hint::variant::variant(const point::clazz &clazz, plang::column_types::bool_t recursive)
+    : Base(pnt(clazz, recursive)) {}
+
+plang::plot::object::clazz::hint::variant::~variant() = default;
+
 object::clazz::clazz() = default;
 
-object::clazz::clazz(const point::clazz &clazz, string_t name, bool_t _default)
+object::clazz::clazz(const point::clazz &clazz, string_t name, bool_t _default, bool_t singleton)
     : point_class_id(clazz.get_id()),
       name(std::move(name)),
-      _default(_default) {}
+      _default(_default),
+      singleton(singleton) {}
 
 pkey<point::clazz> object::clazz::get_point_class_id() const {
     return point_class_id;

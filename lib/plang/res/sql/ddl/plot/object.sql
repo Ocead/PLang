@@ -1,17 +1,17 @@
 CREATE TABLE IF NOT EXISTS plot_object_class
 (
-    id             integer not null
+    id             integer               not null
         CONSTRAINT plot_object_class_pk
             PRIMARY KEY autoincrement,
     name           text
         CHECK ( length(name) > 0 )
         CHECK ( name regexp '^[^.:?\[\]]*$' ),
-    point_class_id integer not null
-        CONSTRAINT plot_object_class_class_id_fk
+    point_class_id integer               not null
+        CONSTRAINT plot_object_class_point_class_id_fk
             REFERENCES plot_point_class
             ON DELETE CASCADE
             DEFERRABLE initially deferred,
-    "default"      boolean not null,
+    "default"      boolean               not null,
     singleton      boolean DEFAULT false not null,
     ordinal        integer,
     description    text,
@@ -42,8 +42,9 @@ CREATE TABLE IF NOT EXISTS plot_object_class_hint_lit
             ON DELETE CASCADE
             DEFERRABLE initially deferred,
     hint      text    not null,
-    type      text DEFAULT 'c' not null
-        CHECK ( type in ('c', 'l', 'g', 'm', 'r') ),
+    type      integer not null
+        CHECK ( type >= 0 and type <= 4 ),
+    ordinal   integer,
     source_id integer
         CONSTRAINT plot_object_class_hint_lit_source_id_fk
             REFERENCES source
@@ -56,20 +57,21 @@ CREATE UNIQUE INDEX IF NOT EXISTS plot_object_class_hint_lit_id_uindex
 
 CREATE TABLE IF NOT EXISTS plot_object_class_hint_sym
 (
-    id        integer not null
+    id        integer               not null
         CONSTRAINT plot_object_class_hint_sym_pk
             PRIMARY KEY autoincrement,
-    class_id  integer not null
+    class_id  integer               not null
         CONSTRAINT plot_object_class_hint_sym_class_id_fk
             REFERENCES plot_object_class
             ON DELETE CASCADE
             DEFERRABLE initially deferred,
-    hint_id   integer not null
+    hint_id   integer               not null
         CONSTRAINT plot_object_class_hint_sym_hint_id_fk
             REFERENCES plot_symbol_class
             ON DELETE CASCADE
             DEFERRABLE initially deferred,
     recursive boolean DEFAULT false not null,
+    ordinal   integer,
     source_id integer
         CONSTRAINT plot_object_class_hint_sym_source_id_fk
             REFERENCES source
@@ -82,20 +84,21 @@ CREATE UNIQUE INDEX IF NOT EXISTS plot_object_class_hint_sym_id_uindex
 
 CREATE TABLE IF NOT EXISTS plot_object_class_hint_pnt
 (
-    id        integer not null
+    id        integer               not null
         CONSTRAINT plot_object_class_hint_pnt_pk
             PRIMARY KEY autoincrement,
-    class_id  integer not null
+    class_id  integer               not null
         CONSTRAINT plot_object_class_hint_pnt_class_id_fk
             REFERENCES plot_object_class
             ON DELETE CASCADE
             DEFERRABLE initially deferred,
-    hint_id   integer not null
+    hint_id   integer               not null
         CONSTRAINT plot_object_class_hint_pnt_hint_id_fk
             REFERENCES plot_point_class
             ON DELETE CASCADE
             DEFERRABLE initially deferred,
     recursive boolean DEFAULT false not null,
+    ordinal   integer,
     source_id integer
         CONSTRAINT plot_object_class_hint_pnt_source_id_fk
             REFERENCES source

@@ -47,8 +47,8 @@
 (.character[]) .character.identity.name.epithet (3) is;                                //point_class
 (.character[]) .character.identity.name.nickname (4) is;                               //point_class
 (.character[]) .character.identity.name.alias (5) is;                                  //point_class
-(.character[]) ! .character.identity.age is;                                           //point_class
-(.character[]) ! .character.identity.birthday is;                                      //point_class
+(.character[]) ! .character.identity.age ! is;                                         //point_class
+(.character[]) ! .character.identity.birthday ! is;                                    //point_class
 .character.personality;
 .character.relationship;
 .character.relationship.family;
