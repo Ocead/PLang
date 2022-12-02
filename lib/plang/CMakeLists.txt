@@ -80,6 +80,8 @@ add_library(plang
         src/corpus/plot/symbol.cpp
         src/corpus/plot/point_class.cpp
         src/corpus/plot/object_class.cpp
+        src/corpus/plot/point.cpp
+        src/corpus/plot/object.cpp
 
         src/data/sqlite_undo.c
 

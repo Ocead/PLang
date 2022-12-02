@@ -3,7 +3,7 @@
 //
 
 #include <sqlite3.h>
-#include <plang/corpus/plot/symbol.hpp>
+#include <plang/corpus/plot/symbol_class.hpp>
 
 using namespace plang;
 using namespace plang::op;

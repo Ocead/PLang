@@ -4,7 +4,7 @@
 
 #include <map>
 #include <sqlite3.h>
-#include <plang/corpus/plot/object.hpp>
+#include <plang/corpus/plot/object_class.hpp>
 
 using namespace plang;
 using namespace plang::op;

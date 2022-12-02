@@ -12,9 +12,12 @@
 #ifndef PLANG_PLOT_HPP
 #define PLANG_PLOT_HPP
 
-#include <plang/corpus/plot/symbol.hpp>
-#include <plang/corpus/plot/point.hpp>
-#include <plang/corpus/plot/object.hpp>
 #include <plang/corpus/plot/causal.hpp>
+#include <plang/corpus/plot/object_class.hpp>
+#include <plang/corpus/plot/object.hpp>
+#include <plang/corpus/plot/point_class.hpp>
+#include <plang/corpus/plot/point.hpp>
+#include <plang/corpus/plot/symbol_class.hpp>
+#include <plang/corpus/plot/symbol.hpp>
 
 #endif//PLANG_PLOT_HPP

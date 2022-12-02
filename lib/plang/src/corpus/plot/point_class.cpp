@@ -3,7 +3,7 @@
 //
 
 #include <sqlite3.h>
-#include <plang/corpus/plot/point.hpp>
+#include <plang/corpus/plot/point_class.hpp>
 
 using namespace plang;
 using namespace plang::op;
