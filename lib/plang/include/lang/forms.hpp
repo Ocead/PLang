@@ -9,9 +9,16 @@
 #include <optional>
 #include <vector>
 #include <plang/base.hpp>
-#include "lang/visitor.hpp"
+#include "lang/GENERATED/PlangBaseVisitor.h"
 
 namespace plang::lang {
+
+    using any_vector_t = std::vector<std::any>;
+
+    class any_vector : public any_vector_t {
+    public:
+        using any_vector_t::any_vector_t;
+    };
 
     struct decoration_form {
         antlr4::tree::TerminalNode *ordinal;

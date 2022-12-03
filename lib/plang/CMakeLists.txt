@@ -91,6 +91,13 @@ add_library(plang
         src/lang/GENERATED/PlangVisitor.cpp
 
         src/lang/visitor.cpp
+        src/lang/context_visitor.cpp
+        src/lang/hint_visitor.cpp
+        src/lang/path_visitor.cpp
+        src/lang/symbol_visitor.cpp
+        src/lang/object_visitor.cpp
+        src/lang/point_visitor.cpp
+        src/lang/visitor_impl.cpp
 
         ${PLANG_RESOURCES})
 add_library(plang::libplang ALIAS plang)
