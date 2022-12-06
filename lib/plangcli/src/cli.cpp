@@ -254,7 +254,7 @@ char **cli::completion_function(const char *text, int start, int end) {
             if (!command.empty()) {
                 std::vector<string_t> candidates;
                 for (auto const &[k, v] : current_instance->commands) {
-                    if (k.rfind(command, 0) == 0) { candidates.push_back(k); }
+                    if (k.rfind(command, 0) == 0) { candidates.push_back(":" + k); }
                 }
                 cli::autocomplete_candidates = candidates;
             } else {
@@ -394,6 +394,12 @@ int_t cli::_option(class corpus *, std::vector<string_t> const &args) {
                 case "strict"_hash: {
                     options.strict = bool_option_map[args[1]];
                 }
+                case "assume"_hash: {
+                    options.assume = bool_option_map[args[1]];
+                }
+                case "exact"_hash: {
+                    options.exact = bool_option_map[args[1]];
+                }
                 default:
                     break;
             }
@@ -439,6 +445,14 @@ int_t cli::_option(class corpus *, std::vector<string_t> const &args) {
                     std::cout << "strict=" << (options.strict ? "true" : "false") << '\n';
                     break;
                 }
+                case "assume"_hash: {
+                    std::cout << "assume=" << (options.assume ? "true" : "false") << '\n';
+                    break;
+                }
+                case "exact"_hash: {
+                    std::cout << "exact=" << (options.exact ? "true" : "false") << '\n';
+                    break;
+                }
                 default:
                     break;
             }
@@ -454,6 +468,8 @@ int_t cli::_option(class corpus *, std::vector<string_t> const &args) {
             std::cout << "prompt=" << invert(prompt_option_map)[options.prompt] << '\n';
             std::cout << "implicit=" << (options.implicit ? "true" : "false") << '\n';
             std::cout << "strict=" << (options.strict ? "true" : "false") << '\n';
+            std::cout << "assume=" << (options.implicit ? "true" : "false") << '\n';
+            std::cout << "exact=" << (options.strict ? "true" : "false") << '\n';
             break;
         }
     }
@@ -468,7 +484,7 @@ cli::cmd_complete_result_t cli::_option_complete(class corpus *, const string_vi
     std::vector<string_t> candidates;
 
     if (i == 0) {
-        values = {"output", "enrich", "detail", "qualification", "indent", "implicit", "strict"};
+        values = {"output", "enrich", "detail", "qualification", "indent", "implicit", "strict", "assume", "exact"};
     } else if (i == 1) {
         switch (fnv1a_32(args[0].c_str(), args[0].size())) {
             case "output"_hash: {
@@ -495,11 +511,10 @@ cli::cmd_complete_result_t cli::_option_complete(class corpus *, const string_vi
                 for (auto const &p : prompt_option_map) { values.emplace_back(p.first); }
                 break;
             }
-            case "implicit"_hash: {
-                for (auto const &p : bool_option_map) { values.emplace_back(p.first); }
-                break;
-            }
-            case "strict"_hash: {
+            case "implicit"_hash:
+            case "strict"_hash:
+            case "assume"_hash:
+            case "exact"_hash: {
                 for (auto const &p : bool_option_map) { values.emplace_back(p.first); }
                 break;
             }
@@ -866,7 +881,7 @@ int_t cli::handle_input(string_view_t const &view) {
         if (com != commands.end()) {
             auto spos = view.find(' ') + 1;
             try {
-                return com->second(corpus ? &*corpus : nullptr, spos != 0 ? view.substr(spos) : string_view_t());
+                return com->second.first(corpus ? &*corpus : nullptr, spos != 0 ? view.substr(spos) : string_view_t());
             } catch (std::exception const &e) { std::cerr << e.what() << std::endl; }
         } else {
             //TODO: throw unknown_command_error
@@ -977,13 +992,15 @@ cli::cli()
             "y",
             [this](plang::corpus *c, string_view_t const &a) { return _redo(c, a); },
             "Redo the last undone step");
+
+    std::for_each(commands.begin(), commands.end(), [](auto &e) { e.second.second = true; });
 }
 
 bool_t cli::register_command(string_t command,
-                             std::function<int_t(plang::corpus *, string_view_t const &)> func,
+                             raw_cmd_func_t func,
                              string_t description,
                              cmd_complete_func_t completor) {
-    auto [it, ok] = commands.emplace(std::move(command), std::move(func));
+    auto [it, ok] = commands.emplace(std::move(command), std::make_pair(std::move(func), false));
     if (ok) {
         if (completor) { completers.emplace(it->first, std::move(completor)); }
         help.emplace_back(":" + it->first + "\t" + description);
@@ -992,7 +1009,7 @@ bool_t cli::register_command(string_t command,
 }
 
 bool_t cli::register_command(string_t command,
-                             std::function<int_t(plang::corpus *, std::vector<string_t> const &)> func,
+                             argv_cmd_func_t func,
                              string_t description,
                              cmd_complete_func_t completor) {
     auto argv_func = [func](plang::corpus *c, string_view_t const &args) {
@@ -1003,14 +1020,21 @@ bool_t cli::register_command(string_t command,
 }
 
 bool_t cli::unregister_command(plang::column_types::string_t command) {
-    auto i  = commands.erase(command) > 0;
-    auto it = std::remove_if(help.begin(), help.end(), [&command](auto const &e) {
+    auto it  = commands.find(command);
+    if (it == commands.end()) { //Command does not exist
+        return -2;
+    }
+    if (it->second.second) { //Command is built-in
+        return -1;
+    }
+    commands.erase(it, commands.end());
+    auto ith = std::remove_if(help.begin(), help.end(), [&command](auto const &e) {
         return e.substr(0, e.find(':')) == command;
     });
     completers.erase(command);
-    help.erase(it, help.end());
+    help.erase(ith, help.end());
 
-    return i > 0;
+    return 0;
 }
 
 int_t cli::prompt() {

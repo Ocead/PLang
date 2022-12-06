@@ -35,12 +35,11 @@ visitor::visitor()
       scope(std::nullopt),
       _report() {}
 
-visitor::visitor(class corpus &corpus, const plang::root::path &scope, bool_t strict, bool_t implicit)
+visitor::visitor(class corpus &corpus, const plang::root::path &scope, visitor::options options)
     : corpus(&corpus),
       scope(scope),
       _report(),
-      strict(strict),
-      implicit(implicit) {}
+      _options(options) {}
 
 std::any visitor::visitDeclSVO(generated::PlangParser::DeclSVOContext *ctx) {
     try {

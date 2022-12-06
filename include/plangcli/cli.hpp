@@ -540,6 +540,8 @@ namespace plang {
             prompt prompt;  ///< \brief Assumed codepage of the output
             bool_t implicit;///< \brief <code>implicit</code> option for the parser
             bool_t strict;  ///< \brief <code>strict</code> option for the parser
+            bool_t assume;  ///< \brief<code>assume</code> option for the parser
+            bool_t exact;   ///< \brief<code>exact</code> option for the parser
         } options;
 
         /// \brief Callback type expecting a string
@@ -565,12 +567,12 @@ namespace plang {
         static cli *current_instance;
         static cmd_complete_result_t autocomplete_candidates;
 
-        std::optional<std::filesystem::path> file;                   ///< \brief Path to current file
-        std::optional<corpus> corpus;                                ///< \brief Corpus for the command line
-        std::optional<path> scope;                                   ///< \brief Path scope for the command line
-        string_t scope_path;                                         ///< \brief Representation of the current scope
-        std::unordered_map<string_t, raw_cmd_func_t> commands;       ///< \brief Registered commands
-        std::unordered_map<string_t, cmd_complete_func_t> completers;///< \brief Registered completers
+        std::optional<std::filesystem::path> file;///< \brief Path to current file
+        std::optional<corpus> corpus;             ///< \brief Corpus for the command line
+        std::optional<path> scope;                ///< \brief Path scope for the command line
+        string_t scope_path;                      ///< \brief Representation of the current scope
+        std::unordered_map<string_t, std::pair<raw_cmd_func_t, bool_t>> commands;///< \brief Registered commands
+        std::unordered_map<string_t, cmd_complete_func_t> completers;            ///< \brief Registered completers
         std::vector<string_t> help;
         std::reference_wrapper<const dict_t> dict;
         bool_t unsaved;///< \brief Set to `true`, after each execution of PLang code that changed the corpus

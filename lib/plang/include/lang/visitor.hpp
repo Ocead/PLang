@@ -117,6 +117,14 @@ namespace plang::lang {
     }
 
     class visitor : public virtual generated::PlangBaseVisitor {
+    public:
+        struct options {
+            bool_t strict = false;  ///<`true`, if not matching should count as an error
+            bool_t implicit = true; ///<`true`, if declarations may implicitly declare other entries
+            bool_t assume = true;   ///<`true`, if point references may omit irrelevant objects
+            bool_t exact = false;   ///<`true`, if object lists in point references must be exact
+        };
+
     private:
         void sort_result(string_t &&repr, resolve_entry_result &ref);
 
@@ -125,12 +133,11 @@ namespace plang::lang {
         std::optional<path> scope;
         corpus::report _report;
 
-        bool_t strict;  ///< \brief <code>true</code>, if hints on class entries must be followed
-        bool_t implicit;///< \brief <code>true</code>, if implicit declarations of entries should be allowed
+        options _options;
 
         visitor();
 
-        visitor(class corpus &corpus, path const &scope, bool_t strict, bool_t implicit);
+        visitor(class corpus &corpus, path const &scope, visitor::options options);
 
     public:
         std::any visitDeclSVO(generated::PlangParser::DeclSVOContext *ctx) override;
@@ -143,10 +150,10 @@ namespace plang::lang {
     };
 
     std::unique_ptr<visitor>
-    make_visitor(corpus &corpus, plang::path const &scope, bool_t strict = false, bool_t implicit = true);
+    make_visitor(corpus &corpus, plang::path const &scope, visitor::options options = {});
 
     std::unique_ptr<visitor>
-    make_visitor(corpus const &corpus, plang::path const &scope, bool_t strict = false, bool_t implicit = true);
+    make_visitor(corpus const &corpus, plang::path const &scope, visitor::options options = {});
 
 }// namespace plang::lang
 

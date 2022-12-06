@@ -47,20 +47,19 @@ namespace plang::lang {
         }
 
     public:
-        visitor_impl(class corpus &corpus, plang::path const &scope, bool_t strict, bool_t implicit)
-            : visitor(corpus, scope, strict, implicit) {}
+        visitor_impl(class corpus &corpus, plang::path const &scope, visitor::options options)
+            : visitor(corpus, scope, options) {}
     };
 
-    std::unique_ptr<visitor> make_visitor(corpus &corpus, plang::path const &scope, bool_t strict, bool_t implicit) {
-        return std::make_unique<visitor_impl>(std::ref(corpus), std::cref(scope), strict, implicit);
+    std::unique_ptr<visitor> make_visitor(corpus &corpus, plang::path const &scope, visitor::options options) {
+        return std::make_unique<visitor_impl>(std::ref(corpus), std::cref(scope), options);
     }
 
     std::unique_ptr<visitor>
-    make_visitor(corpus const &corpus, plang::path const &scope, bool_t strict, bool_t implicit) {
+    make_visitor(corpus const &corpus, plang::path const &scope, visitor::options options) {
         return std::make_unique<visitor_impl>(std::ref(const_cast<class corpus &>(corpus)),
                                               std::cref(scope),
-                                              strict,
-                                              implicit);
+                                              options);
     }
 
 }// namespace plang::lang

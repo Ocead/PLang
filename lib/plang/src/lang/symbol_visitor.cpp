@@ -84,7 +84,7 @@ namespace plang::lang {
                     auto result2 = corpus->resolve({},
                                                    detail::corpus::tag<symbol::clazz>(),
                                                    std::get<class path>(p.entry()),
-                                                   implicit);
+                                                   _options.implicit);
 
                     hint_classes.push_back(result2);
 
@@ -100,7 +100,10 @@ namespace plang::lang {
                             *hint_form.path.nodes.rbegin() = e2;
                             auto p2                        = form_to_path(*corpus, *scope, hint_form.path);
                             if (!p2.has_result()) { return p2; }
-                            auto r2 = corpus->resolve({}, detail::corpus::tag<symbol::clazz>(), p2.entry(), implicit);
+                            auto r2 = corpus->resolve({},
+                                                      detail::corpus::tag<symbol::clazz>(),
+                                                      p2.entry(),
+                                                      _options.implicit);
                             symbol::clazz::hint h2{std::get<symbol::clazz>(r2.entry())};
                             h2.set_recursive(hint_form.recursive);
 

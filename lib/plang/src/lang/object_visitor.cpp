@@ -100,7 +100,7 @@ namespace plang::lang {
             auto &clazz = std::get<plot::object::clazz>(r);
             clazz.set_singleton(form.singleton);
 
-            auto classes = update_object_class(*corpus, *scope, clazz, form, implicit);
+            auto classes = update_object_class(*corpus, *scope, clazz, form, _options.implicit);
 
             auto a2 = corpus->update(clazz, ctx->objectClassDef());
 
